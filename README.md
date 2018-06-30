@@ -1,6 +1,13 @@
 # Sitecore + Blazor
-<img style="-webkit-user-select: none;" src="https://visionsincode.files.wordpress.com/2018/06/hackerman.gif">
-*<a href="https://www.youtube.com/watch?v=KEkrWRHCDQU&amp;feature=youtu.be&amp;t=66" rel="noopener" target="_blank">Let’s get going, we are gone hack this 3,5 inch floppy disc to the year 2005</a>
+
+[Let’s get going, we are gone hack this 3,5 inch floppy disc to the year 2005](https://www.youtube.com/watch?v=KEkrWRHCDQU&amp;feature=youtu.be&amp;t=66)
+
+[logo]: https://visionsincode.files.wordpress.com/2018/06/hackerman.gif "sss"
+
+
+
+
+
 
 For you guys who still are wondering what BLAZOR is, check out this great post – WHAT IS BLAZOR?
 

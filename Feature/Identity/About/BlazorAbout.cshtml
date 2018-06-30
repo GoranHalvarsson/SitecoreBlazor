@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+
+@*<img alt="@LogoModel.Image.Alt" id="scLogo" src="@LogoModel.Image.Src" style="height:inherit;margin:0">*@
+
+<a href="@FieldsModel.Link("AboutLink").Value.Href" target="@FieldsModel.Link("AboutLink").Value.Target" class="@FieldsModel.Link("AboutLink").Value.Class">
+  @FieldsModel.Link("AboutLink").Value.Text
+</a>
+
+
+
+@functions{
+
+  [Parameter]
+  List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+ 
+
+}

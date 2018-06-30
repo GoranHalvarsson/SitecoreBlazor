@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+@inject Foundation.BlazorExtensions.BlazorContext blazorContext;
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
+
+<a class="navbar-brand" href="@blazorContext.ContextLanguage.WithBaseUrl_UglyHackForGithub(uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+
+
+@functions {
+
+[Parameter]
+List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+}

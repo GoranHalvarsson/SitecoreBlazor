@@ -1,0 +1,155 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using System.Timers
+@using System.Linq
+@using Feature.PageContent
+@using Foundation.BlazorExtensions.Extensions
+
+@implements IDisposable
+
+<div class="carousel slide" onmouseout="@OnMouseOut" onmouseover="@OnMouseOver">
+
+    <ol class="carousel-indicators">
+        @for (var i = 0; i < FieldsModel.MultiList("MediaSelector").Value.Values.Count; i++)
+        {
+            var local_i = i;
+
+
+            <li class="@IndicatorClassName(i)" onclick="@(evt => NavCarousel(evt,local_i))"></li>
+        }
+    </ol>
+
+
+    <div class="carousel-inner">
+
+        @for (int j = 0; j < FieldsModel.MultiList("MediaSelector").Value.Values.Count; j++)
+        {
+
+            var field = @FieldsModel.MultiList("MediaSelector").Value.Values[j];
+
+            <div class="@CarouselItemClassName(j)">
+                <img class="d-block w-100" src="@field.SitecoreFields.Image("MediaImage").Value.Src" alt="@field.SitecoreFields.Image("MediaImage").Value.Alt">
+                <div class="carousel-caption d-none d-md-block bg-dark">
+
+                    <h5>@field.SitecoreFields.PlainText("MediaTitle").Value.HtmlDecode()</h5>
+                    <p>@field.SitecoreFields.PlainText("MediaDescription").Value.HtmlDecode()</p>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <a class="carousel-control-prev" role="button" onclick="@(() => NavCarousel(CarouselDirection.Previous))">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" role="button" onclick="@(() => NavCarousel(CarouselDirection.Next))">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+
+@functions {
+
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+    private string IndicatorClassName(int index)
+    {
+      return ActiveIndex == index ? "active" : null;
+    }
+
+    private string CarouselItemClassName(int index)
+    {
+      var active = ActiveIndex == index ? "active" : null;
+      return $"carousel-item {active}";
+    }
+
+    private string CarouselItemCaptionClassName
+    {
+      get
+      {
+        return $"carousel-caption d-none d-md-block";
+      }
+    }
+
+    private int _activeIndex;
+    int ActiveIndex
+    {
+      get => _activeIndex;
+      set { _activeIndex = value; StateHasChanged(); }
+    }
+
+    private Action<int> ActiveIndexChanged { get; set; }
+
+
+    private int Interval { get; set; } = 5000;
+
+    private Timer _timer;
+
+
+    protected override void OnInit()
+    {
+      _timer = new Timer(Interval);
+      _timer.Elapsed += OnTimerEvent;
+      _timer.AutoReset = true;
+      _timer.Start();
+
+    }
+
+    private void OnTimerEvent(Object source, ElapsedEventArgs e)
+    {
+      if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+        ActiveIndex = 0;
+      else
+        ActiveIndex = ActiveIndex + 1;
+
+      ActiveIndexChanged(ActiveIndex);
+    }
+
+
+    private void OnMouseOver()
+    {
+      if (_timer != null) _timer.Stop();
+    }
+
+    private void OnMouseOut()
+    {
+      if (_timer != null) _timer.Start();
+    }
+
+    private void NavCarousel(CarouselDirection carouselIndication)
+    {
+      if (carouselIndication == CarouselDirection.Previous)
+      {
+        if (ActiveIndex == 0)
+          ActiveIndex = FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1;
+        else
+          ActiveIndex = ActiveIndex - 1;
+      }
+      else
+      {
+        if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+          ActiveIndex = 0;
+        else
+          ActiveIndex = ActiveIndex + 1;
+
+      }
+    }
+
+    private void NavCarousel(Microsoft.AspNetCore.Blazor.UIMouseEventArgs args, int index)
+    {
+      ActiveIndex = index;
+    }
+
+    public void Dispose()
+    {
+      if (_timer != null)
+      {
+        _timer.Stop();
+        _timer.Dispose();
+        _timer = null;
+      }
+    }
+
+}

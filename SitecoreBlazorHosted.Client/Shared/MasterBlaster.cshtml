@@ -1,0 +1,59 @@
+﻿@using Foundation.BlazorExtensions.Services
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
+
+@inject LayoutService layoutService;
+
+@inherits BlazorLayoutComponent
+@implements IDisposable
+
+
+<div class="main">
+
+    <BlazorPlaceholder Name="navbar">
+    </BlazorPlaceholder>
+
+    <main role="main" class="container">
+        <BlazorPlaceholder Name="main">
+        </BlazorPlaceholder>
+    </main>
+
+
+    <footer class="container">
+
+        <BlazorPlaceholder Name="footer">
+        </BlazorPlaceholder>
+
+    </footer>
+</div>
+
+
+@functions
+{
+
+    [Parameter]
+    protected string Language { get; set; }
+
+    [Parameter]
+    protected string PageUrl { get; set; }
+
+    protected override void OnInit()
+    {
+        uriHelper.OnLocationChanged += OnLocationChanges;
+        Reload();
+    }
+
+    private void OnLocationChanges(object sender, string location) => Reload();
+
+    private async void Reload()
+    {
+        await layoutService.LoadRoute(Language);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        uriHelper.OnLocationChanged -= OnLocationChanges;
+    }
+
+}

@@ -1,0 +1,42 @@
+﻿@using Foundation.BlazorExtensions.Services
+
+@inject LayoutService layoutService
+
+
+
+@*@page "/"*@
+
+
+@if (DynamicComponents == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  @foreach (var component in DynamicComponents)
+  {
+    @component
+  }
+}
+
+@functions {
+
+    [Parameter]
+    protected string Language { get; set; }
+
+
+    public IList<Microsoft.AspNetCore.Blazor.RenderFragment> DynamicComponents { get; set; }
+
+
+
+
+    protected override async Task OnInitAsync()
+    {
+      DynamicComponents = await layoutService.RenderPlaceholders("main");
+    }
+
+}
+
+
+
+

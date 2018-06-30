@@ -1,0 +1,220 @@
+{
+  "Name": "carousels",
+  "Id": "8a80477e-7cb4-4cee-a035-b48ac118abe8",
+  "DisplayName": null,
+  "ItemLanguage": "sv",
+  "Fields": null,
+  "Placeholders": {
+    "navbar": [
+      {
+        "Assembly": "SitecoreBlazorHosted.Client",
+        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Name": "navbar",
+        "Fields": null,
+        "Placeholders": {
+          "navbar-header": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "Name": "navbarHeader",
+              "Fields": {
+                "NavHeader": {
+                  "Value": "Sitecore + Blazor",
+                  "Type": "PlainTextField"
+                }
+              },
+              "Placeholders": null
+            }
+          ],
+          "navbar-menu": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "Name": "navbarMenu",
+              "Fields": {},
+              "Placeholders": {}
+            }
+          ],
+          "navbar-activity": [
+            {
+              "Assembly": "SitecoreBlazorHosted.Client",
+              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Name": "navbarActivity",
+              "Fields": null,
+              "Placeholders": {
+                "navbar-activity-item": [
+                  {
+                    "Assembly": "Feature.Navigation",
+                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "Name": "navLanguage",
+                    "Fields": null,
+                    "Placeholders": null
+                  }
+                ]
+              }
+            }
+          ],
+          "navbar-about": [
+            {
+              "Assembly": "Feature.Identity",
+              "ComponentName": "Identity.About.BlazorAbout",
+              "Name": "header",
+              "Fields": {
+                "AboutLink": {
+                  "Value": {
+                    "Href": "http://blazor.net",
+                    "Text": "About",
+                    "Target": "_blank",
+                    "Class": "ml-md-auto"
+                  },
+                  "Type": "LinkField"
+                }
+              },
+              "Placeholders": null
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "Assembly": "Feature.Navigation",
+        "ComponentName": "navigation.NavBreadcrumb.BlazorNavBreadcrumb",
+        "Name": "breadcrumb",
+        "Fields": {
+          "NavHeader": {
+            "Value": "Sitecore + Blazor",
+            "Type": "PlainTextField"
+          }
+        },
+        "Placeholders": null
+      },
+      {
+        "Assembly": "Feature.PageContent",
+        "ComponentName": "PageContent.PageHeader.BlazorPageHeader",
+        "Name": "main",
+        "Fields": {
+          "PageHeaderTitle": {
+            "Value": "Karuseller",
+            "Type": "PlainTextField"
+          }
+        },
+        "Placeholders": {
+          "main-body": [
+            {
+              "Assembly": "Feature.PageContent",
+              "ComponentName": "PageContent.PageHeaderCarousel.BlazorPageHeaderCarousel",
+              "Name": "PageHeaderCarousel",
+              "Fields": {
+
+                "MediaSelector": {
+                  "Values": [
+                    {
+                      "Id": "12cfa7c1-b5bd-4c99-b6f4-221423f2e0e1",
+                      "Url": "http://habitat.sitecoreinblazor/Global/Media/Simplicity",
+                      "Fields": {
+                        "MediaTitle": {
+                          "Value": "Enkelhet",
+                          "Type": "PlainTextField"
+                        },
+                        "MediaThumbnail": {
+                          "value": {
+                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Alt": "Man using Laptop",
+                            "Width": "1920",
+                            "Height": "660"
+                          },
+                          "Type": "ImageField"
+                        },
+                        "MediaImage": {
+                          "Value": {
+                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Alt": "Man using Laptop",
+                            "Width": "1920",
+                            "Height": "660"
+                          },
+                          "Type": "ImageField"
+                        },
+                        "MediaDescription": {
+                          "Value": "En konsekvent och uppt&auml;ckbar arkitektur",
+                          "Type": "PlainTextField"
+                        }
+                      }
+                    },
+                    {
+                      "Id": "69cf65fb-f46e-4038-bbfb-66695b9178e4",
+                      "Url": "http://habitat.sitecoreinblazor/Global/Media/Flexibility",
+                      "Fields": {
+                        "MediaTitle": {
+                          "Value": "Flexibilitet",
+                          "Type": "PlainTextField"
+                        },
+                        "MediaThumbnail": {
+                          "value": {
+                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Alt": "Woman on Phone",
+                            "Width": "1920",
+                            "Height": "660"
+                          },
+                          "Type": "ImageField"
+                        },
+                        "MediaImage": {
+                          "Value": {
+                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Alt": "Woman on Phone",
+                            "Width": "1920",
+                            "Height": "660"
+                          },
+                          "Type": "ImageField"
+                        },
+                        "MediaDescription": {
+                          "Value": "&Auml;ndra och l&auml;gg till snabbt och utan oro",
+                          "Type": "PlainTextField"
+                        }
+                      }
+                    }
+                  ],
+                  "Type": "MultiListField"
+
+                }
+              },
+              "Placeholders": {}
+            }
+          ]
+        }
+      }
+    ],
+    "footer": [
+      {
+        "Assembly": "Feature.Identity",
+        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "Name": "footer",
+        "Fields": {
+          "Text": {
+            "Value": "Ser du inte ljuset, nesse lelle? G&aring; med i ",
+            "Type": "PlainTextField"
+          },
+          "Image": {
+            "Value": {
+              "Src": "css/SBlazor.svg",
+              "Alt": null,
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
+          "Link": {
+            "Value": {
+              "Href": "http://blazor.net",
+              "Text": "Blazor &auml;r sanningen",
+              "Target": "_blank",
+              "Class": "ml-md-auto"
+            },
+            "Type": "LinkField"
+          }
+        },
+        "Placeholders": null
+      }
+    ]
+  }
+}

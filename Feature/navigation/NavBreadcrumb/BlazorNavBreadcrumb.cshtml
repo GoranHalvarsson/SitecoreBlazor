@@ -1,0 +1,59 @@
+﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
+@using Foundation.BlazorExtensions.Extensions
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
+@inject Feature.Navigation.Repositories.NavigationRepository navigationRepository;
+@if (NavigationItems == null)
+{
+  <span>Loading...</span>
+}
+else
+{
+
+
+  <ol class="breadcrumb">
+    @foreach (var item in NavigationItems)
+    {
+
+      var title = item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode();
+
+
+    <li class="@ClassName(item)">
+
+
+      @if (string.IsNullOrWhiteSpace(item.Url))
+      {
+        <a>@title</a>
+      }
+      else
+      {
+        <a href="@item.Url.WithBaseUrl_UglyHackForGithub(uriHelper)">@title</a>
+      }
+    </li>
+    }
+  </ol>
+}
+
+@functions {
+
+[Parameter]
+List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+[Parameter]
+List<NavigationItem> NavigationItems { get; set; }
+
+string ClassName(NavigationItem item)
+{
+  string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+
+  return item.Url.Equals("/" + relative) ? "active" : string.Empty;
+
+}
+
+
+protected override async Task OnParametersSetAsync()
+{
+  NavigationItems = await navigationRepository.GetBreadcrumb();
+}
+
+}

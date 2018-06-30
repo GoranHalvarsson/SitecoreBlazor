@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+@using SitecoreBlazorHosted.Shared
+@using System.Net.Http;
+@using Foundation.BlazorExtensions
+@addTagHelper *, Foundation.BlazorExtensions
+
+
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
+@inject RestService restService
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      @FieldsModel.PlainText("WeatherTeaserHeader").Value.HtmlDecode()
+    </h5>
+    <h6 class="card-subtitle mb-2 text-muted">@FieldsModel.PlainText("WeatherTeaserText").Value.HtmlDecode()</h6>
+
+    <p class="card-text">
+      @if (WeatherForecasts == null)
+      {
+        <em>Loading...</em>
+      }
+    </p>
+
+    @if (WeatherForecasts != null)
+    {
+      <table class="table">
+        <thead>
+          <tr>
+            <th>@FieldsModel.PlainText("ColumnDate").Value</th>
+            <th>@FieldsModel.PlainText("ColumnTempC").Value</th>
+            <th>@FieldsModel.PlainText("ColumnTempF").Value</th>
+            <th>@FieldsModel.PlainText("ColumnSummary").Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var forecast in WeatherForecasts)
+          {
+            <tr>
+              <td>@forecast.Date.ToShortDateString()</td>
+              <td>@forecast.TemperatureC</td>
+              <td>@forecast.TemperatureF</td>
+              <td>@forecast.Summary</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>
+
+
+@functions {
+
+  [Parameter]
+  List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+  WeatherForecast[] WeatherForecasts;
+
+  protected override async Task OnParametersSetAsync()
+  {
+
+    WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.WithBaseUrl_UglyHackForGithub(uriHelper));
+  }
+
+
+}

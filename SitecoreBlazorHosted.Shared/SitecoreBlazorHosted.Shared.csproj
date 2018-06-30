@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\HtmlField.cs" />
+    <Compile Remove="Models\ImageField.cs" />
+    <Compile Remove="Models\LinkField.cs" />
+    <Compile Remove="Models\PlainTextField.cs" />
+    <Compile Remove="Models\Sitecore\IField.cs" />
+    <Compile Remove="Models\Sitecore\IItemSource.cs" />
+    <Compile Remove="Models\Sitecore\ItemSource.cs" />
+    <Compile Remove="Models\Sitecore\ItemSourcePOD.cs" />
+    <Compile Remove="Models\Sitecore\ScField.cs" />
+    <Compile Remove="Models\Sitecore\ScItemsResponse.cs" />
+  </ItemGroup>
+
+</Project>

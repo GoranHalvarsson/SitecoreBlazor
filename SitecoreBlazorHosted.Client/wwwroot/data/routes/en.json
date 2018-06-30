@@ -1,0 +1,150 @@
+{
+  "Name": "home",
+  "Id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+  "DisplayName": null,
+  "ItemLanguage": "en",
+  "Fields": null,
+  "Placeholders": {
+    "navbar": [
+      {
+        "Assembly": "SitecoreBlazorHosted.Client",
+        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Name": "navbar",
+        "Fields": null,
+        "Placeholders": {
+          "navbar-header": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "Name": "navbarHeader",
+              "Fields": {
+                "NavHeader": {
+                  "Value": "Sitecore + Blazor",
+                  "Type": "PlainTextField"
+                }
+              },
+              "Placeholders": null
+            }
+          ],
+          "navbar-menu": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "Name": "navbarMenu",
+              "Fields": {},
+              "Placeholders": {}
+            }
+          ],
+          "navbar-activity": [
+            {
+              "Assembly": "SitecoreBlazorHosted.Client",
+              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Name": "navbarActivity",
+              "Fields": null,
+              "Placeholders": {
+                "navbar-activity-item": [
+                  {
+                    "Assembly": "Feature.Navigation",
+                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "Name": "navLanguage",
+                    "Fields": null,
+                    "Placeholders": null
+                  }
+                ]
+              }
+            }
+          ],
+          "navbar-about": [
+            {
+              "Assembly": "Feature.Identity",
+              "ComponentName": "Identity.About.BlazorAbout",
+              "Name": "header",
+              "Fields": {
+                "AboutLink": {
+                  "Value": {
+                    "Href": "http://blazor.net",
+                    "Text": "About",
+                    "Target": "_blank",
+                    "Class": "ml-md-auto"
+                  },
+                  "Type": "LinkField"
+                }
+              },
+              "Placeholders": null
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "Assembly": "SitecoreBlazorHosted.Client",
+        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.OneColumn",
+        "Name": "OneColumn",
+        "Fields": null,
+        "Placeholders": {
+          "col-huge-765aa916-a5f0-4659-a7ab-7d59df4140a1": [
+            {
+              "Assembly": "Feature.PageContent",
+              "ComponentName": "PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+              "Name": "pageHeaderDescription",
+              "Fields": {
+                "HeaderImage": {
+                  "Value": {
+                    "Src": "_content/Feature.PageContent/sc_logo.png",
+                    "Alt": "Sitecore",
+                    "Width": null,
+                    "Height": null
+                  },
+                  "Type": "ImageField"
+                },
+                "Title": {
+                  "Value": "Sitecore Experience Platform + BLAZOR",
+                  "Type": "PlainTextField"
+                },
+                "Text": {
+                  "Value": "<p>From a single connected platform that also integrates with other customer-facing platforms, to a single view of the customer in a big data marketing repository, to completely eliminating much of the complexity that has previously held marketers back, the latest version of Sitecore makes customer experience highly achievable. Learn how the latest version of Sitecore gives marketers the complete data, integrated tools, and automation capabilities to engage customers throughout an iterative lifecycle – the technology foundation absolutely necessary to win customers for life.</p><p>For further information, please go to the <a href=\"https://doc.sitecore.net/\" target=\"_blank\" title=\"Sitecore Documentation site\">Sitecore Documentation site</a></p>",
+                  "Type": "HtmlField"
+                }
+
+              },
+              "Placeholders": {}
+            }
+          ]
+        }
+      }
+    ],
+    "footer": [
+      {
+        "Assembly": "Feature.Identity",
+        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "Name": "footer",
+        "Fields": {
+          "Text": {
+            "Value": "Not seeing the light? Join the ",
+            "Type": "PlainTextField"
+          },
+          "Image": {
+            "Value": {
+              "Src": "css/SBlazor.svg",
+              "Alt": null,
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
+          "Link": {
+            "Value": {
+              "Href": "http://blazor.net",
+              "Text": "Blazor will rock your world",
+              "Target": "_blank",
+              "Class": "ml-md-auto"
+            },
+            "Type": "LinkField"
+          }
+        },
+        "Placeholders": null
+      }
+    ]
+  }
+}

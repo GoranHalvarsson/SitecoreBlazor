@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+@inject InteropService interopService
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@FieldsModel.PlainText("Header").Value.HtmlDecode()</h5>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p class="card-text">@FieldsModel.PlainText("CountText").Value.HtmlDecode(): @currentCount</p>
+        <button class="@FieldsModel.Link("CountButton").Value.Class" onclick="@IncrementCount">@FieldsModel.Link("CountButton").Value.Text.HtmlDecode()</button>
+    </div>
+</div>
+
+
+
+
+@functions {
+
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+      currentCount++;
+    }
+}

@@ -1,0 +1,87 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Components
+@using Microsoft.AspNetCore.Blazor.Routing
+@using Foundation.BlazorExtensions.Services
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
+
+@inject Foundation.BlazorExtensions.BlazorContext blazorContext
+
+@inject Foundation.BlazorExtensions.Services.InteropService interopService;
+
+<li class="dropdown">
+    <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@onclick" aria-haspopup="true">
+        @GetSelectedLanguage()
+    </button>
+    <div class="@ClassName">
+
+        @foreach (var language in GetLanguages().Where(l => l.Name != blazorContext.ContextLanguage))
+        {
+            <a class="dropdown-item" onclick="@HardReload" href="@BuildUrl(language)">@language.NativeName</a>
+        }
+
+    </div>
+</li>
+
+@functions {
+
+
+    string ClassName
+    {
+        get
+        {
+            var open = IsOpen ? "show" : null;
+            return $"dropdown-menu {open}";
+        }
+    }
+
+    bool IsOpen { get; set; } = false;
+    void onclick()
+    {
+        IsOpen = !IsOpen;
+    }
+
+
+    IEnumerable<SitecoreBlazorHosted.Shared.Models.Language> GetLanguages()
+    {
+        yield return new SitecoreBlazorHosted.Shared.Models.Language()
+        {
+            Name = "en",
+            NativeName = "English",
+            TwoLetterCode = "en"
+        };
+
+        yield return new SitecoreBlazorHosted.Shared.Models.Language()
+        {
+            Name = "sv",
+            NativeName = "Svenska",
+            TwoLetterCode = "sv"
+        };
+
+
+    }
+
+    private string GetSelectedLanguage()
+    {
+        return GetLanguages().FirstOrDefault(l => l.TwoLetterCode == blazorContext.ContextLanguage).NativeName;
+    }
+
+    private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language lanuage)
+    {
+        string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+
+        if (blazorContext.ContextLanguage.Length > 0)
+            relative = relative.Substring(blazorContext.ContextLanguage.Length);
+
+        return $"{uriHelper.GetBaseUri()}{lanuage.TwoLetterCode}{relative}";
+    }
+
+    private void HardReload()
+    {
+        interopService.ReloadBlazor();
+    }
+
+
+
+}

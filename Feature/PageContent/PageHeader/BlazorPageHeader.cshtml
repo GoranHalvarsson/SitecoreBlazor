@@ -1,0 +1,27 @@
+﻿
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Components
+@addTagHelper *, Foundation.BlazorExtensions
+
+
+
+<header class="page-header">
+    <h1>
+        @FieldsModel.PlainText("PageHeaderTitle").Value.HtmlDecode()
+    </h1>
+</header>
+
+<BlazorPlaceholder Name="main-body">
+
+</BlazorPlaceholder>
+
+
+@functions {
+
+[Parameter]
+List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+
+
+}

@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+
+@inject InteropService interopService
+
+
+<div class="text-right">
+    @FieldsModel.PlainText("Text").Value.HtmlDecode() <a href="@FieldsModel.Link("Link").Value.Href" target="@FieldsModel.Link("Link").Value.Target" title="@FieldsModel.Link("Link").Value.Text"><img alt="@FieldsModel.Image("Image").Value.Alt" class="footer-image" src="@FieldsModel.Image("Image").Value.Src"></a>
+</div>
+
+@functions{
+  [Parameter]
+  List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+
+
+}

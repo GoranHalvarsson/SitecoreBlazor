@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Blazor.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+@inject InteropService interopService
+
+<div id="CenterColumn">
+  <div id="InnerCenter">
+    <div id="Header">
+      <img alt="@FieldsModel.Image("HeaderImage").Value.Alt" id="scLogo" src="@FieldsModel.Image("HeaderImage").Value.Src">
+    </div>
+    <div id="Content">
+      <div id="LeftContent">
+        <h1 class="contentTitle">@interopService.RenderHtml(FieldsModel.PlainText("Title"), "contentTitle")</h1>
+        <div class="contentDescription" >
+          @interopService.RenderHtml(FieldsModel.HtmlText("Text"), "contentDescription");
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+@functions {
+
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
+    protected override void OnAfterRender()
+    {
+   
+      interopService.RenderHtmlAction();
+
+    }
+
+
+
+
+
+
+
+}

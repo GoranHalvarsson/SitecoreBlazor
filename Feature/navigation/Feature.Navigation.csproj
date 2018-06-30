@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
+    <EmbeddedResource Include="NavMenu\content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="NavMenu\content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="NavMenu\content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\BlazorExtensions\Foundation.BlazorExtensions.csproj" />
+    <ProjectReference Include="..\..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavMenu\BlazorNavMenu.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NavBreadcrumb\content\NavBreadcrumb.css" />
+    <None Remove="NavHeader\content\NavHeader.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="NavBreadcrumb\content\NavBreadcrumb.css">
+	 <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NavHeader\content\NavHeader.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavHeader\BlazorNavHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="NavLanguage\BlazorNavLanguage.cshtml" />
+  </ItemGroup>
+
+</Project>

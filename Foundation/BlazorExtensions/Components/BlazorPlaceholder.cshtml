@@ -1,0 +1,56 @@
+﻿
+@using Foundation.BlazorExtensions.Services;
+
+@inject LayoutService layoutService
+
+@if (RenderChild)
+{
+    @ChildContent
+}
+else
+{
+
+    @if (DynamicComponents == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        @foreach (var component in DynamicComponents)
+        {
+            @component
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@functions {
+
+    [Parameter]
+    protected string Name { get; set; }
+
+    [Parameter]
+    protected bool RenderChild { get; set; }
+
+    [Parameter]
+    protected Microsoft.AspNetCore.Blazor.RenderFragment ChildContent { get; set; }
+
+
+    private IList<Microsoft.AspNetCore.Blazor.RenderFragment> DynamicComponents { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        DynamicComponents = await layoutService.RenderPlaceholders(Name);
+    }
+}
+
+

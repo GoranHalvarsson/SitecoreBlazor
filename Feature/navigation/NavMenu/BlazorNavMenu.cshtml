@@ -1,0 +1,126 @@
+﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
+@using Microsoft.AspNetCore.Blazor
+@using Microsoft.AspNetCore.Blazor.Routing
+@using Foundation.BlazorExtensions.Extensions
+
+
+@inject Feature.Navigation.Repositories.NavigationRepository navigationRepository
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
+
+@implements IDisposable
+
+@if (NavigationItems == null)
+{
+    <span>Loading...</span>
+
+}
+else
+{
+
+    <button class="navbar-toggler" onclick=@ToggleNavMenu>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class=@(collapseNavMenu ? "collapse navbar-collapse" : "navbar-collapse") onclick=@ToggleNavMenu>
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item"></li>
+            @foreach (var item in NavigationItems)
+            {
+
+                if (item.Children == null || item.Children.Count() == 0)
+                {
+                    <li class="nav-item">
+                        <NavLink  class="nav-link" href="@item.Url.WithBaseUrl_UglyHackForGithub(uriHelper)" Match=NavLinkMatch.All>
+                            @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
+                        </NavLink>
+                    </li>
+                } else
+                {
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" onclick="@Onclick">
+                            @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()
+                        </a>
+                        <div class="@ClassName">
+
+                            @foreach (var child in item.Children)
+                            {
+                                if (child == null)
+                                {
+                                    continue;
+                                }
+
+                                <NavLink class="dropdown-item" href="@child.Url.WithBaseUrl_UglyHackForGithub(uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
+
+                            }
+
+                        </div>
+                    </li>
+
+                }
+
+            }
+
+
+
+        </ul>
+
+
+    </div>
+}
+
+
+
+
+
+@functions {
+
+
+
+  List<NavigationItem> NavigationItems { get; set; }
+
+  protected override async Task OnInitAsync()
+  {
+    NavigationItems = await navigationRepository.GetMenu();
+  }
+
+  bool collapseNavMenu = true;
+
+  void ToggleNavMenu()
+  {
+    collapseNavMenu = !collapseNavMenu;
+  }
+
+ 
+
+  string ClassName
+  {
+    get
+    {
+      var open = IsOpen ? "show" : null;
+      return $"dropdown-menu {open}";
+    }
+  }
+
+  bool IsOpen { get; set; }
+  void Onclick(UIMouseEventArgs e)
+  {
+    IsOpen = !IsOpen;
+    StateHasChanged();
+  }
+
+
+  private void OnLocationChanges(object sender, string location) => IsOpen = false;
+
+  protected override void OnInit()
+  {
+    uriHelper.OnLocationChanged += OnLocationChanges;
+  }
+
+  public void Dispose()
+  {
+    uriHelper.OnLocationChanged -= OnLocationChanges;
+  }
+
+}

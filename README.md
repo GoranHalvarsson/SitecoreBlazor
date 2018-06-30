@@ -3,7 +3,7 @@
 
 > [Let’s get going, we are gone hack this 3,5 inch floppy disc to the year 2005](https://www.youtube.com/watch?v=KEkrWRHCDQU&amp;feature=youtu.be&amp;t=66)
 
-For you guys who still are wondering what BLAZOR is, check out this great post – [WHAT IS BLAZOR?](https://learn-blazor.com/getting-started/what-is-blazor/ )
+For those still wondering what BLAZOR is, check out this great post – [WHAT IS BLAZOR?](https://learn-blazor.com/getting-started/what-is-blazor/ )
 
 This repo allow's you to run Sitecore app's on the client. We are also following the [HELIX concept](http://helix.sitecore.net/), the clean way.
 

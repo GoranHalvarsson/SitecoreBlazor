@@ -14,6 +14,6 @@ To get started with Blazor and build your first Blazor web app check out [Blazor
 Clone or fork this repo, build it and be happy 🙂
 
 
-## Blogposts
+## Blog posts
 [Server-side is dead, long live client-side! BLAZOR + Sitecore = a match made in heaven](https://visionsincode.wordpress.com/2018/05/13/server-side-is-dead-long-live-client-side-blazor-sitecore-a-match-made-in-heaven/)
 

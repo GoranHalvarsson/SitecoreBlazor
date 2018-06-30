@@ -17,3 +17,4 @@ Clone or fork this repo, build it and be happy 🙂
 ## Blog posts
 [Server-side is dead, long live client-side! BLAZOR + Sitecore = a match made in heaven](https://visionsincode.wordpress.com/2018/05/13/server-side-is-dead-long-live-client-side-blazor-sitecore-a-match-made-in-heaven/)
 
+[Time travel into the future – BLAZOR + SITECORE + HELIX](https://visionsincode.wordpress.com/2018/06/30/time-travel-into-the-future-blazor-sitecore-helix/)

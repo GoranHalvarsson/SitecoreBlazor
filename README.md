@@ -5,7 +5,7 @@
 
 For those still wondering what BLAZOR is, check out this great post – [WHAT IS BLAZOR?](https://learn-blazor.com/getting-started/what-is-blazor/ )
 
-This repo allow's you to run Sitecore app's on the client. We are also following the [HELIX concept](http://helix.sitecore.net/), the clean way.
+This repo allows you to run Sitecore app's client-side. We are also following the [HELIX concept](http://helix.sitecore.net/), the clean way.
 
 Live: https://visionsincode.github.io/SitecoreBlazor.io/
 

@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace SitecoreBlazorHosted.Shared.Models.Sitecore
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface ISitecoreItem
     {
         string DisplayName { get; set; }

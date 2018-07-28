@@ -4,25 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>7.3</LangVersion>
-
-    <!-- Temporary workaround for a VS build issue -->
-    <BlazorRebuildOnFileChange>false</BlazorRebuildOnFileChange>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\**" />
-    <Compile Remove="RouterExtended\**" />
-    <Content Remove="Pages\**" />
-    <Content Remove="RouterExtended\**" />
-    <EmbeddedResource Remove="Pages\**" />
-    <EmbeddedResource Remove="RouterExtended\**" />
-    <None Remove="Pages\**" />
-    <None Remove="RouterExtended\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.5.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +43,10 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Components\Sublayouts\TwoColumn6_6.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\blazor.polyfill.js" />
   </ItemGroup>
 
 </Project>

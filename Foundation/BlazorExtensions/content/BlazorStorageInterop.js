@@ -1,43 +1,47 @@
-var registerFunction = Blazor.registerFunction;
-var storageAssembly = 'Foundation.BlazorExtensions';
+// Copyright (c) 2018 cloudcrate solutions UG (haftungsbeschraenkt)
+var storageAssembly = 'Foundation_BlazorExtensions';
 var storageNamespace = "" + storageAssembly;
 var storages = {
     LocalStorage: localStorage,
     SessionStorage: sessionStorage
 };
 var _loop_1 = function () {
-    var storage = storages[storageTypeName];
-    var storageFullTypeName = storageNamespace + "." + storageTypeName;
-    registerFunction(storageFullTypeName + ".Clear", function () {
-        clear(storage);
-    });
-    registerFunction(storageFullTypeName + ".GetItem", function (key) {
-        return getItem(storage, key);
-    });
-    registerFunction(storageFullTypeName + ".Key", function (index) {
-        return key(storage, index);
-    });
-    registerFunction(storageFullTypeName + ".Length", function () {
-        return getLength(storage);
-    });
-    registerFunction(storageFullTypeName + ".RemoveItem", function (key) {
-        removeItem(storage, key);
-    });
-    registerFunction(storageFullTypeName + ".SetItem", function (key, data) {
-        setItem(storage, key, data);
-    });
-    registerFunction(storageFullTypeName + ".GetItemString", function (key) {
-        return getItemString(storage, key);
-    });
-    registerFunction(storageFullTypeName + ".SetItemString", function (key, data) {
-        setItemString(storage, key, data);
-    });
-    registerFunction(storageFullTypeName + ".GetItemNumber", function (index) {
-        return getItemNumber(storage, index);
-    });
-    registerFunction(storageFullTypeName + ".SetItemNumber", function (index, data) {
-        setItemNumber(storage, index, data);
-    });
+    if (storages.hasOwnProperty(storageTypeName)) {
+        var storage_1 = storages[storageTypeName];
+        var storageFullTypeName = storageNamespace + "_" + storageTypeName;
+        window[storageFullTypeName] = {
+            Clear: function () {
+                clear(storage_1);
+            },
+            GetItem: function (key) {
+                return getItem(storage_1, key);
+            },
+            Key: function (index) {
+                return key(storage_1, index);
+            },
+            Length: function () {
+                return getLength(storage_1);
+            },
+            RemoveItem: function (key) {
+                removeItem(storage_1, key);
+            },
+            SetItem: function (key, data) {
+                setItem(storage_1, key, data);
+            },
+            GetItemString: function (key) {
+                return getItemString(storage_1, key);
+            },
+            SetItemString: function (key, data) {
+                setItemString(storage_1, key, data);
+            },
+            GetItemNumber: function (index) {
+                return getItemNumber(storage_1, index);
+            },
+            SetItemNumber: function (index, data) {
+                setItemNumber(storage_1, index, data);
+            }
+        };
+    }
 };
 for (var storageTypeName in storages) {
     _loop_1();

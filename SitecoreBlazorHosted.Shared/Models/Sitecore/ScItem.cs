@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace SitecoreBlazorHosted.Shared.Models.Sitecore
+﻿namespace SitecoreBlazorHosted.Shared.Models.Sitecore
 {
+
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class ScItem : ISitecoreItem
     {
         public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";

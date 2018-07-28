@@ -1,10 +1,12 @@
-﻿using SitecoreBlazorHosted.Shared.Models.Sitecore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace SitecoreBlazorHosted.Shared.Models.Navigation
 {
+
+    using SitecoreBlazorHosted.Shared.Models.Sitecore;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class NavigationItem
     {
         public ISitecoreItem Item  { get; set; }

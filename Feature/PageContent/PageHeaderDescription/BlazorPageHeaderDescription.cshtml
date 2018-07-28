@@ -10,12 +10,12 @@
       <img alt="@FieldsModel.Image("HeaderImage").Value.Alt" id="scLogo" src="@FieldsModel.Image("HeaderImage").Value.Src">
     </div>
     <div id="Content">
-      <div id="LeftContent">
-        <h1 class="contentTitle">@interopService.RenderHtml(FieldsModel.PlainText("Title"), "contentTitle")</h1>
-        <div class="contentDescription" >
-          @interopService.RenderHtml(FieldsModel.HtmlText("Text"), "contentDescription");
+        <div id="LeftContent">
+            <h1>@((MarkupString)FieldsModel.PlainText("Title").Value.HtmlDecode())</h1>
+            <div class="contentDescription">
+                @((MarkupString)FieldsModel.HtmlText("Text").Value.HtmlDecode())
+            </div>
         </div>
-      </div>
     </div>
 
   </div>
@@ -26,19 +26,5 @@
 
     [Parameter]
     List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
-
-    protected override void OnAfterRender()
-    {
-   
-      interopService.RenderHtmlAction();
-
-    }
-
-
-
-
-
-
 
 }

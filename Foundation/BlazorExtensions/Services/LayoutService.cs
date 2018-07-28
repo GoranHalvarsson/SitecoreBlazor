@@ -10,17 +10,16 @@ using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
 {
-  public class LayoutService
+    public class LayoutService
   {
     private readonly ComponentFactory _componentFactory;
     private readonly RouteService _routeService;
     private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
-    public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper, BlazorContext blazorContext)
+    public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper)
     {
       _componentFactory = componentFactory;
       _routeService = routeService;
       _uriHelper = uriHelper;
-      BlazorContext = blazorContext;
     }
 
 
@@ -46,7 +45,7 @@ namespace Foundation.BlazorExtensions.Services
     {
       get; set;
     }
-    private BlazorContext BlazorContext { get; }
+  
 
     public Task<List<RenderFragment>> RenderPlaceholders(string placeholder, CancellationToken cancellationToken = default)
     {
@@ -83,8 +82,6 @@ namespace Foundation.BlazorExtensions.Services
 
               if (keyVal.Key.IsDynamicPlaceholder())
                 RenderedComponentsInDynamicPlaceholdersPerStateChanged.Add(keyName);
-
-
 
             }
           }

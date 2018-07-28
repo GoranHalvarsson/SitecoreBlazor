@@ -37,6 +37,12 @@
     [Parameter]
     protected string PageUrl { get; set; }
 
+    [Parameter]
+    protected string ChildLevel1 { get; set; }
+
+    [Parameter]
+    protected string ChildLevel2 { get; set; }
+
     protected override void OnInit()
     {
         uriHelper.OnLocationChanged += OnLocationChanges;

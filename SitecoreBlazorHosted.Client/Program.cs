@@ -1,26 +1,34 @@
-﻿using Microsoft.AspNetCore.Blazor.Browser.Rendering;
-using Microsoft.AspNetCore.Blazor.Browser.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Foundation.BlazorExtensions.Extensions;
-using Feature.Navigation.Extensions;
-using System;
-
+﻿
 
 namespace SitecoreBlazorHosted.Client
 {
-  public class Program
-  {
-    static void Main(string[] args)
+    using Microsoft.AspNetCore.Blazor.Hosting;
+
+    public class Program
     {
-      var serviceProvider = new BrowserServiceProvider(services =>
-      {
-        services.AddForFoundationBlazorExtensions();
-        services.AddForFeatureNavigation();
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-      });
-
-
-      new BrowserRenderer(serviceProvider).AddComponent<App>("app");
+        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
+            BlazorWebAssemblyHost.CreateDefaultBuilder()
+                .UseBlazorStartup<Startup>();
     }
-  }
+
+    //  public class Program
+    //{
+    //  static void Main(string[] args)
+    //  {
+    //    var serviceProvider = new BrowserServiceProvider(services =>
+    //    {
+    //      services.AddForFoundationBlazorExtensions();
+    //      services.AddForFeatureNavigation();
+
+    //    });
+
+
+    //    new BrowserRenderer(serviceProvider).AddComponent<App>("app");
+    //  }
+//}
 }

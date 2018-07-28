@@ -6,21 +6,21 @@ using System.Collections.Generic;
 
 namespace Foundation.BlazorExtensions.Services
 {
-  public class SitecoreItemService
-  {
-    private const string PageComponent = "SitecoreBlazorHosted.Client.Shared.MasterBlaster, SitecoreBlazorHosted.Client";
-    public ScItem GetSitecoreItemRootMock(string language = "en")
+    public class SitecoreItemService
     {
+        private const string PageComponent = "SitecoreBlazorHosted.Client.Shared.MasterBlaster, SitecoreBlazorHosted.Client";
+        public ScItem GetSitecoreItemRootMock(string language = "en")
+        {
 
-      return language == "sv"
-                ? new ScItem()
-                {
-                  Name = "Home",
-                  Url = "/sv",
-                  Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
-                  Language = "sv",
-                  Fields = new List<IBlazorSitecoreField>()
-            {
+            return language == "sv"
+                      ? new ScItem()
+                      {
+                          Name = "Home",
+                          Url = "/sv",
+                          Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+                          Language = "sv",
+                          Fields = new List<IBlazorSitecoreField>()
+                  {
                         new BlazorSitecoreField<string>
                         {
                             FieldName = "NavigationTitle",
@@ -28,9 +28,9 @@ namespace Foundation.BlazorExtensions.Services
                             Editable = "Hem",
                             Type =  FieldTypes.PlainTextField
                         }
-            },
-                  Children = new List<ISitecoreItem>()
-                {
+                  },
+                          Children = new List<ISitecoreItem>()
+                      {
                                 new ScItem()
                                 {
                                     Name = "Habitat stuff",
@@ -128,16 +128,16 @@ namespace Foundation.BlazorExtensions.Services
                                 }
 
 
-                }
-                }
-                : new ScItem()
-                {
-                  Name = "Home",
-                  Url = "/en",
-                  Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
-                  Language = "en",
-                  Fields = new List<IBlazorSitecoreField>()
-                {
+                      }
+                      }
+                      : new ScItem()
+                      {
+                          Name = "Home",
+                          Url = "/en",
+                          Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+                          Language = "en",
+                          Fields = new List<IBlazorSitecoreField>()
+                      {
                             new BlazorSitecoreField<string>
                             {
                                 FieldName = "NavigationTitle",
@@ -145,9 +145,9 @@ namespace Foundation.BlazorExtensions.Services
                                 Editable = "Home",
                                 Type =  FieldTypes.PlainTextField
                             }
-                },
-                  Children = new List<ISitecoreItem>()
-                {
+                      },
+                          Children = new List<ISitecoreItem>()
+                      {
                               new ScItem()
                                 {
                                     Name = "Habitat stuff",
@@ -245,72 +245,92 @@ namespace Foundation.BlazorExtensions.Services
                                 }
 
 
+                      }
+                      };
+
+
+        }
+
+        public RouterDataRoot ConfigRoutes(string language = "en")
+        {
+
+            ISitecoreItem rootItem = GetSitecoreItemRootMock();
+
+            RouterDataRoot routesData = new RouterDataRoot()
+            {
+                //Home
+                Routes = new List<RouterData>()
+                {
+                  new RouterData()
+                  {
+                    Path = "/{Language}",
+                    Page = PageComponent
+                  }
                 }
-                };
+            };
+
+            //Rest of menu items
+            foreach (ISitecoreItem item in rootItem.Children)
+            {
+                routesData.Routes.Add(new RouterData()
+                {
+                    Path = "/{Language}" + item.Url.Substring(language.Length + 1),
+                    Page = PageComponent,
+                    Children = item.HasChildren ? GetChildren(item) : null
+                });
+            }
+
+            //Fallback error handling
+            routesData.Routes.Add(new RouterData()
+            {
+                Path = "/{Language}/{PageUrl}",
+                Page = PageComponent,
+                Children = new List<RouterData>()
+                {
+                    new RouterData()
+                    {
+                        Path = "/{ChildLevel1}",
+                        Page = PageComponent,
+                        Children = new List<RouterData>()
+                        {
+                            new RouterData()
+                            {
+                                Path = "/{ChildLevel2}",
+                                Page = PageComponent
+                            }
+                        }
+                    }
+                }
+            });
+
+           
+
+            return routesData;
 
 
-    }
 
-    public RouterDataRoot ConfigRoutes(string language = "en")
-    {
+            List<RouterData> GetChildren(ISitecoreItem sitecoreItem)
+            {
+                List<RouterData> children = new List<RouterData>();
 
-      ISitecoreItem rootItem = GetSitecoreItemRootMock();
+                if (!sitecoreItem.HasChildren)
+                {
+                    return null;
+                }
 
-      RouterDataRoot routesData = new RouterDataRoot()
-      {
-        //Home
-        Routes = new List<RouterData>()
-        {
-          new RouterData()
-          {
-            Path = "/{Language}",
-            Page = PageComponent
-          }
+                foreach (ISitecoreItem child in sitecoreItem.Children)
+                {
+                    children.Add(new RouterData()
+                    {
+                        Path = child.Url.Substring(child.Url.LastIndexOf('/')),
+                        Page = PageComponent,
+                        Children = child.HasChildren ? GetChildren(child) : null
+                    });
+
+                }
+
+                return children;
+            }
         }
-      };
-
-      //Rest of menu items
-      foreach (var item in rootItem.Children)
-      {
-        routesData.Routes.Add(new RouterData()
-        {
-          Path = "/{Language}" + item.Url.Substring(language.Length + 1),
-          Page = PageComponent,
-          Children = item.HasChildren ? GetChildren(item) : null
-        });
-      }
-
-      //Fallback error handling
-      routesData.Routes.Add(new RouterData()
-      {
-        Path = "/{Language}/{PageUrl}",
-        Page = PageComponent
-      });
-
-      return routesData;
-
-
-
-      List<RouterData> GetChildren(ISitecoreItem sitecoreItem)
-      {
-        var children = new List<RouterData>();
-
-        if (!sitecoreItem.HasChildren)
-          return null;
-
-        foreach (var child in sitecoreItem.Children)
-        {
-          children.Add(new RouterData()
-          {
-            Path = child.Url.Substring(child.Url.LastIndexOf('/')),
-            Page = PageComponent,
-            Children = child.HasChildren ? GetChildren(child) : null
-          });
-
-        }
-
-        return children;
-      }
     }
-  }
 }

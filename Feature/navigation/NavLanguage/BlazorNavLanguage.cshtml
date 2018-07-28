@@ -11,14 +11,14 @@
 @inject Foundation.BlazorExtensions.Services.InteropService interopService;
 
 <li class="dropdown">
-    <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@onclick" aria-haspopup="true">
+    <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
         @GetSelectedLanguage()
     </button>
     <div class="@ClassName">
 
         @foreach (var language in GetLanguages().Where(l => l.Name != blazorContext.ContextLanguage))
         {
-            <a class="dropdown-item" onclick="@HardReload" href="@BuildUrl(language)">@language.NativeName</a>
+            <a class="dropdown-item" onclick="@(() => HardReload())" href="@BuildUrl(language)">@language.NativeName</a>
         }
 
     </div>
@@ -37,7 +37,7 @@
     }
 
     bool IsOpen { get; set; } = false;
-    void onclick()
+    private void ToggleOpen()
     {
         IsOpen = !IsOpen;
     }
@@ -77,9 +77,9 @@
         return $"{uriHelper.GetBaseUri()}{lanuage.TwoLetterCode}{relative}";
     }
 
-    private void HardReload()
+    private async Task HardReload()
     {
-        interopService.ReloadBlazor();
+        await interopService.HardReload();
     }
 
 

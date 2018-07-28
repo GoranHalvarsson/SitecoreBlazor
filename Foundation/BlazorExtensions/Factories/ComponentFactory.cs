@@ -4,6 +4,7 @@ using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.JSInterop;
 
 namespace Foundation.BlazorExtensions.Factories
 {
@@ -29,7 +30,7 @@ namespace Foundation.BlazorExtensions.Factories
             break;
 
           default:
-            fieldValue = JsonUtil.Deserialize<T>(sitecoreField.Value.Value.ToString());
+            fieldValue = Json.Deserialize<T>(sitecoreField.Value.Value.ToString());
             break;
         }
 
@@ -81,7 +82,7 @@ namespace Foundation.BlazorExtensions.Factories
               if (item == null || string.IsNullOrWhiteSpace(item.ToString()))
                 continue;
 
-              BlazorFieldValueMultiListItem multiListItem = JsonUtil.Deserialize<BlazorFieldValueMultiListItem>(item.ToString());
+              BlazorFieldValueMultiListItem multiListItem = Json.Deserialize<BlazorFieldValueMultiListItem>(item.ToString());
 
               var model = CreateComponentModel(multiListItem.Fields);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
 {
-  public class RouteService
+    public class RouteService
   {
     private readonly RestService _restService;
     private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;

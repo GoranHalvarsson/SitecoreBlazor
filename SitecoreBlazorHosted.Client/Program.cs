@@ -15,20 +15,5 @@ namespace SitecoreBlazorHosted.Client
             BlazorWebAssemblyHost.CreateDefaultBuilder()
                 .UseBlazorStartup<Startup>();
     }
-
-    //  public class Program
-    //{
-    //  static void Main(string[] args)
-    //  {
-    //    var serviceProvider = new BrowserServiceProvider(services =>
-    //    {
-    //      services.AddForFoundationBlazorExtensions();
-    //      services.AddForFeatureNavigation();
-
-    //    });
-
-
-    //    new BrowserRenderer(serviceProvider).AddComponent<App>("app");
-    //  }
-//}
-}
+   
+}   

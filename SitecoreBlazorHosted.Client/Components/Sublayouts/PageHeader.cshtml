@@ -1,5 +1,12 @@
 ﻿<header class="page-header">
     <BlazorPlaceholder Name="page-header">
-
+        @ChildContent
     </BlazorPlaceholder>
 </header>
+
+@functions  {
+
+    [Parameter]
+    protected Microsoft.AspNetCore.Blazor.RenderFragment ChildContent { get; set; }
+
+}

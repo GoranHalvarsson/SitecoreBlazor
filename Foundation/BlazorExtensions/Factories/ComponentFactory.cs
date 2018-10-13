@@ -47,7 +47,7 @@ namespace Foundation.BlazorExtensions.Factories
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"Error cretaing field {fieldValue.GetType()}. Error { ex.Message}");
+        Console.WriteLine($"Error creating field {fieldValue.GetType()}. Error { ex.Message}");
       }
 
       return field;
@@ -118,7 +118,7 @@ namespace Foundation.BlazorExtensions.Factories
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"Error cretaing complex field {fieldValue.GetType()}. Error { ex.Message}");
+        Console.WriteLine($"Error creating complex field {fieldValue.GetType()}. Error { ex.Message}");
 
       }
 

@@ -42,20 +42,18 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
     private void Render()
     {
-      // In the middle, we render the requested page
-      Type layoutType = Page;
-      var fragment = RenderComponentWithBody(Page, bodyParam: null);
+        // In the middle, we render the requested page
+        var fragment = RenderComponentWithBody(Page, bodyParam: null);
 
-      // Repeatedly wrap it in each layer of nested layout until we get
-      // to a layout that has no parent
-      //Type layoutType = Page;
-      //Console.WriteLine(Page.ToString() + " - " + GetLayoutType(layoutType).ToString());
-      while ((layoutType = GetLayoutType(layoutType)) != null)
-      {
-        fragment = RenderComponentWithBody(layoutType, fragment);
-      }
+        // Repeatedly wrap it in each layer of nested layout until we get
+        // to a layout that has no parent
+        Type layoutType = Page;
+        while ((layoutType = GetLayoutType(layoutType)) != null)
+        {
+            fragment = RenderComponentWithBody(layoutType, fragment);
+        }
 
-      _renderHandle.Render(fragment);
+        _renderHandle.Render(fragment);
     }
 
     private RenderFragment RenderComponentWithBody(Type componentType, RenderFragment bodyParam) => builder =>

@@ -10,13 +10,13 @@
 else
 {
 
-    @if (DynamicComponents == null)
+    if (DynamicComponents == null)
     {
         <p><em>Loading...</em></p>
     }
     else
     {
-        @foreach (var component in DynamicComponents)
+        foreach (var component in DynamicComponents)
         {
             @component
         }

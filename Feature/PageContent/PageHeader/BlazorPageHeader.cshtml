@@ -11,16 +11,17 @@
 </header>
 
 <BlazorPlaceholder Name="main-body">
-
+    @ChildContent
 </BlazorPlaceholder>
 
 
 @functions {
 
-[Parameter]
-List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
-
+    [Parameter]
+    protected Microsoft.AspNetCore.Blazor.RenderFragment ChildContent { get; set; }
 
 
 }

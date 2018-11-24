@@ -1,20 +1,25 @@
 ﻿@using Foundation.BlazorExtensions.Services
 
+@inherits BlazorLayoutComponent
+@*@implements IDisposable*@
+
+
 @inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
 
 @inject LayoutService layoutService;
 
-@inherits BlazorLayoutComponent
-@implements IDisposable
+
 
 
 <div class="main">
 
     <BlazorPlaceholder Name="navbar">
+     
     </BlazorPlaceholder>
 
     <main role="main" class="container">
         <BlazorPlaceholder Name="main">
+            @Body
         </BlazorPlaceholder>
     </main>
 
@@ -22,6 +27,7 @@
     <footer class="container">
 
         <BlazorPlaceholder Name="footer">
+           
         </BlazorPlaceholder>
 
     </footer>
@@ -33,15 +39,6 @@
 
     [Parameter]
     protected string Language { get; set; }
-
-    [Parameter]
-    protected string PageUrl { get; set; }
-
-    [Parameter]
-    protected string ChildLevel1 { get; set; }
-
-    [Parameter]
-    protected string ChildLevel2 { get; set; }
 
     protected override void OnInit()
     {

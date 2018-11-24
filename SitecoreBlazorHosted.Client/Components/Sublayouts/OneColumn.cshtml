@@ -2,9 +2,18 @@
     <div class="row">
         <div class="col-md-12">
             <BlazorPlaceholder Name="col-huge">
-
+                @ChildContent
             </BlazorPlaceholder>
         </div>
     </div>
 </div>
+
+
+@functions  {
+
+[Parameter]
+protected Microsoft.AspNetCore.Blazor.RenderFragment ChildContent { get; set; }
+
+}
+
 

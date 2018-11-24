@@ -281,27 +281,27 @@ namespace Foundation.BlazorExtensions.Services
             }
 
             //Fallback error handling
-            routesData.Routes.Add(new RouterData()
-            {
-                Path = "/{Language}/{PageUrl}",
-                Page = PageComponent,
-                Children = new List<RouterData>()
-                {
-                    new RouterData()
-                    {
-                        Path = "/{ChildLevel1}",
-                        Page = PageComponent,
-                        Children = new List<RouterData>()
-                        {
-                            new RouterData()
-                            {
-                                Path = "/{ChildLevel2}",
-                                Page = PageComponent
-                            }
-                        }
-                    }
-                }
-            });
+            //routesData.Routes.Add(new RouterData()
+            //{
+            //    Path = "/{Language}/{PageUrl}",
+            //    Page = PageComponent,
+            //    Children = new List<RouterData>()
+            //    {
+            //        new RouterData()
+            //        {
+            //            Path = "/{ChildLevel1}",
+            //            Page = PageComponent,
+            //            Children = new List<RouterData>()
+            //            {
+            //                new RouterData()
+            //                {
+            //                    Path = "/{ChildLevel2}",
+            //                    Page = PageComponent
+            //                }
+            //            }
+            //        }
+            //    }
+            //});
 
            
 

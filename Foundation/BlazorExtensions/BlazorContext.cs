@@ -32,16 +32,7 @@ namespace Foundation.BlazorExtensions
 
         public Task<string> GetContextLanguageAsync()
         {
-
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage);
-
-            //if (!String.IsNullOrWhiteSpace(language))
-            //    return language;
-
-            //await _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, "en");
-
-            //language = await _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage);
-            //return language;
         }
 
         public  Task SetContextLanguageAsync(string language)
@@ -54,12 +45,9 @@ namespace Foundation.BlazorExtensions
 
         }
 
-        public async Task<string> GetCurrentRouteIdAsync()
+        public Task<string> GetCurrentRouteIdAsync()
         {
-
-            string routeId = await _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId);
-
-             return routeId;
+            return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId);
         }
 
         public Task SetCurrentRouteIdAsync(string routeId)

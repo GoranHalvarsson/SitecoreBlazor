@@ -10,22 +10,21 @@ namespace Foundation.BlazorExtensions.Extensions
     {
       yield return thisItem;
 
-      if (thisItem.HasChildren)
-      {
+        if (!thisItem.HasChildren) 
+            yield break;
+        
         foreach (ISitecoreItem child in thisItem.Children)
         {
-          yield return child;
+            yield return child;
 
-          if (child.HasChildren)
-          {
+            if (!child.HasChildren) 
+                continue;
+            
             foreach (ISitecoreItem i in GetItSelfAndDescendants(child))
             {
-              yield return i;
+                yield return i;
             }
-          }
         }
-
-      }
 
     }
 

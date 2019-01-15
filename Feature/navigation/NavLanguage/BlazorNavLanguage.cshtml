@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Blazor.Components
 @using Microsoft.AspNetCore.Blazor.Routing
 @using Foundation.BlazorExtensions.Services
+@using SitecoreBlazorHosted.Shared.Models
 
 @inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
 
@@ -10,77 +11,81 @@
 
 @inject Foundation.BlazorExtensions.Services.InteropService interopService;
 
-<li class="dropdown">
-    <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
-        @GetSelectedLanguage()
-    </button>
-    <div class="@ClassName">
+@inject Foundation.BlazorExtensions.Services.LanguageService languageService;
 
-        @foreach (var language in GetLanguages().Where(l => l.Name != blazorContext.ContextLanguage))
-        {
-            <a class="dropdown-item" onclick="@(() => HardReload())" href="@BuildUrl(language)">@language.NativeName</a>
-        }
 
-    </div>
-</li>
+@if (ValidLanguages == null)
+{
+    <em>Loading...</em>
+}
+else
+{
+
+
+
+    <li class="dropdown">
+        <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
+            @languageService.Get(CurrentLanguage)?.NativeName
+        </button>
+        <div class="@ClassName">
+
+            @foreach (var language in ValidLanguages)
+            {
+                <a class="dropdown-item" onclick="@(() => HardReload())" href="@BuildUrl(language)">@language.NativeName</a>
+            }
+
+        </div>
+    </li>
+
+}
 
 @functions {
 
+private string CurrentLanguage { get; set; }
 
-    string ClassName
+private IList<Language> ValidLanguages { get; set; }
+
+
+
+
+protected override async Task OnParametersSetAsync()
+{
+    CurrentLanguage = await blazorContext.GetContextLanguageAsync();
+
+    ValidLanguages = languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+}
+
+string ClassName
+{
+    get
     {
-        get
-        {
-            var open = IsOpen ? "show" : null;
-            return $"dropdown-menu {open}";
-        }
+        var open = IsOpen ? "show" : null;
+        return $"dropdown-menu {open}";
     }
+}
 
-    bool IsOpen { get; set; } = false;
-    private void ToggleOpen()
-    {
-        IsOpen = !IsOpen;
-    }
-
-
-    IEnumerable<SitecoreBlazorHosted.Shared.Models.Language> GetLanguages()
-    {
-        yield return new SitecoreBlazorHosted.Shared.Models.Language()
-        {
-            Name = "en",
-            NativeName = "English",
-            TwoLetterCode = "en"
-        };
-
-        yield return new SitecoreBlazorHosted.Shared.Models.Language()
-        {
-            Name = "sv",
-            NativeName = "Svenska",
-            TwoLetterCode = "sv"
-        };
+private bool IsOpen { get; set; } = false;
+private void ToggleOpen()
+{
+    IsOpen = !IsOpen;
+}
 
 
-    }
 
-    private string GetSelectedLanguage()
-    {
-        return GetLanguages().FirstOrDefault(l => l.TwoLetterCode == blazorContext.ContextLanguage).NativeName;
-    }
+private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
+{
+    string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
 
-    private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language lanuage)
-    {
-        string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+    if (CurrentLanguage.Length > 0)
+        relative = relative.Substring(CurrentLanguage.Length);
 
-        if (blazorContext.ContextLanguage.Length > 0)
-            relative = relative.Substring(blazorContext.ContextLanguage.Length);
+    return $"{uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
+}
 
-        return $"{uriHelper.GetBaseUri()}{lanuage.TwoLetterCode}{relative}";
-    }
-
-    private async Task HardReload()
-    {
-        await interopService.HardReload();
-    }
+private async Task HardReload()
+{
+    await interopService.HardReload();
+}
 
 
 

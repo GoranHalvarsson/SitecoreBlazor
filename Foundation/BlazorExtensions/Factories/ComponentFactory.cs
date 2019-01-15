@@ -47,7 +47,7 @@ namespace Foundation.BlazorExtensions.Factories
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"Error creating field {fieldValue.GetType()}. Error { ex.Message}");
+        Console.WriteLine($"Error creating field {fieldValue?.GetType()}. Error { ex.Message}");
       }
 
       return field;
@@ -118,7 +118,7 @@ namespace Foundation.BlazorExtensions.Factories
       }
       catch (Exception ex)
       {
-        Console.WriteLine($"Error creating complex field {fieldValue.GetType()}. Error { ex.Message}");
+        Console.WriteLine($"Error creating complex field {fieldValue?.GetType()}. Error { ex.Message}");
 
       }
 
@@ -184,13 +184,13 @@ namespace Foundation.BlazorExtensions.Factories
 
       Type type = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
 
-      System.Reflection.Assembly assembly = type.Assembly;
+      System.Reflection.Assembly assembly = type?.Assembly;
 
       (List<IBlazorSitecoreField> model, bool hasModel) componentModel = CreateComponentModel(placeholderData.Fields);
 
       return BuildRenderTree =>
       {
-        BuildRenderTree.OpenComponent(0, assembly.GetType(placeholderData.ComponentName));
+        BuildRenderTree.OpenComponent(0, assembly?.GetType(placeholderData.ComponentName));
 
         if (componentModel.hasModel)
           BuildRenderTree.AddAttribute(1, "FieldsModel", componentModel.model);

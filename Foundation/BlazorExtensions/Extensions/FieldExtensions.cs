@@ -25,9 +25,6 @@ namespace Foundation.BlazorExtensions.Extensions
 
             IBlazorSitecoreField field = fields.FirstOrDefault(f => f.FieldName == fieldName);
 
-            if (field == null)
-                return null;
-
             return field as T;
         }
 

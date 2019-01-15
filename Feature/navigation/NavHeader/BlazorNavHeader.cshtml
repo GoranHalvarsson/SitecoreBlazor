@@ -5,13 +5,26 @@
 @inject Foundation.BlazorExtensions.BlazorContext blazorContext;
 @inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
 
-<a class="navbar-brand" href="@blazorContext.ContextLanguage.WithBaseUrl_UglyHackForGithub(uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
-
+@if (string.IsNullOrWhiteSpace(CurrentLanguage))
+{
+    <em>Loading...</em>
+}
+else
+{
+    <a class="navbar-brand" href="@CurrentLanguage.WithBaseUrl_UglyHackForGithub(uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+}
 
 @functions {
 
 [Parameter]
 List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+private string CurrentLanguage { get; set; }
+
+protected override async Task OnParametersSetAsync()
+{
+    CurrentLanguage = await blazorContext.GetContextLanguageAsync();
+}
 
 
 }

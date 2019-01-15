@@ -1,4 +1,5 @@
-﻿using Foundation.BlazorExtensions;
+﻿using System;
+using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Services;
 using SitecoreBlazorHosted.Shared.Models.Navigation;
 using SitecoreBlazorHosted.Shared.Models.Sitecore;
@@ -19,12 +20,10 @@ namespace Feature.Navigation.Repositories
       _sitecoreItemService = sitecoreItemService;
     }
 
-    public Task<List<NavigationItem>> GetBreadcrumb()
+    public  async Task<List<NavigationItem>> GetBreadcrumb()
     {
 
-
-      return Task.Run(async () =>
-      {
+    
         var items = await GetNavigationHierarchy();
         items.Reverse();
         for (var i = 0; i < items.Count - 1; i++)
@@ -33,17 +32,16 @@ namespace Feature.Navigation.Repositories
         }
 
         return items;
-      });
+      
 
 
     }
 
-    private Task<List<NavigationItem>> GetNavigationHierarchy()
+    private async Task<List<NavigationItem>> GetNavigationHierarchy()
     {
-      return Task.Run(async () =>
-      {
+      
 
-        var routeId = _blazorContext.ContextRoute?.Id;
+        var routeId = await _blazorContext.GetCurrentRouteIdAsync();
 
         var menuItems = new List<NavigationItem>();
 
@@ -76,7 +74,7 @@ namespace Feature.Navigation.Repositories
         }
 
         return result;
-      });
+     
 
     }
 
@@ -109,13 +107,11 @@ namespace Feature.Navigation.Repositories
       return children;
     }
 
-    public Task<List<NavigationItem>> GetMenu()
+    public async Task<List<NavigationItem>> GetMenu()
     {
-
-      return Task.Run(() =>
-      {
-
-        ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(_blazorContext.ContextLanguage);
+        string currentLanguage = await _blazorContext.GetContextLanguageAsync();
+        Console.WriteLine("GetMenu " + currentLanguage);
+        ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
 
 
         List<NavigationItem> list = new List<NavigationItem>
@@ -143,7 +139,6 @@ namespace Feature.Navigation.Repositories
         return list;
 
 
-      });
     }
   }
 }

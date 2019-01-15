@@ -12,7 +12,7 @@
 
 @if (NavigationItems == null)
 {
-    <span>Loading...</span>
+    <em>Loading...</em>
 
 }
 else
@@ -80,7 +80,7 @@ else
 
   List<NavigationItem> NavigationItems { get; set; }
 
-  protected override async Task OnInitAsync()
+  protected override async Task OnParametersSetAsync()
   {
     NavigationItems = await navigationRepository.GetMenu();
   }

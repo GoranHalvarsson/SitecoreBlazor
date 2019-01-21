@@ -79,6 +79,10 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         {
             var locationPath = UriHelper.ToBaseRelativePath(_baseUri, _locationAbsolute);
             locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
+
+            if (string.IsNullOrWhiteSpace(locationPath))
+                locationPath = "en";
+
             var context = new RouteContext(locationPath);
             Routes.Route(context);
 

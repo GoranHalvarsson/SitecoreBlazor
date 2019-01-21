@@ -16,14 +16,14 @@ namespace Foundation.BlazorExtensions.Extensions
         public static void AddForFoundationBlazorExtensions(this IServiceCollection serviceCollection)
         {
             AddStorage(serviceCollection);
-            serviceCollection.AddSingleton<SitecoreItemService>();
-            serviceCollection.AddSingleton<InteropService>();
-            serviceCollection.AddSingleton<BlazorContext>();
-            serviceCollection.AddSingleton<RouteService>();
-            serviceCollection.AddSingleton<LayoutService>();
-            serviceCollection.AddSingleton<ComponentFactory>();
-            serviceCollection.AddSingleton<RestService>();
-            serviceCollection.AddSingleton<LanguageService>();
+            serviceCollection.AddScoped<SitecoreItemService>();
+            serviceCollection.AddScoped<InteropService>();
+            serviceCollection.AddScoped<BlazorContext>();
+            serviceCollection.AddScoped<RouteService>();
+            serviceCollection.AddScoped<LayoutService>();
+            serviceCollection.AddScoped<ComponentFactory>();
+            serviceCollection.AddScoped<RestService>();
+            serviceCollection.AddScoped<LanguageService>();
 
         }
 

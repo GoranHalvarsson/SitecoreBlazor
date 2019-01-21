@@ -19,6 +19,7 @@ namespace SitecoreBlazorHosted.Server
         {
             services.AddMvc();
 
+            //For server-side
             services.AddServerSideBlazor<Client.Startup>();
 
             services.AddResponseCompression(options =>
@@ -46,6 +47,10 @@ namespace SitecoreBlazorHosted.Server
                 routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
             });
 
+            //For client-side
+            //app.UseBlazor<Client.Startup>();
+
+            //For server-side
             app.UseServerSideBlazor<Client.Startup>();
         }
     }

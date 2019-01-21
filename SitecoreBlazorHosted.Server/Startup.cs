@@ -19,6 +19,8 @@ namespace SitecoreBlazorHosted.Server
         {
             services.AddMvc();
 
+            services.AddServerSideBlazor<Client.Startup>();
+
             services.AddResponseCompression(options =>
             {
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
@@ -44,7 +46,7 @@ namespace SitecoreBlazorHosted.Server
                 routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
             });
 
-            app.UseBlazor<Client.Program>();
+            app.UseServerSideBlazor<Client.Startup>();
         }
     }
 }

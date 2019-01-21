@@ -56,28 +56,28 @@
 
     private string IndicatorClassName(int index)
     {
-      return ActiveIndex == index ? "active" : null;
+        return ActiveIndex == index ? "active" : null;
     }
 
     private string CarouselItemClassName(int index)
     {
-      var active = ActiveIndex == index ? "active" : null;
-      return $"carousel-item {active}";
+        var active = ActiveIndex == index ? "active" : null;
+        return $"carousel-item {active}";
     }
 
     private string CarouselItemCaptionClassName
     {
-      get
-      {
-        return $"carousel-caption d-none d-md-block";
-      }
+        get
+        {
+            return $"carousel-caption d-none d-md-block";
+        }
     }
 
     private int _activeIndex;
-    int ActiveIndex
+    private int ActiveIndex
     {
-      get => _activeIndex;
-      set { _activeIndex = value; StateHasChanged(); }
+        get => _activeIndex;
+        set { _activeIndex = value; StateHasChanged(); }
     }
 
     private Action<int> ActiveIndexChanged { get; set; }
@@ -90,66 +90,72 @@
 
     protected override void OnInit()
     {
-      _timer = new Timer(Interval);
-      _timer.Elapsed += OnTimerEvent;
-      _timer.AutoReset = true;
-      _timer.Start();
+        _timer = new Timer(Interval);
+        _timer.Elapsed += OnTimerEvent;
+        _timer.AutoReset = true;
+        _timer.Start();
 
     }
 
     private void OnTimerEvent(Object source, ElapsedEventArgs e)
     {
-      if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
-        ActiveIndex = 0;
-      else
-        ActiveIndex = ActiveIndex + 1;
 
-      ActiveIndexChanged(ActiveIndex);
+        if (ActiveIndexChanged == null)
+            return;
+
+
+        if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+            ActiveIndex = 0;
+        else
+            ActiveIndex = ActiveIndex + 1;
+
+
+        ActiveIndexChanged(ActiveIndex);
     }
 
 
     private void OnMouseOver()
     {
-      if (_timer != null) _timer.Stop();
+        if (_timer != null) _timer.Stop();
     }
 
     private void OnMouseOut()
     {
-      if (_timer != null) _timer.Start();
+        if (_timer != null) _timer.Start();
     }
 
     private void NavCarousel(CarouselDirection carouselIndication)
     {
-      if (carouselIndication == CarouselDirection.Previous)
-      {
-        if (ActiveIndex == 0)
-          ActiveIndex = FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1;
+        if (carouselIndication == CarouselDirection.Previous)
+        {
+            if (ActiveIndex == 0)
+                ActiveIndex = FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1;
+            else
+                ActiveIndex = ActiveIndex - 1;
+        }
         else
-          ActiveIndex = ActiveIndex - 1;
-      }
-      else
-      {
-        if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
-          ActiveIndex = 0;
-        else
-          ActiveIndex = ActiveIndex + 1;
+        {
+            if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+                ActiveIndex = 0;
+            else
+                ActiveIndex = ActiveIndex + 1;
 
-      }
+        }
     }
 
     private void NavCarousel(Microsoft.AspNetCore.Blazor.UIMouseEventArgs args, int index)
     {
-      ActiveIndex = index;
+        ActiveIndex = index;
     }
 
     public void Dispose()
     {
-      if (_timer != null)
-      {
-        _timer.Stop();
-        _timer.Dispose();
-        _timer = null;
-      }
+        if (_timer != null)
+        {
+            _timer.Stop();
+            _timer.Dispose();
+            _timer = null;
+        }
     }
 
 }

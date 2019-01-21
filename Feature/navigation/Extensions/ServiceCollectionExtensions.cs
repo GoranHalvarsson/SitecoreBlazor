@@ -8,7 +8,7 @@ namespace Feature.Navigation.Extensions
   {
     public static void AddForFeatureNavigation(this IServiceCollection serviceCollection)
     {
-      serviceCollection.AddSingleton<NavigationRepository>();
+      serviceCollection.AddScoped<NavigationRepository>();
      
     }
 

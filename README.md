@@ -15,6 +15,78 @@ To get started with Blazor and build your first Blazor web app check out [Blazor
 ## Setup solution
 Clone or fork this repo, build it and be happy 🙂
 
+## UPDATE! Application can now run server/client -side
+Go to Startup.cs(in SitecoreBlazorHosted.Server), locate //For server-side and //For client-side.
+```csharp
+public class Startup
+    {
+        // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+
+            //For server-side
+            services.AddServerSideBlazor<Client.Startup>();
+
+            services.AddResponseCompression(options =>
+            {
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
+                {
+                    MediaTypeNames.Application.Octet,
+                    WasmMediaTypeNames.Application.Wasm,
+                });
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseResponseCompression();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
+            });
+
+            //For client-side
+            //app.UseBlazor<Client.Startup>();
+
+            //For server-side
+            app.UseServerSideBlazor<Client.Startup>();
+        }
+    }
+        
+```
+In index.cshtml(in SitecoreBlazorHosted.Client) you need to set what javascript to use:
+- Server-side: _framework/blazor.server.js
+- Client-side: _framework/blazor.webassembly.js
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Sitecore Blazor</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <app><img src="css/SBlazor.svg" /></app>
+
+    <script type="text/javascript" src="blazor.polyfill.min.js"></script>
+
+    <!--<script src="_framework/blazor.webassembly.js"></script>-->
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>        
+```
 
 ## Blog posts
 [Server-side is dead, long live client-side! BLAZOR + Sitecore = a match made in heaven](https://visionsincode.wordpress.com/2018/05/13/server-side-is-dead-long-live-client-side-blazor-sitecore-a-match-made-in-heaven/)

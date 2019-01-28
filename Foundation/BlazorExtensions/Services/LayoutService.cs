@@ -15,11 +15,14 @@ namespace Foundation.BlazorExtensions.Services
         private readonly ComponentFactory _componentFactory;
         private readonly RouteService _routeService;
         private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
+       
+
         public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper)
         {
             _componentFactory = componentFactory;
             _routeService = routeService;
             _uriHelper = uriHelper;
+       
         }
 
 
@@ -27,16 +30,17 @@ namespace Foundation.BlazorExtensions.Services
         /// LoadRoute is called on state changed(each "request")
         /// </summary>
         /// <param name="language"></param>
+        /// <param name="hasRouteError"></param>
         /// <returns></returns>
-        public async Task LoadRoute(string language)
+        public async Task LoadRoute(string language, bool hasRouteError)
         {
 
-            if (_routeService.FlattenPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
+            if (_routeService.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
             {
 
                 RenderedComponentsInDynamicPlaceholdersPerStateChanged = new List<string>();
 
-                await _routeService.LoadRoute(language);
+                await _routeService.LoadRoute(language,hasRouteError);
             }
         }
 
@@ -57,7 +61,7 @@ namespace Foundation.BlazorExtensions.Services
                 try
                 {
 
-                    IEnumerable<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.FlattenPlaceholders.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder);
+                    IEnumerable<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.CurrentPlaceholders.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder);
 
                     foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
                     {

@@ -13,36 +13,31 @@ namespace Foundation.BlazorExtensions.Services
         private readonly RestService _restService;
         private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
         private readonly SitecoreItemService _sitecoreItemService;
-        private readonly LanguageService _languageService;
-
-        public RouteService(RestService restService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorContext blazorContext, LanguageService languageService)
+        
+        public RouteService(RestService restService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorContext blazorContext)
         {
             _restService = restService;
             _uriHelper = uriHelper;
             _sitecoreItemService = sitecoreItemService;
             BlazorContext = blazorContext;
-            _languageService = languageService;
         }
 
         private BlazorContext BlazorContext { get; }
         private Route CurrentRoute { get; set; }
 
-        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> FlattenPlaceholders { get; set; }
+        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
        
-        public string BuildRouteApiUrl(string language)
+        public string BuildRouteApiUrl(string language, bool? hasRouteError)
         {
             string baseUrl = $"{_uriHelper.GetBaseUri()}/data/routes";
 
             string relativeUrl = $"{_uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri())}";
 
-            //Language is wrong
-            if (!_languageService.IsValidLanguage(language))
-            {
-                language = _languageService.GetDefaultLanguage()?.TwoLetterCode;
+            //Incorrect url
+            if (hasRouteError.HasValue && hasRouteError.Value)
                 return $"{baseUrl}/error/{language}.json";
-            }
-
+           
             ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(language);
 
             if (rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl) || relativeUrl == "")
@@ -69,29 +64,18 @@ namespace Foundation.BlazorExtensions.Services
               : (false, $"/{relativeUrl}");
         }
 
-        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(string language = null)
+        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(string language = null, bool hasRouteError = false )
         {
-            if (language == null && CurrentRoute?.ItemLanguage == null)
-                language = _languageService.GetDefaultLanguage()?.TwoLetterCode;
-
-            if (language == null && CurrentRoute?.ItemLanguage != null)
-                language = CurrentRoute.ItemLanguage;
-
-            if (!_languageService.IsValidLanguage(language))
-                language = _languageService.GetDefaultLanguage()?.TwoLetterCode;
-
-          
-            string routeUrl = BuildRouteApiUrl(language);
+            string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
             this.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
 
-            this.FlattenPlaceholders = CurrentRoute.Placeholders.FlattenPlaceholders();
+            this.CurrentPlaceholders = CurrentRoute.Placeholders.FlattenThePlaceholders();
 
             await BlazorContext.SetCurrentRouteIdAsync(CurrentRoute.Id);
             await BlazorContext.SetContextLanguageAsync(language);
 
-
-            return new ValueTuple<Route, IEnumerable<KeyValuePair<string, IList<Placeholder>>>>(CurrentRoute, FlattenPlaceholders);
+            return new ValueTuple<Route, IEnumerable<KeyValuePair<string, IList<Placeholder>>>>(CurrentRoute, CurrentPlaceholders);
         }
 
     }

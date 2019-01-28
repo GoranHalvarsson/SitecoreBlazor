@@ -41,6 +41,7 @@ namespace Foundation.BlazorExtensions.Services
 
         public Language Get(string twoLetterCode)
         {
+
             return GetLanguages().FirstOrDefault(l => l.TwoLetterCode == twoLetterCode);
         }
 
@@ -49,6 +50,50 @@ namespace Foundation.BlazorExtensions.Services
             string[] validLanguages = new string[] { "sv", "en" };
             return validLanguages.Any(vl => vl == language);
         }
-        
+
+
+        public bool HasValidLanguageInUrl(string baseUrl, string relativeUrl)
+        {
+
+            if (string.IsNullOrWhiteSpace(relativeUrl))
+                return false;
+
+            Uri uri = new Uri(new Uri(baseUrl), relativeUrl);
+
+            string segment =  uri?.Segments?.ElementAt(1);
+
+            if(string.IsNullOrWhiteSpace(segment))
+                return false;
+
+            string twoLetterCode = segment.Replace("/","");
+
+            twoLetterCode = twoLetterCode.Replace("?", "");
+
+            return IsValidLanguage(twoLetterCode);
+
+
+        }
+
+        public Language GetLanguageFromUrl(string baseUrl, string relativeUrl)
+        {
+
+            if (string.IsNullOrWhiteSpace(relativeUrl))
+                return GetDefaultLanguage();
+
+            Uri uri = new Uri(new Uri(baseUrl), relativeUrl);
+
+            string segment =  uri?.Segments?.ElementAt(1);
+
+            if(string.IsNullOrWhiteSpace(segment))
+                return GetDefaultLanguage();
+
+            string twoLetterCode = segment.Replace("/","");
+
+            twoLetterCode = twoLetterCode.Replace("?", "");
+
+            return IsValidLanguage(twoLetterCode) ? Get(twoLetterCode) : GetDefaultLanguage();
+
+
+        }
     }
 }

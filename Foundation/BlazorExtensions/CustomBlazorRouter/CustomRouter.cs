@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Blazor.Services;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Foundation.BlazorExtensions.Services;
+using SitecoreBlazorHosted.Shared.Models;
 
 namespace Foundation.BlazorExtensions.CustomBlazorRouter
 {
@@ -24,6 +26,9 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
         [Inject]
         private IUriHelper UriHelper { get; set; }
+
+        [Inject]
+        private LanguageService LanguageService { get; set; }
 
         [Parameter] private RouterDataRoot RouteValues { get; set; }
         /// <summary>
@@ -81,14 +86,14 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
 
             if (string.IsNullOrWhiteSpace(locationPath))
-                locationPath = "en";
+                locationPath = LanguageService.GetDefaultLanguage().TwoLetterCode;
 
-            var context = new RouteContext(locationPath);
+            RouteContext context = new RouteContext(locationPath);
             Routes.Route(context);
 
             //Not valid route
-            if (context.Handler == null)
-                context = SetErrorContext();
+            if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(_baseUri, locationPath))
+                context = SetErrorContext(locationPath);
            
             if (!typeof(IComponent).IsAssignableFrom(context.Handler))
             {
@@ -99,9 +104,11 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             _renderHandle.Render(builder => Render(builder, context.Handler, context.Parameters));
         }
 
-        private RouteContext SetErrorContext()
+        private RouteContext SetErrorContext(string locationPath)
         {
-            var errContext = new RouteContext("error");
+            Language currentLanguage = LanguageService.GetLanguageFromUrl(_baseUri, locationPath);
+
+            var errContext = new RouteContext($"{currentLanguage.TwoLetterCode}?{Constants.Route.RouteError}");
             Routes.Route(errContext);
             RouteContext context = errContext;
             return context;

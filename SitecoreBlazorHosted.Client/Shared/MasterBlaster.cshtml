@@ -1,12 +1,15 @@
-﻿@using Foundation.BlazorExtensions.Services
+﻿@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
 
 @inherits BlazorLayoutComponent
-@*@implements IDisposable*@
+@implements IDisposable
 
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
 
-@inject LayoutService layoutService;
+@inject LayoutService _layoutService;
+
+@inject LanguageService _languageService;
 
 
 
@@ -26,7 +29,7 @@
 
     <footer class="container">
 
-        <BlazorPlaceholder Name="footer" >
+        <BlazorPlaceholder Name="footer">
             @Body
         </BlazorPlaceholder>
 
@@ -40,23 +43,33 @@
     [Parameter]
     protected string Language { get; set; }
 
+
     protected override void OnInit()
     {
-        uriHelper.OnLocationChanged += OnLocationChanges;
+        _uriHelper.OnLocationChanged += OnLocationChanged;
         Reload();
     }
 
-    private void OnLocationChanges(object sender, string location) => Reload();
+    private void OnLocationChanged(object sender, string location) => Reload();
 
     private async void Reload()
     {
-        await layoutService.LoadRoute(Language);
+
+        if(Language.HasRouteError())
+            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
+
+
+        await _layoutService.LoadRoute(Language, Language.HasRouteError());
+
+     
         StateHasChanged();
     }
 
+    
+
     public void Dispose()
     {
-        uriHelper.OnLocationChanged -= OnLocationChanges;
+        _uriHelper.OnLocationChanged -= OnLocationChanged;
     }
 
 }

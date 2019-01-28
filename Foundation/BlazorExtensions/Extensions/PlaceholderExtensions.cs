@@ -5,7 +5,7 @@ namespace Foundation.BlazorExtensions.Extensions
 {
   public static class PlaceholderExtensions
   {
-    public static IEnumerable<KeyValuePair<string, IList<Placeholder>>> FlattenPlaceholders(this Dictionary<string, IList<Placeholder>> root)
+    public static IEnumerable<KeyValuePair<string, IList<Placeholder>>> FlattenThePlaceholders(this Dictionary<string, IList<Placeholder>> root)
     {
       var stack = new Stack<KeyValuePair<string, IList<Placeholder>>>();
 

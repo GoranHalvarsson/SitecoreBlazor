@@ -1,10 +1,10 @@
 ﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
 @using Foundation.BlazorExtensions.Services
 @using Foundation.BlazorExtensions.Extensions
-@using Foundation.BlazorExtensions.CustomBlazorRouter
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper;
-@inject Foundation.BlazorExtensions.Services.SitecoreItemService sitecoreItemService;
+
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
+@inject Foundation.BlazorExtensions.Services.SitecoreItemService _sitecoreItemService;
 <!--
     Configuring this here is temporary. Later we'll move the app config
     into Program.cs, and it won't be necessary to specify AppAssembly.
@@ -24,13 +24,13 @@
   protected override void OnInit()
   {
 
-    RoutesData = sitecoreItemService.ConfigRoutes();
+    RoutesData = _sitecoreItemService.ConfigRoutes();
 
-    string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+    string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
 
     if (relative == "")
-      uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(uriHelper));
+      _uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(_uriHelper));
 
 
   }

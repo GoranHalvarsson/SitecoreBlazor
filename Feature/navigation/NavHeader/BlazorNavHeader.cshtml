@@ -2,8 +2,8 @@
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
-@inject Foundation.BlazorExtensions.BlazorContext blazorContext;
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
+@inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper
 
 @if (string.IsNullOrWhiteSpace(CurrentLanguage))
 {
@@ -11,7 +11,7 @@
 }
 else
 {
-    <a class="navbar-brand" href="@CurrentLanguage.WithBaseUrl_UglyHackForGithub(uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+    <a class="navbar-brand" href="@CurrentLanguage.WithBaseUrl_UglyHackForGithub(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
 }
 
 @functions {
@@ -23,7 +23,7 @@ private string CurrentLanguage { get; set; }
 
 protected override async Task OnParametersSetAsync()
 {
-    CurrentLanguage = await blazorContext.GetContextLanguageAsync();
+    CurrentLanguage = await _blazorContext.GetContextLanguageAsync();
 }
 
 

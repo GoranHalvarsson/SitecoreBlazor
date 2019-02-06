@@ -21,33 +21,6 @@
     <ProjectReference Include="..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Components\Sublayouts\TwoColumn6_6.cshtml" />
-    <None Include="Components\Sublayouts\NavbarActivity.cshtml" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <BlazorGenerate Remove="Components\NavbarActivity.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="Components\Navbar.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="Components\Sublayouts\Navbar.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="Components\Sublayouts\OneColumn.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="Components\Sublayouts\TwoColumn6_6.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\blazor.polyfill.js" />
-  </ItemGroup>
 
 </Project>

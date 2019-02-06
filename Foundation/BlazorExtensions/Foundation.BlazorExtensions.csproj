@@ -16,16 +16,6 @@
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Storage\**" />
-    <Content Remove="Storage\**" />
-    <EmbeddedResource Remove="Storage\**" />
-    <None Remove="Storage\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Components\RawHtml.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
@@ -33,25 +23,6 @@
     <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Remove="content\BlazorStorageInterop.ts" />
-    <EmbeddedResource Remove="content\BrowserStorage.js" />
-    <EmbeddedResource Remove="content\BrowserStorage.js.map" />
-    <EmbeddedResource Remove="content\BrowserStorage.ts" />
-    <EmbeddedResource Remove="content\InitializeStorage.js" />
-    <EmbeddedResource Remove="content\InitializeStorage.js.map" />
-    <EmbeddedResource Remove="content\InitializeStorage.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="content\BlazorStorageInterop.ts" />
-    <None Remove="content\BrowserStorage.js" />
-    <None Remove="content\BrowserStorage.js.map" />
-    <None Remove="content\BrowserStorage.ts" />
-    <None Remove="content\InitializeStorage.js" />
-    <None Remove="content\InitializeStorage.js.map" />
-    <None Remove="content\InitializeStorage.ts" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />

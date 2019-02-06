@@ -9,10 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
-    <EmbeddedResource Include="About\content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="About\content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="About\content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Remove="About\content\**" />
+    <Content Remove="About\content\**" />
+    <EmbeddedResource Remove="About\content\**" />
+    <None Remove="About\content\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,10 +38,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\BlazorExtensions\Foundation.BlazorExtensions.csproj" />
     <ProjectReference Include="..\..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="About\content\" />
   </ItemGroup>
 
   <ItemGroup>

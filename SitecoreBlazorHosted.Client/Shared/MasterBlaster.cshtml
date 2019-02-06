@@ -55,17 +55,18 @@
     private async void Reload()
     {
 
-        if(Language.HasRouteError())
+        bool hasRouteError = Language.HasRouteError();
+
+        if (hasRouteError)
             Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
 
+        await _layoutService.LoadRoute(Language, hasRouteError);
 
-        await _layoutService.LoadRoute(Language, Language.HasRouteError());
 
-     
         StateHasChanged();
     }
 
-    
+
 
     public void Dispose()
     {

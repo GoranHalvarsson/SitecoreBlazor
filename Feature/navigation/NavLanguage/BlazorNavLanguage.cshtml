@@ -5,13 +5,13 @@
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared.Models
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper
 
-@inject Foundation.BlazorExtensions.BlazorContext blazorContext
+@inject Foundation.BlazorExtensions.BlazorContext _blazorContext
 
-@inject Foundation.BlazorExtensions.Services.InteropService interopService;
+@inject Foundation.BlazorExtensions.Services.InteropService _interopService;
 
-@inject Foundation.BlazorExtensions.Services.LanguageService languageService;
+@inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
 
 
 @if (ValidLanguages == null)
@@ -25,7 +25,7 @@ else
 
     <li class="dropdown">
         <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
-            @languageService.Get(CurrentLanguage)?.NativeName
+            @_languageService.Get(CurrentLanguage)?.NativeName
         </button>
         <div class="@ClassName">
 
@@ -50,9 +50,9 @@ private IList<Language> ValidLanguages { get; set; }
 
 protected override async Task OnParametersSetAsync()
 {
-    CurrentLanguage = await blazorContext.GetContextLanguageAsync();
+    CurrentLanguage = await _blazorContext.GetContextLanguageAsync();
 
-    ValidLanguages = languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+    ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
 }
 
 string ClassName
@@ -74,17 +74,17 @@ private void ToggleOpen()
 
 private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
 {
-    string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+    string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
     if (CurrentLanguage.Length > 0)
         relative = relative.Substring(CurrentLanguage.Length);
 
-    return $"{uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
+    return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
 }
 
 private async Task HardReload()
 {
-    await interopService.HardReload();
+    await _interopService.HardReload();
 }
 
 

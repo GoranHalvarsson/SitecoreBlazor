@@ -4,7 +4,7 @@
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
 
-@implements IDisposable
+
 
 <div class="carousel slide" onmouseout="@OnMouseOut" onmouseover="@OnMouseOver">
 
@@ -80,9 +80,7 @@
         set { _activeIndex = value; StateHasChanged(); }
     }
 
-    private Action<int> ActiveIndexChanged { get; set; }
-
-
+   
     private int Interval { get; set; } = 5000;
 
     private Timer _timer;
@@ -100,8 +98,6 @@
     private void OnTimerEvent(Object source, ElapsedEventArgs e)
     {
 
-        if (ActiveIndexChanged == null)
-            return;
 
 
         if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
@@ -109,8 +105,7 @@
         else
             ActiveIndex = ActiveIndex + 1;
 
-
-        ActiveIndexChanged(ActiveIndex);
+     
     }
 
 

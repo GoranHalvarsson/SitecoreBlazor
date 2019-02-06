@@ -4,9 +4,9 @@
     {
         public static readonly char[] Separators = new[] { '/' };
 
-        public RouteTemplate(string TemplateText, TemplateSegment[] segments)
+        public RouteTemplate(string templateText, TemplateSegment[] segments)
         {
-            this.TemplateText = TemplateText;
+            this.TemplateText = templateText;
             Segments = segments;
         }
 

@@ -1,8 +1,8 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
 @using Foundation.BlazorExtensions.Extensions
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper
-@inject Feature.Navigation.Repositories.NavigationRepository navigationRepository;
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper
+@inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository;
 @if (NavigationItems == null)
 {
   <em>Loading...</em>
@@ -27,7 +27,7 @@ else
       }
       else
       {
-        <a href="@item.Url.WithBaseUrl_UglyHackForGithub(uriHelper)">@title</a>
+        <a href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)">@title</a>
       }
     </li>
     }
@@ -44,7 +44,7 @@ List<NavigationItem> NavigationItems { get; set; }
 
 string GetClassName(NavigationItem item)
 {
-  string relative = uriHelper.ToBaseRelativePath(uriHelper.GetBaseUri(), uriHelper.GetAbsoluteUri());
+  string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
   return item.Url.Equals("/" + relative) ? "active" : string.Empty;
 
@@ -53,7 +53,7 @@ string GetClassName(NavigationItem item)
 
 protected override async Task OnParametersSetAsync()
 {
-  NavigationItems = await navigationRepository.GetBreadcrumb();
+  NavigationItems = await _navigationRepository.GetBreadcrumb();
 }
 
 }

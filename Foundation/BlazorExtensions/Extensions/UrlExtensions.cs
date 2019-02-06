@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Foundation.BlazorExtensions.Services;
-using SitecoreBlazorHosted.Shared.Models;
+﻿using System;
+using Microsoft.AspNetCore.Components.Services;
 
 namespace Foundation.BlazorExtensions.Extensions
 {
@@ -27,9 +21,7 @@ namespace Foundation.BlazorExtensions.Extensions
         {
             return !string.IsNullOrWhiteSpace(url) && url.Contains(Constants.Route.RouteError);
         }
-
-     
-
+        
 
     }
 }

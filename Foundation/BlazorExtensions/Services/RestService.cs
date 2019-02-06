@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
 {
-  public class RestService
+    public class RestService
   {
     private readonly HttpClient _httpClient;
 

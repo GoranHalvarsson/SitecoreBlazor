@@ -1,6 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Factories;
-using Microsoft.AspNetCore.Blazor;
+using Microsoft.AspNetCore.Components;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ namespace Foundation.BlazorExtensions.Services
     {
         private readonly ComponentFactory _componentFactory;
         private readonly RouteService _routeService;
-        private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
+        private readonly Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
        
 
-        public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper)
+        public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Components.Services.IUriHelper uriHelper)
         {
             _componentFactory = componentFactory;
             _routeService = routeService;

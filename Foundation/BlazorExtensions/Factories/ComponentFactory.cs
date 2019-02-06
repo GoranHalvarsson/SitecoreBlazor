@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components;
 
 namespace Foundation.BlazorExtensions.Factories
 {

@@ -1,9 +1,8 @@
-﻿@using Microsoft.AspNetCore.Blazor.Components
-@using Foundation.BlazorExtensions.Extensions
+﻿@using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper
+@inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
 
 @if (string.IsNullOrWhiteSpace(CurrentLanguage))
 {

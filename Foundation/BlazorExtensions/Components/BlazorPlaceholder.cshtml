@@ -41,10 +41,10 @@ else
     protected bool RenderChild { get; set; }
 
     [Parameter]
-    protected Microsoft.AspNetCore.Blazor.RenderFragment ChildContent { get; set; }
+    protected Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
 
 
-    private IList<Microsoft.AspNetCore.Blazor.RenderFragment> DynamicComponents { get; set; }
+    private IList<Microsoft.AspNetCore.Components.RenderFragment> DynamicComponents { get; set; }
 
 
     protected override async Task OnParametersSetAsync()

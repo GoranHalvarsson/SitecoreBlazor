@@ -2,14 +2,22 @@
     <div class="row">
         <div class="col-md-6">
             <BlazorPlaceholder Name="col-wide-1">
-              
+                @ChildContent
             </BlazorPlaceholder>
         </div>
         <div class="col-md-6">
             <BlazorPlaceholder Name="col-wide-2">
-             
+                @ChildContent
             </BlazorPlaceholder>
         </div>
     </div>
 </div>
+
+
+@functions  {
+
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
+
+}
 

@@ -1,82 +1,84 @@
-﻿using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.Layouts;
+﻿
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.CustomBlazorRouter
 {
-  public class LayoutDisplay : IComponent
-  {
-    internal const string NameOfPage = nameof(Page);
-    internal const string NameOfPageParameters = nameof(PageParameters);
-
-    private RenderHandle _renderHandle;
-
-    /// <summary>
-    /// Gets or sets the type of the page component to display.
-    /// The type must implement <see cref="IComponent"/>.
-    /// </summary>
-    [Parameter]
-    Type Page { get; set; }
-
-    /// <summary>
-    /// Gets or sets the parameters to pass to the page.
-    /// </summary>
-    [Parameter]
-    IDictionary<string, object> PageParameters { get; set; }
-
-    /// <inheritdoc />
-    public void Init(RenderHandle renderHandle)
+    public class LayoutDisplay : IComponent
     {
-      _renderHandle = renderHandle;
-    }
+        internal const string NameOfPage = nameof(Page);
+        internal const string NameOfPageParameters = nameof(PageParameters);
 
-    /// <inheritdoc />
-    public void SetParameters(ParameterCollection parameters)
-    {
-      parameters.AssignToProperties(this);
-      Render();
-    }
+        private RenderHandle _renderHandle;
 
-    private void Render()
-    {
-        // In the middle, we render the requested page
-        var fragment = RenderComponentWithBody(Page, bodyParam: null);
+        /// <summary>
+        /// Gets or sets the type of the page component to display.
+        /// The type must implement <see cref="IComponent"/>.
+        /// </summary>
+        [Parameter]
+        Type Page { get; set; }
 
-        // Repeatedly wrap it in each layer of nested layout until we get
-        // to a layout that has no parent
-        Type layoutType = Page;
-        while ((layoutType = GetLayoutType(layoutType)) != null)
+        /// <summary>
+        /// Gets or sets the parameters to pass to the page.
+        /// </summary>
+        [Parameter]
+        IDictionary<string, object> PageParameters { get; set; }
+
+        /// <inheritdoc />
+        public void Configure(RenderHandle renderHandle)
         {
-            fragment = RenderComponentWithBody(layoutType, fragment);
+            _renderHandle = renderHandle;
         }
 
-        _renderHandle.Render(fragment);
-    }
-
-    private RenderFragment RenderComponentWithBody(Type componentType, RenderFragment bodyParam) => builder =>
-    {
-      builder.OpenComponent(0, componentType);
-      if (bodyParam != null)
-      {
-        builder.AddAttribute(1, "Body", bodyParam);
-      }
-      else
-      {
-        if (PageParameters != null)
+        /// <inheritdoc />
+        public Task SetParametersAsync(ParameterCollection parameters)
         {
-          foreach (var kvp in PageParameters)
-          {
-            builder.AddAttribute(1, kvp.Key, kvp.Value);
-          }
+            parameters.SetParameterProperties(this);
+            Render();
+            return Task.CompletedTask;
         }
-      }
-      builder.CloseComponent();
-    };
+   
+        private void Render()
+        {
+            // In the middle, we render the requested page
+            var fragment = RenderComponentWithBody(Page, bodyParam: null);
 
-    private Type GetLayoutType(Type type)
-        => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
-  }
+            // Repeatedly wrap it in each layer of nested layout until we get
+            // to a layout that has no parent
+            Type layoutType = Page;
+            while ((layoutType = GetLayoutType(layoutType)) != null)
+            {
+                fragment = RenderComponentWithBody(layoutType, fragment);
+            }
+
+            _renderHandle.Render(fragment);
+        }
+
+        private RenderFragment RenderComponentWithBody(Type componentType, RenderFragment bodyParam) => builder =>
+        {
+            builder.OpenComponent(0, componentType);
+            if (bodyParam != null)
+            {
+                builder.AddAttribute(1, LayoutComponentBase.BodyPropertyName, bodyParam);
+            }
+            else
+            {
+                if (PageParameters != null)
+                {
+                    foreach (var kvp in PageParameters)
+                    {
+                        builder.AddAttribute(1, kvp.Key, kvp.Value);
+                    }
+                }
+            }
+            builder.CloseComponent();
+        };
+
+        private Type GetLayoutType(Type type)
+            => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
+    }
 }

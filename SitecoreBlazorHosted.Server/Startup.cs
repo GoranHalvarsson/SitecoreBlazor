@@ -16,6 +16,9 @@ namespace SitecoreBlazorHosted.Server
             services.AddMvc().AddNewtonsoftJson();
             services.AddResponseCompression();
             services.AddHttpClient();
+
+             //For server-side
+            //services.AddRazorComponents<Client.Startup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

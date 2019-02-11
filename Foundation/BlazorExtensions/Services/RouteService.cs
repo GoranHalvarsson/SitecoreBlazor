@@ -41,7 +41,14 @@ namespace Foundation.BlazorExtensions.Services
             ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(language);
 
             if (rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl) || relativeUrl == "")
+            {
+                if(relativeUrl.Length<=language.Length)
+                    return $"{baseUrl}/{language}.json";
+
                 return $"{baseUrl}{relativeUrl.Substring(language.Length)}/{language}.json";
+
+            }
+                
 
             return $"{baseUrl}/error/{language}.json";
 

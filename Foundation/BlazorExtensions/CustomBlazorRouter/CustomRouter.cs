@@ -20,9 +20,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         private RenderHandle _renderHandle;
         private string _baseUri;
         private string _locationAbsolute;
-
-        public event EventHandler Disposed;
-
+        
         [Inject]
         private IUriHelper UriHelper { get; set; }
 
@@ -62,24 +60,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             return Task.CompletedTask;
         }
 
-        //public void Init(RenderHandle renderHandle)
-        //{
-        //    _renderHandle = renderHandle;
-        //    _baseUri = UriHelper.GetBaseUri();
-        //    _locationAbsolute = UriHelper.GetAbsoluteUri();
-        //    UriHelper.OnLocationChanged += OnLocationChanged;
-        //}
-
-        //public void SetParameters(ParameterCollection parameters)
-        //{
-        //    parameters.AssignToProperties(this);
-        //    //var types = ComponentResolver.ResolveComponents(AppAssembly);
-        //    //Routes = RouteTable.Create(types);
-        //    Routes = RouteTable.CreateNew(RouteValues);
-        //    Refresh();
-        //}
-
-
         /// <inheritdoc />
         public void Dispose()
         {
@@ -102,30 +82,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             builder.CloseComponent();
         }
 
-
-        //private void Refresh()
-        //{
-        //    var locationPath = UriHelper.ToBaseRelativePath(_baseUri, _locationAbsolute);
-        //    locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
-
-        //    if (string.IsNullOrWhiteSpace(locationPath))
-        //        locationPath = LanguageService.GetDefaultLanguage().TwoLetterCode;
-
-        //    RouteContext context = new RouteContext(locationPath);
-        //    Routes.Route(context);
-
-        //    //Not valid route
-        //    if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(_baseUri, locationPath))
-        //        context = SetErrorContext(locationPath);
-
-        //    if (!typeof(IComponent).IsAssignableFrom(context.Handler))
-        //    {
-        //        throw new InvalidOperationException($"The type {context.Handler.FullName} " +
-        //                                            $"does not implement {typeof(IComponent).FullName}.");
-        //    }
-
-        //    _renderHandle.Render(builder => Render(builder, context.Handler, context.Parameters));
-        //}
+        
 
         private void Refresh()
         {

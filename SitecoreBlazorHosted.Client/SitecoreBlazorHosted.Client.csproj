@@ -13,6 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\blazor.polyfill.min.js" />
+    <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\README.md" />
+    <None Include="wwwroot\css\SBlazor.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Feature\Identity\Feature.Identity.csproj" />
     <ProjectReference Include="..\Feature\navigation\Feature.Navigation.csproj" />
     <ProjectReference Include="..\Feature\PageContent\Feature.PageContent.csproj" />

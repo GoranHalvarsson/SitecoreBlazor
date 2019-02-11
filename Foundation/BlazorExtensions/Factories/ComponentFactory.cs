@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.JSInterop;
-using Microsoft.AspNetCore.Components;
 
 namespace Foundation.BlazorExtensions.Factories
 {
-  public class ComponentFactory
+    public class ComponentFactory
   {
     private IBlazorSitecoreField CreateSitecoreField<T>(KeyValuePair<string, BlazorField> sitecoreField) where T : class
     {

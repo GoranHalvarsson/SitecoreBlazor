@@ -57,11 +57,10 @@ namespace Foundation.BlazorExtensions.Services
             {
                 List<RenderFragment> list = new List<RenderFragment>();
 
-
                 try
                 {
 
-                    IEnumerable<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.CurrentPlaceholders.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder);
+                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.CurrentPlaceholders?.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder).ToList();
 
                     foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
                     {

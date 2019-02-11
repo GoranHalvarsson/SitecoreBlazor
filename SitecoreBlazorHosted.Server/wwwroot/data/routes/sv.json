@@ -1,0 +1,140 @@
+{
+  "Name": "home",
+  "Id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+  "DisplayName": null,
+  "ItemLanguage": "sv",
+  "Fields": null,
+  "Placeholders": {
+    "navbar": [
+      {
+        "Assembly": "SitecoreBlazorHosted.Client",
+        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Name": "navbar",
+        "Fields": null,
+        "Placeholders": {
+          "navbar-header": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "Name": "navbarHeader",
+              "Fields": {
+                "NavHeader": {
+                  "Value": "Sitecore + Blazor",
+                  "Type": "PlainTextField"
+                }
+              },
+              "Placeholders": null
+            }
+          ],
+          "navbar-menu": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "Name": "navbarMenu",
+              "Fields": {},
+              "Placeholders": {}
+            }
+          ],
+          "navbar-activity": [
+            {
+              "Assembly": "SitecoreBlazorHosted.Client",
+              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Name": "navbarActivity",
+              "Fields": null,
+              "Placeholders": {
+                "navbar-activity-item": [
+                  {
+                    "Assembly": "Feature.Navigation",
+                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "Name": "navLanguage",
+                    "Fields": null,
+                    "Placeholders": null
+                  }
+                ]
+              }
+            }
+          ],
+          "navbar-about": [
+            {
+              "Assembly": "Feature.Identity",
+              "ComponentName": "Identity.About.BlazorAbout",
+              "Name": "header",
+              "Fields": {
+                "AboutLink": {
+                  "Value": {
+                    "Href": "http://blazor.net",
+                    "Text": "About",
+                    "Target": "_blank",
+                    "Class": "ml-md-auto"
+                  },
+                  "Type": "LinkField"
+                }
+              },
+              "Placeholders": null
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "Assembly": "Feature.PageContent",
+        "ComponentName": "PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+        "Name": "main",
+        "Fields": {
+          "HeaderImage": {
+            "Value": {
+              "Src": "_content/Feature.PageContent/sc_logo.png",
+              "Alt": "Sitecore",
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
+          "Title": {
+            "Value": "Sitecore Experience Platform + BLAZOR",
+            "Type": "PlainTextField"
+          },
+          "Text": {
+            "Value": "<p>Sitecore Experience Platform är en enhetlig plattform som ger marknadsförare allt de behöver för att förstå besökarnas behov och avsikter så att de kan leverera en relevant och personaliserad upplevelse – från första besöket till engagemang och kundvård efter köpet.</p><p>För mer information, var vänlig gå till <a href=\"https://doc.sitecore.net/\" target=\"_blank\" title=\"Sitecore Documentation site\">Sitecore Dokumenterings site</a></p>",
+            "Type": "HtmlField"
+          }
+
+        },
+        "Placeholders": {}
+      }
+    ],
+    "footer": [
+      {
+        "Assembly": "Feature.Identity",
+        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "Name": "footer",
+        "Fields": {
+          "Text": {
+            "Value": "Ser du inte ljuset? G&aring; med i ",
+            "Type": "PlainTextField"
+          },
+          "Image": {
+            "Value": {
+              "Src": "css/SBlazor.svg",
+              "Alt": null,
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
+          "Link": {
+            "Value": {
+              "Href": "http://blazor.net",
+              "Text": "Blazor kommer att f&ouml;r&auml;ndra din v&auml;rld",
+              "Target": "_blank",
+              "Class": "ml-md-auto"
+            },
+            "Type": "LinkField"
+          }
+        },
+        "Placeholders": null
+      }
+    ]
+  }
+}

@@ -4,6 +4,7 @@
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
 
+@implements IDisposable
 
 
 <div class="carousel slide" onmouseout="@OnMouseOut" onmouseover="@OnMouseOver">
@@ -80,7 +81,7 @@
         set { _activeIndex = value; StateHasChanged(); }
     }
 
-   
+
     private int Interval { get; set; } = 5000;
 
     private Timer _timer;
@@ -105,7 +106,7 @@
         else
             ActiveIndex = ActiveIndex + 1;
 
-     
+
     }
 
 

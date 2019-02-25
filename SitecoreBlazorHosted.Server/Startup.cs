@@ -18,7 +18,7 @@ namespace SitecoreBlazorHosted.Server
             services.AddHttpClient();
 
              //For server-side
-            //services.AddRazorComponents<Client.Startup>();
+            services.AddRazorComponents<Client.Startup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,13 +38,13 @@ namespace SitecoreBlazorHosted.Server
 
 
             //For client-side
-            app.UseBlazor<Client.Startup>();
-            app.UseBlazorDebugging();
+            //app.UseBlazor<Client.Startup>();
+            //app.UseBlazorDebugging();
 
             
             //For server-side
-            //app.UseStaticFiles();
-            //app.UseRazorComponents<Client.Startup>();
+            app.UseStaticFiles();
+            app.UseRazorComponents<Client.Startup>();
         }
     }
 }

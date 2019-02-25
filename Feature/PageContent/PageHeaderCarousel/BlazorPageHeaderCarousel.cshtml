@@ -78,7 +78,9 @@
     private int ActiveIndex
     {
         get => _activeIndex;
-        set { _activeIndex = value; StateHasChanged(); }
+        set { 
+            _activeIndex = value; //StateHasChanged(); 
+            }
     }
 
 
@@ -106,6 +108,7 @@
         else
             ActiveIndex = ActiveIndex + 1;
 
+       base.Invoke(StateHasChanged);
 
     }
 

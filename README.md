@@ -24,19 +24,12 @@ public class Startup
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson();
+            services.AddResponseCompression();
+            services.AddHttpClient();
 
-            //For server-side
-            services.AddServerSideBlazor<Client.Startup>();
-
-            services.AddResponseCompression(options =>
-            {
-                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
-                {
-                    MediaTypeNames.Application.Octet,
-                    WasmMediaTypeNames.Application.Wasm,
-                });
-            });
+             //For server-side
+            services.AddRazorComponents<Client.Startup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,11 +47,15 @@ public class Startup
                 routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
             });
 
+
             //For client-side
             //app.UseBlazor<Client.Startup>();
+            //app.UseBlazorDebugging();
 
+            
             //For server-side
-            app.UseServerSideBlazor<Client.Startup>();
+            app.UseStaticFiles();
+            app.UseRazorComponents<Client.Startup>();
         }
     }
         

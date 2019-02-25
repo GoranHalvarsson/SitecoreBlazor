@@ -1,10 +1,8 @@
 ﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
-@using Foundation.BlazorExtensions.Services
-@using Foundation.BlazorExtensions.Extensions
 
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
-@inject Foundation.BlazorExtensions.Services.SitecoreItemService _sitecoreItemService;
+@inject IUriHelper _uriHelper;
+@inject SitecoreItemService _sitecoreItemService;
 <!--
     Configuring this here is temporary. Later we'll move the app config
     into Program.cs, and it won't be necessary to specify AppAssembly.

@@ -1,8 +1,9 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
 @using Foundation.BlazorExtensions.Extensions
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper
+@inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository;
+
 @if (NavigationItems == null)
 {
   <em>Loading...</em>

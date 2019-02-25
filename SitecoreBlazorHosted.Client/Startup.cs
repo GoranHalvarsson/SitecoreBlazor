@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using Feature.Navigation.Extensions;
 using Foundation.BlazorExtensions.Extensions;
-using Microsoft.AspNetCore.Blazor.Builder;
-using Microsoft.AspNetCore.Blazor.Services;
+using Microsoft.AspNetCore.Components.Builder;
+using Microsoft.AspNetCore.Components.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SitecoreBlazorHosted.Client
@@ -36,7 +36,7 @@ namespace SitecoreBlazorHosted.Client
 
         }
 
-        public void Configure(IBlazorApplicationBuilder app)
+        public void Configure(IComponentsApplicationBuilder app)
         {
             app.AddComponent<App>("app");
         }

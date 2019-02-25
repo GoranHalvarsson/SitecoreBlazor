@@ -1,12 +1,11 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
-@using Microsoft.AspNetCore.Blazor
-@using Microsoft.AspNetCore.Blazor.Routing
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Extensions
 
 
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
-
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
+@inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
 
 @implements IDisposable
 

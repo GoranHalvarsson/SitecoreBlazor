@@ -1,9 +1,10 @@
-﻿@using Microsoft.AspNetCore.Blazor.Components
+﻿
 @using System.Timers
 @using System.Linq
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
 
+@implements IDisposable
 
 
 <div class="carousel slide" onmouseout="@OnMouseOut" onmouseover="@OnMouseOver">
@@ -77,10 +78,12 @@
     private int ActiveIndex
     {
         get => _activeIndex;
-        set { _activeIndex = value; StateHasChanged(); }
+        set { 
+            _activeIndex = value; //StateHasChanged(); 
+            }
     }
 
-   
+
     private int Interval { get; set; } = 5000;
 
     private Timer _timer;
@@ -105,7 +108,8 @@
         else
             ActiveIndex = ActiveIndex + 1;
 
-     
+       base.Invoke(StateHasChanged);
+
     }
 
 
@@ -138,7 +142,7 @@
         }
     }
 
-    private void NavCarousel(Microsoft.AspNetCore.Blazor.UIMouseEventArgs args, int index)
+    private void NavCarousel(Microsoft.AspNetCore.Components.UIMouseEventArgs args, int index)
     {
         ActiveIndex = index;
     }

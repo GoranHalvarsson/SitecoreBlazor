@@ -11,10 +11,10 @@ namespace Foundation.BlazorExtensions.Services
     public class RouteService
     {
         private readonly RestService _restService;
-        private readonly Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
+        private readonly Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
         private readonly SitecoreItemService _sitecoreItemService;
         
-        public RouteService(RestService restService, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorContext blazorContext)
+        public RouteService(RestService restService, Microsoft.AspNetCore.Components.Services.IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorContext blazorContext)
         {
             _restService = restService;
             _uriHelper = uriHelper;
@@ -41,7 +41,14 @@ namespace Foundation.BlazorExtensions.Services
             ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(language);
 
             if (rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl) || relativeUrl == "")
+            {
+                if(relativeUrl.Length<=language.Length)
+                    return $"{baseUrl}/{language}.json";
+
                 return $"{baseUrl}{relativeUrl.Substring(language.Length)}/{language}.json";
+
+            }
+                
 
             return $"{baseUrl}/error/{language}.json";
 

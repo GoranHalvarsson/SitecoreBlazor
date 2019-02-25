@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.RenderTree;
-using Microsoft.AspNetCore.Blazor.Services;
+﻿using Foundation.BlazorExtensions.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Components.Services;
+using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Foundation.BlazorExtensions.Services;
-using SitecoreBlazorHosted.Shared.Models;
+using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.CustomBlazorRouter
 {
@@ -13,17 +14,13 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
     /// A component that displays whichever other component corresponds to the
     /// current navigation location.
     /// </summary>
-    public class CustomRouter : IComponent, IDisposable
+    public class CustomRouter : Microsoft.AspNetCore.Components.IComponent, IDisposable
     {
-        private static readonly char[] _queryOrHashStartChar = new char[2]
-        {
-          '?',
-          '#'
-        };
+        static readonly char[] _queryOrHashStartChar = new[] { '?', '#' };
         private RenderHandle _renderHandle;
         private string _baseUri;
         private string _locationAbsolute;
-
+        
         [Inject]
         private IUriHelper UriHelper { get; set; }
 
@@ -37,9 +34,16 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         /// </summary>
         [Parameter] private Assembly AppAssembly { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the type of the component that should be used as a fallback when no match is found for the requested route.
+        /// </summary>
+        [Parameter] private Type FallbackComponent { get; set; }
+
         private RouteTable Routes { get; set; }
 
-        public void Init(RenderHandle renderHandle)
+
+        public void Configure(RenderHandle renderHandle)
         {
             _renderHandle = renderHandle;
             _baseUri = UriHelper.GetBaseUri();
@@ -47,16 +51,15 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             UriHelper.OnLocationChanged += OnLocationChanged;
         }
 
-        public void SetParameters(ParameterCollection parameters)
+        public Task SetParametersAsync(ParameterCollection parameters)
         {
-            parameters.AssignToProperties(this);
-            //var types = ComponentResolver.ResolveComponents(AppAssembly);
-            //Routes = RouteTable.Create(types);
+            parameters.SetParameterProperties(this);
+
             Routes = RouteTable.CreateNew(RouteValues);
             Refresh();
+            return Task.CompletedTask;
         }
 
-       
         /// <inheritdoc />
         public void Dispose()
         {
@@ -79,26 +82,42 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             builder.CloseComponent();
         }
 
-     
+        
+
         private void Refresh()
         {
+            //Custom
             var locationPath = UriHelper.ToBaseRelativePath(_baseUri, _locationAbsolute);
             locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
 
+            //Custom
             if (string.IsNullOrWhiteSpace(locationPath))
                 locationPath = LanguageService.GetDefaultLanguage().TwoLetterCode;
 
-            RouteContext context = new RouteContext(locationPath);
+
+            var context = new RouteContext(locationPath);
             Routes.Route(context);
 
-            //Not valid route
+            //Custom - Not valid route
             if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(_baseUri, locationPath))
                 context = SetErrorContext(locationPath);
-           
-            if (!typeof(IComponent).IsAssignableFrom(context.Handler))
+
+            if (context.Handler == null)
+            {
+                if (FallbackComponent != null)
+                {
+                    context.Handler = FallbackComponent;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"'{nameof(CustomRouter)}' cannot find any component with a route for '/{locationPath}', and no fallback is defined.");
+                }
+            }
+
+            if (!typeof(Microsoft.AspNetCore.Components.IComponent).IsAssignableFrom(context.Handler))
             {
                 throw new InvalidOperationException($"The type {context.Handler.FullName} " +
-                                                    $"does not implement {typeof(IComponent).FullName}.");
+                    $"does not implement {typeof(Microsoft.AspNetCore.Components.IComponent).FullName}.");
             }
 
             _renderHandle.Render(builder => Render(builder, context.Handler, context.Parameters));
@@ -122,5 +141,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 Refresh();
             }
         }
+
+
     }
 }

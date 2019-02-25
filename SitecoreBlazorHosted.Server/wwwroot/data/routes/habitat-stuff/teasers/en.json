@@ -1,0 +1,176 @@
+{
+  "Name": "teasers",
+  "Id": "f30c4470-07d4-4652-9cb6-bf8ac43d1694",
+  "DisplayName": null,
+  "ItemLanguage": "en",
+  "Fields": null,
+  "Placeholders": {
+    "navbar": [
+      {
+        "Assembly": "SitecoreBlazorHosted.Client",
+        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Name": "navbar",
+        "Fields": null,
+        "Placeholders": {
+          "navbar-header": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "Name": "navbarHeader",
+              "Fields": {
+                "NavHeader": {
+                  "Value": "Sitecore + Blazor",
+                  "Type": "PlainTextField"
+                }
+              },
+              "Placeholders": null
+            }
+          ],
+          "navbar-menu": [
+            {
+              "Assembly": "Feature.Navigation",
+              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "Name": "navbarMenu",
+              "Fields": {},
+              "Placeholders": {}
+            }
+          ],
+          "navbar-activity": [
+            {
+              "Assembly": "SitecoreBlazorHosted.Client",
+              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Name": "navbarActivity",
+              "Fields": null,
+              "Placeholders": {
+                "navbar-activity-item": [
+                  {
+                    "Assembly": "Feature.Navigation",
+                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "Name": "navLanguage",
+                    "Fields": null,
+                    "Placeholders": null
+                  }
+                ]
+              }
+            }
+          ],
+          "navbar-about": [
+            {
+              "Assembly": "Feature.Identity",
+              "ComponentName": "Identity.About.BlazorAbout",
+              "Name": "header",
+              "Fields": {
+                "AboutLink": {
+                  "Value": {
+                    "Href": "http://blazor.net",
+                    "Text": "About",
+                    "Target": "_blank",
+                    "Class": "ml-md-auto"
+                  },
+                  "Type": "LinkField"
+                }
+              },
+              "Placeholders": null
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "Assembly": "Feature.Navigation",
+        "ComponentName": "navigation.NavBreadcrumb.BlazorNavBreadcrumb",
+        "Name": "breadcrumb",
+        "Fields": {
+          "NavHeader": {
+            "Value": "Sitecore + Blazor",
+            "Type": "PlainTextField"
+          }
+        },
+        "Placeholders": null
+      },
+      {
+        "Assembly": "Feature.PageContent",
+        "ComponentName": "PageContent.PageHeader.BlazorPageHeader",
+        "Name": "main",
+        "Fields": {
+          "PageHeaderTitle": {
+            "Value": "Teasers",
+            "Type": "PlainTextField"
+          }
+        },
+        "Placeholders": {
+          "main-body": [
+            {
+              "Assembly": "SitecoreBlazorHosted.Client",
+              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.TwoColumn6_6",
+              "Name": "TwoColumn6_6",
+              "Fields": null,
+              "Placeholders": {
+                "col-wide-1": [
+                  {
+                    "Assembly": "Feature.Teasers",
+                    "ComponentName": "Teasers.ButtonTeaser.BlazorButtonTeaser",
+                    "Name": "button",
+                    "Fields": {
+                      "Header": {
+                        "Value": "Button teaser",
+                        "Type": "PlainTextField"
+                      },
+                      "CountText": {
+                        "Value": "Number of clicks",
+                        "Type": "PlainTextField"
+                      },
+                      "CountButton": {
+                        "Value": {
+                          "Href": "",
+                          "Text": "Click me",
+                          "Target": "",
+                          "Class": "btn btn-primary"
+                        },
+                        "Type": "LinkField"
+                      }
+                    },
+                    "Placeholders": {}
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "footer": [
+      {
+        "Assembly": "Feature.Identity",
+        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "Name": "footer",
+        "Fields": {
+          "Text": {
+            "Value": "Not seeing the light? Join the ",
+            "Type": "PlainTextField"
+          },
+          "Image": {
+            "Value": {
+              "Src": "css/SBlazor.svg",
+              "Alt": null,
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
+          "Link": {
+            "Value": {
+              "Href": "http://blazor.net",
+              "Text": "Blazor will rock your world",
+              "Target": "_blank",
+              "Class": "ml-md-auto"
+            },
+            "Type": "LinkField"
+          }
+        },
+        "Placeholders": null
+      }
+    ]
+  }
+}

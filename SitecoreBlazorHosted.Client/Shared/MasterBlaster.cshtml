@@ -1,14 +1,9 @@
-﻿@using Foundation.BlazorExtensions.Extensions
-@using Foundation.BlazorExtensions.Services
-
-@inherits BlazorLayoutComponent
+﻿@inherits LayoutComponentBase
 @implements IDisposable
 
 
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper _uriHelper;
-
+@inject IUriHelper _uriHelper;
 @inject LayoutService _layoutService;
-
 @inject LanguageService _languageService;
 
 

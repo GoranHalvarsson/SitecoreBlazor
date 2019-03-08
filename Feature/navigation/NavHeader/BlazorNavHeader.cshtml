@@ -1,8 +1,10 @@
 ﻿@using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
+@using Microsoft.JSInterop
 
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
 @inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
+@inject IJSRuntime _jsRuntimeCurrent;
 
 @if (string.IsNullOrWhiteSpace(CurrentLanguage))
 {
@@ -15,15 +17,15 @@ else
 
 @functions {
 
-[Parameter]
-List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
-private string CurrentLanguage { get; set; }
+    private string CurrentLanguage { get; set; }
 
-protected override async Task OnParametersSetAsync()
-{
-    CurrentLanguage = await _blazorContext.GetContextLanguageAsync();
-}
+    protected override async Task OnParametersSetAsync()
+    {
+        CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+    }
 
 
 }

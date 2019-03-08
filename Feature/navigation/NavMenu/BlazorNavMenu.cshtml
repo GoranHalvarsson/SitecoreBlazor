@@ -2,10 +2,11 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Extensions
-
+@using Microsoft.JSInterop
 
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
 @inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
+@inject IJSRuntime _jsRuntimeCurrent;
 
 @implements IDisposable
 
@@ -30,11 +31,12 @@ else
                 if (item.Children == null || !item.Children.Any())
                 {
                     <li class="nav-item">
-                        <NavLink  class="nav-link" href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)" Match=NavLinkMatch.All>
+                        <NavLink class="nav-link" href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)" Match=NavLinkMatch.All>
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
                         </NavLink>
                     </li>
-                } else
+                }
+                else
                 {
 
                     <li class="nav-item dropdown">
@@ -77,49 +79,49 @@ else
 
 
 
-  List<NavigationItem> NavigationItems { get; set; }
+    List<NavigationItem> NavigationItems { get; set; }
 
-  protected override async Task OnParametersSetAsync()
-  {
-    NavigationItems = await _navigationRepository.GetMenu();
-  }
-
-  bool _collapseNavMenu = true;
-
-  void ToggleNavMenu()
-  {
-    _collapseNavMenu = !_collapseNavMenu;
-  }
-
- 
-
-  string ClassName
-  {
-    get
+    protected override async Task OnParametersSetAsync()
     {
-      var open = IsOpen ? "show" : null;
-      return $"dropdown-menu {open}";
+        NavigationItems = await _navigationRepository.GetMenu(_jsRuntimeCurrent);
     }
-  }
 
-  bool IsOpen { get; set; }
-  void Onclick(UIMouseEventArgs e)
-  {
-    IsOpen = !IsOpen;
-    StateHasChanged();
-  }
+    bool _collapseNavMenu = true;
+
+    void ToggleNavMenu()
+    {
+        _collapseNavMenu = !_collapseNavMenu;
+    }
 
 
-  private void OnLocationChanges(object sender, string location) => IsOpen = false;
 
-  protected override void OnInit()
-  {
-    _uriHelper.OnLocationChanged += OnLocationChanges;
-  }
+    string ClassName
+    {
+        get
+        {
+            var open = IsOpen ? "show" : null;
+            return $"dropdown-menu {open}";
+        }
+    }
 
-  public void Dispose()
-  {
-    _uriHelper.OnLocationChanged -= OnLocationChanges;
-  }
+    bool IsOpen { get; set; }
+    void Onclick(UIMouseEventArgs e)
+    {
+        IsOpen = !IsOpen;
+        StateHasChanged();
+    }
+
+
+    private void OnLocationChanges(object sender, string location) => IsOpen = false;
+
+    protected override void OnInit()
+    {
+        _uriHelper.OnLocationChanged += OnLocationChanges;
+    }
+
+    public void Dispose()
+    {
+        _uriHelper.OnLocationChanged -= OnLocationChanges;
+    }
 
 }

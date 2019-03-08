@@ -6,6 +6,7 @@ using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace Feature.Navigation.Repositories
 {
@@ -20,11 +21,11 @@ namespace Feature.Navigation.Repositories
       _sitecoreItemService = sitecoreItemService;
     }
 
-    public  async Task<List<NavigationItem>> GetBreadcrumb()
+    public  async Task<List<NavigationItem>> GetBreadcrumb(IJSRuntime jsRuntime)
     {
 
     
-        var items = await GetNavigationHierarchy();
+        var items = await GetNavigationHierarchy(jsRuntime);
         items.Reverse();
         for (var i = 0; i < items.Count - 1; i++)
         {
@@ -37,15 +38,15 @@ namespace Feature.Navigation.Repositories
 
     }
 
-    private async Task<List<NavigationItem>> GetNavigationHierarchy()
+    private async Task<List<NavigationItem>> GetNavigationHierarchy(IJSRuntime jsRuntime)
     {
       
 
-        var routeId = await _blazorContext.GetCurrentRouteIdAsync();
+        var routeId = await _blazorContext.GetCurrentRouteIdAsync(jsRuntime);
 
         var menuItems = new List<NavigationItem>();
 
-        foreach (var item in await GetMenu())
+        foreach (var item in await GetMenu(jsRuntime))
         {
           menuItems.Add(item);
 
@@ -107,9 +108,9 @@ namespace Feature.Navigation.Repositories
       return children;
     }
 
-    public async Task<List<NavigationItem>> GetMenu()
+    public async Task<List<NavigationItem>> GetMenu(IJSRuntime jsRuntime)
     {
-        string currentLanguage = await _blazorContext.GetContextLanguageAsync();
+        string currentLanguage = await _blazorContext.GetContextLanguageAsync(jsRuntime);
         Console.WriteLine("GetMenu " + currentLanguage);
         ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
 

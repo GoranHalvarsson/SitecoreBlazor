@@ -1,12 +1,13 @@
 ﻿@using System.Net.Http
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared.Models
+@using Microsoft.JSInterop
 
 @inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext
 @inject Foundation.BlazorExtensions.Services.InteropService _interopService;
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
-
+@inject IJSRuntime _jsRuntimeCurrent;
 
 @if (ValidLanguages == null)
 {
@@ -35,51 +36,52 @@ else
 
 @functions {
 
-private string CurrentLanguage { get; set; }
+    private string CurrentLanguage { get; set; }
 
-private IList<Language> ValidLanguages { get; set; }
-
-
+    private IList<Language> ValidLanguages { get; set; }
 
 
-protected override async Task OnParametersSetAsync()
-{
-    CurrentLanguage = await _blazorContext.GetContextLanguageAsync();
 
-    ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
-}
 
-string ClassName
-{
-    get
+    protected override async Task OnParametersSetAsync()
     {
-        var open = IsOpen ? "show" : null;
-        return $"dropdown-menu {open}";
+
+        CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+
+        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
     }
-}
 
-private bool IsOpen { get; set; } = false;
-private void ToggleOpen()
-{
-    IsOpen = !IsOpen;
-}
+    string ClassName
+    {
+        get
+        {
+            var open = IsOpen ? "show" : null;
+            return $"dropdown-menu {open}";
+        }
+    }
+
+    private bool IsOpen { get; set; } = false;
+    private void ToggleOpen()
+    {
+        IsOpen = !IsOpen;
+    }
 
 
 
-private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
-{
-    string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+    private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
+    {
+        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
-    if (CurrentLanguage.Length > 0)
-        relative = relative.Substring(CurrentLanguage.Length);
+        if (CurrentLanguage.Length > 0)
+            relative = relative.Substring(CurrentLanguage.Length);
 
-    return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
-}
+        return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
+    }
 
-private async Task HardReload()
-{
-    await _interopService.HardReload();
-}
+    private async Task HardReload()
+    {
+        await _interopService.HardReload(_jsRuntimeCurrent);
+    }
 
 
 

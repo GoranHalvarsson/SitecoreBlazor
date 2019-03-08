@@ -1,6 +1,7 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Factories;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace Foundation.BlazorExtensions.Services
         /// <param name="language"></param>
         /// <param name="hasRouteError"></param>
         /// <returns></returns>
-        public async Task LoadRoute(string language, bool hasRouteError)
+        public async Task LoadRoute(IJSRuntime jsRuntime, string language, bool hasRouteError)
         {
 
             if (_routeService.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
@@ -40,7 +41,7 @@ namespace Foundation.BlazorExtensions.Services
 
                 RenderedComponentsInDynamicPlaceholdersPerStateChanged = new List<string>();
 
-                await _routeService.LoadRoute(language,hasRouteError);
+                await _routeService.LoadRoute(jsRuntime, language, hasRouteError);
             }
         }
 

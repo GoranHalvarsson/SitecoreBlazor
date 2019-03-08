@@ -1,11 +1,13 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.JSInterop
+
+@inherits LayoutComponentBase
 @implements IDisposable
 
 
 @inject IUriHelper _uriHelper;
 @inject LayoutService _layoutService;
 @inject LanguageService _languageService;
-
+@inject IJSRuntime _jsRuntimeCurrent;
 
 
 
@@ -55,7 +57,7 @@
         if (hasRouteError)
             Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
 
-        await _layoutService.LoadRoute(Language, hasRouteError);
+        await _layoutService.LoadRoute(_jsRuntimeCurrent, Language, hasRouteError);
 
 
         StateHasChanged();

@@ -1,60 +1,62 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
 @using Foundation.BlazorExtensions.Extensions
+@using Microsoft.JSInterop
 
 @inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository;
+@inject IJSRuntime _jsRuntimeCurrent;
 
 @if (NavigationItems == null)
 {
-  <em>Loading...</em>
+    <em>Loading...</em>
 }
 else
 {
 
 
-  <ol class="breadcrumb">
-    @foreach (var item in NavigationItems)
-    {
+    <ol class="breadcrumb">
+        @foreach (var item in NavigationItems)
+        {
 
-      var title = item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode();
-
-
-    <li class="@GetClassName(item)">
+            var title = item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode();
 
 
-      @if (string.IsNullOrWhiteSpace(item.Url))
-      {
-        <a>@title</a>
-      }
-      else
-      {
-        <a href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)">@title</a>
-      }
-    </li>
-    }
-  </ol>
+            <li class="@GetClassName(item)">
+
+
+                @if (string.IsNullOrWhiteSpace(item.Url))
+                {
+                    <a>@title</a>
+                }
+                else
+                {
+                    <a href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)">@title</a>
+                }
+            </li>
+        }
+    </ol>
 }
 
 @functions {
 
-[Parameter]
-List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
-[Parameter]
-List<NavigationItem> NavigationItems { get; set; }
+    [Parameter]
+    List<NavigationItem> NavigationItems { get; set; }
 
-string GetClassName(NavigationItem item)
-{
-  string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+    string GetClassName(NavigationItem item)
+    {
+        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
-  return item.Url.Equals("/" + relative) ? "active" : string.Empty;
+        return item.Url.Equals("/" + relative) ? "active" : string.Empty;
 
-}
+    }
 
 
-protected override async Task OnParametersSetAsync()
-{
-  NavigationItems = await _navigationRepository.GetBreadcrumb();
-}
+    protected override async Task OnParametersSetAsync()
+    {
+        NavigationItems = await _navigationRepository.GetBreadcrumb(_jsRuntimeCurrent);
+    }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
+using Microsoft.JSInterop;
 using SitecoreBlazorHosted.Shared.Models;
 using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System;
@@ -71,7 +72,7 @@ namespace Foundation.BlazorExtensions.Services
               : (false, $"/{relativeUrl}");
         }
 
-        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(string language = null, bool hasRouteError = false )
+        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(IJSRuntime jsRuntime, string language = null, bool hasRouteError = false )
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
@@ -79,8 +80,8 @@ namespace Foundation.BlazorExtensions.Services
 
             this.CurrentPlaceholders = CurrentRoute.Placeholders.FlattenThePlaceholders();
 
-            await BlazorContext.SetCurrentRouteIdAsync(CurrentRoute.Id);
-            await BlazorContext.SetContextLanguageAsync(language);
+            await BlazorContext.SetCurrentRouteIdAsync(CurrentRoute.Id,jsRuntime);
+            await BlazorContext.SetContextLanguageAsync(language,jsRuntime);
 
             return new ValueTuple<Route, IEnumerable<KeyValuePair<string, IList<Placeholder>>>>(CurrentRoute, CurrentPlaceholders);
         }

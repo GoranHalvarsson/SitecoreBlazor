@@ -5,10 +5,9 @@ namespace Foundation.BlazorExtensions.Services
 {
     public class InteropService
     {
-       
-        public Task<bool> HardReload()
+        public Task<bool> HardReload(IJSRuntime jsRuntime)
         {
-            return JSRuntime.Current.InvokeAsync<bool>("blazorExtensions.hardReload");
+            return jsRuntime.InvokeAsync<bool>("blazorExtensions.hardReload");
         }
 
 

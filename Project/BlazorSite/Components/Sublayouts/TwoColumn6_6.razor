@@ -1,0 +1,39 @@
+﻿@addTagHelper *, Feature.PageContent
+@addTagHelper *, Feature.Navigation
+@addTagHelper *, Feature.Identity
+@addTagHelper *, Feature.Teasers
+@addTagHelper *, Foundation.BlazorExtensions
+
+
+@using System.Net.Http
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Services
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+@using Microsoft.JSInterop
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <BlazorPlaceholder Name="col-wide-1">
+                @ChildContent
+            </BlazorPlaceholder>
+        </div>
+        <div class="col-md-6">
+            <BlazorPlaceholder Name="col-wide-2">
+                @ChildContent
+            </BlazorPlaceholder>
+        </div>
+    </div>
+</div>
+
+
+@functions  {
+
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
+
+}
+

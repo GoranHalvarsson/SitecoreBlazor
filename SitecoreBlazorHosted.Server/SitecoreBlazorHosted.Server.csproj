@@ -3,24 +3,28 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
+    <_RazorComponentInclude>Components\**\*.razor</_RazorComponentInclude>
   </PropertyGroup>
 
+ 
   <ItemGroup>
-    <Compile Remove="wwwroot\**" />
-    <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="wwwroot\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.9.0-preview3-19154-02" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Server" Version="3.0.0-preview3-19153-02" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview3-19153-02" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview3-19153-02" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SitecoreBlazorHosted.Client\SitecoreBlazorHosted.Client.csproj" />
-    <ProjectReference Include="..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
+    <ProjectReference Include="..\Project\BlazorSite\Project.BlazorSite.csproj" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <Content Update="Pages\_ViewImports.cshtml">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Generator>MSBuild:RazorGenerateComponentDeclarationDesignTime</Generator>
+    </Content>
+    <Content Update="_ViewImports.cshtml">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Generator>MSBuild:RazorGenerateComponentDeclarationDesignTime</Generator>
+    </Content>
+  </ItemGroup>-->
 
 </Project>

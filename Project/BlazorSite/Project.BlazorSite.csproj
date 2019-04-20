@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <LangVersion>7.3</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
+      https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
+    </RestoreAdditionalProjectSources>
+    <Configurations>Debug;Release;BlazorServer;BlazorClient</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview3-19153-02" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Build" Version="3.0.0-preview3-19153-02" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Feature\Identity\Feature.Identity.csproj" />
+    <ProjectReference Include="..\..\Feature\navigation\Feature.Navigation.csproj" />
+    <ProjectReference Include="..\..\Feature\PageContent\Feature.PageContent.csproj" />
+    <ProjectReference Include="..\..\Feature\Teasers\Feature.Teasers.csproj" />
+    <ProjectReference Include="..\..\Foundation\BlazorExtensions\Foundation.BlazorExtensions.csproj" />
+    <ProjectReference Include="..\..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

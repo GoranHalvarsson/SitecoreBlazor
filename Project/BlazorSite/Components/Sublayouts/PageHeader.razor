@@ -1,0 +1,28 @@
+﻿@addTagHelper *, Feature.PageContent
+@addTagHelper *, Feature.Navigation
+@addTagHelper *, Feature.Identity
+@addTagHelper *, Feature.Teasers
+@addTagHelper *, Foundation.BlazorExtensions
+
+
+@using System.Net.Http
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Services
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+@using Microsoft.JSInterop
+
+<header class="page-header">
+    <BlazorPlaceholder Name="page-header">
+        @ChildContent
+    </BlazorPlaceholder>
+</header>
+
+@functions  {
+
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
+
+}

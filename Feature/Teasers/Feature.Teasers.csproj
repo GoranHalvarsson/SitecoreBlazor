@@ -7,6 +7,7 @@
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
     <Configurations>Debug;Release;BlazorServer;BlazorClient</Configurations>
+    <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,14 +15,6 @@
     <EmbeddedResource Include="ButtonTeaser\content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="ButtonTeaser\content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="ButtonTeaser\content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.9.0-preview3-19154-02" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="ButtonTeaser\BlazorButtonTeaser.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,12 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorGenerate Remove="WeatherTeaser\BlazorWeatherTeaser.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview3-19153-02" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Build" Version="3.0.0-preview3-19153-02" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview4-19216-03" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview4-19216-03" />
   </ItemGroup>
 
 </Project>

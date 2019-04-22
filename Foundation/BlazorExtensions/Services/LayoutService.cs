@@ -15,10 +15,10 @@ namespace Foundation.BlazorExtensions.Services
     {
         private readonly ComponentFactory _componentFactory;
         private readonly RouteService _routeService;
-        private readonly Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
+        private readonly IUriHelper _uriHelper;
        
 
-        public LayoutService(ComponentFactory componentFactory, RouteService routeService, Microsoft.AspNetCore.Components.Services.IUriHelper uriHelper)
+        public LayoutService(ComponentFactory componentFactory, RouteService routeService, IUriHelper uriHelper)
         {
             _componentFactory = componentFactory;
             _routeService = routeService;
@@ -33,7 +33,7 @@ namespace Foundation.BlazorExtensions.Services
         /// <param name="language"></param>
         /// <param name="hasRouteError"></param>
         /// <returns></returns>
-        public async Task LoadRoute(IJSRuntime jsRuntime, string language, bool hasRouteError)
+        public async Task LoadRoute(string language, bool hasRouteError)
         {
 
             if (_routeService.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
@@ -41,7 +41,7 @@ namespace Foundation.BlazorExtensions.Services
 
                 RenderedComponentsInDynamicPlaceholdersPerStateChanged = new List<string>();
 
-                await _routeService.LoadRoute(jsRuntime, language, hasRouteError);
+                await _routeService.LoadRoute(language, hasRouteError);
             }
         }
 
@@ -62,6 +62,9 @@ namespace Foundation.BlazorExtensions.Services
                 {
 
                     IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.CurrentPlaceholders?.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder).ToList();
+
+                    if (placeHoldersList == null)
+                        return null;
 
                     foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
                     {

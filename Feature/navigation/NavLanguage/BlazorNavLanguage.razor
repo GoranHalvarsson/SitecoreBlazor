@@ -3,7 +3,9 @@
 @using SitecoreBlazorHosted.Shared.Models
 @using Microsoft.JSInterop
 
-@inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
+@inject IUriHelper _uriHelper
+@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
+
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext
 @inject Foundation.BlazorExtensions.Services.InteropService _interopService;
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
@@ -43,12 +45,23 @@ else
 
 
 
-    protected override async Task OnParametersSetAsync()
-    {
+    //protected override async Task OnParametersSetAsync()
+    //{
 
-        CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+    //    CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+
+    //    ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+
+    //}
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        CurrentLanguage = _poorManSessionState.Language;
 
         ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+        
     }
 
     string ClassName
@@ -72,8 +85,11 @@ else
     {
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
-        if (CurrentLanguage.Length > 0)
+        if (relative.Length > 0 && CurrentLanguage.Length > 0)
+        {
             relative = relative.Substring(CurrentLanguage.Length);
+        }
+
 
         return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
     }

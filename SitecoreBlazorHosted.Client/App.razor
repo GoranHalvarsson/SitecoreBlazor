@@ -2,11 +2,12 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Layouts
 @using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.AspNetCore.Components.Services
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 @using Foundation.BlazorExtensions.CustomBlazorRouter
 
+
+@inherits Microsoft.AspNetCore.Components.ComponentBase
 
 @inject IUriHelper _uriHelper;
 @inject SitecoreItemService _sitecoreItemService;
@@ -22,23 +23,22 @@
 
 
 @functions
-{
+    {
 
-  private RouterDataRoot RoutesData = null;
+      private RouterDataRoot RoutesData = null;
 
-  protected override void OnInit()
-  {
+      protected override void OnInit()
+      {
 
-    RoutesData = _sitecoreItemService.ConfigRoutes();
+        RoutesData = _sitecoreItemService.ConfigRoutes();
 
-    string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
-
-
-    if (relative == "")
-      _uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(_uriHelper));
+        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
 
-  }
+        if (relative == "") {
+          _uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(_uriHelper));
+        }
+      }
 
 }
 

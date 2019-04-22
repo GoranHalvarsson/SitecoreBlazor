@@ -1,31 +1,34 @@
-﻿@using System.Net.Http
-@using Microsoft.AspNetCore.Components
+﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
+@using System.Net.Http
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Layouts
 @using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.AspNetCore.Components.Services
+@using Microsoft.JSInterop
+
+
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
-@using Foundation.BlazorExtensions.CustomBlazorRouter
+
+
 
 @inherits Microsoft.AspNetCore.Components.ComponentBase
 
-@inject IUriHelper _uriHelper;
-
+@inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
 @inject SitecoreItemService _sitecoreItemService;
+
 <!--
     Configuring this here is temporary. Later we'll move the app config
     into Program.cs, and it won't be necessary to specify AppAssembly.
 -->
-@*<Router AppAssembly=typeof(BlazorSite.Components._ViewImports).Assembly />*@
+@*<Router AppAssembly=typeof(Program).Assembly />*@
 
 @*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
-<CustomRouter  RouteValues=@RoutesData />
-
-
-@functions{ 
+<CustomRouter RouteValues="@RoutesData" />
 
 
 
+@functions
+    {
 
     private RouterDataRoot RoutesData = null;
 
@@ -33,10 +36,22 @@
     {
 
         RoutesData = _sitecoreItemService.ConfigRoutes();
-
-
     }
 
+    protected override void OnAfterRender()
+    {
+        base.OnAfterRender();
+
+        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+
+
+        if (relative == "")
+        {
+            _uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(_uriHelper));
+
+        }
+
+    }
 
 }
 

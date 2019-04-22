@@ -1,6 +1,6 @@
 ﻿@using Foundation.BlazorExtensions.Extensions
 
-
+@inherits Microsoft.AspNetCore.Components.ComponentBase
 
 <a href="@FieldsModel.Link("AboutLink").Value.Href" target="@FieldsModel.Link("AboutLink").Value.Target" class="@FieldsModel.Link("AboutLink").Value.Class">
     @FieldsModel.Link("AboutLink").Value.Text

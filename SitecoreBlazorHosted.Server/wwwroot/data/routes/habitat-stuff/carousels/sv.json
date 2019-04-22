@@ -7,15 +7,15 @@
   "Placeholders": {
     "navbar": [
       {
-        "Assembly": "SitecoreBlazorHosted.Client",
-        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Assembly": "Project.BlazorSite",
+        "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
         "Fields": null,
         "Placeholders": {
           "navbar-header": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "ComponentName": "Feature.Navigation.NavHeader.BlazorNavHeader",
               "Name": "navbarHeader",
               "Fields": {
                 "NavHeader": {
@@ -29,7 +29,7 @@
           "navbar-menu": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
               "Fields": {},
               "Placeholders": {}
@@ -37,8 +37,8 @@
           ],
           "navbar-activity": [
             {
-              "Assembly": "SitecoreBlazorHosted.Client",
-              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Assembly": "Project.BlazorSite",
+              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
               "Fields": null,
               "Placeholders": {
@@ -57,7 +57,7 @@
           "navbar-about": [
             {
               "Assembly": "Feature.Identity",
-              "ComponentName": "Identity.About.BlazorAbout",
+              "ComponentName": "Feature.Identity.About.BlazorAbout",
               "Name": "header",
               "Fields": {
                 "AboutLink": {
@@ -79,7 +79,7 @@
     "main": [
       {
         "Assembly": "Feature.Navigation",
-        "ComponentName": "navigation.NavBreadcrumb.BlazorNavBreadcrumb",
+        "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
         "Name": "breadcrumb",
         "Fields": {
           "NavHeader": {
@@ -91,7 +91,7 @@
       },
       {
         "Assembly": "Feature.PageContent",
-        "ComponentName": "PageContent.PageHeader.BlazorPageHeader",
+        "ComponentName": "Feature.PageContent.PageHeader.BlazorPageHeader",
         "Name": "main",
         "Fields": {
           "PageHeaderTitle": {
@@ -103,7 +103,7 @@
           "main-body": [
             {
               "Assembly": "Feature.PageContent",
-              "ComponentName": "PageContent.PageHeaderCarousel.BlazorPageHeaderCarousel",
+              "ComponentName": "Feature.PageContent.PageHeaderCarousel.BlazorPageHeaderCarousel",
               "Name": "PageHeaderCarousel",
               "Fields": {
 
@@ -119,7 +119,7 @@
                         },
                         "MediaThumbnail": {
                           "value": {
-                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Src": "images/Habitat-004-wide.jpg",
                             "Alt": "Man using Laptop",
                             "Width": "1920",
                             "Height": "660"
@@ -128,7 +128,7 @@
                         },
                         "MediaImage": {
                           "Value": {
-                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Src": "images/Habitat-004-wide.jpg",
                             "Alt": "Man using Laptop",
                             "Width": "1920",
                             "Height": "660"
@@ -151,7 +151,7 @@
                         },
                         "MediaThumbnail": {
                           "value": {
-                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Src": "images/Habitat-007-wide.jpg",
                             "Alt": "Woman on Phone",
                             "Width": "1920",
                             "Height": "660"
@@ -160,7 +160,7 @@
                         },
                         "MediaImage": {
                           "Value": {
-                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Src": "images/Habitat-007-wide.jpg",
                             "Alt": "Woman on Phone",
                             "Width": "1920",
                             "Height": "660"
@@ -187,7 +187,7 @@
     "footer": [
       {
         "Assembly": "Feature.Identity",
-        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "ComponentName": "Feature.Identity.Copyright.BlazorCopyright",
         "Name": "footer",
         "Fields": {
           "Text": {

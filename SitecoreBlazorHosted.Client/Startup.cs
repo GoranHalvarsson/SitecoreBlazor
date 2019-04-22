@@ -1,12 +1,9 @@
-﻿
-using System;
-using System.Linq;
-using System.Net.Http;
-using Feature.Navigation.Extensions;
+﻿using Feature.Navigation.Extensions;
 using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components.Builder;
-using Microsoft.AspNetCore.Components.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http;
+
 
 namespace SitecoreBlazorHosted.Client
 {
@@ -16,29 +13,15 @@ namespace SitecoreBlazorHosted.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<HttpClient>((s) => new HttpClient());
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();
-
-            // Server Side Blazor doesn't register HttpClient by default
-            if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
-            {
-                // Setup HttpClient for server side in a client side compatible fashion
-                services.AddScoped<HttpClient>(s =>
-                {
-                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
-                    var uriHelper = s.GetRequiredService<IUriHelper>();
-                    return new HttpClient
-                    {
-                        BaseAddress = new Uri(uriHelper.GetBaseUri())
-                    };
-                });
-            }
 
         }
 
         public void Configure(IComponentsApplicationBuilder app)
         {
-            app.AddComponent<App>("app");
+            app.AddComponent<Project.BlazorSite.App>("app");
         }
     }
 }

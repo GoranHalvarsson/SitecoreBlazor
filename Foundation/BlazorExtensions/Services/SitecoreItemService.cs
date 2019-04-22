@@ -8,7 +8,7 @@ namespace Foundation.BlazorExtensions.Services
 {
     public class SitecoreItemService
     {
-        private const string PageComponent = "SitecoreBlazorHosted.Client.Shared.MasterBlaster, SitecoreBlazorHosted.Client";
+        private const string PageComponent = "Project.BlazorSite.Components.Shared.MasterBlaster, Project.BlazorSite";
         public ScItem GetSitecoreItemRootMock(string language = "en")
         {
 

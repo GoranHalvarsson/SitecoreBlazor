@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions
 {
-
+    //!TODO FIX with cookies 
 
     public class BlazorContext
     {

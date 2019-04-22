@@ -1,8 +1,9 @@
-﻿
-@using System.Timers
+﻿@using System.Timers
 @using System.Linq
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
+
+@inherits Microsoft.AspNetCore.Components.ComponentBase
 
 @implements IDisposable
 
@@ -78,9 +79,10 @@
     private int ActiveIndex
     {
         get => _activeIndex;
-        set { 
-            _activeIndex = value; //StateHasChanged(); 
-            }
+        set
+        {
+            _activeIndex = value; //StateHasChanged();
+        }
     }
 
 
@@ -104,23 +106,34 @@
 
 
         if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+        {
             ActiveIndex = 0;
+        }
         else
+        {
             ActiveIndex = ActiveIndex + 1;
+        }
 
-       base.Invoke(StateHasChanged);
+
+        base.Invoke(StateHasChanged);
 
     }
 
 
     private void OnMouseOver()
     {
-        if (_timer != null) _timer.Stop();
+        if (_timer != null)
+        {
+            _timer.Stop();
+        }
     }
 
     private void OnMouseOut()
     {
-        if (_timer != null) _timer.Start();
+        if (_timer != null)
+        {
+            _timer.Start();
+        }
     }
 
     private void NavCarousel(CarouselDirection carouselIndication)
@@ -128,16 +141,26 @@
         if (carouselIndication == CarouselDirection.Previous)
         {
             if (ActiveIndex == 0)
+            {
                 ActiveIndex = FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1;
+            }
             else
+            {
                 ActiveIndex = ActiveIndex - 1;
+            }
+
         }
         else
         {
             if (ActiveIndex == FieldsModel.MultiList("MediaSelector").Value.Values.Count - 1)
+            {
                 ActiveIndex = 0;
+            }
             else
+            {
                 ActiveIndex = ActiveIndex + 1;
+            }
+
 
         }
     }

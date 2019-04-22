@@ -1,6 +1,7 @@
 ﻿using Foundation.BlazorExtensions.Factories;
 using Foundation.BlazorExtensions.Services;
 using Microsoft.Extensions.DependencyInjection;
+using SitecoreBlazorHosted.Shared;
 
 namespace Foundation.BlazorExtensions.Extensions
 {
@@ -8,14 +9,15 @@ namespace Foundation.BlazorExtensions.Extensions
     {
         private static void AddStorage(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<LocalStorage>();
-            serviceCollection.AddSingleton<SessionStorage>();
+            serviceCollection.AddScoped<LocalStorage>();
+            serviceCollection.AddScoped<SessionStorage>();
         }
 
 
         public static void AddForFoundationBlazorExtensions(this IServiceCollection serviceCollection)
         {
             AddStorage(serviceCollection);
+            serviceCollection.AddScoped<PoorManSessionState>();
             serviceCollection.AddScoped<SitecoreItemService>();
             serviceCollection.AddScoped<InteropService>();
             serviceCollection.AddScoped<BlazorContext>();

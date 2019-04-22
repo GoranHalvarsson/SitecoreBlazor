@@ -1,5 +1,7 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System;
@@ -12,18 +14,18 @@ namespace Foundation.BlazorExtensions.Services
     public class RouteService
     {
         private readonly RestService _restService;
-        private readonly Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper;
+        private readonly IUriHelper _uriHelper;
         private readonly SitecoreItemService _sitecoreItemService;
-        
-        public RouteService(RestService restService, Microsoft.AspNetCore.Components.Services.IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorContext blazorContext)
+        private readonly PoorManSessionState _poorManSessionState;
+
+        public RouteService(RestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, PoorManSessionState poorManSessionState)
         {
             _restService = restService;
             _uriHelper = uriHelper;
             _sitecoreItemService = sitecoreItemService;
-            BlazorContext = blazorContext;
+            _poorManSessionState = poorManSessionState;
         }
 
-        private BlazorContext BlazorContext { get; }
         private Route CurrentRoute { get; set; }
 
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
@@ -72,7 +74,7 @@ namespace Foundation.BlazorExtensions.Services
               : (false, $"/{relativeUrl}");
         }
 
-        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(IJSRuntime jsRuntime, string language = null, bool hasRouteError = false )
+        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(string language = null, bool hasRouteError = false )
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
@@ -80,8 +82,8 @@ namespace Foundation.BlazorExtensions.Services
 
             this.CurrentPlaceholders = CurrentRoute.Placeholders.FlattenThePlaceholders();
 
-            await BlazorContext.SetCurrentRouteIdAsync(CurrentRoute.Id,jsRuntime);
-            await BlazorContext.SetContextLanguageAsync(language,jsRuntime);
+            _poorManSessionState.Language = language;
+            _poorManSessionState.RouteId = CurrentRoute.Id;
 
             return new ValueTuple<Route, IEnumerable<KeyValuePair<string, IList<Placeholder>>>>(CurrentRoute, CurrentPlaceholders);
         }

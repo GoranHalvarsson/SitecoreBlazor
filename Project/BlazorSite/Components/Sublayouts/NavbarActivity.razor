@@ -1,0 +1,27 @@
+﻿
+
+@using System.Net.Http
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+@using Foundation.BlazorExtensions.Components
+@using Microsoft.JSInterop
+
+<ul class="nav navbar-nav navbar-right">
+    <BlazorPlaceholder Name="navbar-activity-item">
+        @ChildContent
+    </BlazorPlaceholder>
+</ul>
+
+@functions  {
+
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
+
+}
+
+
+

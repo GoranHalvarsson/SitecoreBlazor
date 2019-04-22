@@ -1,9 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Feature.Navigation.Extensions;
+using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SitecoreBlazorHosted.Shared;
+using System.Net.Http;
 
 namespace SitecoreBlazorHosted.Server
 {
@@ -13,38 +18,44 @@ namespace SitecoreBlazorHosted.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddNewtonsoftJson();
-            services.AddResponseCompression();
-            services.AddHttpClient();
+            services.AddScoped<HttpClient>((s) => new HttpClient());
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
 
-             //For server-side
-            //services.AddRazorComponents<Client.Startup>();
+            services.AddForFoundationBlazorExtensions();
+            services.AddForFeatureNavigation();
+
+            
+
+     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseResponseCompression();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseMvc(routes =>
+            else
             {
-                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+     
+
+            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
-
-
-            //For client-side
-            app.UseBlazor<Client.Startup>();
-            app.UseBlazorDebugging();
-
-            
-            //For server-side
-            //app.UseStaticFiles();
-            //app.UseRazorComponents<Client.Startup>();
         }
     }
 }

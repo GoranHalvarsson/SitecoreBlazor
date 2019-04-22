@@ -6,6 +6,8 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
+    <Configurations>Debug;Release;BlazorServer;BlazorClient</Configurations>
+    <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorGenerate Remove="NavMenu\BlazorNavMenu.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="NavBreadcrumb\content\NavBreadcrumb.css" />
     <None Remove="NavHeader\content\NavHeader.css" />
   </ItemGroup>
@@ -41,16 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <BlazorGenerate Remove="NavHeader\BlazorNavHeader.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <BlazorGenerate Remove="NavLanguage\BlazorNavLanguage.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview3-19153-02" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Build" Version="3.0.0-preview3-19153-02" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview4-19216-03" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview4-19216-03" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

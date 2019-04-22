@@ -1,5 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Components.Services;
+﻿using Microsoft.AspNetCore.Components;
+using System;
+
 
 namespace Foundation.BlazorExtensions.Extensions
 {

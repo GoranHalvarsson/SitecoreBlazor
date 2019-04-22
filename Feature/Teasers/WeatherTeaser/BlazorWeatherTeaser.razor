@@ -3,11 +3,10 @@
 @using SitecoreBlazorHosted.Shared
 @using System.Net.Http;
 @using Foundation.BlazorExtensions
-@addTagHelper *, Foundation.BlazorExtensions
 
 
 
-@inject Microsoft.AspNetCore.Components.Services.IUriHelper uriHelper;
+@inject IUriHelper uriHelper;
 @inject RestService restService
 <div class="card">
   <div class="card-body">

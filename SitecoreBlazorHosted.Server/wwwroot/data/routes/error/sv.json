@@ -7,15 +7,15 @@
   "Placeholders": {
     "navbar": [
       {
-        "Assembly": "SitecoreBlazorHosted.Client",
-        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Assembly": "Project.BlazorSite",
+        "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
         "Fields": null,
         "Placeholders": {
           "navbar-header": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "ComponentName": "Feature.Navigation.NavHeader.BlazorNavHeader",
               "Name": "navbarHeader",
               "Fields": {
                 "NavHeader": {
@@ -29,7 +29,7 @@
           "navbar-menu": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
               "Fields": {},
               "Placeholders": {}
@@ -37,8 +37,8 @@
           ],
           "navbar-activity": [
             {
-              "Assembly": "SitecoreBlazorHosted.Client",
-              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Assembly": "Project.BlazorSite",
+              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
               "Fields": null,
               "Placeholders": {
@@ -57,7 +57,7 @@
           "navbar-about": [
             {
               "Assembly": "Feature.Identity",
-              "ComponentName": "Identity.About.BlazorAbout",
+              "ComponentName": "Feature.Identity.About.BlazorAbout",
               "Name": "header",
               "Fields": {
                 "AboutLink": {
@@ -107,7 +107,7 @@
     "footer": [
       {
         "Assembly": "Feature.Identity",
-        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "ComponentName": "Feature.Identity.Copyright.BlazorCopyright",
         "Name": "footer",
         "Fields": {
           "Text": {

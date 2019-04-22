@@ -1,0 +1,32 @@
+﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
+@using Foundation.BlazorExtensions.Services
+
+@using Microsoft.AspNetCore.Components
+
+
+@inject IUriHelper _uriHelper;
+
+@inject SitecoreItemService _sitecoreItemService;
+
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+<CustomRouter RouteValues=@RoutesData />
+
+
+@functions{
+
+
+
+
+    private RouterDataRoot RoutesData = null;
+
+    protected override void OnInit()
+    {
+
+        RoutesData = _sitecoreItemService.ConfigRoutes();
+
+
+    }
+
+
+}

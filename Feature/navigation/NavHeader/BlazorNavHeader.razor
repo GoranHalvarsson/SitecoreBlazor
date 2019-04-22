@@ -2,9 +2,11 @@
 @using Foundation.BlazorExtensions.Services
 @using Microsoft.JSInterop
 
-@inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
-@inject Microsoft.AspNetCore.Components.Services.IUriHelper _uriHelper
-@inject IJSRuntime _jsRuntimeCurrent;
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
+@inject IUriHelper _uriHelper
+
 
 @if (string.IsNullOrWhiteSpace(CurrentLanguage))
 {
@@ -22,9 +24,11 @@ else
 
     private string CurrentLanguage { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
-        CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+        base.OnParametersSet();
+
+        CurrentLanguage = _poorManSessionState.Language;
     }
 
 

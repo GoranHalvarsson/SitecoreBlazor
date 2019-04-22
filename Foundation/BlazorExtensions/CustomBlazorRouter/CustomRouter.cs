@@ -1,7 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.AspNetCore.Components.Services;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;

@@ -7,115 +7,118 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
+using SitecoreBlazorHosted.Shared;
 
 namespace Feature.Navigation.Repositories
 {
-  public class NavigationRepository
-  {
-    private readonly BlazorContext _blazorContext;
-    private readonly SitecoreItemService _sitecoreItemService;
-
-    public NavigationRepository(BlazorContext blazorContext, SitecoreItemService sitecoreItemService)
+    public class NavigationRepository
     {
-      _blazorContext = blazorContext;
-      _sitecoreItemService = sitecoreItemService;
-    }
+        private readonly BlazorContext _blazorContext;
+        private readonly SitecoreItemService _sitecoreItemService;
+        private readonly PoorManSessionState _poorManSessionState;
 
-    public  async Task<List<NavigationItem>> GetBreadcrumb(IJSRuntime jsRuntime)
-    {
-
-    
-        var items = await GetNavigationHierarchy(jsRuntime);
-        items.Reverse();
-        for (var i = 0; i < items.Count - 1; i++)
+        public NavigationRepository(BlazorContext blazorContext, SitecoreItemService sitecoreItemService, PoorManSessionState poorManSessionState)
         {
-          items[i].Level = i;
+            _blazorContext = blazorContext;
+            _sitecoreItemService = sitecoreItemService;
+            _poorManSessionState = poorManSessionState;
         }
 
-        return items;
-      
-
-
-    }
-
-    private async Task<List<NavigationItem>> GetNavigationHierarchy(IJSRuntime jsRuntime)
-    {
-      
-
-        var routeId = await _blazorContext.GetCurrentRouteIdAsync(jsRuntime);
-
-        var menuItems = new List<NavigationItem>();
-
-        foreach (var item in await GetMenu(jsRuntime))
+        public async Task<List<NavigationItem>> GetBreadcrumb(IJSRuntime jsRuntime)
         {
-          menuItems.Add(item);
 
-          if (item.Children != null && item.Children.Any())
-          {
-            menuItems.AddRange(item.Children);
-          }
+
+            var items = await GetNavigationHierarchy(jsRuntime);
+            items.Reverse();
+            for (var i = 0; i < items.Count - 1; i++)
+            {
+                items[i].Level = i;
+            }
+
+            return items;
+
 
 
         }
 
-        List<NavigationItem> result = new List<NavigationItem>();
-
-
-        while (!string.IsNullOrWhiteSpace(routeId))
+        private async Task<List<NavigationItem>> GetNavigationHierarchy(IJSRuntime jsRuntime)
         {
-          NavigationItem currentItem = menuItems.FirstOrDefault(i => i.Item.Id == routeId);
 
-          if (currentItem != null)
-          {
-            result.Add(currentItem);
-          }
 
-          routeId = currentItem?.Item?.Parent?.Id;
+            var routeId = _poorManSessionState.RouteId;// await _blazorContext.GetCurrentRouteIdAsync(jsRuntime); //"dac24edd-44fb-42ef-9ecd-1e8daf706386"; //
+
+            var menuItems = new List<NavigationItem>();
+
+            foreach (var item in await GetMenu(jsRuntime))
+            {
+                menuItems.Add(item);
+
+                if (item.Children != null && item.Children.Any())
+                {
+                    menuItems.AddRange(item.Children);
+                }
+
+
+            }
+
+            List<NavigationItem> result = new List<NavigationItem>();
+
+
+            while (!string.IsNullOrWhiteSpace(routeId))
+            {
+                NavigationItem currentItem = menuItems.FirstOrDefault(i => i.Item.Id == routeId);
+
+                if (currentItem != null)
+                {
+                    result.Add(currentItem);
+                }
+
+                routeId = currentItem?.Item?.Parent?.Id;
+
+            }
+
+            return result;
+
 
         }
 
-        return result;
-     
+        private NavigationItem CreateNavigationItem(ISitecoreItem item)
+        {
 
-    }
+            return new NavigationItem
+            {
+                Item = item,
+                Url = item.Url,
+                Children = item.HasChildren ? GetChildNavigationItems(item) : null
+            };
+        }
 
-    private NavigationItem CreateNavigationItem(ISitecoreItem item)
-    {
+        private List<NavigationItem> GetChildNavigationItems(ISitecoreItem item)
+        {
+            List<NavigationItem> children = new List<NavigationItem>();
 
-      return new NavigationItem
-      {
-        Item = item,
-        Url = item.Url,
-        Children = item.HasChildren ? GetChildNavigationItems(item) : null
-      };
-    }
+            if (!item.HasChildren)
+                return children;
 
-    private List<NavigationItem> GetChildNavigationItems(ISitecoreItem item)
-    {
-      List<NavigationItem> children = new List<NavigationItem>();
+            foreach (var child in item.Children)
+            {
+                if (child == null)
+                    continue;
 
-      if (!item.HasChildren)
-        return children;
+                children.Add(CreateNavigationItem(child));
+            }
 
-      foreach (var child in item.Children)
-      {
-        if (child == null)
-          continue;
+            return children;
+        }
 
-        children.Add(CreateNavigationItem(child));
-      }
-
-      return children;
-    }
-
-    public async Task<List<NavigationItem>> GetMenu(IJSRuntime jsRuntime)
-    {
-        string currentLanguage = await _blazorContext.GetContextLanguageAsync(jsRuntime);
-        Console.WriteLine("GetMenu " + currentLanguage);
-        ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
+        public  Task<List<NavigationItem>> GetMenu(IJSRuntime jsRuntime)
+        {
+            string currentLanguage = _poorManSessionState.Language; //await _blazorContext.GetContextLanguageAsync(jsRuntime);
+            Console.WriteLine("GetMenu " + currentLanguage);
+            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
 
 
-        List<NavigationItem> list = new List<NavigationItem>
+            List<NavigationItem> list = new List<NavigationItem>
           {
                    new NavigationItem() //Home
                    {
@@ -125,21 +128,21 @@ namespace Feature.Navigation.Repositories
                    }
           };
 
-        foreach (ISitecoreItem item in rootItem.Children)
-        {
+            foreach (ISitecoreItem item in rootItem.Children)
+            {
 
-          if (item == null)
-            continue;
+                if (item == null)
+                    continue;
 
-          list.Add(
-                   CreateNavigationItem(item)
-                   );
+                list.Add(
+                         CreateNavigationItem(item)
+                         );
+            }
+
+
+            return Task.FromResult<List<NavigationItem>>(list);
+
+
         }
-
-
-        return list;
-
-
     }
-  }
 }

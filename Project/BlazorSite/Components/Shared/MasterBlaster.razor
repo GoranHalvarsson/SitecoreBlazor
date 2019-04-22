@@ -1,0 +1,112 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Layouts
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.JSInterop
+
+@using Foundation.BlazorExtensions.Components
+@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+
+
+@inherits Microsoft.AspNetCore.Components.Layouts.LayoutComponentBase
+@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
+@inject Foundation.BlazorExtensions.BlazorContext _blazorContext
+@inject IUriHelper _uriHelper;
+@inject LayoutService _layoutService;
+@inject LanguageService _languageService;
+@inject IJSRuntime _jsRuntimeCurrent;
+
+
+
+<div class="main">
+
+    <BlazorPlaceholder Name="navbar">
+        @Body
+    </BlazorPlaceholder>
+
+    <main role="main" class="container">
+        <BlazorPlaceholder Name="main">
+            @Body
+        </BlazorPlaceholder>
+    </main>
+
+
+    <footer class="container">
+
+        <BlazorPlaceholder Name="footer">
+            @Body
+        </BlazorPlaceholder>
+
+    </footer>
+</div>
+
+
+@functions
+{
+
+    [Parameter]
+    protected string Language { get; set; }
+
+    protected override Task OnAfterRenderAsync()
+    {
+
+        // //Lets write some stuff to blazorcontext
+        //if (_poorManSessionState != null)
+        //{
+        //    _poorManSessionState.Language = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+        //    _poorManSessionState.RouteId = await _blazorContext.GetCurrentRouteIdAsync(_jsRuntimeCurrent);
+        //}
+
+
+        //Lets write some stuff to blazorcontext
+        if (_poorManSessionState != null)
+        {
+
+            _blazorContext.SetContextLanguageAsync(_poorManSessionState.Language, _jsRuntimeCurrent);
+            _blazorContext.SetCurrentRouteIdAsync(_poorManSessionState.RouteId, _jsRuntimeCurrent);
+
+        }
+
+
+        return base.OnAfterRenderAsync();
+    }
+
+
+    protected override void OnInit()
+    {
+        _uriHelper.OnLocationChanged += OnLocationChanged;
+
+        Reload();
+    }
+
+
+    private void OnLocationChanged(object sender, string location) => Reload();
+
+    private async void Reload()
+    {
+
+        bool hasRouteError = Language.HasRouteError();
+
+        if (hasRouteError)
+        {
+            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
+        }
+
+
+        await _layoutService.LoadRoute(Language, hasRouteError);
+
+
+        StateHasChanged();
+    }
+
+
+
+    public void Dispose()
+    {
+        _uriHelper.OnLocationChanged -= OnLocationChanged;
+    }
+
+}
+

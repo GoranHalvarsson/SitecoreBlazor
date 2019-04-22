@@ -7,15 +7,15 @@
   "Placeholders": {
     "navbar": [
       {
-        "Assembly": "SitecoreBlazorHosted.Client",
-        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.Navbar",
+        "Assembly": "Project.BlazorSite",
+        "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
         "Fields": null,
         "Placeholders": {
           "navbar-header": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavHeader.BlazorNavHeader",
+              "ComponentName": "Feature.Navigation.NavHeader.BlazorNavHeader",
               "Name": "navbarHeader",
               "Fields": {
                 "NavHeader": {
@@ -29,7 +29,7 @@
           "navbar-menu": [
             {
               "Assembly": "Feature.Navigation",
-              "ComponentName": "navigation.NavMenu.BlazorNavMenu",
+              "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
               "Fields": {},
               "Placeholders": {}
@@ -37,15 +37,15 @@
           ],
           "navbar-activity": [
             {
-              "Assembly": "SitecoreBlazorHosted.Client",
-              "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.NavbarActivity",
+              "Assembly": "Project.BlazorSite",
+              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
               "Fields": null,
               "Placeholders": {
                 "navbar-activity-item": [
                   {
                     "Assembly": "Feature.Navigation",
-                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "ComponentName": "Feature.Navigation.NavLanguage.BlazorNavLanguage",
                     "Name": "navLanguage",
                     "Fields": null,
                     "Placeholders": null
@@ -57,7 +57,7 @@
           "navbar-about": [
             {
               "Assembly": "Feature.Identity",
-              "ComponentName": "Identity.About.BlazorAbout",
+              "ComponentName": "Feature.Identity.About.BlazorAbout",
               "Name": "header",
               "Fields": {
                 "AboutLink": {
@@ -78,15 +78,15 @@
     ],
     "main": [
       {
-        "Assembly": "SitecoreBlazorHosted.Client",
-        "ComponentName": "SitecoreBlazorHosted.Client.Components.Sublayouts.OneColumn",
+        "Assembly": "Project.BlazorSite",
+        "ComponentName": "Project.BlazorSite.Components.Sublayouts.OneColumn",
         "Name": "OneColumn",
         "Fields": null,
         "Placeholders": {
           "col-huge-765aa916-a5f0-4659-a7ab-7d59df4140a1": [
             {
               "Assembly": "Feature.PageContent",
-              "ComponentName": "PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+              "ComponentName": "Feature.PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
               "Name": "pageHeaderDescription",
               "Fields": {
                 "HeaderImage": {
@@ -117,7 +117,7 @@
     "footer": [
       {
         "Assembly": "Feature.Identity",
-        "ComponentName": "Identity.Copyright.BlazorCopyright",
+        "ComponentName": "Feature.Identity.Copyright.BlazorCopyright",
         "Name": "footer",
         "Fields": {
           "Text": {

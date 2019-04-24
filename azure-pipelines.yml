@@ -2,10 +2,10 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'vs2017-win2016'
   # replace the hosted Ubuntu pool above with the Windows pool below if
   # you want to deploy to a Windows web app
-  # vmImage: 'vs2017-win2016'
+  # vmImage: 'Ubuntu-16.04'
 
 variables:
   solution: '**/*.sln'

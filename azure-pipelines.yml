@@ -8,26 +8,23 @@ pool:
   # vmImage: 'vs2017-win2016'
 
 
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'BlazorClient'
+  project: '**/SitecoreBlazorHosted.Client.csproj'
+
+
 steps:
-- task: DotNetCoreCLI@1
-  displayName: Build
-  inputs:
-    version: '3.0.100-preview4-011223'
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
-
-
-# variables:
-#  solution: '**/*.sln'
-#  buildPlatform: 'Any CPU'
-#  buildConfiguration: 'Release'
-#  projects: '**/*.csproj'
-
-# buildConfiguration: 'Release'
-# Project: '**/SitecoreBlazorHosted.Client.csproj'
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
 
 
 #steps:
-#- script: dotnet build --configuration $(buildConfiguration)
-#  displayName: 'dotnet build $(buildConfiguration)'
+#- task: DotNetCoreCLI@1
+#  displayName: Build
+#  inputs:
+#    version: '3.0.100-preview4-011223'
+#    command: build
+#    projects: '**/*.csproj'
+#    arguments: '--configuration Release'

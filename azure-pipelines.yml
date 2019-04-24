@@ -9,7 +9,7 @@ pool:
 
 
 steps:
-- task: DotNetCoreCLI@3
+- task: DotNetCoreCLI@1
   displayName: Build
   inputs:
     version: '3.0.100-preview4-011223'

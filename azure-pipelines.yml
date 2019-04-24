@@ -11,8 +11,8 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'BlazorServer'
-  project: '**/SitecoreBlazorHosted.Server.csproj'
+  buildConfiguration: 'BlazorClient'
+  project: '**/SitecoreBlazorHosted.Client.csproj'
 
 
 steps:

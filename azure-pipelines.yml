@@ -9,9 +9,10 @@ pool:
 
 
 steps:
-- task: DotNetCoreCLI@2
+- task: DotNetCoreCLI
   displayName: Build
   inputs:
+    version: '3.0.100-preview4-011223'
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration Release'

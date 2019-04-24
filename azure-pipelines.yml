@@ -5,7 +5,10 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'BlazorClient'
+  startUpProject: 'SitecoreBlazorHosted.Client'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)

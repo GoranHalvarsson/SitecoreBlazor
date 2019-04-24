@@ -11,7 +11,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
- 
+  projects: '**/*.csproj'
 
 # buildConfiguration: 'Release'
 # Project: '**/SitecoreBlazorHosted.Client.csproj'

@@ -27,6 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{7026
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.BlazorSite", "Project\BlazorSite\Project.BlazorSite.csproj", "{EB1345A2-C6CD-405E-BF69-7941A633C0A9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzurePipelines", "AzurePipelines", "{F87CFBDF-3EEA-41C7-867E-F59DE721ECA8}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BlazorClient|Any CPU = BlazorClient|Any CPU
@@ -46,6 +51,7 @@ Global
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.Build.0 = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405D481A-2358-48F2-B5B5-012C7C907504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorClient|Any CPU.ActiveCfg = Debug|Any CPU

@@ -2,16 +2,19 @@ trigger:
 - master
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'Ubuntu-16.04'
   # replace the hosted Ubuntu pool above with the Windows pool below if
   # you want to deploy to a Windows web app
-  # vmImage: 'Ubuntu-16.04'
+  # vmImage: 'vs2017-win2016'
 
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'BlazorClient'
-  Project: '**/SitecoreBlazorHosted.Client.csproj'
+  buildConfiguration: 'Release'
+ 
+
+# buildConfiguration: 'Release'
+# Project: '**/SitecoreBlazorHosted.Client.csproj'
 
 
 steps:

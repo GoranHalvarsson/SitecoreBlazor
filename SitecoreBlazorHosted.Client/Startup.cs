@@ -2,6 +2,7 @@
 using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Project.BlazorSite;
 using System.Net.Http;
 
 
@@ -21,7 +22,7 @@ namespace SitecoreBlazorHosted.Client
 
         public void Configure(IComponentsApplicationBuilder app)
         {
-            app.AddComponent<Project.BlazorSite.App>("app");
+            app.AddComponent<App>("app");
         }
     }
 }

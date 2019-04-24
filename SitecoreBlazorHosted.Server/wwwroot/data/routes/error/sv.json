@@ -79,12 +79,12 @@
     "main": [
       {
         "Assembly": "Feature.PageContent",
-        "ComponentName": "PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+        "ComponentName": "Feature.PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
         "Name": "main",
         "Fields": {
           "HeaderImage": {
             "Value": {
-              "Src": "_content/Feature.PageContent/sc_logo.png",
+              "Src": "images/sc_logo.png",
               "Alt": "Sitecore",
               "Width": null,
               "Height": null

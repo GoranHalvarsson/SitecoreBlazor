@@ -79,7 +79,7 @@
     "main": [
       {
         "Assembly": "Feature.PageContent",
-        "ComponentName": "PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+        "ComponentName": "Feature.PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
         "Name": "main",
         "Fields": {
           "HeaderImage": {

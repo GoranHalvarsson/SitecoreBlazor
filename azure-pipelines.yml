@@ -5,7 +5,8 @@ pool:
   vmImage: 'vs2017-win2016'
 
 variables:
-  buildConfiguration: 'BlazorClient'
+  buildConfigurationClient: 'BlazorClient'
+  buildConfigurationServer: 'BlazorServer'
 
 steps:
 - task: DotNetCoreInstaller@0
@@ -14,8 +15,10 @@ steps:
     version: 3.0.100-preview4-011223
 
 - script: dotnet build --configuration $(buildConfiguration) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
-  displayName: 'Building $(buildConfiguration)...'
+  displayName: 'Building $(buildConfigurationClient)...'
 
+- script: dotnet build --configuration $(buildConfiguration) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
+  displayName: 'Building $(buildConfigurationServer)...'
 
 #variables:
 #  solution: '**/*.sln'

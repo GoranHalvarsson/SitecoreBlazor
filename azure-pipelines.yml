@@ -14,10 +14,10 @@ steps:
   inputs:
     version: 3.0.100-preview4-011223
 
-- script: dotnet build --configuration $(buildConfiguration) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
+- script: dotnet build --configuration $(buildConfigurationClient) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
   displayName: 'Building $(buildConfigurationClient)...'
 
-- script: dotnet build --configuration $(buildConfiguration) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
+- script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
 
 #variables:

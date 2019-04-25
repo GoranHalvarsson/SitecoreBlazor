@@ -2,22 +2,38 @@ trigger:
 - Upgrading-to-3.0.0-preview4-19216-03
 
 pool:
-  vmImage: 'Ubuntu-16.04'
-  # replace the hosted Ubuntu pool above with the Windows pool below if
-  # you want to deploy to a Windows web app
-  # vmImage: 'vs2017-win2016'
-
+  vmImage: 'vs2017-win2016'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'BlazorClient'
-  projects: '**/*.csproj'
-
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreInstaller@0
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 3.0.100-preview4-011223
+
+- script: dotnet build --configuration $(buildConfiguration) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
+  displayName: 'Building $(buildConfiguration)...'
+
+
+#variables:
+#  solution: '**/*.sln'
+#  buildPlatform: 'Any CPU'
+#  buildConfiguration: 'BlazorClient'
+#  projects: '**/*.csproj'
+
+#steps:
+#- task: DotNetCoreCLI@2
+#  displayName: Test
+#  inputs:
+#    command: build
+#    projects: '**/*.csproj'
+#    arguments: '--configuration $(BuildConfiguration)'
+
+#steps:
+#- script: dotnet build --configuration $(buildConfiguration)
+# displayName: 'dotnet build $(buildConfiguration)'
 
 
 #steps:

@@ -12,7 +12,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'BlazorClient'
-  projects: '..\Project\BlazorSite\Project.BlazorSite.csproj'
+  projects: '**/*.csproj'
 
 
 steps:

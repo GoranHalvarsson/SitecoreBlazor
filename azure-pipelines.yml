@@ -1,5 +1,5 @@
 trigger:
-- Upgrading-to-3.0.0-preview4-19216-03
+- master
 
 pool:
   vmImage: 'vs2017-win2016'
@@ -19,31 +19,3 @@ steps:
 
 - script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
-
-#variables:
-#  solution: '**/*.sln'
-#  buildPlatform: 'Any CPU'
-#  buildConfiguration: 'BlazorClient'
-#  projects: '**/*.csproj'
-
-#steps:
-#- task: DotNetCoreCLI@2
-#  displayName: Test
-#  inputs:
-#    command: build
-#    projects: '**/*.csproj'
-#    arguments: '--configuration $(BuildConfiguration)'
-
-#steps:
-#- script: dotnet build --configuration $(buildConfiguration)
-# displayName: 'dotnet build $(buildConfiguration)'
-
-
-#steps:
-#- task: DotNetCoreCLI@1
-#  displayName: Build
-#  inputs:
-#    version: '3.0.100-preview4-011223'
-#    command: build
-#    projects: '**/*.csproj'
-#    arguments: '--configuration Release'

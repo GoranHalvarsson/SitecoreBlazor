@@ -2,29 +2,20 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-16.04'
-  # replace the hosted Ubuntu pool above with the Windows pool below if
-  # you want to deploy to a Windows web app
-  # vmImage: 'vs2017-win2016'
-
+  vmImage: 'vs2017-win2016'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'BlazorServer'
-  project: '**/SitecoreBlazorHosted.Server.csproj'
-
+  buildConfigurationClient: 'BlazorClient'
+  buildConfigurationServer: 'BlazorServer'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreInstaller@0
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 3.0.100-preview4-011223
 
+- script: dotnet build --configuration $(buildConfigurationClient) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
+  displayName: 'Building $(buildConfigurationClient)...'
 
-#steps:
-#- task: DotNetCoreCLI@1
-#  displayName: Build
-#  inputs:
-#    version: '3.0.100-preview4-011223'
-#    command: build
-#    projects: '**/*.csproj'
-#    arguments: '--configuration Release'
+- script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
+  displayName: 'Building $(buildConfigurationServer)...'

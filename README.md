@@ -20,7 +20,7 @@ To run server-side:
 
 Set SitecoreBlazorHosted.Server as StartUp project.
 
-Select BlazorServer in Soution Configurations.
+Select BlazorServer in Solution Configurations.
 
 And run...
 
@@ -28,7 +28,7 @@ To run client-side:
 
 Set SitecoreBlazorHosted.Client as StartUp project.
 
-Select BlazorClient in Soution Configurations.
+Select BlazorClient in Solution Configurations.
 
 And run...
 

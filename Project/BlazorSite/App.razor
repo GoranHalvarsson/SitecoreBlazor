@@ -11,11 +11,10 @@
 
 
 
-@inherits Microsoft.AspNetCore.Components.ComponentBase
+@implements Microsoft.AspNetCore.Components.IComponent
 
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
 @inject SitecoreItemService _sitecoreItemService;
-
 <!--
     Configuring this here is temporary. Later we'll move the app config
     into Program.cs, and it won't be necessary to specify AppAssembly.

@@ -3,7 +3,7 @@
 @using SitecoreBlazorHosted.Shared.Models
 @using Microsoft.JSInterop
 
-@implements IDisposable
+@implements Microsoft.AspNetCore.Components.IComponent
 
 @inject IUriHelper _uriHelper
 @inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
@@ -22,7 +22,7 @@ else
 
 
 
-    <li class="nav-item dropdown">
+    <li class="dropdown">
         <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
             @_languageService.Get(CurrentLanguage)?.NativeName
         </button>
@@ -44,16 +44,21 @@ else
 
     private IList<Language> ValidLanguages { get; set; }
 
-    private void OnLocationChanged(object sender, string location) {
-        IsOpen = false;
-        StateHasChanged();
-    }
+
+
+
+    //protected override async Task OnParametersSetAsync()
+    //{
+
+    //    CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
+
+    //    ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+
+    //}
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-        _uriHelper.OnLocationChanged += OnLocationChanged;
 
         CurrentLanguage = _poorManSessionState.Language;
 
@@ -96,10 +101,6 @@ else
         await _interopService.HardReload(_jsRuntimeCurrent);
     }
 
-    public void Dispose()
-    {
-        _uriHelper.OnLocationChanged -= OnLocationChanged;
-    }
 
 
 }

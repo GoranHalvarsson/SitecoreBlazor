@@ -2,6 +2,8 @@
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
+@implements Microsoft.AspNetCore.Components.IComponent
+
 @inject InteropService interopService
 <div class="card">
     <div class="card-body">
@@ -25,6 +27,6 @@
 
     void IncrementCount()
     {
-      currentCount++;
+        currentCount++;
     }
 }

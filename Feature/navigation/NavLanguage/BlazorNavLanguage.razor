@@ -3,6 +3,8 @@
 @using SitecoreBlazorHosted.Shared.Models
 @using Microsoft.JSInterop
 
+@implements Microsoft.AspNetCore.Components.IComponent
+
 @inject IUriHelper _uriHelper
 @inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
 
@@ -61,7 +63,7 @@ else
         CurrentLanguage = _poorManSessionState.Language;
 
         ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
-        
+
     }
 
     string ClassName

@@ -4,7 +4,7 @@
 @using Foundation.BlazorExtensions.Extensions
 @using Microsoft.JSInterop
 
-@inherits Microsoft.AspNetCore.Components.ComponentBase
+@implements Microsoft.AspNetCore.Components.IComponent
 
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
 @inject IUriHelper _uriHelper;

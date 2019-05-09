@@ -45,7 +45,7 @@
                 "navbar-activity-item": [
                   {
                     "Assembly": "Feature.Navigation",
-                    "ComponentName": "navigation.NavLanguage.BlazorNavLanguage",
+                    "ComponentName": "Feature.Navigation.NavLanguage.BlazorNavLanguage",
                     "Name": "navLanguage",
                     "Fields": null,
                     "Placeholders": null

@@ -1,21 +1,18 @@
 ﻿@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
 
 @using Microsoft.JSInterop
 
 @implements Microsoft.AspNetCore.Components.IComponent
+@implements IDisposable
 
+@inject LayoutService _layoutService;
 @inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
 @inject IUriHelper _uriHelper
 
 
-@if (string.IsNullOrWhiteSpace(CurrentLanguage))
-{
-    <em>Loading...</em>
-}
-else
-{
-    <a class="navbar-brand" href="@CurrentLanguage.WithBaseUrl_UglyHackForGithub(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
-}
+<a class="navbar-brand" href="@CurrentLanguage.WithBaseUrl_UglyHackForGithub(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+
 
 @functions {
 
@@ -31,5 +28,22 @@ else
         CurrentLanguage = _poorManSessionState.Language;
     }
 
+    protected override void OnInit()
+    {
+        _layoutService.LanguageSwitch += LanguageSwitchHasHappened;
+    }
+
+    private void LanguageSwitchHasHappened(object sender, EventArgs e)
+    {
+
+        CurrentLanguage = _poorManSessionState.Language;
+
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _layoutService.LanguageSwitch -= LanguageSwitchHasHappened;
+    }
 
 }

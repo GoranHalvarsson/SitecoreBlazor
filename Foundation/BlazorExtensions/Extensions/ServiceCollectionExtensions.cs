@@ -17,7 +17,6 @@ namespace Foundation.BlazorExtensions.Extensions
         public static void AddForFoundationBlazorExtensions(this IServiceCollection serviceCollection)
         {
             AddStorage(serviceCollection);
-            serviceCollection.AddScoped<PoorManSessionState>();
             serviceCollection.AddScoped<SitecoreItemService>();
             serviceCollection.AddScoped<InteropService>();
             serviceCollection.AddScoped<BlazorContext>();

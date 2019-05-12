@@ -184,7 +184,7 @@ namespace Foundation.BlazorExtensions.Factories
 
             try
             {
-                Type componentType =  componentType = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
+                Type componentType = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
 
                 (List<IBlazorSitecoreField> model, bool hasModel) componentModel = CreateComponentModel(placeholderData.Fields);
 

@@ -81,12 +81,7 @@
         "Assembly": "Feature.Navigation",
         "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
         "Name": "breadcrumb",
-        "Fields": {
-          "NavHeader": {
-            "Value": "Sitecore + Blazor",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": null
       },
       {

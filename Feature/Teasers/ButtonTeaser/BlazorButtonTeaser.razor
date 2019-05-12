@@ -1,10 +1,9 @@
 ﻿
 @using Foundation.BlazorExtensions.Extensions
-@using Foundation.BlazorExtensions.Services
+
 
 @implements Microsoft.AspNetCore.Components.IComponent
 
-@inject InteropService interopService
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">@FieldsModel.PlainText("Header").Value.HtmlDecode()</h5>
@@ -29,4 +28,8 @@
     {
         currentCount++;
     }
+
+
+
+  
 }

@@ -105,7 +105,7 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.TwoColumn6_6",
               "Name": "TwoColumn6_6",
-              "Fields": null,
+              "Fields": {},
               "Placeholders": {
                 "col-wide-1": [
                   {

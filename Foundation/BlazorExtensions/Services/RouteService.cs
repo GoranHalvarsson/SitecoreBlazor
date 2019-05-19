@@ -74,18 +74,29 @@ namespace Foundation.BlazorExtensions.Services
               : (false, $"/{relativeUrl}");
         }
 
-        public async Task<(Route route, IEnumerable<KeyValuePair<string, IList<Placeholder>>> flattenedPlaceholders)> LoadRoute(string language = null, bool hasRouteError = false )
+        public async Task LoadRoute(string language = null, bool hasRouteError = false )
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
-            this.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
+            Route routeExists = _poorManSessionState.GetNavigatedRoute(routeUrl);
+            
+            if (routeExists == null) { 
+                this.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
+                _poorManSessionState.AddNavigatedRoute(routeUrl, this.CurrentRoute);
+            }
+            else
+            {
+                this.CurrentRoute = routeExists;
+
+            }
+
+            this.CurrentRoute.Url = routeUrl;
 
             this.CurrentPlaceholders = CurrentRoute.Placeholders.FlattenThePlaceholders();
 
             _poorManSessionState.Language = language;
             _poorManSessionState.RouteId = CurrentRoute.Id;
-
-            return new ValueTuple<Route, IEnumerable<KeyValuePair<string, IList<Placeholder>>>>(CurrentRoute, CurrentPlaceholders);
+           
         }
 
     }

@@ -11,6 +11,7 @@
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext
 @inject Foundation.BlazorExtensions.Services.InteropService _interopService;
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
+@inject Foundation.BlazorExtensions.Services.LayoutService _layoutService;
 @inject IJSRuntime _jsRuntimeCurrent;
 
 @if (ValidLanguages == null)
@@ -30,7 +31,7 @@ else
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" onclick="@(() => HardReload())" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" onclick="@(() => SwitchLanguage(language))" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -94,6 +95,20 @@ else
 
 
         return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
+    }
+
+    private void SwitchLanguage(Language language)
+    {
+        _poorManSessionState.Language = language.TwoLetterCode;
+        CurrentLanguage = _poorManSessionState.Language;
+
+        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+        ToggleOpen();
+        StateHasChanged();
+
+        _layoutService.SwitchLanguage(language);
+
+
     }
 
     private async Task HardReload()

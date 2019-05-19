@@ -2,15 +2,19 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Services
+@using SitecoreBlazorHosted.Shared.Models
 @using Microsoft.JSInterop
 
 @implements Microsoft.AspNetCore.Components.IComponent
+@implements IDisposable
 
+@inject LayoutService _layoutService;
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
 @inject IUriHelper _uriHelper;
 @inject IJSRuntime _jsRuntimeCurrent;
 
-@implements IDisposable
+
 
 @if (NavigationItems == null)
 {
@@ -79,7 +83,8 @@ else
 
 @functions {
 
-
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
     List<NavigationItem> NavigationItems { get; set; }
 
@@ -87,6 +92,7 @@ else
     {
         NavigationItems = await _navigationRepository.GetMenu(_jsRuntimeCurrent);
     }
+
 
     bool _collapseNavMenu = true;
 
@@ -119,11 +125,21 @@ else
     protected override void OnInit()
     {
         _uriHelper.OnLocationChanged += OnLocationChanges;
+        _layoutService.LanguageSwitch += LanguageSwitchHasHappened;
+    }
+
+    private async void LanguageSwitchHasHappened(object sender, EventArgs e)
+    {
+
+
+        NavigationItems = await _navigationRepository.GetMenu(_jsRuntimeCurrent);
+        StateHasChanged();
     }
 
     public void Dispose()
     {
         _uriHelper.OnLocationChanged -= OnLocationChanges;
+        _layoutService.LanguageSwitch -= LanguageSwitchHasHappened;
     }
 
 }

@@ -26,6 +26,17 @@ namespace Foundation.BlazorExtensions.Services
        
         }
 
+        public event EventHandler LanguageSwitch;
+
+       
+        public void SwitchLanguage(Language language)
+        {
+            LanguageSwitchArgs args = new LanguageSwitchArgs
+            {
+                Language = language
+            };
+            LanguageSwitch?.Invoke(this, args);
+        }
 
         /// <summary>
         /// LoadRoute is called on state changed(each "request")

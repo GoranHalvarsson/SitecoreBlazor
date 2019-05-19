@@ -19,6 +19,7 @@ namespace SitecoreBlazorHosted.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<HttpClient>((s) => new HttpClient());
+            services.AddScoped<PoorManSessionState>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
 

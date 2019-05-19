@@ -59,6 +59,7 @@
 
             _blazorContext.SetContextLanguageAsync(_poorManSessionState.Language, _jsRuntimeCurrent);
             _blazorContext.SetCurrentRouteIdAsync(_poorManSessionState.RouteId, _jsRuntimeCurrent);
+            _blazorContext.SetCurrentNavigatedRoutesAsync(_poorManSessionState.NavigatedRoutes, _jsRuntimeCurrent);
 
         }
 
@@ -70,7 +71,6 @@
     protected override void OnInit()
     {
         _uriHelper.OnLocationChanged += OnLocationChanged;
-        //_layoutService.LanguageSwitch += LanguageSwitchHasHappened;
 
         Reload();
     }
@@ -110,21 +110,7 @@
         StateHasChanged();
     }
 
-    private async void ReloadForLanguageSwitch()
-    {
-        bool hasRouteError = Language.HasRouteError();
-
-        if (hasRouteError)
-        {
-            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
-        }
-
-
-        await _layoutService.LoadRoute(Language, hasRouteError);
-
-
-        StateHasChanged();
-    }
+   
 
     public void Dispose()
     {

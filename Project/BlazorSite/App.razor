@@ -12,7 +12,9 @@
 
 
 @implements Microsoft.AspNetCore.Components.IComponent
-
+@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState;
+@inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
+@inject IJSRuntime _jsRuntimeCurrent;
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
 @inject SitecoreItemService _sitecoreItemService;
 <!--
@@ -37,9 +39,12 @@
         RoutesData = _sitecoreItemService.ConfigRoutes();
     }
 
-    protected override void OnAfterRender()
+    protected override async  void OnAfterRender()
     {
         base.OnAfterRender();
+
+        _poorManSessionState.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+
 
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
@@ -50,7 +55,7 @@
 
         }
 
-    }
+}
 
 }
 

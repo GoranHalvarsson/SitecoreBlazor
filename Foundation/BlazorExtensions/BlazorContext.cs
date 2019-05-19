@@ -3,6 +3,7 @@
 using Microsoft.JSInterop;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions
@@ -51,7 +52,23 @@ namespace Foundation.BlazorExtensions
 
         }
 
-        
+
+        public Task<IList<ValueTuple<DateTime, string, Route>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
+        {
+            return _sessionStorage.GetItemAsync<IList<ValueTuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
+        }
+
+        public Task SetCurrentNavigatedRoutesAsync(IList<ValueTuple<DateTime, string, Route>> navigatedRoutes, IJSRuntime jsRuntime)
+        {
+
+            if (navigatedRoutes == null)
+                return null;
+
+            return _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
+
+        }
+
+
         //public Func<string, string> GetNavigationRootItemJson = (lang) => _sessionStorage.GetItem<string>("navigationRootItem_Json_" + lang);
 
         //internal Action<string, string> SetNavigationRootItemJson = (lang, json) => _sessionStorage.SetItem("navigationRootItem_Json_" + lang, json);

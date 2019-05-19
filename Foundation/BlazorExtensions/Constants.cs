@@ -13,6 +13,7 @@ namespace Foundation.BlazorExtensions
             {
                 internal const string ContextLanguage = "contextLanguage";
                 internal const string CurrentRouteId = "currentRouteId";
+                internal const string NavigatedRoutes = "navigatedRoutes";
 
             }
 

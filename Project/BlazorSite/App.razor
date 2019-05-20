@@ -43,7 +43,7 @@
     {
         base.OnAfterRender();
 
-        _poorManSessionState.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+       //_poorManSessionState.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
 
 
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());

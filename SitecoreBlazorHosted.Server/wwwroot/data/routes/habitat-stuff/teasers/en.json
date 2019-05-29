@@ -10,7 +10,12 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
-        "Fields": null,
+        "Fields": {
+          "DummyField": {
+            "Value": "",
+            "Type": "PlainTextField"
+          }
+        },
         "Placeholders": {
           "navbar-header": [
             {
@@ -31,7 +36,12 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {},
+              "Fields": {
+                "DummyField": {
+                  "Value": "",
+                  "Type": "PlainTextField"
+                }
+              },
               "Placeholders": {}
             }
           ],
@@ -40,7 +50,12 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
-              "Fields": null,
+              "Fields": {
+                "DummyField": {
+                  "Value": "",
+                  "Type": "PlainTextField"
+                }
+              },
               "Placeholders": {
                 "navbar-activity-item": [
                   {
@@ -92,7 +107,7 @@
       {
         "Assembly": "Feature.PageContent",
         "ComponentName": "Feature.PageContent.PageHeader.BlazorPageHeader",
-        "Name": "main",
+        "Name": "pageheader",
         "Fields": {
           "PageHeaderTitle": {
             "Value": "Teasers",

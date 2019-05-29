@@ -5,7 +5,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark top-row">
     <div class="container">
-        <BlazorPlaceholder Name="navbar-header">
+        <BlazorPlaceholder Name="navbar-header" RenderChild="true">
             @ChildContent
         </BlazorPlaceholder>
         <BlazorPlaceholder Name="navbar-menu">
@@ -23,5 +23,8 @@
 
     [Parameter]
     protected RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
 }

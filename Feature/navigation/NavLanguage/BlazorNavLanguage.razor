@@ -45,17 +45,7 @@ else
 
     private IList<Language> ValidLanguages { get; set; }
 
-
-
-
-    //protected override async Task OnParametersSetAsync()
-    //{
-
-    //    CurrentLanguage = await _blazorContext.GetContextLanguageAsync(_jsRuntimeCurrent);
-
-    //    ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
-
-    //}
+    
 
     protected override void OnParametersSet()
     {
@@ -106,14 +96,7 @@ else
         ToggleOpen();
         StateHasChanged();
 
-        _layoutService.SwitchLanguage(language);
 
-
-    }
-
-    private async Task HardReload()
-    {
-        await _interopService.HardReload(_jsRuntimeCurrent);
     }
 
 

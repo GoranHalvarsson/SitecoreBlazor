@@ -10,12 +10,7 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
-        "Fields": {
-          "DummyField": {
-            "Value": "",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": {
           "navbar-header": [
             {
@@ -36,12 +31,7 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {}
             }
           ],
@@ -50,12 +40,7 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {
                 "navbar-activity-item": [
                   {
@@ -96,7 +81,7 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.OneColumn",
         "Name": "OneColumn",
-        "Fields": null,
+        "Fields": {},
         "Placeholders": {
           "col-huge": [
             {
@@ -106,7 +91,7 @@
               "Fields": {
                 "HeaderImage": {
                   "Value": {
-                    "Src": "_content/Feature.PageContent/sc_logo.png",
+                    "Src": "images/sc_logo.png",
                     "Alt": "Sitecore",
                     "Width": null,
                     "Height": null

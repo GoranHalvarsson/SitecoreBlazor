@@ -1,12 +1,11 @@
 ﻿using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace SitecoreBlazorHosted.Shared
+namespace Foundation.BlazorExtensions
 {
-    public class PoorManSessionState
+    public class BlazorStateMachine
     {
 
         public int ValidCacheInHours { get; set; } = 12;
@@ -16,6 +15,10 @@ namespace SitecoreBlazorHosted.Shared
         public string RouteId { get; set; }
 
         public IList<ValueTuple<DateTime, string, Route>> NavigatedRoutes { get; set; }
+
+        public Route CurrentRoute { get; set; }
+
+        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
 
         public Route GetNavigatedRoute(string url)

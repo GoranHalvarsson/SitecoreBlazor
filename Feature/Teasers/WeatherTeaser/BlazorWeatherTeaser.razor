@@ -60,7 +60,7 @@
     protected override async Task OnParametersSetAsync()
     {
 
-        WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.WithBaseUrl_UglyHackForGithub(uriHelper));
+        WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.AddBaseUrl(uriHelper));
     }
 
 

@@ -12,7 +12,7 @@
 
 
 @implements Microsoft.AspNetCore.Components.IComponent
-@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState;
+@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine;
 @inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
 @inject IJSRuntime _jsRuntimeCurrent;
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
@@ -43,7 +43,7 @@
     {
         base.OnAfterRender();
 
-       //_poorManSessionState.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+       //_blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
 
 
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
@@ -51,7 +51,7 @@
 
         if (relative == "")
         {
-            _uriHelper.NavigateTo("en".WithBaseUrl_UglyHackForGithub(_uriHelper));
+            _uriHelper.NavigateTo("en".AddBaseUrl(_uriHelper));
 
         }
 

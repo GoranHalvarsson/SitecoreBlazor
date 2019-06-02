@@ -56,6 +56,22 @@ namespace Foundation.BlazorExtensions.Factories
         }
 
 
+        private Dictionary<string, BlazorField> CreateDummy()
+        {
+            SitecoreBlazorHosted.Shared.Models.BlazorField dummyField = new BlazorField()
+            {
+                Editable = null,
+                Value = "",
+                Type = FieldTypes.PlainTextField
+            };
+
+            return new Dictionary<string, BlazorField>()
+            {
+               { "DummyField",dummyField }
+            };
+            
+        }
+
         private IBlazorSitecoreField CreateComplexSitecoreField<T>(KeyValuePair<string, BlazorField> field) where T : class
         {
             if (field.Value == null)
@@ -128,7 +144,7 @@ namespace Foundation.BlazorExtensions.Factories
         private (List<IBlazorSitecoreField> model, bool hasModel) CreateComponentModel(Dictionary<string, BlazorField> fields)
         {
             if (fields == null || !fields.Any())
-                return (null, false);
+                fields = CreateDummy();
 
 
             List<IBlazorSitecoreField> list = new List<IBlazorSitecoreField>();

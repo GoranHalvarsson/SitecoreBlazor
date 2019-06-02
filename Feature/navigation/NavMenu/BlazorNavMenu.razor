@@ -37,7 +37,7 @@ else
                 if (item.Children == null || !item.Children.Any())
                 {
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="@item.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)" Match=NavLinkMatch.All>
+                        <NavLink class="nav-link" href="@item.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
                         </NavLink>
                     </li>
@@ -58,7 +58,7 @@ else
                                     continue;
                                 }
 
-                                <NavLink class="dropdown-item" href="@child.Url.WithBaseUrl_UglyHackForGithub(_uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
+                                <NavLink class="dropdown-item" href="@child.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
 
                             }
 

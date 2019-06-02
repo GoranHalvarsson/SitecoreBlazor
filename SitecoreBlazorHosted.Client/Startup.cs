@@ -1,4 +1,5 @@
 ﻿using Feature.Navigation.Extensions;
+using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,6 @@ namespace SitecoreBlazorHosted.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<HttpClient>((s) => new HttpClient());
-            services.AddScoped<PoorManSessionState>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();
 

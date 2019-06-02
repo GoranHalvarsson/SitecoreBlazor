@@ -1,18 +1,14 @@
 ﻿@using System.Net.Http
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared.Models
-@using Microsoft.JSInterop
+
 
 @implements Microsoft.AspNetCore.Components.IComponent
 
 @inject IUriHelper _uriHelper
-@inject SitecoreBlazorHosted.Shared.PoorManSessionState _poorManSessionState
-
-@inject Foundation.BlazorExtensions.BlazorContext _blazorContext
-@inject Foundation.BlazorExtensions.Services.InteropService _interopService;
+@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
-@inject Foundation.BlazorExtensions.Services.LayoutService _layoutService;
-@inject IJSRuntime _jsRuntimeCurrent;
+
 
 @if (ValidLanguages == null)
 {
@@ -31,7 +27,7 @@ else
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" onclick="@(() => SwitchLanguage(language))" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" onclick="@(() => ToggleOpen())" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -41,17 +37,22 @@ else
 
 @functions {
 
+
+    [Parameter]
+    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+
+
     private string CurrentLanguage { get; set; }
 
     private IList<Language> ValidLanguages { get; set; }
 
-    
+
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        CurrentLanguage = _poorManSessionState.Language;
+        CurrentLanguage = _blazorStateMachine.Language;
 
         ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
 
@@ -86,19 +87,6 @@ else
 
         return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
     }
-
-    private void SwitchLanguage(Language language)
-    {
-        _poorManSessionState.Language = language.TwoLetterCode;
-        CurrentLanguage = _poorManSessionState.Language;
-
-        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
-        ToggleOpen();
-        StateHasChanged();
-
-
-    }
-
 
 
 }

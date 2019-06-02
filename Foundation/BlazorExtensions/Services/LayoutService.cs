@@ -2,6 +2,7 @@
 using Foundation.BlazorExtensions.Factories;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,14 @@ namespace Foundation.BlazorExtensions.Services
         private readonly ComponentFactory _componentFactory;
         private readonly RouteService _routeService;
         private readonly IUriHelper _uriHelper;
-       
+        private readonly BlazorStateMachine _blazorStateMachine;
 
-        public LayoutService(ComponentFactory componentFactory, RouteService routeService, IUriHelper uriHelper)
+        public LayoutService(ComponentFactory componentFactory, RouteService routeService, IUriHelper uriHelper, BlazorStateMachine blazorStateMachine)
         {
             _componentFactory = componentFactory;
             _routeService = routeService;
             _uriHelper = uriHelper;
-       
+            _blazorStateMachine = blazorStateMachine;
         }
 
         public event EventHandler LanguageSwitch;
@@ -47,7 +48,7 @@ namespace Foundation.BlazorExtensions.Services
         public async Task LoadRoute(string language, bool hasRouteError)
         {
 
-            if (_routeService.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
+            if (_blazorStateMachine.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
             {
 
                 RenderedComponentsInDynamicPlaceholdersPerStateChanged = new List<string>();
@@ -72,7 +73,7 @@ namespace Foundation.BlazorExtensions.Services
                 try
                 {
 
-                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _routeService.CurrentPlaceholders?.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder).ToList();
+                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _blazorStateMachine.CurrentPlaceholders?.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder).ToList();
 
                     if (placeHoldersList == null)
                         return null;

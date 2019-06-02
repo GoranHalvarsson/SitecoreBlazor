@@ -2,12 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Feature.Navigation.Extensions;
+using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SitecoreBlazorHosted.Shared;
 using System.Net.Http;
 
 namespace SitecoreBlazorHosted.Server
@@ -19,7 +19,6 @@ namespace SitecoreBlazorHosted.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<HttpClient>((s) => new HttpClient());
-            services.AddScoped<PoorManSessionState>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
 

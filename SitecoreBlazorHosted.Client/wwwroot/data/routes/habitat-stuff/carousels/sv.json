@@ -10,12 +10,7 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
-        "Fields": {
-          "DummyField": {
-            "Value": "",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": {
           "navbar-header": [
             {
@@ -36,12 +31,7 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {}
             }
           ],
@@ -50,12 +40,7 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": null,
               "Placeholders": {
                 "navbar-activity-item": [
                   {
@@ -96,18 +81,13 @@
         "Assembly": "Feature.Navigation",
         "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
         "Name": "breadcrumb",
-        "Fields": {
-          "NavHeader": {
-            "Value": "Sitecore + Blazor",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": null
       },
       {
         "Assembly": "Feature.PageContent",
         "ComponentName": "Feature.PageContent.PageHeader.BlazorPageHeader",
-        "Name": "main",
+        "Name": "pageheader",
         "Fields": {
           "PageHeaderTitle": {
             "Value": "Karuseller",
@@ -134,7 +114,7 @@
                         },
                         "MediaThumbnail": {
                           "value": {
-                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Src": "images/Habitat-004-wide.jpg",
                             "Alt": "Man using Laptop",
                             "Width": "1920",
                             "Height": "660"
@@ -143,7 +123,7 @@
                         },
                         "MediaImage": {
                           "Value": {
-                            "Src": "_content/Feature.PageContent/Habitat-004-wide.jpg",
+                            "Src": "images/Habitat-004-wide.jpg",
                             "Alt": "Man using Laptop",
                             "Width": "1920",
                             "Height": "660"
@@ -166,7 +146,7 @@
                         },
                         "MediaThumbnail": {
                           "value": {
-                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Src": "images/Habitat-007-wide.jpg",
                             "Alt": "Woman on Phone",
                             "Width": "1920",
                             "Height": "660"
@@ -175,7 +155,7 @@
                         },
                         "MediaImage": {
                           "Value": {
-                            "Src": "_content/Feature.PageContent/Habitat-007-wide.jpg",
+                            "Src": "images/Habitat-007-wide.jpg",
                             "Alt": "Woman on Phone",
                             "Width": "1920",
                             "Height": "660"

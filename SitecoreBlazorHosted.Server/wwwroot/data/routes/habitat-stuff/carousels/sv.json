@@ -10,12 +10,7 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
-        "Fields": {
-          "DummyField": {
-            "Value": "",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": {
           "navbar-header": [
             {
@@ -36,12 +31,7 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {}
             }
           ],
@@ -91,12 +81,7 @@
         "Assembly": "Feature.Navigation",
         "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
         "Name": "breadcrumb",
-        "Fields": {
-          "NavHeader": {
-            "Value": "Sitecore + Blazor",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": null
       },
       {

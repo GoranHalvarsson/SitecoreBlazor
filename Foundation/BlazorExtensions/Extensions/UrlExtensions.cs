@@ -8,7 +8,7 @@ namespace Foundation.BlazorExtensions.Extensions
     public static class UrlExtensions
     {
 
-        public static string WithBaseUrl_UglyHackForGithub(this string url, IUriHelper uriHelper)
+        public static string AddBaseUrl(this string url, IUriHelper uriHelper)
         {
 
             if (url.StartsWith("/"))

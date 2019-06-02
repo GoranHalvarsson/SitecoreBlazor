@@ -10,12 +10,7 @@
         "Assembly": "Project.BlazorSite",
         "ComponentName": "Project.BlazorSite.Components.Sublayouts.Navbar",
         "Name": "navbar",
-        "Fields": {
-          "DummyField": {
-            "Value": "",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": {
           "navbar-header": [
             {
@@ -36,12 +31,7 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {}
             }
           ],
@@ -50,12 +40,7 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
               "Name": "navbarActivity",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {
                 "navbar-activity-item": [
                   {
@@ -96,18 +81,13 @@
         "Assembly": "Feature.Navigation",
         "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
         "Name": "breadcrumb",
-        "Fields": {
-          "NavHeader": {
-            "Value": "Sitecore + Blazor",
-            "Type": "PlainTextField"
-          }
-        },
+        "Fields": {},
         "Placeholders": null
       },
       {
         "Assembly": "Feature.PageContent",
         "ComponentName": "Feature.PageContent.PageHeader.BlazorPageHeader",
-        "Name": "main",
+        "Name": "pageheader",
         "Fields": {
           "PageHeaderTitle": {
             "Value": "Puffar",
@@ -120,12 +100,7 @@
               "Assembly": "Project.BlazorSite",
               "ComponentName": "Project.BlazorSite.Components.Sublayouts.TwoColumn6_6",
               "Name": "TwoColumn6_6",
-              "Fields": {
-                "DummyField": {
-                  "Value": "",
-                  "Type": "PlainTextField"
-                }
-              },
+              "Fields": {},
               "Placeholders": {
                 "col-wide-1": [
                   {

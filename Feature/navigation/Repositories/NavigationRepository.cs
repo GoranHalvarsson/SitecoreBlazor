@@ -15,13 +15,13 @@ namespace Feature.Navigation.Repositories
     {
         private readonly BlazorContext _blazorContext;
         private readonly SitecoreItemService _sitecoreItemService;
-        private readonly PoorManSessionState _poorManSessionState;
+        private readonly BlazorStateMachine _blazorStateMachine;
 
-        public NavigationRepository(BlazorContext blazorContext, SitecoreItemService sitecoreItemService, PoorManSessionState poorManSessionState)
+        public NavigationRepository(BlazorContext blazorContext, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
         {
             _blazorContext = blazorContext;
             _sitecoreItemService = sitecoreItemService;
-            _poorManSessionState = poorManSessionState;
+            _blazorStateMachine = blazorStateMachine;
         }
 
         public async Task<List<NavigationItem>> GetBreadcrumb(IJSRuntime jsRuntime)
@@ -45,7 +45,7 @@ namespace Feature.Navigation.Repositories
         {
 
 
-            var routeId = _poorManSessionState.RouteId;// await _blazorContext.GetCurrentRouteIdAsync(jsRuntime); //"dac24edd-44fb-42ef-9ecd-1e8daf706386"; //
+            var routeId = _blazorStateMachine.RouteId;// await _blazorContext.GetCurrentRouteIdAsync(jsRuntime); //"dac24edd-44fb-42ef-9ecd-1e8daf706386"; //
 
             var menuItems = new List<NavigationItem>();
 
@@ -113,7 +113,7 @@ namespace Feature.Navigation.Repositories
 
         public  Task<List<NavigationItem>> GetMenu(IJSRuntime jsRuntime)
         {
-            string currentLanguage = _poorManSessionState.Language; //await _blazorContext.GetContextLanguageAsync(jsRuntime);
+            string currentLanguage = _blazorStateMachine.Language; //await _blazorContext.GetContextLanguageAsync(jsRuntime);
             Console.WriteLine("GetMenu " + currentLanguage);
             ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
 

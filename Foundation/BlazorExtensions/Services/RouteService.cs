@@ -16,18 +16,20 @@ namespace Foundation.BlazorExtensions.Services
         private readonly RestService _restService;
         private readonly IUriHelper _uriHelper;
         private readonly SitecoreItemService _sitecoreItemService;
-        private readonly PoorManSessionState _poorManSessionState;
+        private readonly BlazorStateMachine _blazorStateMachine;
 
-        public RouteService(RestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, PoorManSessionState poorManSessionState)
+        public RouteService(RestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
         {
             _restService = restService;
             _uriHelper = uriHelper;
             _sitecoreItemService = sitecoreItemService;
-            _poorManSessionState = poorManSessionState;
+            _blazorStateMachine = blazorStateMachine;
         }
 
+        [Obsolete]
         private Route CurrentRoute { get; set; }
 
+        [Obsolete]
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
        
@@ -64,12 +66,12 @@ namespace Foundation.BlazorExtensions.Services
         {
             string relativeUrl = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
-            if (string.IsNullOrWhiteSpace(CurrentRoute?.ItemLanguage))
+            if (string.IsNullOrWhiteSpace(_blazorStateMachine.CurrentRoute?.ItemLanguage))
                 return (false, $"/{relativeUrl}");
 
-            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(CurrentRoute.ItemLanguage);
+            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(_blazorStateMachine.CurrentRoute.ItemLanguage);
 
-            return CurrentRoute != null && rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl && item.Id == CurrentRoute.Id)
+            return _blazorStateMachine.CurrentRoute != null && rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl && item.Id == _blazorStateMachine.CurrentRoute.Id)
               ? (true, $"/{relativeUrl}")
               : (false, $"/{relativeUrl}");
         }
@@ -78,24 +80,24 @@ namespace Foundation.BlazorExtensions.Services
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
-            Route routeExists = _poorManSessionState.GetNavigatedRoute(routeUrl);
+            Route routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
-            if (routeExists == null) { 
-                this.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
-                _poorManSessionState.AddNavigatedRoute(routeUrl, this.CurrentRoute);
+            if (routeExists == null) {
+                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
+                _blazorStateMachine.AddNavigatedRoute(routeUrl, _blazorStateMachine.CurrentRoute);
             }
             else
             {
-                this.CurrentRoute = routeExists;
+                _blazorStateMachine.CurrentRoute = routeExists;
 
             }
 
-            this.CurrentRoute.Url = routeUrl;
+            _blazorStateMachine.CurrentRoute.Url = routeUrl;
 
-            this.CurrentPlaceholders = CurrentRoute.Placeholders.FlattenThePlaceholders();
+            _blazorStateMachine.CurrentPlaceholders = _blazorStateMachine.CurrentRoute.Placeholders.FlattenThePlaceholders();
 
-            _poorManSessionState.Language = language;
-            _poorManSessionState.RouteId = CurrentRoute.Id;
+            _blazorStateMachine.Language = language;
+            _blazorStateMachine.RouteId = _blazorStateMachine.CurrentRoute.Id;
            
         }
 

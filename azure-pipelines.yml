@@ -1,5 +1,12 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+
+pr:
+  branches:
+    include:
+    - '*'
 
 pool:
   vmImage: 'vs2017-win2016'

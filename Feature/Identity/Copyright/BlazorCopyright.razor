@@ -7,7 +7,7 @@
     @FieldsModel.PlainText("Text").Value.HtmlDecode() <a href="@FieldsModel.Link("Link").Value.Href" target="@FieldsModel.Link("Link").Value.Target" title="@FieldsModel.Link("Link").Value.Text"><img alt="@FieldsModel.Image("Image").Value.Alt" class="footer-image" src="@FieldsModel.Image("Image").Value.Src"></a>
 </div>
 
-@functions{
+@code{
     [Parameter]
     List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 

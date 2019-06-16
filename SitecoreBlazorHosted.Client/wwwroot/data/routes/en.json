@@ -3,7 +3,7 @@
   "Id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
   "DisplayName": null,
   "ItemLanguage": "en",
-  "Fields": null,
+  "Fields": {},
   "Placeholders": {
     "navbar": [
       {
@@ -23,7 +23,7 @@
                   "Type": "PlainTextField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ],
           "navbar-menu": [
@@ -47,8 +47,8 @@
                     "Assembly": "Feature.Navigation",
                     "ComponentName": "Feature.Navigation.NavLanguage.BlazorNavLanguage",
                     "Name": "navLanguage",
-                    "Fields": null,
-                    "Placeholders": null
+                    "Fields": {},
+                    "Placeholders": {}
                   }
                 ]
               }
@@ -70,7 +70,7 @@
                   "Type": "LinkField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ]
         }
@@ -143,7 +143,7 @@
             "Type": "LinkField"
           }
         },
-        "Placeholders": null
+        "Placeholders": {}
       }
     ]
   }

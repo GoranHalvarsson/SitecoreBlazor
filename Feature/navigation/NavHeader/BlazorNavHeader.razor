@@ -14,7 +14,7 @@
 <a class="navbar-brand" href="@CurrentLanguage.AddBaseUrl(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
 
 
-@functions {
+@code{
 
     [Parameter]
     List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }

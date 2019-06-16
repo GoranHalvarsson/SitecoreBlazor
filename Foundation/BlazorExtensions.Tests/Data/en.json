@@ -1,8 +1,8 @@
 {
-  "Name": "weather",
-  "Id": "a2c07e48-9c6a-466e-b55d-baac62e4dfc7",
-  "DisplayName": null,
-  "ItemLanguage": "en",
+  "name": "home",
+  "id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+  "displayName": "mamma",
+  "itemLanguage": "en",
   "Fields": {},
   "Placeholders": {
     "navbar": [
@@ -78,69 +78,37 @@
     ],
     "main": [
       {
-        "Assembly": "Feature.Navigation",
-        "ComponentName": "Feature.Navigation.NavBreadcrumb.BlazorNavBreadcrumb",
-        "Name": "breadcrumb",
+        "Assembly": "Project.BlazorSite",
+        "ComponentName": "Project.BlazorSite.Components.Sublayouts.OneColumn",
+        "Name": "OneColumn",
         "Fields": {},
-        "Placeholders": {}
-      },
-      {
-        "Assembly": "Feature.PageContent",
-        "ComponentName": "Feature.PageContent.PageHeader.BlazorPageHeader",
-        "Name": "pageheader",
-        "Fields": {
-          "PageHeaderTitle": {
-            "Value": "Weather forecast",
-            "Type": "PlainTextField"
-          }
-        },
         "Placeholders": {
-          "main-body": [
+          "col-huge": [
             {
-              "Assembly": "Project.BlazorSite",
-              "ComponentName": "Project.BlazorSite.Components.Sublayouts.OneColumn",
-              "Name": "OneColumn",
-              "Fields": {},
-              "Placeholders": {
-                "col-huge": [
-                  {
-                    "Assembly": "Feature.Teasers",
-                    "ComponentName": "Feature.Teasers.WeatherTeaser.BlazorWeatherTeaser",
-                    "Name": "WeatherTeaser",
-                    "Fields": {
-                      "WeatherTeaserHeader": {
-                        "Value": "Weather teaser",
-                        "Type": "PlainTextField"
-                      },
-                      "WeatherTeaserText": {
-                        "Value": "This component demonstrates fetching data from the server.",
-                        "Type": "PlainTextField"
-                      },
-                      "ColumnDate": {
-                        "Value": "Date",
-                        "Type": "PlainTextField"
-                      },
-                      "ColumnTempC": {
-                        "Value": "Temp. (C)",
-                        "Type": "PlainTextField"
-                      },
-                      "ColumnTempF": {
-                        "Value": "Temp. (F)",
-                        "Type": "PlainTextField"
-                      },
-                      "ColumnSummary": {
-                        "Value": "Summary",
-                        "Type": "PlainTextField"
-                      },
-                      "RestUrl": {
-                        "Value": "/data/weather.json",
-                        "Type": "PlainTextField"
-                      }
-                    },
-                    "Placeholders": {}
-                  }
-                ]
-              }
+              "Assembly": "Feature.PageContent",
+              "ComponentName": "Feature.PageContent.PageHeaderDescription.BlazorPageHeaderDescription",
+              "Name": "pageHeaderDescription",
+              "Fields": {
+                "HeaderImage": {
+                  "Value": {
+                    "Src": "images/sc_logo.png",
+                    "Alt": "Sitecore",
+                    "Width": null,
+                    "Height": null
+                  },
+                  "Type": "ImageField"
+                },
+                "Title": {
+                  "Value": "Sitecore Experience Platform + BLAZOR 3.0.0-preview5-19227-01",
+                  "Type": "PlainTextField"
+                },
+                "Text": {
+                  "Value": "<p>From a single connected platform that also integrates with other customer-facing platforms, to a single view of the customer in a big data marketing repository, to completely eliminating much of the complexity that has previously held marketers back, the latest version of Sitecore makes customer experience highly achievable. Learn how the latest version of Sitecore gives marketers the complete data, integrated tools, and automation capabilities to engage customers throughout an iterative lifecycle – the technology foundation absolutely necessary to win customers for life.</p><p>For further information, please go to the <a href=\"https://doc.sitecore.net/\" target=\"_blank\" title=\"Sitecore Documentation site\">Sitecore Documentation site</a></p>",
+                  "Type": "HtmlField"
+                }
+
+              },
+              "Placeholders": {}
             }
           ]
         }

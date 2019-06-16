@@ -28,7 +28,7 @@
 
 
 
-@functions
+@code
     {
 
     private RouterDataRoot RoutesData = null;
@@ -39,7 +39,7 @@
         RoutesData = _sitecoreItemService.ConfigRoutes();
     }
 
-    protected override async  void OnAfterRender()
+    protected override void OnAfterRender()
     {
         base.OnAfterRender();
 

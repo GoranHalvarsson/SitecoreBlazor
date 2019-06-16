@@ -8,7 +8,7 @@
 @implements IDisposable
 
 
-<div class="carousel slide" onmouseout="@OnMouseOut" onmouseover="@OnMouseOver">
+<div class="carousel slide" @onmouseout="@OnMouseOut" @onmouseover="@OnMouseOver">
 
     <ol class="carousel-indicators">
         @for (var i = 0; i < FieldsModel.MultiList("MediaSelector").Value.Values.Count; i++)
@@ -16,7 +16,7 @@
             var local_i = i;
 
 
-            <li class="@IndicatorClassName(i)" onclick="@(evt => NavCarousel(evt,local_i))"></li>
+            <li class="@IndicatorClassName(i)" @onclick="@(evt => NavCarousel(evt,local_i))"></li>
         }
     </ol>
 
@@ -40,18 +40,18 @@
         }
     </div>
 
-    <a class="carousel-control-prev" role="button" onclick="@(() => NavCarousel(CarouselDirection.Previous))">
+    <a class="carousel-control-prev" role="button" @onclick="@(() => NavCarousel(CarouselDirection.Previous))">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" role="button" onclick="@(() => NavCarousel(CarouselDirection.Next))">
+    <a class="carousel-control-next" role="button" @onclick="@(() => NavCarousel(CarouselDirection.Next))">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 
 </div>
 
-@functions {
+@code{
 
     [Parameter]
     List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }

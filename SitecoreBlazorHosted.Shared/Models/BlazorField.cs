@@ -9,7 +9,7 @@ namespace SitecoreBlazorHosted.Shared.Models
     {
         public Object Value { get; set; }
 
-        public List<Object> Values { get; set; }
+        public List<BlazorFieldComplex> Values { get; set; }
 
         public string Editable { get; set; }
 

@@ -7,6 +7,7 @@ using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
@@ -83,7 +84,9 @@ namespace Foundation.BlazorExtensions.Services
             Route routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
             if (routeExists == null) {
-                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethod<Route>(routeUrl);
+                string test = await _restService.ExecuteRestMethod(routeUrl);
+
+                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<Route>(routeUrl);
                 _blazorStateMachine.AddNavigatedRoute(routeUrl, _blazorStateMachine.CurrentRoute);
             }
             else

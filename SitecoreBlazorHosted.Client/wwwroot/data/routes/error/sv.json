@@ -3,7 +3,7 @@
   "Id": "error",
   "DisplayName": null,
   "ItemLanguage": "sv",
-  "Fields": null,
+  "Fields": {},
   "Placeholders": {
     "navbar": [
       {
@@ -23,7 +23,7 @@
                   "Type": "PlainTextField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ],
           "navbar-menu": [
@@ -47,8 +47,8 @@
                     "Assembly": "Feature.Navigation",
                     "ComponentName": "Feature.Navigation.NavLanguage.BlazorNavLanguage",
                     "Name": "navLanguage",
-                    "Fields": null,
-                    "Placeholders": null
+                    "Fields": {},
+                    "Placeholders": {}
                   }
                 ]
               }
@@ -70,7 +70,7 @@
                   "Type": "LinkField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ]
         }
@@ -133,7 +133,7 @@
             "Type": "LinkField"
           }
         },
-        "Placeholders": null
+        "Placeholders": {}
       }
     ]
   }

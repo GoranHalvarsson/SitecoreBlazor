@@ -44,7 +44,7 @@
 </div>
 
 
-@functions
+@code
 {
 
     [Parameter]
@@ -77,7 +77,7 @@
 
    
 
-    private void OnLocationChanged(object sender, string location) => Reload();
+    private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
 
     private async void Reload()
     {

@@ -20,14 +20,14 @@ else
 
 
     <li class="dropdown">
-        <button type="button" class="btn  btn-light  dropdown-toggle " onclick="@(() => ToggleOpen())" aria-haspopup="true">
+        <button type="button" class="btn  btn-light  dropdown-toggle " @onclick="@(() => ToggleOpen())" aria-haspopup="true">
             @_languageService.Get(CurrentLanguage)?.NativeName
         </button>
         <div class="@ClassName">
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" onclick="@(() => ToggleOpen())" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" @onclick="@(() => ToggleOpen())" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -35,7 +35,7 @@ else
 
 }
 
-@functions {
+@code{
 
 
     [Parameter]

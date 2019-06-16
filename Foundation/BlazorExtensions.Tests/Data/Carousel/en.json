@@ -2,7 +2,7 @@
   "Name": "carousels",
   "Id": "8a80477e-7cb4-4cee-a035-b48ac118abe8",
   "DisplayName": null,
-  "ItemLanguage": "sv",
+  "ItemLanguage": "en",
   "Fields": {},
   "Placeholders": {
     "navbar": [
@@ -30,7 +30,6 @@
             {
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
-              "Name": "navbarMenu",
               "Fields": {},
               "Placeholders": {}
             }
@@ -90,7 +89,7 @@
         "Name": "pageheader",
         "Fields": {
           "PageHeaderTitle": {
-            "Value": "Karuseller",
+            "Value": "Carousels",
             "Type": "PlainTextField"
           }
         },
@@ -109,11 +108,11 @@
                       "Url": "http://habitat.sitecoreinblazor/Global/Media/Simplicity",
                       "Fields": {
                         "MediaTitle": {
-                          "Value": "Enkelhet",
+                          "Value": "Simplicity",
                           "Type": "PlainTextField"
                         },
                         "MediaThumbnail": {
-                          "value": {
+                          "Value": {
                             "Src": "images/Habitat-004-wide.jpg",
                             "Alt": "Man using Laptop",
                             "Width": "1920",
@@ -131,7 +130,7 @@
                           "Type": "ImageField"
                         },
                         "MediaDescription": {
-                          "Value": "En konsekvent och uppt&auml;ckbar arkitektur",
+                          "Value": "A consistent and discoverable architecture",
                           "Type": "PlainTextField"
                         }
                       }
@@ -141,11 +140,11 @@
                       "Url": "http://habitat.sitecoreinblazor/Global/Media/Flexibility",
                       "Fields": {
                         "MediaTitle": {
-                          "Value": "Flexibilitet",
+                          "Value": "Flexibility",
                           "Type": "PlainTextField"
                         },
                         "MediaThumbnail": {
-                          "value": {
+                          "Value": {
                             "Src": "images/Habitat-007-wide.jpg",
                             "Alt": "Woman on Phone",
                             "Width": "1920",
@@ -163,7 +162,7 @@
                           "Type": "ImageField"
                         },
                         "MediaDescription": {
-                          "Value": "&Auml;ndra och l&auml;gg till snabbt och utan oro",
+                          "Value": "Change and add quickly and without worry",
                           "Type": "PlainTextField"
                         }
                       }
@@ -186,7 +185,7 @@
         "Name": "footer",
         "Fields": {
           "Text": {
-            "Value": "Ser du inte ljuset, nesse lelle? G&aring; med i ",
+            "Value": "Not seeing the light? Join the ",
             "Type": "PlainTextField"
           },
           "Image": {
@@ -201,7 +200,7 @@
           "Link": {
             "Value": {
               "Href": "http://blazor.net",
-              "Text": "Blazor &auml;r sanningen",
+              "Text": "Blazor will rock your world",
               "Target": "_blank",
               "Class": "ml-md-auto"
             },

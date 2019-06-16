@@ -4,6 +4,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.JSInterop;
     using System;
+    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
     public abstract class StorageBase
@@ -27,7 +28,7 @@
         public async Task<T> GetItemAsync<T>(string key,IJSRuntime jsRuntime)
         {
             var json = await GetItemAsync(key,jsRuntime);
-            return string.IsNullOrWhiteSpace(json) ? default(T) : Json.Deserialize<T>(json);
+            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Parse<T>(json);
         }
 
         
@@ -55,7 +56,7 @@
 
         public Task SetItemAsync(string key, object data,IJSRuntime jsRuntime)
         {
-            return SetItemAsync(key, Json.Serialize(data),jsRuntime);
+            return SetItemAsync(key, JsonSerializer.ToString(data),jsRuntime);
         }
 
        

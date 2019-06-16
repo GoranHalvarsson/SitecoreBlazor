@@ -3,7 +3,7 @@
   "Id": "f30c4470-07d4-4652-9cb6-bf8ac43d1694",
   "DisplayName": null,
   "ItemLanguage": "en",
-  "Fields": null,
+  "Fields": {},
   "Placeholders": {
     "navbar": [
       {
@@ -23,7 +23,7 @@
                   "Type": "PlainTextField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ],
           "navbar-menu": [
@@ -47,8 +47,8 @@
                     "Assembly": "Feature.Navigation",
                     "ComponentName": "Feature.Navigation.NavLanguage.BlazorNavLanguage",
                     "Name": "navLanguage",
-                    "Fields": null,
-                    "Placeholders": null
+                    "Fields": {},
+                    "Placeholders": {}
                   }
                 ]
               }
@@ -70,7 +70,7 @@
                   "Type": "LinkField"
                 }
               },
-              "Placeholders": null
+              "Placeholders": {}
             }
           ]
         }
@@ -87,7 +87,7 @@
             "Type": "PlainTextField"
           }
         },
-        "Placeholders": null
+        "Placeholders": {}
       },
       {
         "Assembly": "Feature.PageContent",
@@ -169,7 +169,7 @@
             "Type": "LinkField"
           }
         },
-        "Placeholders": null
+        "Placeholders": {}
       }
     ]
   }

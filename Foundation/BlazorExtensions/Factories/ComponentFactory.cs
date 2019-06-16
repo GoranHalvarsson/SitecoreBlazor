@@ -5,6 +5,7 @@ using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Foundation.BlazorExtensions.Factories
 {
@@ -26,11 +27,11 @@ namespace Foundation.BlazorExtensions.Factories
                 {
                     case FieldTypes.HtmlField:
                     case FieldTypes.PlainTextField:
-                        fieldValue = sitecoreField.Value.Value as T;
+                        fieldValue = sitecoreField.Value.Value.ToString() as T;
                         break;
 
                     default:
-                        fieldValue = Json.Deserialize<T>(sitecoreField.Value.Value.ToString());
+                        fieldValue = JsonSerializer.Parse<T>(sitecoreField.Value.Value.ToString());
                         break;
                 }
 
@@ -47,7 +48,7 @@ namespace Foundation.BlazorExtensions.Factories
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating field {fieldValue?.GetType()}. Error { ex.Message}");
+                Console.WriteLine($"Error creating field {sitecoreField.Value.Value}. Error { ex.Message}");
             }
 
             return field;
@@ -98,9 +99,17 @@ namespace Foundation.BlazorExtensions.Factories
                             if (item == null || string.IsNullOrWhiteSpace(item.ToString()))
                                 continue;
 
-                            BlazorFieldValueMultiListItem multiListItem = Json.Deserialize<BlazorFieldValueMultiListItem>(item.ToString());
+                            BlazorFieldValueMultiListItem multiListItem = new BlazorFieldValueMultiListItem() {
+                                Id = item.Id,
+                                Url = item.Url
+                            }; 
+                            
+                            
+                            //JsonSerializer.Parse<BlazorFieldValueMultiListItem>(item.ToString());
+                           
 
-                            var model = CreateComponentModel(multiListItem.Fields);
+
+                            var model = CreateComponentModel(item.Fields);
 
                             if (!model.hasModel)
                                 continue;

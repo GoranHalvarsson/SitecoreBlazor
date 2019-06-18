@@ -10,7 +10,7 @@ For those still wondering what BLAZOR is, check out this great post – [WHAT IS
 
 This repo allows you to run Sitecore app's client-side. We are also following the [HELIX concept](http://helix.sitecore.net/), the clean way.
 
-Demo: https://visionsinblazor.z16.web.core.windows.net/
+Demo: https://visionsblazor.z16.web.core.windows.net
 
 ## Setup BLAZOR
 To get started with Blazor and build your first Blazor web app check out [Blazor's getting started guide](https://blazor.net/docs/get-started.html).

@@ -14,7 +14,7 @@ namespace Foundation.BlazorExtensions
 
         public string RouteId { get; set; }
 
-        public IList<ValueTuple<DateTime, string, Route>> NavigatedRoutes { get; set; }
+        public IList<Tuple<DateTime, string, Route>> NavigatedRoutes { get; set; }
 
         public Route CurrentRoute { get; set; }
 
@@ -34,14 +34,14 @@ namespace Foundation.BlazorExtensions
         public void AddNavigatedRoute(string url, Route routeToAdd)
         {
             if (NavigatedRoutes == null)
-                NavigatedRoutes = new List<ValueTuple<DateTime, string, Route>>();
+                NavigatedRoutes = new List<Tuple<DateTime, string, Route>>();
 
-            (DateTime, string, Route) foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
+            Tuple<DateTime, string, Route> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
 
-            if (foundItem.Item3 != null)
+            if (foundItem?.Item3 != null)
                 return;
 
-            NavigatedRoutes.Add(new ValueTuple<DateTime, string, Route>(DateTime.Now, url, routeToAdd));
+            NavigatedRoutes.Add(new Tuple<DateTime, string, Route>(DateTime.Now, url, routeToAdd));
         }
 
         public void RemoveNavigatedRoute(string url, Route routeToAdd)
@@ -49,9 +49,9 @@ namespace Foundation.BlazorExtensions
             if (NavigatedRoutes == null)
                 return;
 
-            (DateTime, string, Route) foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
+            Tuple<DateTime, string, Route> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
 
-            if (foundItem.Item3 == null)
+            if (foundItem?.Item3 == null)
                 return;
 
             NavigatedRoutes.Remove(foundItem);

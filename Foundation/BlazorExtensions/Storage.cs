@@ -10,10 +10,17 @@
     public abstract class StorageBase
     {
         private readonly string _fullTypeName;
-        
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
+
         protected internal StorageBase()
         {   
             _fullTypeName = GetType().FullName.Replace('.', '_');
+            _jsonSerializerOptions = new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true,
+                AllowTrailingCommas = true,
+                PropertyNameCaseInsensitive = true
+            };
         }
 
         public Task ClearAsync(IJSRuntime jsRuntime) => jsRuntime.InvokeAsync<object>($"{_fullTypeName}.Clear");
@@ -28,7 +35,7 @@
         public async Task<T> GetItemAsync<T>(string key,IJSRuntime jsRuntime)
         {
             var json = await GetItemAsync(key,jsRuntime);
-            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Parse<T>(json);
+            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Parse<T>(json, _jsonSerializerOptions);
         }
 
         
@@ -54,9 +61,9 @@
         }
         
 
-        public Task SetItemAsync(string key, object data,IJSRuntime jsRuntime)
+        public Task SetItemAsync<T>(string key, T data,IJSRuntime jsRuntime)
         {
-            return SetItemAsync(key, JsonSerializer.ToString(data),jsRuntime);
+            return SetItemAsync(key, JsonSerializer.ToString<T>(data, _jsonSerializerOptions),jsRuntime);
         }
 
        

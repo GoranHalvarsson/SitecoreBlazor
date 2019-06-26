@@ -6,11 +6,13 @@
 
 > [Let’s get going, we are gone hack this 3.5 inch floppy disc to the year 2005](https://www.youtube.com/watch?v=KEkrWRHCDQU&amp;feature=youtu.be&amp;t=66)
 
-For those still wondering what BLAZOR is, check out this great post – [WHAT IS BLAZOR?](https://learn-blazor.com/getting-started/what-is-blazor/ )
+For those still wondering what BLAZOR is, check out the [Introduction to Blazor, from Microsoft](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-3.0 )
+
+Want to find out more about blazor? Check out this great site, [AWESOME BLAZOR - A collection of awesome Blazor resources](https://github.com/AdrienTorris/awesome-blazor/ ). 
 
 This repo allows you to run Sitecore app's client-side. We are also following the [HELIX concept](http://helix.sitecore.net/), the clean way.
 
-Demo: https://visionsblazor.z16.web.core.windows.net
+Demo/live: https://visionsblazor.z16.web.core.windows.net
 
 ## Setup BLAZOR
 To get started with Blazor and build your first Blazor web app check out [Blazor's getting started guide](https://blazor.net/docs/get-started.html).

@@ -6,7 +6,13 @@
     <title>Sitecore Blazor client-side</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon"
+          type="image/png"
+          href="/icons/icon.png">
     <link href="css/site.css" rel="stylesheet" />
+    <link rel="manifest" href="manifest.json">
+    <link rel="script" href="service-worker.js">
+    <meta name="theme-color" content="#052767" />
 </head>
 <body>
     <app><img src="css/SBlazor.svg" /></app>
@@ -15,5 +21,13 @@
     <!--<script type="text/javascript" src="blazor.polyfill.min.js"></script>-->
 
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function () {
+                    console.log('Service Worker Registered');
+                });
+        }
+    </script>
 </body>
 </html>

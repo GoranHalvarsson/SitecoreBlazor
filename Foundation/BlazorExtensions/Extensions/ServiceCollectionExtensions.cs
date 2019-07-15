@@ -23,7 +23,6 @@ namespace Foundation.BlazorExtensions.Extensions
             serviceCollection.AddScoped<RouteService>();
             serviceCollection.AddScoped<LayoutService>();
             serviceCollection.AddScoped<ComponentFactory>();
-            serviceCollection.AddScoped<RestService>();
             serviceCollection.AddScoped<LanguageService>();
             serviceCollection.AddScoped<BlazorStateMachine>();
 

@@ -38,15 +38,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorExtensions", "BlazorE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{38AAD945-9531-4D71-A8B8-31708BDB6A64}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SitecoreBlazorHosted.Electron", "SitecoreBlazorHosted.Electron\SitecoreBlazorHosted.Electron.csproj", "{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF2F51D6-EBB9-4687-8A83-B6936DEB9777}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BlazorClient|Any CPU = BlazorClient|Any CPU
+		BlazorElectron|Any CPU = BlazorElectron|Any CPU
 		BlazorServer|Any CPU = BlazorServer|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
+		{68D208ED-3786-4A9B-AEDD-814AE315B055}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -55,6 +64,7 @@ Global
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.Release|Any CPU.Build.0 = Release|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -62,6 +72,8 @@ Global
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{5A780544-E47E-4754-8B33-899E92280B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -70,6 +82,8 @@ Global
 		{5A780544-E47E-4754-8B33-899E92280B7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -78,6 +92,8 @@ Global
 		{366BF286-D763-471B-8F86-8F3700D8E2D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{993D9697-A319-4F76-91EB-E12908BF8751}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{993D9697-A319-4F76-91EB-E12908BF8751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,6 +102,8 @@ Global
 		{993D9697-A319-4F76-91EB-E12908BF8751}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -94,6 +112,8 @@ Global
 		{84454DD2-D745-41E0-9061-5C4508DE9512}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -102,6 +122,8 @@ Global
 		{E82CBD32-29D2-47DD-A684-26C94BBD741C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4979057-2940-424F-B247-71B60DC379FD}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{D4979057-2940-424F-B247-71B60DC379FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -110,6 +132,8 @@ Global
 		{D4979057-2940-424F-B247-71B60DC379FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
+		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -118,12 +142,22 @@ Global
 		{EB1345A2-C6CD-405E-BF69-7941A633C0A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorClient|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorClient|Any CPU.Build.0 = Debug|Any CPU
+		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.BlazorServer|Any CPU.Build.0 = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorClient|Any CPU.ActiveCfg = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

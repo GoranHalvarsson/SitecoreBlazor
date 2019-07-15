@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
 {
-    public class RestService
+    public class RestService : IRestService
     {
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonSerializerOptions;

@@ -4,6 +4,7 @@
 using Feature.Navigation.Extensions;
 using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Extensions;
+using Foundation.BlazorExtensions.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,7 @@ namespace SitecoreBlazorHosted.Server
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
+            services.AddScoped<IRestService, RestService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();
 

@@ -14,12 +14,12 @@ namespace Foundation.BlazorExtensions.Services
 {
     public class RouteService
     {
-        private readonly RestService _restService;
+        private readonly IRestService _restService;
         private readonly IUriHelper _uriHelper;
         private readonly SitecoreItemService _sitecoreItemService;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public RouteService(RestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
+        public RouteService(IRestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
         {
             _restService = restService;
             _uriHelper = uriHelper;

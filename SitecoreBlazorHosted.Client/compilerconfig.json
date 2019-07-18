@@ -1,6 +1,6 @@
 [
   {
     "inputFile": "Sass/themes/site.scss",
-    "outputFile": "wwwroot/css/gagga.css"
+    "outputFile": "wwwroot/css/blazorsite.css"
   }
 ]

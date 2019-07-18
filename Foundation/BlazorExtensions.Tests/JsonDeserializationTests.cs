@@ -31,7 +31,7 @@ namespace BlazorExtensions.Tests
             Route DeserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<Route>(data);
             Route DeserializedRouteUsingSystemTextJson = System.Text.Json.Serialization.JsonSerializer.Parse<Route>(data, options);
 
-            Assert.Equal(DeserializedRouteUsingSystemTextJson.Placeholders.Values.Count, DeserializedRouteUsingNewtonSoft.Placeholders.Count);
+            Assert.Equal(DeserializedRouteUsingNewtonSoft.Placeholders.Count, DeserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
         }
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Foundation.BlazorExtensions.Extensions;
+using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -22,11 +23,7 @@ namespace Foundation.BlazorExtensions.Services
         public async Task<string> ExecuteRestMethod(string url)
         {
 
-        // await
-
-        file:///D:/Projects/SitecoreBlazor/SitecoreBlazorHosted.Electron/wwwroot//data/routes/error/en.json
-            url = url.Replace("file:///", "");
-
+            url = url.RemoveFilePrefix();
 
             return await Task<string>.Run(() =>
             {
@@ -38,8 +35,6 @@ namespace Foundation.BlazorExtensions.Services
                 {
                     return System.IO.File.ReadAllText(url);
                 }
-
-
 
             });
         }

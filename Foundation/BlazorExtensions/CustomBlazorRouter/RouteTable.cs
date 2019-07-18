@@ -15,7 +15,11 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
         public RouteEntry[] Routes { get; set; }
 
-
+        /// <summary>
+        /// New method to generate RouteTable from RouterDataRoot
+        /// </summary>
+        /// <param name="routesData"></param>
+        /// <returns></returns>
         public static RouteTable CreateNew(RouterDataRoot routesData)
         {
             var routes = new List<RouteEntry>();

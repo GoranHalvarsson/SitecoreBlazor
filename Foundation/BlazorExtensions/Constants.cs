@@ -24,5 +24,10 @@ namespace Foundation.BlazorExtensions
         {
              internal const string RouteError = "error=true";
         }
+
+        internal struct UrlFixes
+        {
+            internal const string FilePrefix = "file:///";
+        }
     }
 }

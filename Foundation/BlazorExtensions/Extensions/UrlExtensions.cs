@@ -22,7 +22,14 @@ namespace Foundation.BlazorExtensions.Extensions
         {
             return !string.IsNullOrWhiteSpace(url) && url.Contains(Constants.Route.RouteError);
         }
-        
+
+        public static string RemoveFilePrefix(this string url)
+        {
+
+            url = url.Replace(Constants.UrlFixes.FilePrefix, "");
+
+            return url;
+        }
 
     }
 }

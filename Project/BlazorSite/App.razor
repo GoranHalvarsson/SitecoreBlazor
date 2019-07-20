@@ -1,9 +1,5 @@
 ﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
-@using System.Net.Http
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Layouts
-@using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.JSInterop
+@using Foundation.BlazorExtensions.Components
 
 
 @using Foundation.BlazorExtensions.Extensions
@@ -12,9 +8,6 @@
 
 
 @implements Microsoft.AspNetCore.Components.IComponent
-@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine;
-@inject Foundation.BlazorExtensions.BlazorContext _blazorContext;
-@inject IJSRuntime _jsRuntimeCurrent;
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
 @inject SitecoreItemService _sitecoreItemService;
 <!--
@@ -22,9 +15,11 @@
     into Program.cs, and it won't be necessary to specify AppAssembly.
 -->
 @*<Router AppAssembly=typeof(Program).Assembly />*@
-
 @*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
-<CustomRouter RouteValues="@RoutesData" />
+
+    <ContextStateProvider>
+        <CustomRouter RouteValues="@RoutesData" />
+    </ContextStateProvider>
 
 
 
@@ -43,9 +38,7 @@
     {
         base.OnAfterRender();
 
-       //_blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
-
-
+      
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
 
@@ -55,7 +48,7 @@
 
         }
 
-}
+    }
 
 }
 

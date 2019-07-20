@@ -47,61 +47,56 @@
 @code
 {
 
-    [Parameter]
-    protected string Language { get; set; }
+[Parameter]
+protected string Language { get; set; }
 
-    protected override Task OnAfterRenderAsync()
+
+
+
+protected override Task OnAfterRenderAsync()
+{
+
+    return ContextStateProvider.SaveChangesAsync();
+    
+}
+
+[CascadingParameter] ContextStateProvider ContextStateProvider { get; set; }
+
+
+protected override void OnInit()
+{
+    _uriHelper.OnLocationChanged += OnLocationChanged;
+
+    Reload();
+}
+
+
+
+private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
+
+private async void Reload()
+{
+
+    bool hasRouteError = Language.HasRouteError();
+
+    if (hasRouteError)
     {
-
-        //Lets write some stuff to blazorcontext
-        if (_blazorStateMachine != null)
-        {
-
-            _blazorContext.SetContextLanguageAsync(_blazorStateMachine.Language, _jsRuntimeCurrent);
-            _blazorContext.SetCurrentRouteIdAsync(_blazorStateMachine.RouteId, _jsRuntimeCurrent);
-            _blazorContext.SetCurrentNavigatedRoutesAsync(_blazorStateMachine.NavigatedRoutes, _jsRuntimeCurrent);
-
-        }
-
-
-        return base.OnAfterRenderAsync();
+        Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
     }
 
 
-    protected override void OnInit()
-    {
-        _uriHelper.OnLocationChanged += OnLocationChanged;
-
-        Reload();
-    }
-
-   
-
-    private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
-
-    private async void Reload()
-    {
-
-        bool hasRouteError = Language.HasRouteError();
-
-        if (hasRouteError)
-        {
-            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
-        }
+    await _layoutService.LoadRoute(Language, hasRouteError);
 
 
-        await _layoutService.LoadRoute(Language, hasRouteError);
+    StateHasChanged();
+}
 
 
-        StateHasChanged();
-    }
 
-   
-
-    public void Dispose()
-    {
-        _uriHelper.OnLocationChanged -= OnLocationChanged;
-    }
+public void Dispose()
+{
+    _uriHelper.OnLocationChanged -= OnLocationChanged;
+}
 
 }
 

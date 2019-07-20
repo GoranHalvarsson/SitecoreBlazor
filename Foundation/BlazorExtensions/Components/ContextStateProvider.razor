@@ -1,8 +1,76 @@
 @*@using Microsoft.AspNetCore.ProtectedBrowserStorage
-@inject ProtectedSessionStorage ProtectedSessionStore*@
+    @inject ProtectedSessionStorage ProtectedSessionStore*@
 
+@using Microsoft.JSInterop
+
+@inject BlazorStateMachine _blazorStateMachine
+@inject BlazorContext _blazorContext
+@inject IJSRuntime _jsRuntimeCurrent;
+
+
+@if (_hasLoaded)
+{
+    <CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
+}
+else
+{
+    <p>Loading...</p>
+}
 
 
 @code {
+
+[Parameter] public RenderFragment ChildContent { get; set; }
+
+public bool _hasLoaded;
+
+protected override async Task OnInitAsync()
+{
+    await LoadStateAsync();
+    _hasLoaded = true;
+
+}
+
+
+public Task SaveChangesAsync()
+{
+
+    if (_blazorStateMachine != null)
+    {
+
+        _blazorContext.SetContextLanguageAsync(_blazorStateMachine.Language, _jsRuntimeCurrent);
+        _blazorContext.SetCurrentRouteIdAsync(_blazorStateMachine.RouteId, _jsRuntimeCurrent);
+        _blazorContext.SetCurrentNavigatedRoutesAsync(_blazorStateMachine.NavigatedRoutes, _jsRuntimeCurrent);
+
+    }
+
+    return Task.CompletedTask;
+
+    //return LoadStateAsync();
+    //StateHasChanged();
+
+}
+
+async Task LoadStateAsync()
+{
+
+    try
+    {
+        _blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+         await Task.CompletedTask;
+        
+    }
+
+    
+
+    
+
+}
 
 }

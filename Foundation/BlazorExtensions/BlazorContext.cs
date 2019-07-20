@@ -53,9 +53,9 @@ namespace Foundation.BlazorExtensions
         }
 
 
-        public Task<IList<ValueTuple<DateTime, string, Route>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
+        public Task<IList<Tuple<DateTime, string, Route>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
         {
-            return _sessionStorage.GetItemAsync<IList<ValueTuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
+            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
         }
 
         public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, Route>> navigatedRoutes, IJSRuntime jsRuntime)

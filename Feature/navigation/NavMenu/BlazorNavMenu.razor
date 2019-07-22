@@ -5,8 +5,10 @@
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared.Models
 @using Microsoft.JSInterop
+@using Foundation.BlazorExtensions.Components
 
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
+
 @implements IDisposable
 
 @inject LayoutService _layoutService;
@@ -83,7 +85,6 @@ else
 
 @code{
 
-    [Parameter]
     List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
     List<NavigationItem> NavigationItems { get; set; }

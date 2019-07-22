@@ -1,10 +1,6 @@
-﻿
+﻿@using Foundation.BlazorExtensions.Components
 
-
-@using Foundation.BlazorExtensions.Components
-
-
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 <ul class="nav navbar-nav navbar-right">
     <BlazorPlaceholder Name="navbar-activity-item">
@@ -16,9 +12,6 @@
 
     [Parameter]
     protected RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
 }
 

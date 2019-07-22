@@ -1,4 +1,5 @@
 ﻿using SitecoreBlazorHosted.Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,7 @@ namespace Foundation.BlazorExtensions.Extensions
 
         public static BlazorSitecoreField<BlazorFieldValueMultiList> MultiList(this List<IBlazorSitecoreField> fields, string fieldName) => BlazorSitecoreField<BlazorSitecoreField<BlazorFieldValueMultiList>>(fields, fieldName);
 
+        public static BlazorSitecoreField<bool> Checkbox(this List<IBlazorSitecoreField> fields, string fieldName) => BlazorSitecoreField<BlazorSitecoreField<bool>>(fields, fieldName);
 
         public static string HtmlDecode(this string fieldValue) => @System.Web.HttpUtility.HtmlDecode(fieldValue);
 
@@ -25,8 +27,11 @@ namespace Foundation.BlazorExtensions.Extensions
 
             IBlazorSitecoreField field = fields.FirstOrDefault(f => f.FieldName == fieldName);
 
+
             return field as T;
         }
+
+     
 
 
 

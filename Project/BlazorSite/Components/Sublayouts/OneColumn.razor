@@ -1,9 +1,6 @@
-﻿
+﻿@using Foundation.BlazorExtensions.Components
 
-@using Foundation.BlazorExtensions.Components
-
-
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 <div>
     <div class="row">
@@ -20,10 +17,6 @@
 
     [Parameter]
     protected RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
 
 }
 

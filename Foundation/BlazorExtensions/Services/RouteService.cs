@@ -95,6 +95,7 @@ namespace Foundation.BlazorExtensions.Services
 
             }
 
+           
             _blazorStateMachine.CurrentRoute.Url = routeUrl;
 
             _blazorStateMachine.CurrentPlaceholders = _blazorStateMachine.CurrentRoute.Placeholders.FlattenThePlaceholders();

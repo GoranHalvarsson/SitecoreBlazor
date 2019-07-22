@@ -11,7 +11,7 @@ namespace Foundation.BlazorExtensions.Factories
 {
     public class ComponentFactory
     {
-        private IBlazorSitecoreField CreateSitecoreField<T>(KeyValuePair<string, BlazorField> sitecoreField) where T : class
+        private IBlazorSitecoreField CreateSitecoreField<T>(KeyValuePair<string, BlazorField> sitecoreField)
         {
             if (sitecoreField.Value == null)
                 return null;
@@ -20,6 +20,7 @@ namespace Foundation.BlazorExtensions.Factories
 
             T fieldValue = default;
 
+          
             try
             {
 
@@ -27,9 +28,9 @@ namespace Foundation.BlazorExtensions.Factories
                 {
                     case FieldTypes.HtmlField:
                     case FieldTypes.PlainTextField:
-                        fieldValue = sitecoreField.Value.Value.ToString() as T;
+                    case FieldTypes.CheckboxField:
+                        fieldValue = (T)Convert.ChangeType(sitecoreField.Value.Value.ToString(), typeof(T));
                         break;
-
                     default:
                         fieldValue = JsonSerializer.Parse<T>(sitecoreField.Value.Value.ToString());
                         break;
@@ -174,6 +175,9 @@ namespace Foundation.BlazorExtensions.Factories
                     case FieldTypes.HtmlField:
                     case FieldTypes.PlainTextField:
                         list.Add(CreateSitecoreField<string>(field));
+                        break;
+                    case FieldTypes.CheckboxField:
+                        list.Add(CreateSitecoreField<bool>(field));
                         break;
 
                     case FieldTypes.LinkField:

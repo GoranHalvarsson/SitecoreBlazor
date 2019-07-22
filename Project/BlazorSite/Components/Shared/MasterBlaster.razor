@@ -47,56 +47,56 @@
 @code
 {
 
-[Parameter]
-protected string Language { get; set; }
+    [Parameter]
+    protected string Language { get; set; }
 
 
 
 
-protected override Task OnAfterRenderAsync()
-{
-
-    return ContextStateProvider.SaveChangesAsync();
-    
-}
-
-[CascadingParameter] ContextStateProvider ContextStateProvider { get; set; }
-
-
-protected override void OnInit()
-{
-    _uriHelper.OnLocationChanged += OnLocationChanged;
-
-    Reload();
-}
-
-
-
-private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
-
-private async void Reload()
-{
-
-    bool hasRouteError = Language.HasRouteError();
-
-    if (hasRouteError)
+    protected override Task OnAfterRenderAsync()
     {
-        Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
+
+        return ContextStateProvider.SaveChangesAsync();
+
+    }
+
+    [CascadingParameter] ContextStateProvider ContextStateProvider { get; set; }
+
+
+    protected override void OnInit()
+    {
+        _uriHelper.OnLocationChanged += OnLocationChanged;
+
+        Reload();
     }
 
 
-    await _layoutService.LoadRoute(Language, hasRouteError);
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
+
+    private async void Reload()
+    {
+
+        bool hasRouteError = Language.HasRouteError();
 
 
-    StateHasChanged();
-}
+
+        if (hasRouteError)
+        {
+            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
+        }
+
+        await _layoutService.LoadRoute(Language, hasRouteError);
+
+        StateHasChanged();
+    }
 
 
 
-public void Dispose()
-{
-    _uriHelper.OnLocationChanged -= OnLocationChanged;
-}
+    public void Dispose()
+    {
+        _uriHelper.OnLocationChanged -= OnLocationChanged;
+    }
 
 }
 

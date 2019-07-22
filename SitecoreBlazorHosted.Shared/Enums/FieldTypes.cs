@@ -8,5 +8,7 @@ namespace SitecoreBlazorHosted.Shared
         public const string LinkField = "LinkField";
         public const string ImageField = "ImageField";
         public const string MultiListField = "MultiListField";
+        public const string CheckboxField = "CheckboxField";
+        public const string DateField = "DateField";
     }
 }

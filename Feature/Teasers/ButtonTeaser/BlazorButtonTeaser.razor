@@ -1,8 +1,8 @@
-﻿
-@using Foundation.BlazorExtensions.Extensions
+﻿@using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Components
 
+@inherits BaseComponent
 
-@implements Microsoft.AspNetCore.Components.IComponent
 
 <div class="card">
     <div class="card-body">
@@ -18,10 +18,6 @@
 
 @code{
 
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
-
     int currentCount = 0;
 
     void IncrementCount()
@@ -31,5 +27,5 @@
 
 
 
-  
+
 }

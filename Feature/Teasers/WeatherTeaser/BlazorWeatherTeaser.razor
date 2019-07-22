@@ -3,8 +3,9 @@
 @using SitecoreBlazorHosted.Shared
 @using System.Net.Http;
 @using Foundation.BlazorExtensions
+@using Foundation.BlazorExtensions.Components
 
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 @inject IUriHelper uriHelper;
 @inject IRestService restService
@@ -51,9 +52,6 @@
 
 
 @code{
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
     WeatherForecast[] WeatherForecasts;
 

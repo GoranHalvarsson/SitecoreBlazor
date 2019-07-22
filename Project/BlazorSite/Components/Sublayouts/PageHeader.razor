@@ -1,9 +1,6 @@
-﻿
+﻿@using Foundation.BlazorExtensions.Components
 
-@using Foundation.BlazorExtensions.Components
-
-
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 <header class="page-header">
     <BlazorPlaceholder Name="page-header">
@@ -15,8 +12,5 @@
 
     [Parameter]
     protected RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
+   
 }

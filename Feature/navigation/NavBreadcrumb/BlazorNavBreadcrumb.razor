@@ -1,8 +1,9 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
 @using Foundation.BlazorExtensions.Extensions
 @using Microsoft.JSInterop
+@using Foundation.BlazorExtensions.Components
 
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper
@@ -41,9 +42,6 @@ else
 }
 
 @code{
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
     [Parameter]
     List<NavigationItem> NavigationItems { get; set; }

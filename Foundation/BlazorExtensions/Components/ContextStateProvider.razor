@@ -22,55 +22,49 @@ else
 
 @code {
 
-[Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-public bool _hasLoaded;
+    public bool _hasLoaded;
 
-protected override async Task OnInitAsync()
-{
-    await LoadStateAsync();
-    _hasLoaded = true;
-
-}
-
-
-public Task SaveChangesAsync()
-{
-
-    if (_blazorStateMachine != null)
+    protected override async Task OnInitAsync()
     {
+        await LoadStateAsync();
+        _hasLoaded = true;
+
+    }
+
+
+    public Task SaveChangesAsync()
+    {
+
+        if (_blazorStateMachine == null)
+        {
+            return Task.CompletedTask;
+        }
+
 
         _blazorContext.SetContextLanguageAsync(_blazorStateMachine.Language, _jsRuntimeCurrent);
         _blazorContext.SetCurrentRouteIdAsync(_blazorStateMachine.RouteId, _jsRuntimeCurrent);
         _blazorContext.SetCurrentNavigatedRoutesAsync(_blazorStateMachine.NavigatedRoutes, _jsRuntimeCurrent);
 
+        return LoadStateAsync();
+
     }
 
-    return Task.CompletedTask;
-
-    //return LoadStateAsync();
-    //StateHasChanged();
-
-}
-
-async Task LoadStateAsync()
-{
-
-    try
+    public async Task LoadStateAsync()
     {
-        _blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+
+        try
+        {
+            _blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            await Task.CompletedTask;
+
+        }
+
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-         await Task.CompletedTask;
-        
-    }
-
-    
-
-    
-
-}
 
 }

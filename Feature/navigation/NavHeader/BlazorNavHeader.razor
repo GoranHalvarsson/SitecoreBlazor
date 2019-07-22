@@ -1,9 +1,9 @@
 ﻿@using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
-
 @using Microsoft.JSInterop
+@using Foundation.BlazorExtensions.Components
 
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 
 
@@ -16,9 +16,6 @@
 
 @code{
 
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
     private string CurrentLanguage { get; set; }
 
     protected override void OnParametersSet()
@@ -28,6 +25,6 @@
         CurrentLanguage = _blazorStateMachine.Language;
     }
 
-  
-   
+
+
 }

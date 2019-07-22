@@ -1,9 +1,9 @@
 ﻿@using System.Net.Http
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared.Models
+@using Foundation.BlazorExtensions.Components
 
-
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 @inject IUriHelper _uriHelper
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
@@ -37,11 +37,7 @@ else
 
 @code{
 
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
-
+   
     private string CurrentLanguage { get; set; }
 
     private IList<Language> ValidLanguages { get; set; }

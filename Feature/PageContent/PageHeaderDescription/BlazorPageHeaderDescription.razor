@@ -1,28 +1,23 @@
-﻿@using Foundation.BlazorExtensions.Extensions
+﻿@using Foundation.BlazorExtensions.Components
+@using Foundation.BlazorExtensions.Extensions
 
-@implements Microsoft.AspNetCore.Components.IComponent
+@inherits BaseComponent
 
 <div id="CenterColumn">
     <div id="InnerCenter">
         <div id="Header">
-            <img alt="@FieldsModel.Image("HeaderImage").Value.Alt" id="scLogo" src="@FieldsModel.Image("HeaderImage").Value.Src">
+            <img alt="@FieldsModel.Image("HeaderImage")?.Value.Alt" id="scLogo" src="@FieldsModel.Image("HeaderImage").Value.Src">
         </div>
         <div id="Content">
             <div id="LeftContent">
-                <h1>@((MarkupString)FieldsModel.PlainText("Title").Value.HtmlDecode())</h1>
+                <h1>@((MarkupString)FieldsModel.PlainText("Title")?.Value.HtmlDecode())</h1>
                 <div class="contentDescription">
-                    @((MarkupString)FieldsModel.HtmlText("Text").Value.HtmlDecode())
+                    @((MarkupString)FieldsModel.HtmlText("Text")?.Value.HtmlDecode())
                 </div>
             </div>
         </div>
-
+        @FieldsModel.Checkbox("ShowInNavigation")?.Value
     </div>
 </div>
 
 
-@code{
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
-
-}

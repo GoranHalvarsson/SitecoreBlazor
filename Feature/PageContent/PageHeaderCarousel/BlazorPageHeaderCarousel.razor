@@ -2,10 +2,9 @@
 @using System.Linq
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
+@using Foundation.BlazorExtensions.Components
 
-@implements Microsoft.AspNetCore.Components.IComponent
-
-@implements IDisposable
+@inherits BaseComponent
 
 
 <div class="carousel slide" @onmouseout="@OnMouseOut" @onmouseover="@OnMouseOver">
@@ -52,9 +51,6 @@
 </div>
 
 @code{
-
-    [Parameter]
-    List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
 
     private string IndicatorClassName(int index)
     {

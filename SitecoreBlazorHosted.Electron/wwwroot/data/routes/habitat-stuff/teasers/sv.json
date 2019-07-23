@@ -3,7 +3,16 @@
   "Id": "f30c4470-07d4-4652-9cb6-bf8ac43d1694",
   "DisplayName": null,
   "ItemLanguage": "sv",
-  "Fields": {},
+  "Fields": {
+    "NavigationTitle": {
+      "Value": "Klicka på, grisa tå",
+      "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": true,
+      "Type": "CheckboxField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

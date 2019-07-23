@@ -4,6 +4,10 @@
   "displayName": "mamma",
   "itemLanguage": "en",
   "Fields": {
+    "NavigationTitle": {
+      "Value": "Sitecore + Blazor",
+      "Type": "PlainTextField"
+    },
     "ShowInNavigation": {
       "Value": true,
       "Type": "CheckboxField"

@@ -3,7 +3,16 @@
   "Id": "8a80477e-7cb4-4cee-a035-b48ac118abe8",
   "DisplayName": null,
   "ItemLanguage": "sv",
-  "Fields": {},
+  "Fields": {
+    "NavigationTitle": {
+      "Value": "Karusellen går runt",
+      "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": true,
+      "Type": "CheckboxField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

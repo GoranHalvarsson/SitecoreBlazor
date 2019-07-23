@@ -3,7 +3,12 @@
   "Id": "error",
   "DisplayName": null,
   "ItemLanguage": "en",
-  "Fields": {},
+  "Fields": {
+    "NavigationTitle": {
+      "Value": "Error for the people",
+      "Type": "PlainTextField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

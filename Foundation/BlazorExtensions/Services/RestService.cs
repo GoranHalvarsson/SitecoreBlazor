@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace Foundation.BlazorExtensions.Services
         {
             string rawResultData = await ExecuteRestMethod(url);
 
-            return JsonSerializer.Parse<T>(rawResultData, options == null ? _jsonSerializerOptions : options);
+            return JsonSerializer.Deserialize<T>(rawResultData, options == null ? _jsonSerializerOptions : options);
         }
 
     }

@@ -4,6 +4,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.JSInterop;
     using System;
+    using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@
         public async Task<T> GetItemAsync<T>(string key,IJSRuntime jsRuntime)
         {
             var json = await GetItemAsync(key,jsRuntime);
-            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Parse<T>(json, _jsonSerializerOptions);
+            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Deserialize<T>(json, _jsonSerializerOptions);
         }
 
         
@@ -63,7 +64,7 @@
 
         public Task SetItemAsync<T>(string key, T data,IJSRuntime jsRuntime)
         {
-            return SetItemAsync(key, JsonSerializer.ToString<T>(data, _jsonSerializerOptions),jsRuntime);
+            return SetItemAsync(key, JsonSerializer.Serialize<T>(data, _jsonSerializerOptions),jsRuntime);
         }
 
        

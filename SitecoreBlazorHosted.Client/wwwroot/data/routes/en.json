@@ -4,6 +4,10 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
+    "NavigationTitle": {
+      "Value": "Sitecore + Blazor",
+      "Type": "PlainTextField"
+    },
     "ShowInNavigation": {
       "Value": true,
       "Type": "CheckboxField"

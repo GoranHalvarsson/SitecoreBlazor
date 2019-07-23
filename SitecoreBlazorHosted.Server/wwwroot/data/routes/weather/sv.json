@@ -3,7 +3,16 @@
   "Id": "a2c07e48-9c6a-466e-b55d-baac62e4dfc7",
   "DisplayName": null,
   "ItemLanguage": "sv",
-  "Fields": {},
+  "Fields": {
+    "NavigationTitle": {
+      "Value": "Hur mycket är fisken, väder pojke",
+      "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": true,
+      "Type": "CheckboxField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

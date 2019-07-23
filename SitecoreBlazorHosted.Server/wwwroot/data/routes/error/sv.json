@@ -3,7 +3,12 @@
   "Id": "error",
   "DisplayName": null,
   "ItemLanguage": "sv",
-  "Fields": {},
+  "Fields": {
+    "NavigationTitle": {
+      "Value": "Fel fel fel",
+      "Type": "PlainTextField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

@@ -5,6 +5,7 @@ using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Foundation.BlazorExtensions.Factories
@@ -32,7 +33,7 @@ namespace Foundation.BlazorExtensions.Factories
                         fieldValue = (T)Convert.ChangeType(sitecoreField.Value.Value.ToString(), typeof(T));
                         break;
                     default:
-                        fieldValue = JsonSerializer.Parse<T>(sitecoreField.Value.Value.ToString());
+                        fieldValue = JsonSerializer.Deserialize<T>(sitecoreField.Value.Value.ToString());
                         break;
                 }
 
@@ -103,11 +104,8 @@ namespace Foundation.BlazorExtensions.Factories
                             BlazorFieldValueMultiListItem multiListItem = new BlazorFieldValueMultiListItem() {
                                 Id = item.Id,
                                 Url = item.Url
-                            }; 
-                            
-                            
-                            //JsonSerializer.Parse<BlazorFieldValueMultiListItem>(item.ToString());
-                           
+                            };
+
 
 
                             var model = CreateComponentModel(item.Fields);

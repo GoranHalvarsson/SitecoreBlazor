@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Xunit;
 using Foundation.BlazorExtensions.Extensions;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace BlazorExtensions.Tests
 {
@@ -29,7 +30,7 @@ namespace BlazorExtensions.Tests
             };
 
             Route DeserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<Route>(data);
-            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.Serialization.JsonSerializer.Parse<Route>(data, options);
+            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
 
             Assert.Equal(DeserializedRouteUsingNewtonSoft.Placeholders.Count, DeserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
         }
@@ -51,12 +52,12 @@ namespace BlazorExtensions.Tests
                 MaxDepth = 100
             };
 
-            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.Serialization.JsonSerializer.Parse<Route>(data, options);
+            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
 
             
             Tuple<DateTime, string, Route> someData = new Tuple<DateTime, string, Route>(DateTime.Now,"/en/carousel", DeserializedRouteUsingSystemTextJson);
             
-            string jsonResult = System.Text.Json.Serialization.JsonSerializer.ToString<Tuple<DateTime, string, Route>>(someData, options);
+            string jsonResult = System.Text.Json.JsonSerializer.Serialize<Tuple<DateTime, string, Route>>(someData, options);
 
             Assert.Contains(@"""Name"":""carousels""", jsonResult);
         }

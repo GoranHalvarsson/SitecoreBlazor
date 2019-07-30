@@ -13,11 +13,11 @@ namespace Feature.Navigation.Repositories
 {
     public class NavigationRepository
     {
-        private readonly BlazorContext _blazorContext;
+        private readonly BlazorStateMachineResolver _blazorContext;
         private readonly SitecoreItemService _sitecoreItemService;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public NavigationRepository(BlazorContext blazorContext, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
+        public NavigationRepository(BlazorStateMachineResolver blazorContext, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
         {
             _blazorContext = blazorContext;
             _sitecoreItemService = sitecoreItemService;

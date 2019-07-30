@@ -1,11 +1,9 @@
 @*@using Microsoft.AspNetCore.ProtectedBrowserStorage
     @inject ProtectedSessionStorage ProtectedSessionStore*@
 
-@using Microsoft.JSInterop
-
 @inject BlazorStateMachine _blazorStateMachine
-@inject BlazorContext _blazorContext
-@inject IJSRuntime _jsRuntimeCurrent;
+@inject BlazorStateMachineResolver _blazorStateMachineResolver
+
 
 
 @if (_hasLoaded)
@@ -43,9 +41,9 @@ else
         }
 
 
-        _blazorContext.SetContextLanguageAsync(_blazorStateMachine.Language, _jsRuntimeCurrent);
-        _blazorContext.SetCurrentRouteIdAsync(_blazorStateMachine.RouteId, _jsRuntimeCurrent);
-        _blazorContext.SetCurrentNavigatedRoutesAsync(_blazorStateMachine.NavigatedRoutes, _jsRuntimeCurrent);
+        _blazorStateMachineResolver.SetContextLanguageAsync(_blazorStateMachine.Language);
+        _blazorStateMachineResolver.SetCurrentRouteIdAsync(_blazorStateMachine.RouteId);
+        _blazorStateMachineResolver.SetCurrentNavigatedRoutesAsync(_blazorStateMachine.NavigatedRoutes);
 
         return LoadStateAsync();
 
@@ -56,7 +54,7 @@ else
 
         try
         {
-            _blazorStateMachine.NavigatedRoutes = await _blazorContext.GetNavigatedRouteAsync(_jsRuntimeCurrent);
+            _blazorStateMachine.NavigatedRoutes = await _blazorStateMachineResolver.GetNavigatedRouteAsync();
         }
         catch (Exception ex)
         {

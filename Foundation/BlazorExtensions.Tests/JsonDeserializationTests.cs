@@ -1,13 +1,8 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
-using System.IO;
-using System.Text.Json.Serialization;
-using Xunit;
-using Foundation.BlazorExtensions.Extensions;
-using System.Collections.Generic;
 using System.Text.Json;
+using Xunit;
 
 namespace BlazorExtensions.Tests
 {
@@ -25,14 +20,13 @@ namespace BlazorExtensions.Tests
             {
                 IgnoreNullValues = true,
                 AllowTrailingCommas = true,
-                PropertyNameCaseInsensitive = true,
-                MaxDepth = 100
+                PropertyNameCaseInsensitive = true
             };
 
-            Route DeserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<Route>(data);
-            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
+            Route deserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<Route>(data);
+            Route deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
 
-            Assert.Equal(DeserializedRouteUsingNewtonSoft.Placeholders.Count, DeserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
+            Assert.Equal(deserializedRouteUsingNewtonSoft.Placeholders.Count, deserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
         }
 
 
@@ -48,14 +42,12 @@ namespace BlazorExtensions.Tests
             {
                 IgnoreNullValues = true,
                 AllowTrailingCommas = true,
-                PropertyNameCaseInsensitive = true,
-                MaxDepth = 100
+                PropertyNameCaseInsensitive = true
             };
 
-            Route DeserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
-
+            Route deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
             
-            Tuple<DateTime, string, Route> someData = new Tuple<DateTime, string, Route>(DateTime.Now,"/en/carousel", DeserializedRouteUsingSystemTextJson);
+            Tuple<DateTime, string, Route> someData = new Tuple<DateTime, string, Route>(DateTime.Now,"/en/carousel", deserializedRouteUsingSystemTextJson);
             
             string jsonResult = System.Text.Json.JsonSerializer.Serialize<Tuple<DateTime, string, Route>>(someData, options);
 

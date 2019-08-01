@@ -27,21 +27,18 @@ steps:
 - script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@1
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publishing BlazorClient App...'
   inputs:
     command: publish
     publishWebProjects: false
-    arguments: '--configuration $(buildConfigurationClient) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj'
+    arguments: '--configuration $(buildConfigurationServer) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj'
     zipAfterPublish: false
 
 - task: PublishBuildArtifacts@1

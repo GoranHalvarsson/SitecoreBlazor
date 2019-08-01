@@ -28,7 +28,7 @@ steps:
   displayName: 'Building $(buildConfigurationServer)...'
 
 - task: DotNetCoreCLI@1
-displayName: 'Running tests...'
+  displayName: 'Running tests...'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'

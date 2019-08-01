@@ -5,9 +5,23 @@ namespace Foundation.BlazorExtensions.Services
 {
     public class InteropService
     {
-        public Task<bool> HardReload(IJSRuntime jsRuntime)
+        private readonly IJSRuntime _jsRuntime;
+
+        public InteropService(IJSRuntime jsRuntime)
         {
-            return jsRuntime.InvokeAsync<bool>("blazorExtensions.hardReload");
+            _jsRuntime = jsRuntime;
+        }
+
+
+        public Task<bool> HardReload()
+        {
+            return _jsRuntime.InvokeAsync<bool>("blazorExtensions.hardReload");
+        }
+
+
+        public Task<string> SetPageTitle(string pageTitle)
+        {
+            return _jsRuntime.InvokeAsync<string>("blazorExtensions.setPageTitle", pageTitle);
         }
 
 

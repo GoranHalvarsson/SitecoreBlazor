@@ -4,9 +4,13 @@
   "DisplayName": null,
   "ItemLanguage": "sv",
   "Fields": {
-    "NavigationTitle": {
+    "PageTitle": {
       "Value": "Fel fel fel",
       "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": false,
+      "Type": "CheckboxField"
     }
   },
   "Placeholders": {

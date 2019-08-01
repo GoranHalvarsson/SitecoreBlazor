@@ -1,9 +1,5 @@
-﻿@using System.Net.Http
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Layouts
+﻿@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
-@using Microsoft.JSInterop
 
 @using Foundation.BlazorExtensions.Components
 @using Foundation.BlazorExtensions.Extensions
@@ -14,10 +10,11 @@
 @inherits Microsoft.AspNetCore.Components.Layouts.LayoutComponentBase
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 @inject Foundation.BlazorExtensions.BlazorStateMachineResolver _blazorContext
+
 @inject IUriHelper _uriHelper;
 @inject LayoutService _layoutService;
 @inject LanguageService _languageService;
-@inject IJSRuntime _jsRuntimeCurrent;
+@inject InteropService _interopService;
 
 
 
@@ -80,13 +77,35 @@
         bool hasRouteError = Language.HasRouteError();
 
 
-
         if (hasRouteError)
         {
             Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
         }
 
         await _layoutService.LoadRoute(Language, hasRouteError);
+
+
+        string pageTitle = _blazorStateMachine.GetFieldsFromCurrentRoute().PlainText("PageTitle")?.Value?.HtmlDecode();
+
+        if (!string.IsNullOrWhiteSpace(pageTitle))
+        {
+
+            // THIS IS FOR BLAZOR-SERVER-SIDE - Cant call javascript before rendering is done 
+            try
+            {
+                await _interopService.SetPageTitle(pageTitle);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+
+            
+        }
+
+
+
 
         StateHasChanged();
     }

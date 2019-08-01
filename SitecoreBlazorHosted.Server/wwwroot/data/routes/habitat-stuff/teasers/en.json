@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Click it hard, baby",
+    "PageTitle": {
+      "Value": "Button teaser",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {

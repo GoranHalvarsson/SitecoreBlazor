@@ -1,12 +1,21 @@
-﻿using SitecoreBlazorHosted.Shared.Models;
+﻿using Foundation.BlazorExtensions.Factories;
+using Microsoft.AspNetCore.Components;
+using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Foundation.BlazorExtensions
 {
+
     public class BlazorStateMachine
     {
+        private readonly ComponentFactory _componentFactory;
+
+        public BlazorStateMachine(ComponentFactory componentFactory)
+        {
+            _componentFactory = componentFactory;
+        }
 
         public int ValidCacheInHours { get; set; } = 12;
 
@@ -17,6 +26,44 @@ namespace Foundation.BlazorExtensions
         public IList<Tuple<DateTime, string, Route>> NavigatedRoutes { get; set; }
 
         public Route CurrentRoute { get; set; }
+
+        public List<IBlazorSitecoreField> GetFieldsFromCurrentRoute(string placeHolder = null)
+        {
+
+            List<IBlazorSitecoreField> blazorFields = new List<IBlazorSitecoreField>();
+
+            if (CurrentRoute == null)
+                return null;
+
+            if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            {
+                blazorFields.AddRange(_componentFactory.CreateComponentModel(CurrentRoute.Fields));
+            }
+
+            if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            {
+
+                var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
+
+
+                foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
+                {
+
+                    foreach (Placeholder placeholderData in keyVal.Value)
+                    {
+
+                        blazorFields.AddRange(_componentFactory.CreateComponentModel(placeholderData.Fields));
+                    }
+                }
+
+            }
+
+            return blazorFields;
+
+        }
+
+
+        
 
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 

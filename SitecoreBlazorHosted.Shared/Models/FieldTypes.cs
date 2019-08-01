@@ -1,5 +1,5 @@
 ﻿
-namespace SitecoreBlazorHosted.Shared
+namespace SitecoreBlazorHosted.Shared.Models
 {
     public struct FieldTypes
     {

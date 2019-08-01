@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
+using SitecoreBlazorHosted.Shared.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Components
 {
     public abstract class BaseComponent : ComponentBase
     {
         [Parameter]
-        protected List<SitecoreBlazorHosted.Shared.Models.IBlazorSitecoreField> FieldsModel { get; set; }
+        protected List<IBlazorSitecoreField> FieldsModel { get; set; }
     }
 }

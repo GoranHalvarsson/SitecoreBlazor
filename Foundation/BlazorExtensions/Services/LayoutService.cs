@@ -27,9 +27,10 @@ namespace Foundation.BlazorExtensions.Services
             _blazorStateMachine = blazorStateMachine;
         }
 
+        [Obsolete("Not used")]
         public event EventHandler LanguageSwitch;
 
-       
+        [Obsolete("Not used")]
         public void SwitchLanguage(Language language)
         {
             LanguageSwitchArgs args = new LanguageSwitchArgs
@@ -73,7 +74,7 @@ namespace Foundation.BlazorExtensions.Services
                 try
                 {
 
-                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _blazorStateMachine.CurrentPlaceholders?.Where(fp => fp.Key.ExtractPlaceholderName() == placeholder).ToList();
+                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _blazorStateMachine.CurrentPlaceholders?.Where(ph => ph.Key.ExtractPlaceholderName() == placeholder).ToList();
 
                     if (placeHoldersList == null)
                         return null;

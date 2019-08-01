@@ -4,9 +4,13 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Error for the people",
+    "PageTitle": {
+      "Value": "An error...",
       "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": false,
+      "Type": "CheckboxField"
     }
   },
   "Placeholders": {

@@ -22,14 +22,15 @@ namespace Foundation.BlazorExtensions.Extensions
 
         public static string HtmlDecode(this string fieldValue) => @System.Web.HttpUtility.HtmlDecode(fieldValue);
 
-        public static T BlazorSitecoreField<T>(this List<IBlazorSitecoreField> fields, string fieldName) where T : class
+        private static T BlazorSitecoreField<T>(this List<IBlazorSitecoreField> fields, string fieldName) where T : class
         {
 
-            IBlazorSitecoreField field = fields.FirstOrDefault(f => f.FieldName == fieldName);
+            IBlazorSitecoreField field = fields?.FirstOrDefault(f => f.FieldName == fieldName);
 
 
             return field as T;
         }
+
 
      
 

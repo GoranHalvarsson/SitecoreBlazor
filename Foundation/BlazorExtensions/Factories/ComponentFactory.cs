@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Foundation.BlazorExtensions.Factories
 {
@@ -59,9 +56,9 @@ namespace Foundation.BlazorExtensions.Factories
         }
 
 
-        private Dictionary<string, BlazorField> CreateDummy()
+        private Dictionary<string, BlazorField> CreateDefaultField()
         {
-            SitecoreBlazorHosted.Shared.Models.BlazorField dummyField = new BlazorField()
+            SitecoreBlazorHosted.Shared.Models.BlazorField defaultField = new BlazorField()
             {
                 Editable = null,
                 Value = "",
@@ -70,7 +67,7 @@ namespace Foundation.BlazorExtensions.Factories
 
             return new Dictionary<string, BlazorField>()
             {
-               { "DummyField",dummyField }
+               { "DefaultField",defaultField }
             };
             
         }
@@ -110,10 +107,10 @@ namespace Foundation.BlazorExtensions.Factories
 
                             var model = CreateComponentModel(item.Fields);
 
-                            if (!model.hasModel)
-                                continue;
+                            //if (!model.hasModel)
+                            //    continue;
 
-                            multiListItem.SitecoreFields = model.model;
+                            multiListItem.SitecoreFields = model;
 
                             fieldValueMultiList.Values.Add(multiListItem);
 
@@ -149,10 +146,10 @@ namespace Foundation.BlazorExtensions.Factories
             return sitecoreField;
 
         }
-        private (List<IBlazorSitecoreField> model, bool hasModel) CreateComponentModel(Dictionary<string, BlazorField> fields)
+        public List<IBlazorSitecoreField> CreateComponentModel(Dictionary<string, BlazorField> fields)
         {
             if (fields == null || !fields.Any())
-                fields = CreateDummy();
+                fields = CreateDefaultField();
 
 
             List<IBlazorSitecoreField> list = new List<IBlazorSitecoreField>();
@@ -196,7 +193,7 @@ namespace Foundation.BlazorExtensions.Factories
 
             }
 
-            return (list, true);
+            return list;
 
 
         }
@@ -213,7 +210,7 @@ namespace Foundation.BlazorExtensions.Factories
             {
                 Type componentType = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
 
-                (List<IBlazorSitecoreField> model, bool hasModel) componentModel = CreateComponentModel(placeholderData.Fields);
+                IList<IBlazorSitecoreField> componentModel = CreateComponentModel(placeholderData.Fields);
 
 
                 return BuildRenderTree =>
@@ -221,8 +218,7 @@ namespace Foundation.BlazorExtensions.Factories
 
                     BuildRenderTree.OpenComponent(0, componentType);
 
-                    if (componentModel.hasModel)
-                        BuildRenderTree.AddAttribute(1, "FieldsModel", componentModel.model);
+                    BuildRenderTree.AddAttribute(1, "FieldsModel", componentModel);
 
                     BuildRenderTree.CloseComponent();
                 };

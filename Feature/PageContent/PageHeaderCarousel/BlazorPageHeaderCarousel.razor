@@ -7,7 +7,7 @@
 @inherits BaseComponent
 
 
-<div class="carousel slide" @onmouseout="@OnMouseOut" @onmouseover="@OnMouseOver">
+<div class="carousel slide" @onmouseout="OnMouseOut" @onmouseover="OnMouseOver">
 
     <ol class="carousel-indicators">
         @for (var i = 0; i < FieldsModel.MultiList("MediaSelector").Value.Values.Count; i++)

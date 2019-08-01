@@ -1,13 +1,8 @@
 ﻿namespace Foundation.BlazorExtensions
 {
-    using Microsoft.AspNetCore.Components;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.JSInterop;
     using SitecoreBlazorHosted.Shared.Models;
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;

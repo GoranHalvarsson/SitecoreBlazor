@@ -1,10 +1,10 @@
 {
-  "name": "home",
-  "id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
-  "displayName": "mamma",
-  "itemLanguage": "en",
+  "Name": "home",
+  "Id": "dac24edd-44fb-42ef-9ecd-1e8daf706386",
+  "DisplayName": null,
+  "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
+    "PageTitle": {
       "Value": "Sitecore + Blazor",
       "Type": "PlainTextField"
     },
@@ -132,7 +132,7 @@
         "Assembly": "Feature.Identity",
         "ComponentName": "Feature.Identity.Copyright.BlazorCopyright",
         "Name": "footer",
-        "fields": {
+        "Fields": {
           "Text": {
             "Value": "Not seeing the light? Join the ",
             "Type": "PlainTextField"

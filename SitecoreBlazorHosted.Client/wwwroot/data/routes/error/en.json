@@ -3,7 +3,16 @@
   "Id": "error",
   "DisplayName": null,
   "ItemLanguage": "en",
-  "Fields": {},
+  "Fields": {
+    "PageTitle": {
+      "Value": "An error...",
+      "Type": "PlainTextField"
+    },
+    "ShowInNavigation": {
+      "Value": false,
+      "Type": "CheckboxField"
+    }
+  },
   "Placeholders": {
     "navbar": [
       {

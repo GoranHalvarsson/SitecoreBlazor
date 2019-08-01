@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "sv",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Hur mycket är fisken, väder pojke",
+    "PageTitle": {
+      "Value": "V&auml;der",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {

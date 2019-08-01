@@ -4,7 +4,7 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
+    "PageTitle": {
       "Value": "Sitecore + Blazor",
       "Type": "PlainTextField"
     },

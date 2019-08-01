@@ -19,25 +19,13 @@ namespace Foundation.BlazorExtensions
 
         public BlazorStateMachineResolver(SessionStorage sessionStorage)
         {
-
-            if (sessionStorage == null)
-            {
-                throw new ArgumentException("The value cannot be null", nameof(sessionStorage));
-            }
-
-            _sessionStorage = sessionStorage;
+            _sessionStorage = sessionStorage ?? throw new ArgumentException("The value cannot be null", nameof(sessionStorage));
         }
 
 
         public BlazorStateMachineResolver(SessionStorage sessionStorage, IJSRuntime jsRuntime) : this(sessionStorage)
         {
-
-            if (jsRuntime == null)
-            {
-                throw new ArgumentException("The value cannot be null", nameof(jsRuntime));
-            }
-
-            _jsRuntime = jsRuntime;
+            _jsRuntime = jsRuntime ?? throw new ArgumentException("The value cannot be null", nameof(jsRuntime));
         }
 
         public Task<string> GetContextLanguageAsync()
@@ -47,32 +35,24 @@ namespace Foundation.BlazorExtensions
 
         public Task<string> GetContextLanguageAsync(IJSRuntime jsRuntime)
         {
-            if (jsRuntime == null)
-                return null;
-
-
-            return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage,jsRuntime);
+            return jsRuntime == null ? null : _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage,jsRuntime);
         }
 
         public Task SetContextLanguageAsync(string language)
         {
 
-            if (String.IsNullOrWhiteSpace(language))
-                return null;
-
-            return _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language, _jsRuntime);
-
+            return String.IsNullOrWhiteSpace(language)
+                ? null
+                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language, _jsRuntime);
         }
 
 
         public Task SetContextLanguageAsync(string language,IJSRuntime jsRuntime)
         {
 
-            if (String.IsNullOrWhiteSpace(language))
-                return null;
-
-             return _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language,jsRuntime);
-
+            return String.IsNullOrWhiteSpace(language)
+                ? null
+                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language,jsRuntime);
         }
 
         public Task<string> GetCurrentRouteIdAsync()
@@ -88,21 +68,17 @@ namespace Foundation.BlazorExtensions
         public Task SetCurrentRouteIdAsync(string routeId,IJSRuntime jsRuntime)
         {
 
-            if (String.IsNullOrWhiteSpace(routeId))
-                return null;
-
-            return _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId,jsRuntime);
-
+            return String.IsNullOrWhiteSpace(routeId)
+                ? null
+                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId,jsRuntime);
         }
 
         public Task SetCurrentRouteIdAsync(string routeId)
         {
 
-            if (String.IsNullOrWhiteSpace(routeId))
-                return null;
-
-            return _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId, _jsRuntime);
-
+            return String.IsNullOrWhiteSpace(routeId)
+                ? null
+                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId, _jsRuntime);
         }
 
 
@@ -119,21 +95,17 @@ namespace Foundation.BlazorExtensions
         public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, Route>> navigatedRoutes, IJSRuntime jsRuntime)
         {
 
-            if (navigatedRoutes == null)
-                return null;
-
-            return _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
-
+            return navigatedRoutes == null
+                ? null
+                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
         }
 
         public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, Route>> navigatedRoutes)
         {
 
-            if (navigatedRoutes == null)
-                return null;
-
-            return _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, _jsRuntime);
-
+            return navigatedRoutes == null
+                ? null
+                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, _jsRuntime);
         }
 
 

@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
-@using SitecoreBlazorHosted.Shared.Models
+
 @using Microsoft.JSInterop
 @using Foundation.BlazorExtensions.Components
 
@@ -14,7 +14,7 @@
 @inject LayoutService _layoutService;
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
 @inject IUriHelper _uriHelper;
-@inject IJSRuntime _jsRuntimeCurrent;
+
 
 
 
@@ -90,7 +90,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        NavigationItems = await _navigationRepository.GetMenu(_jsRuntimeCurrent);
+        NavigationItems = await _navigationRepository.GetMenu();
     }
 
 
@@ -125,21 +125,12 @@ else
     protected override void OnInit()
     {
         _uriHelper.OnLocationChanged += OnLocationChanges;
-        _layoutService.LanguageSwitch += LanguageSwitchHasHappened;
     }
 
-    private async void LanguageSwitchHasHappened(object sender, EventArgs e)
-    {
-
-
-        NavigationItems = await _navigationRepository.GetMenu(_jsRuntimeCurrent);
-        StateHasChanged();
-    }
-
+  
     public void Dispose()
     {
         _uriHelper.OnLocationChanged -= OnLocationChanges;
-        _layoutService.LanguageSwitch -= LanguageSwitchHasHappened;
     }
 
 }

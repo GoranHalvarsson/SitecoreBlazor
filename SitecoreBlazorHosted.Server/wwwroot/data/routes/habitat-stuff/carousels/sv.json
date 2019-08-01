@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "sv",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Karusellen går runt",
+    "PageTitle": {
+      "Value": "Karuseller",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {

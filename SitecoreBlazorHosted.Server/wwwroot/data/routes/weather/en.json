@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "How much is the Fish, weather boy",
+    "PageTitle": {
+      "Value": "Wheather",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {

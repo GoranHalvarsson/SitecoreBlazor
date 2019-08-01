@@ -158,16 +158,19 @@ namespace Foundation.BlazorExtensions.Tests
             {
                 result = await blazorStateMachineResolver.GetNavigatedRouteAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Ugly hack for now
                 result = expectedData;
             }
 
-            //
-
 
             // Assert
+            var invocation = jsRuntime.Invocations.Single();
+            Assert.Equal("Foundation_BlazorExtensions_SessionStorage.GetItem", invocation.Identifier);
+            Assert.Collection(invocation.Args,
+                arg => Assert.Equal("navigatedRoutes", arg));
+
             Assert.Equal(expectedData.Single().Item1, result.Single().Item1);
             Assert.Equal(expectedData.Single().Item2, result.Single().Item2);
             Assert.Equal(expectedData.Single().Item3.Name, result.Single().Item3.Name);

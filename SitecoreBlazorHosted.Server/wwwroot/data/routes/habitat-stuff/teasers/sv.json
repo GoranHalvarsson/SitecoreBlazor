@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "sv",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Klicka på, grisa tå",
+    "PageTitle": {
+      "Value": "Knapp teaser",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {

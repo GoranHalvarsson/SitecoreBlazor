@@ -1,13 +1,8 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using SitecoreBlazorHosted.Shared.Models.Sitecore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
@@ -27,13 +22,7 @@ namespace Foundation.BlazorExtensions.Services
             _blazorStateMachine = blazorStateMachine;
         }
 
-        [Obsolete]
-        private Route CurrentRoute { get; set; }
-
-        [Obsolete]
-        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
-
-       
+        
         public string BuildRouteApiUrl(string language, bool? hasRouteError)
         {
             string baseUrl = $"{_uriHelper.GetBaseUri()}/data/routes";
@@ -84,8 +73,6 @@ namespace Foundation.BlazorExtensions.Services
             Route routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
             if (routeExists == null) {
-                string test = await _restService.ExecuteRestMethod(routeUrl);
-
                 _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<Route>(routeUrl);
                 _blazorStateMachine.AddNavigatedRoute(routeUrl, _blazorStateMachine.CurrentRoute);
             }
@@ -97,9 +84,7 @@ namespace Foundation.BlazorExtensions.Services
 
            
             _blazorStateMachine.CurrentRoute.Url = routeUrl;
-
             _blazorStateMachine.CurrentPlaceholders = _blazorStateMachine.CurrentRoute.Placeholders.FlattenThePlaceholders();
-
             _blazorStateMachine.Language = language;
             _blazorStateMachine.RouteId = _blazorStateMachine.CurrentRoute.Id;
            

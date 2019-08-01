@@ -10,7 +10,7 @@
         </div>
         <div id="Content">
             <div id="LeftContent">
-                <h1>@((MarkupString)FieldsModel.PlainText("Title")?.Value.HtmlDecode())</h1>
+                <h1>@FieldsModel.PlainText("Title")?.Value.HtmlDecode()</h1>
                 <div class="contentDescription">
                     @((MarkupString)FieldsModel.HtmlText("Text")?.Value.HtmlDecode())
                 </div>

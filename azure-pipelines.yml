@@ -27,11 +27,11 @@ steps:
 - script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
 
-- task: DotNetCoreCLI@1
+- script: dotnet test '**/*Tests/*.csproj' --logger trx --collect "Code coverage"
+- task: PublishTestResults@2
   inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publishing BlazorClient App...'

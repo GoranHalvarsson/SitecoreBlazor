@@ -27,11 +27,14 @@ steps:
 - script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
 
-- script: dotnet test '**/*Tests/*.csproj' --logger trx --collect "Code coverage"
-- task: PublishTestResults@2
+- task: VSTest@2
   inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publishing BlazorClient App...'

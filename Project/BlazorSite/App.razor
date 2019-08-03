@@ -1,7 +1,5 @@
 ﻿@using Foundation.BlazorExtensions.CustomBlazorRouter
 @using Foundation.BlazorExtensions.Components
-
-
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
@@ -9,15 +7,13 @@
 
 @implements Microsoft.AspNetCore.Components.IComponent
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
-@inject SitecoreItemService _sitecoreItemService;
-<!--
-    Configuring this here is temporary. Later we'll move the app config
-    into Program.cs, and it won't be necessary to specify AppAssembly.
--->
-@*<Router AppAssembly=typeof(Program).Assembly />*@
-@*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
+@inject BlazorItemsService _blazorItemsService;
+
+
 
     <ContextStateProvider>
+        @*<Router AppAssembly=typeof(Program).Assembly />*@
+        @*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
         <CustomRouter RouteValues="@RoutesData" />
     </ContextStateProvider>
 
@@ -30,15 +26,11 @@
 
     protected override void OnInit()
     {
-
-        RoutesData = _sitecoreItemService.ConfigRoutes();
+        RoutesData = _blazorItemsService.CreateRoutes();
     }
 
     protected override void OnAfterRender()
     {
-        base.OnAfterRender();
-
-      
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
 

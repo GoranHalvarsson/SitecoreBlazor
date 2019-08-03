@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SitecoreBlazorHosted.Shared.Models
 {
-    public interface IBlazorField
-    {
-        string FieldName { get; set; }
-    }
+    //public interface IBlazorField
+    //{
+    //    string FieldName { get; set; }
+    //}
 }

@@ -7,6 +7,6 @@ namespace Foundation.BlazorExtensions.Components
     public abstract class BaseComponent : ComponentBase
     {
         [Parameter]
-        protected List<IBlazorSitecoreField> FieldsModel { get; set; }
+        protected List<IBlazorItemField> FieldsModel { get; set; }
     }
 }

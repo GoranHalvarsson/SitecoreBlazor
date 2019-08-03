@@ -23,14 +23,14 @@ namespace Foundation.BlazorExtensions
 
         public string RouteId { get; set; }
 
-        public IList<Tuple<DateTime, string, Route>> NavigatedRoutes { get; set; }
+        public IList<Tuple<DateTime, string, BlazorRoute>> NavigatedRoutes { get; set; }
 
-        public Route CurrentRoute { get; set; }
+        public BlazorRoute CurrentRoute { get; set; }
 
-        public List<IBlazorSitecoreField> GetFieldsFromCurrentRoute(string placeHolder = null)
+        public List<IBlazorItemField> GetFieldsFromCurrentRoute(string placeHolder = null)
         {
 
-            List<IBlazorSitecoreField> blazorFields = new List<IBlazorSitecoreField>();
+            List<IBlazorItemField> blazorFields = new List<IBlazorItemField>();
 
             if (CurrentRoute == null)
                 return null;
@@ -68,7 +68,7 @@ namespace Foundation.BlazorExtensions
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
 
-        public Route GetNavigatedRoute(string url)
+        public BlazorRoute GetNavigatedRoute(string url)
         {
             if (NavigatedRoutes == null)
                 return null;
@@ -78,25 +78,25 @@ namespace Foundation.BlazorExtensions
             return NavigatedRoutes.Where(navRoot => navRoot.Item2 == url && navRoot.Item1 <= CacheValidTo).Select(navroot => navroot.Item3).FirstOrDefault();
         }
 
-        public void AddNavigatedRoute(string url, Route routeToAdd)
+        public void AddNavigatedRoute(string url, BlazorRoute routeToAdd)
         {
             if (NavigatedRoutes == null)
-                NavigatedRoutes = new List<Tuple<DateTime, string, Route>>();
+                NavigatedRoutes = new List<Tuple<DateTime, string, BlazorRoute>>();
 
-            Tuple<DateTime, string, Route> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
+            Tuple<DateTime, string, BlazorRoute> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
 
             if (foundItem?.Item3 != null)
                 return;
 
-            NavigatedRoutes.Add(new Tuple<DateTime, string, Route>(DateTime.Now, url, routeToAdd));
+            NavigatedRoutes.Add(new Tuple<DateTime, string, BlazorRoute>(DateTime.Now, url, routeToAdd));
         }
 
-        public void RemoveNavigatedRoute(string url, Route routeToAdd)
+        public void RemoveNavigatedRoute(string url, BlazorRoute routeToAdd)
         {
             if (NavigatedRoutes == null)
                 return;
 
-            Tuple<DateTime, string, Route> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
+            Tuple<DateTime, string, BlazorRoute> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
 
             if (foundItem?.Item3 == null)
                 return;

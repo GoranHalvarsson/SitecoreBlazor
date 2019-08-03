@@ -130,12 +130,12 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
             var storedJson = "[\n\t{\n\t\t\"Item1\": \"2019-07-28T11:46:14.378+00:00\",\n\t\t\"Item2\": \"https://base/data/routes/en.json\",\n\t\t\"Item3\": {\r\n  \"Name\": \"carousels\",\r\n  \"Id\": \"8a80477e-7cb4-4cee-a035-b48ac118abe8\",\r\n  \"DisplayName\": null,\r\n  \"ItemLanguage\": \"en\",\r\n  \"Fields\": null,\r\n  \"Placeholders\": null\r\n}\n]";
-            var expectedData = new List<Tuple<DateTime, string, Route>>();
+            var expectedData = new List<Tuple<DateTime, string, BlazorRoute>>();
             expectedData.Add(
-                new Tuple<DateTime, string, Route>(
+                new Tuple<DateTime, string, BlazorRoute>(
                     DateTime.Parse("2019-07-28T11:46:14.378+00:00"),
                     "http://someurl",
-                    new Route()
+                    new BlazorRoute()
                     {
                         ItemLanguage = "en",
                         Id = "8a80477e-7cb4-4cee-a035-b48ac118abe8",
@@ -151,7 +151,7 @@ namespace Foundation.BlazorExtensions.Tests
 
 
             jsRuntime.NextInvocationResult = Task.FromResult(storedJson);
-            IList<Tuple<DateTime, string, Route>> result = null;
+            IList<Tuple<DateTime, string, BlazorRoute>> result = null;
 
             // Act
             try
@@ -185,12 +185,12 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
             var jsResultTask = Task.FromResult((object)null);
-            var data = new List<Tuple<DateTime, string, Route>>();
+            var data = new List<Tuple<DateTime, string, BlazorRoute>>();
             data.Add(
-                new Tuple<DateTime, string, Route>(
+                new Tuple<DateTime, string, BlazorRoute>(
                     DateTime.Parse("2019-07-28T11:46:14.378+00:00"),
                     "http://someurl",
-                    new Route()
+                    new BlazorRoute()
                     {
                         ItemLanguage = "en",
                         Id = "8a80477e-7cb4-4cee-a035-b48ac118abe8",
@@ -209,7 +209,7 @@ namespace Foundation.BlazorExtensions.Tests
                 PropertyNameCaseInsensitive = true
             };
 
-            var expectedJson = System.Text.Json.JsonSerializer.Serialize<IList<Tuple<DateTime, string, Route>>>(data, options);
+            var expectedJson = System.Text.Json.JsonSerializer.Serialize<IList<Tuple<DateTime, string, BlazorRoute>>>(data, options);
 
 
             // Act

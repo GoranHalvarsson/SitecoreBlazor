@@ -82,30 +82,30 @@ namespace Foundation.BlazorExtensions
         }
 
 
-        public Task<IList<Tuple<DateTime, string, Route>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
+        public Task<IList<Tuple<DateTime, string, BlazorRoute>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
         {
-            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
+            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
         }
 
-        public Task<IList<Tuple<DateTime, string, Route>>> GetNavigatedRouteAsync()
+        public Task<IList<Tuple<DateTime, string, BlazorRoute>>> GetNavigatedRouteAsync()
         {
-            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, _jsRuntime);
+            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, _jsRuntime);
         }
 
-        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, Route>> navigatedRoutes, IJSRuntime jsRuntime)
+        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes, IJSRuntime jsRuntime)
         {
 
             return navigatedRoutes == null
                 ? null
-                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
+                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
         }
 
-        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, Route>> navigatedRoutes)
+        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes)
         {
 
             return navigatedRoutes == null
                 ? null
-                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, Route>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, _jsRuntime);
+                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, _jsRuntime);
         }
 
 

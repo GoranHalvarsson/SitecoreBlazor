@@ -1,7 +1,7 @@
 ﻿using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Services;
 using SitecoreBlazorHosted.Shared.Models.Navigation;
-using SitecoreBlazorHosted.Shared.Models.Sitecore;
+using SitecoreBlazorHosted.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +10,12 @@ namespace Feature.Navigation.Repositories
 {
     public class NavigationRepository
     {
-        private readonly SitecoreItemService _sitecoreItemService;
+        private readonly BlazorItemsService _blazorItemsService;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public NavigationRepository(SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
+        public NavigationRepository(BlazorItemsService blazorItemsService, BlazorStateMachine blazorStateMachine)
         {
-            _sitecoreItemService = sitecoreItemService;
+            _blazorItemsService = blazorItemsService;
             _blazorStateMachine = blazorStateMachine;
         }
 
@@ -77,7 +77,7 @@ namespace Feature.Navigation.Repositories
 
         }
 
-        private NavigationItem CreateNavigationItem(ISitecoreItem item)
+        private NavigationItem CreateNavigationItem(IBlazorItem item)
         {
 
             return new NavigationItem
@@ -88,7 +88,7 @@ namespace Feature.Navigation.Repositories
             };
         }
 
-        private List<NavigationItem> GetChildNavigationItems(ISitecoreItem item)
+        private List<NavigationItem> GetChildNavigationItems(IBlazorItem item)
         {
             List<NavigationItem> children = new List<NavigationItem>();
 
@@ -109,7 +109,7 @@ namespace Feature.Navigation.Repositories
         public Task<List<NavigationItem>> GetMenu()
         {
             string currentLanguage = _blazorStateMachine.Language;
-            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(currentLanguage);
+            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(currentLanguage);
 
 
             List<NavigationItem> list = new List<NavigationItem>
@@ -122,7 +122,7 @@ namespace Feature.Navigation.Repositories
                    }
           };
 
-            foreach (ISitecoreItem item in rootItem.Children)
+            foreach (IBlazorItem item in rootItem.Children)
             {
 
                 if (item == null)

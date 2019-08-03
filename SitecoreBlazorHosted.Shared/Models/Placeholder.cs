@@ -16,7 +16,7 @@ namespace SitecoreBlazorHosted.Shared.Models
 
         public string Name { get; set; }
 
-        public Dictionary<string, BlazorField> Fields { get; set; }
+        public Dictionary<string, BlazorRouteField> Fields { get; set; }
 
         public Dictionary<string, IList<Placeholder>> Placeholders { get; set; }
         

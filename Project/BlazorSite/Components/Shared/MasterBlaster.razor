@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Routing
-
 @using Foundation.BlazorExtensions.Components
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
@@ -47,7 +46,8 @@
     [Parameter]
     protected string Language { get; set; }
 
-
+    [CascadingParameter]
+    protected ContextStateProvider ContextStateProvider { get; set; }
 
 
     protected override Task OnAfterRenderAsync()
@@ -57,7 +57,7 @@
 
     }
 
-    [CascadingParameter] ContextStateProvider ContextStateProvider { get; set; }
+
 
 
     protected override void OnInit()
@@ -90,7 +90,7 @@
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {
 
-            // THIS IS FOR BLAZOR-SERVER-SIDE - Cant call javascript before rendering is done 
+            // THIS IS FOR BLAZOR-SERVER-SIDE - Can't call javascript before rendering is done 
             try
             {
                 await _interopService.SetPageTitle(pageTitle);
@@ -101,7 +101,7 @@
                 Console.WriteLine(ex.Message);
             }
 
-            
+
         }
 
 

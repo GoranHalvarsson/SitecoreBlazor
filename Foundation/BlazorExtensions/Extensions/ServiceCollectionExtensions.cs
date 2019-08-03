@@ -1,7 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Factories;
 using Foundation.BlazorExtensions.Services;
 using Microsoft.Extensions.DependencyInjection;
-using SitecoreBlazorHosted.Shared;
 
 namespace Foundation.BlazorExtensions.Extensions
 {
@@ -17,7 +16,7 @@ namespace Foundation.BlazorExtensions.Extensions
         public static void AddForFoundationBlazorExtensions(this IServiceCollection serviceCollection)
         {
             AddStorage(serviceCollection);
-            serviceCollection.AddScoped<SitecoreItemService>();
+            serviceCollection.AddScoped<BlazorItemsService>();
             serviceCollection.AddScoped<InteropService>();
             serviceCollection.AddScoped<BlazorStateMachineResolver>();
             serviceCollection.AddScoped<RouteService>();

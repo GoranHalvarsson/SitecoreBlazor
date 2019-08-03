@@ -1,27 +1,25 @@
 ﻿using Foundation.BlazorExtensions.CustomBlazorRouter;
-using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
-using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System.Collections.Generic;
 
 namespace Foundation.BlazorExtensions.Services
 {
-    public class SitecoreItemService
+    public class BlazorItemsService
     {
         private const string PageComponent = "Project.BlazorSite.Components.Shared.MasterBlaster, Project.BlazorSite";
-        public ScItem GetSitecoreItemRootMock(string language = "en")
+        public BlazorItem GetBlazorItemRootMock(string language = "en")
         {
 
             return language == "sv"
-                      ? new ScItem()
+                      ? new BlazorItem()
                       {
                           Name = "Home",
                           Url = "/sv",
                           Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
                           Language = "sv",
-                          Fields = new List<IBlazorSitecoreField>()
+                          Fields = new List<IBlazorItemField>()
                   {
-                        new BlazorSitecoreField<string>
+                        new BlazorItemField<string>
                         {
                             FieldName = "NavigationTitle",
                             Value = "Hem",
@@ -29,22 +27,22 @@ namespace Foundation.BlazorExtensions.Services
                             Type =  FieldTypes.PlainTextField
                         }
                   },
-                          Children = new List<ISitecoreItem>()
+                          Children = new List<IBlazorItem>()
                       {
-                                new ScItem()
+                                new BlazorItem()
                                 {
                                     Name = "Habitat stuff",
                                     Url = "/sv/habitat-stuff",
                                     Id = "762684e7-480b-41d6-82de-8549babe95e3",
                                     Language = "sv",
-                                    Parent = new ScItem()
+                                    Parent = new BlazorItem()
                                     {
                                         Name = "Home",
                                         Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386"
                                     },
-                                    Fields = new List<IBlazorSitecoreField>()
+                                    Fields = new List<IBlazorItemField>()
                                     {
-                                            new BlazorSitecoreField<string>
+                                            new BlazorItemField<string>
                                             {
                                                 FieldName = "NavigationTitle",
                                                 Value = "Habitat grejer",
@@ -52,17 +50,17 @@ namespace Foundation.BlazorExtensions.Services
                                                 Type =  FieldTypes.PlainTextField
                                             }
                                     },
-                                    Children = new List<ISitecoreItem>()
+                                    Children = new List<IBlazorItem>()
                                     {
-                                        new ScItem()
+                                        new BlazorItem()
                                         {
                                             Name = "Carousels",
                                             Url = "/sv/habitat-stuff/carousels",
                                             Id = "8a80477e-7cb4-4cee-a035-b48ac118abe8",
                                             Language = "sv",
-                                            Fields = new List<IBlazorSitecoreField>()
+                                            Fields = new List<IBlazorItemField>()
                                             {
-                                                    new BlazorSitecoreField<string>
+                                                    new BlazorItemField<string>
                                                     {
                                                         FieldName = "NavigationTitle",
                                                         Value = "Karuseller",
@@ -70,22 +68,22 @@ namespace Foundation.BlazorExtensions.Services
                                                         Type =  FieldTypes.PlainTextField
                                                     }
                                             },
-                                            Parent = new ScItem()
+                                            Parent = new BlazorItem()
                                             {
                                                 Name = "Habitat stuff",
                                                 Id = "762684e7-480b-41d6-82de-8549babe95e3"
                                             }
 
                                         },
-                                        new ScItem()
+                                        new BlazorItem()
                                         {
                                             Name = "Teasers",
                                             Url = "/sv/habitat-stuff/teasers",
                                             Id="f30c4470-07d4-4652-9cb6-bf8ac43d1694",
                                             Language = "sv",
-                                            Fields = new List<IBlazorSitecoreField>()
+                                            Fields = new List<IBlazorItemField>()
                                             {
-                                                    new BlazorSitecoreField<string>
+                                                    new BlazorItemField<string>
                                                     {
                                                         FieldName = "NavigationTitle",
                                                         Value = "Puffar",
@@ -93,7 +91,7 @@ namespace Foundation.BlazorExtensions.Services
                                                         Type =  FieldTypes.PlainTextField
                                                     }
                                             },
-                                            Parent = new ScItem()
+                                            Parent = new BlazorItem()
                                             {
                                                 Name = "Habitat stuff",
                                                 Id = "762684e7-480b-41d6-82de-8549babe95e3"
@@ -103,15 +101,15 @@ namespace Foundation.BlazorExtensions.Services
                                     }
 
                                 },
-                                new ScItem()
+                                new BlazorItem()
                                 {
                                     Name = "Weather",
                                     Url = "/sv/weather",
                                     Id = "a2c07e48-9c6a-466e-b55d-baac62e4dfc7",
                                     Language = "sv",
-                                    Fields = new List<IBlazorSitecoreField>()
+                                    Fields = new List<IBlazorItemField>()
                                     {
-                                            new BlazorSitecoreField<string>
+                                            new BlazorItemField<string>
                                             {
                                                 FieldName = "NavigationTitle",
                                                 Value = "Väder",
@@ -119,7 +117,7 @@ namespace Foundation.BlazorExtensions.Services
                                                 Type =  FieldTypes.PlainTextField
                                             }
                                     },
-                                    Parent = new ScItem()
+                                    Parent = new BlazorItem()
                                     {
                                         Name = "Home",
                                         Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386"
@@ -130,15 +128,15 @@ namespace Foundation.BlazorExtensions.Services
 
                       }
                       }
-                      : new ScItem()
+                      : new BlazorItem()
                       {
                           Name = "Home",
                           Url = "/en",
                           Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386",
                           Language = "en",
-                          Fields = new List<IBlazorSitecoreField>()
+                          Fields = new List<IBlazorItemField>()
                       {
-                            new BlazorSitecoreField<string>
+                            new BlazorItemField<string>
                             {
                                 FieldName = "NavigationTitle",
                                 Value = "Home",
@@ -146,22 +144,22 @@ namespace Foundation.BlazorExtensions.Services
                                 Type =  FieldTypes.PlainTextField
                             }
                       },
-                          Children = new List<ISitecoreItem>()
+                          Children = new List<IBlazorItem>()
                       {
-                              new ScItem()
+                              new BlazorItem()
                                 {
                                     Name = "Habitat stuff",
                                     Url = "/en/habitat-stuff",
                                     Id = "762684e7-480b-41d6-82de-8549babe95e3",
                                     Language = "en",
-                                    Parent = new ScItem()
+                                    Parent = new BlazorItem()
                                     {
                                         Name = "Home",
                                         Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386"
                                     },
-                                    Fields = new List<IBlazorSitecoreField>()
+                                    Fields = new List<IBlazorItemField>()
                                     {
-                                            new BlazorSitecoreField<string>
+                                            new BlazorItemField<string>
                                             {
                                                 FieldName = "NavigationTitle",
                                                 Value = "Habitat stuff",
@@ -169,17 +167,17 @@ namespace Foundation.BlazorExtensions.Services
                                                 Type =  FieldTypes.PlainTextField
                                             }
                                     },
-                                    Children = new List<ISitecoreItem>()
+                                    Children = new List<IBlazorItem>()
                                     {
-                                        new ScItem()
+                                        new BlazorItem()
                                         {
                                             Name = "Carousels",
                                             Url = "/en/habitat-stuff/carousels",
                                             Id = "8a80477e-7cb4-4cee-a035-b48ac118abe8",
                                             Language = "en",
-                                            Fields = new List<IBlazorSitecoreField>()
+                                            Fields = new List<IBlazorItemField>()
                                             {
-                                                    new BlazorSitecoreField<string>
+                                                    new BlazorItemField<string>
                                                     {
                                                         FieldName = "NavigationTitle",
                                                         Value = "Carousels",
@@ -187,22 +185,22 @@ namespace Foundation.BlazorExtensions.Services
                                                         Type =  FieldTypes.PlainTextField
                                                     }
                                             },
-                                            Parent = new ScItem()
+                                            Parent = new BlazorItem()
                                             {
                                                 Name = "Habitat stuff",
                                                 Id = "762684e7-480b-41d6-82de-8549babe95e3"
                                             }
 
                                         },
-                                        new ScItem()
+                                        new BlazorItem()
                                         {
                                             Name = "Teasers",
                                             Url = "/en/habitat-stuff/teasers",
                                             Id="f30c4470-07d4-4652-9cb6-bf8ac43d1694",
                                             Language = "en",
-                                            Fields = new List<IBlazorSitecoreField>()
+                                            Fields = new List<IBlazorItemField>()
                                             {
-                                                    new BlazorSitecoreField<string>
+                                                    new BlazorItemField<string>
                                                     {
                                                         FieldName = "NavigationTitle",
                                                         Value = "Teasers",
@@ -210,7 +208,7 @@ namespace Foundation.BlazorExtensions.Services
                                                         Type =  FieldTypes.PlainTextField
                                                     }
                                             },
-                                            Parent = new ScItem()
+                                            Parent = new BlazorItem()
                                             {
                                                 Name = "Habitat stuff",
                                                 Id = "762684e7-480b-41d6-82de-8549babe95e3"
@@ -220,15 +218,15 @@ namespace Foundation.BlazorExtensions.Services
                                     }
 
                                 },
-                                new ScItem()
+                                new BlazorItem()
                                 {
                                     Name = "Weather",
                                     Url = "/en/weather",
                                     Id = "a2c07e48-9c6a-466e-b55d-baac62e4dfc7",
                                     Language = "en",
-                                    Fields = new List<IBlazorSitecoreField>()
+                                    Fields = new List<IBlazorItemField>()
                                     {
-                                            new BlazorSitecoreField<string>
+                                            new BlazorItemField<string>
                                             {
                                                 FieldName = "NavigationTitle",
                                                 Value = "Weather",
@@ -236,7 +234,7 @@ namespace Foundation.BlazorExtensions.Services
                                                 Type =  FieldTypes.PlainTextField
                                             }
                                     },
-                                    Parent = new ScItem()
+                                    Parent = new BlazorItem()
                                     {
                                         Name = "Home",
                                         Id = "dac24edd-44fb-42ef-9ecd-1e8daf706386"
@@ -251,10 +249,10 @@ namespace Foundation.BlazorExtensions.Services
 
         }
 
-        public RouterDataRoot ConfigRoutes(string language = "en")
+        public RouterDataRoot CreateRoutes(string language = "en")
         {
 
-            ISitecoreItem rootItem = GetSitecoreItemRootMock();
+            IBlazorItem rootItem = GetBlazorItemRootMock();
 
             RouterDataRoot routesData = new RouterDataRoot()
             {
@@ -270,7 +268,7 @@ namespace Foundation.BlazorExtensions.Services
             };
 
             //Rest of menu items
-            foreach (ISitecoreItem item in rootItem.Children)
+            foreach (IBlazorItem item in rootItem.Children)
             {
                 routesData.Routes.Add(new RouterData()
                 {
@@ -285,7 +283,7 @@ namespace Foundation.BlazorExtensions.Services
 
 
 
-            List<RouterData> GetChildren(ISitecoreItem sitecoreItem)
+            List<RouterData> GetChildren(IBlazorItem sitecoreItem)
             {
                 List<RouterData> children = new List<RouterData>();
 
@@ -294,7 +292,7 @@ namespace Foundation.BlazorExtensions.Services
                     return null;
                 }
 
-                foreach (ISitecoreItem child in sitecoreItem.Children)
+                foreach (IBlazorItem child in sitecoreItem.Children)
                 {
                     children.Add(new RouterData()
                     {

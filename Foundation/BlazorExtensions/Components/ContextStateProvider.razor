@@ -22,14 +22,14 @@ else
 
     [Parameter] public RenderFragment ChildContent { get; set; }
 
-    public bool _hasLoaded;
+    public bool _hasLoaded = true;
 
-    protected override async Task OnInitAsync()
-    {
-        await LoadStateAsync();
-        _hasLoaded = true;
+    //protected override async Task OnInitAsync()
+    //{
+    //    await LoadStateAsync();
+    //    _hasLoaded = true;    
 
-    }
+    //}
 
 
     public Task SaveChangesAsync()

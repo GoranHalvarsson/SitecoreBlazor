@@ -1,10 +1,10 @@
-﻿namespace SitecoreBlazorHosted.Shared.Models.Sitecore
+﻿namespace SitecoreBlazorHosted.Shared.Models
 {
 
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ScItem : ISitecoreItem
+    public class BlazorItem : IBlazorItem
     {
         public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";
 
@@ -22,8 +22,8 @@
         }
         public string Id { get;  set; }
         public string Path { get;  set; }
-        public ISitecoreItem Parent { get; set; }
-        public IEnumerable<ISitecoreItem> Children { get; set; }
-        public List<IBlazorSitecoreField> Fields { get; set; }
+        public IBlazorItem Parent { get; set; }
+        public IEnumerable<IBlazorItem> Children { get; set; }
+        public List<IBlazorItemField> Fields { get; set; }
     }
 }

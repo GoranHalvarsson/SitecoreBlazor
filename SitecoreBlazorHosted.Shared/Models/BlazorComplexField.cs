@@ -8,6 +8,6 @@ namespace SitecoreBlazorHosted.Shared.Models
     {
         public string Id { get; set; }
         public string Url { get; set; }
-        public Dictionary<string, BlazorField> Fields { get; set; }
+        public Dictionary<string, BlazorRouteField> Fields { get; set; }
     }
 }

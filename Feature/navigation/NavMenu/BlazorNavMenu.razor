@@ -26,10 +26,10 @@
 else
 {
 
-    <button class="navbar-toggler" @onclick=@ToggleNavMenu>
+    <button class="navbar-toggler" @onclick=ToggleNavMenu>
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class=@(_collapseNavMenu ? "collapse navbar-collapse" : "navbar-collapse") @onclick=@ToggleNavMenu>
+    <div class=@(_collapseNavMenu ? "collapse navbar-collapse" : "navbar-collapse") @onclick=ToggleNavMenu>
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item"></li>
@@ -48,7 +48,7 @@ else
                 {
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="@Onclick">
+                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="Onclick">
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()
                         </a>
                         <div class="@ClassName">

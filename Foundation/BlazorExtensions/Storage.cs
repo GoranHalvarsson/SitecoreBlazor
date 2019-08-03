@@ -83,15 +83,15 @@
     /// <summary>
     /// CustomTupleConverter is not working, UNDER CONSTRUCTION...
     /// </summary>
-    public class CustomTupleConverter : JsonConverter<Tuple<DateTime, string, Route>>
+    public class CustomTupleConverter : JsonConverter<Tuple<DateTime, string, BlazorRoute>>
     {
         public CustomTupleConverter() { }
 
-        public override Tuple<DateTime, string, Route> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Tuple<DateTime, string, BlazorRoute> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
 
 
-            Route route = new Route();
+            BlazorRoute route = new BlazorRoute();
             string propertyName = string.Empty;
 
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -167,7 +167,7 @@
 
                 if (reader.TokenType == JsonTokenType.EndObject)
                 {
-                    Tuple<DateTime, string, Route> tuple = new Tuple<DateTime, string, Route>(item1Value, item2Value, route);
+                    Tuple<DateTime, string, BlazorRoute> tuple = new Tuple<DateTime, string, BlazorRoute>(item1Value, item2Value, route);
                     return tuple;
                 }
 
@@ -179,14 +179,14 @@
         }
 
 
-        public override void Write(Utf8JsonWriter writer, Tuple<DateTime, string, Route> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Tuple<DateTime, string, BlazorRoute> value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
 
 
             writer.WriteString("Item1", JsonSerializer.Serialize<DateTime>(value.Item1));
             writer.WriteString("Item2", value.Item2);
-            writer.WriteString("Item3", JsonSerializer.Serialize<Route>(value.Item3));
+            writer.WriteString("Item3", JsonSerializer.Serialize<BlazorRoute>(value.Item3));
 
 
             writer.WriteEndObject();

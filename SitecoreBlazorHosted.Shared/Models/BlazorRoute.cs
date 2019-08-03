@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SitecoreBlazorHosted.Shared.Models
 {
-    public class Route
+    public class BlazorRoute
     {
         public string Name { get; set; }
 
@@ -18,7 +14,7 @@ namespace SitecoreBlazorHosted.Shared.Models
 
         public string ItemLanguage { get; set; }
 
-        public Dictionary<string, BlazorField> Fields { get; set; }
+        public Dictionary<string, BlazorRouteField> Fields { get; set; }
 
         public Dictionary<string,IList<Placeholder>> Placeholders { get; set; }
        

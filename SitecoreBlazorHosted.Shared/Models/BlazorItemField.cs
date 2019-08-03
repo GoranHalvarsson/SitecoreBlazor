@@ -5,14 +5,14 @@ using System.Text;
 
 namespace SitecoreBlazorHosted.Shared.Models
 {
-    public class BlazorField
+    public class BlazorItemField<T> : IBlazorItemField
     {
-        public Object Value { get; set; }
-
-        public List<BlazorFieldComplex> Values { get; set; }
+        public T Value { get; set; }
 
         public string Editable { get; set; }
 
         public string Type { get; set; }
+
+        public string FieldName { get; set; }
     }
 }

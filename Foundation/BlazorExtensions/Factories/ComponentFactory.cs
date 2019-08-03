@@ -9,12 +9,12 @@ namespace Foundation.BlazorExtensions.Factories
 {
     public class ComponentFactory
     {
-        private IBlazorSitecoreField CreateSitecoreField<T>(KeyValuePair<string, BlazorField> sitecoreField)
+        private IBlazorItemField CreateSitecoreField<T>(KeyValuePair<string, BlazorRouteField> sitecoreField)
         {
             if (sitecoreField.Value == null)
                 return null;
 
-            BlazorSitecoreField<T> field = null;
+            BlazorItemField<T> field = null;
 
             T fieldValue = default;
 
@@ -36,7 +36,7 @@ namespace Foundation.BlazorExtensions.Factories
 
 
 
-                field = new BlazorSitecoreField<T>
+                field = new BlazorItemField<T>
                 {
                     FieldName = sitecoreField.Key,
                     Value = fieldValue,
@@ -56,28 +56,28 @@ namespace Foundation.BlazorExtensions.Factories
         }
 
 
-        private Dictionary<string, BlazorField> CreateDefaultField()
+        private Dictionary<string, BlazorRouteField> CreateDefaultField()
         {
-            SitecoreBlazorHosted.Shared.Models.BlazorField defaultField = new BlazorField()
+            SitecoreBlazorHosted.Shared.Models.BlazorRouteField defaultField = new BlazorRouteField()
             {
                 Editable = null,
                 Value = "",
                 Type = FieldTypes.PlainTextField
             };
 
-            return new Dictionary<string, BlazorField>()
+            return new Dictionary<string, BlazorRouteField>()
             {
                { "DefaultField",defaultField }
             };
             
         }
 
-        private IBlazorSitecoreField CreateComplexSitecoreField<T>(KeyValuePair<string, BlazorField> field) where T : class
+        private IBlazorItemField CreateComplexSitecoreField<T>(KeyValuePair<string, BlazorRouteField> field) where T : class
         {
             if (field.Value == null)
                 return null;
 
-            BlazorSitecoreField<T> sitecoreField = null;
+            BlazorItemField<T> sitecoreField = null;
 
             T fieldValue = default;
 
@@ -127,7 +127,7 @@ namespace Foundation.BlazorExtensions.Factories
                 }
 
 
-                sitecoreField = new BlazorSitecoreField<T>
+                sitecoreField = new BlazorItemField<T>
                 {
                     FieldName = field.Key,
                     Value = fieldValue,
@@ -146,16 +146,16 @@ namespace Foundation.BlazorExtensions.Factories
             return sitecoreField;
 
         }
-        public List<IBlazorSitecoreField> CreateComponentModel(Dictionary<string, BlazorField> fields)
+        public List<IBlazorItemField> CreateComponentModel(Dictionary<string, BlazorRouteField> fields)
         {
             if (fields == null || !fields.Any())
                 fields = CreateDefaultField();
 
 
-            List<IBlazorSitecoreField> list = new List<IBlazorSitecoreField>();
+            List<IBlazorItemField> list = new List<IBlazorItemField>();
 
 
-            foreach (KeyValuePair<string, BlazorField> field in fields)
+            foreach (KeyValuePair<string, BlazorRouteField> field in fields)
             {
                 if (field.Value == null)
                     continue;
@@ -210,7 +210,7 @@ namespace Foundation.BlazorExtensions.Factories
             {
                 Type componentType = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
 
-                IList<IBlazorSitecoreField> componentModel = CreateComponentModel(placeholderData.Fields);
+                IList<IBlazorItemField> componentModel = CreateComponentModel(placeholderData.Fields);
 
 
                 return BuildRenderTree =>

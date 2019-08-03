@@ -2,14 +2,12 @@
 namespace SitecoreBlazorHosted.Shared.Models.Navigation
 {
 
-    using SitecoreBlazorHosted.Shared.Models.Sitecore;
-    using System;
+    using SitecoreBlazorHosted.Shared.Models;
     using System.Collections.Generic;
-    using System.Text;
 
     public class NavigationItem
     {
-        public ISitecoreItem Item  { get; set; }
+        public IBlazorItem Item  { get; set; }
         public string Id { get; set; }
         public string Url { get; set; }
         public int Level { get; set; }

@@ -1,7 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components;
 using SitecoreBlazorHosted.Shared.Models;
-using SitecoreBlazorHosted.Shared.Models.Sitecore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,14 +10,14 @@ namespace Foundation.BlazorExtensions.Services
     {
         private readonly IRestService _restService;
         private readonly IUriHelper _uriHelper;
-        private readonly SitecoreItemService _sitecoreItemService;
+        private readonly BlazorItemsService _blazorItemsService;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public RouteService(IRestService restService, IUriHelper uriHelper, SitecoreItemService sitecoreItemService, BlazorStateMachine blazorStateMachine)
+        public RouteService(IRestService restService, IUriHelper uriHelper, BlazorItemsService blazorItemsService, BlazorStateMachine blazorStateMachine)
         {
             _restService = restService;
             _uriHelper = uriHelper;
-            _sitecoreItemService = sitecoreItemService;
+            _blazorItemsService = blazorItemsService;
             _blazorStateMachine = blazorStateMachine;
         }
 
@@ -33,7 +32,7 @@ namespace Foundation.BlazorExtensions.Services
             if (hasRouteError.HasValue && hasRouteError.Value)
                 return $"{baseUrl}/error/{language}.json";
            
-            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(language);
+            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(language);
 
             if (rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl) || relativeUrl == "")
             {
@@ -59,7 +58,7 @@ namespace Foundation.BlazorExtensions.Services
             if (string.IsNullOrWhiteSpace(_blazorStateMachine.CurrentRoute?.ItemLanguage))
                 return (false, $"/{relativeUrl}");
 
-            ISitecoreItem rootItem = _sitecoreItemService.GetSitecoreItemRootMock(_blazorStateMachine.CurrentRoute.ItemLanguage);
+            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(_blazorStateMachine.CurrentRoute.ItemLanguage);
 
             return _blazorStateMachine.CurrentRoute != null && rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl && item.Id == _blazorStateMachine.CurrentRoute.Id)
               ? (true, $"/{relativeUrl}")
@@ -70,10 +69,10 @@ namespace Foundation.BlazorExtensions.Services
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
-            Route routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
+            BlazorRoute routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
             if (routeExists == null) {
-                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<Route>(routeUrl);
+                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<BlazorRoute>(routeUrl);
                 _blazorStateMachine.AddNavigatedRoute(routeUrl, _blazorStateMachine.CurrentRoute);
             }
             else

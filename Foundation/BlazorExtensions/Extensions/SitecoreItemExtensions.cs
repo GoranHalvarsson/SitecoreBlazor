@@ -1,4 +1,4 @@
-﻿using SitecoreBlazorHosted.Shared.Models.Sitecore;
+﻿using SitecoreBlazorHosted.Shared.Models;
 using System.Collections.Generic;
 
 namespace Foundation.BlazorExtensions.Extensions
@@ -6,21 +6,21 @@ namespace Foundation.BlazorExtensions.Extensions
   public static class SitecoreItemExtensions
   {
 
-    public static IEnumerable<ISitecoreItem> GetItSelfAndDescendants(this ISitecoreItem thisItem)
+    public static IEnumerable<IBlazorItem> GetItSelfAndDescendants(this IBlazorItem thisItem)
     {
       yield return thisItem;
 
         if (!thisItem.HasChildren) 
             yield break;
         
-        foreach (ISitecoreItem child in thisItem.Children)
+        foreach (IBlazorItem child in thisItem.Children)
         {
             yield return child;
 
             if (!child.HasChildren) 
                 continue;
             
-            foreach (ISitecoreItem i in GetItSelfAndDescendants(child))
+            foreach (IBlazorItem i in GetItSelfAndDescendants(child))
             {
                 yield return i;
             }

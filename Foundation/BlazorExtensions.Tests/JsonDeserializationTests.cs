@@ -23,8 +23,8 @@ namespace BlazorExtensions.Tests
                 PropertyNameCaseInsensitive = true
             };
 
-            Route deserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<Route>(data);
-            Route deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
+            BlazorRoute deserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject<BlazorRoute>(data);
+            BlazorRoute deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<BlazorRoute>(data, options);
 
             Assert.Equal(deserializedRouteUsingNewtonSoft.Placeholders.Count, deserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
         }
@@ -45,11 +45,11 @@ namespace BlazorExtensions.Tests
                 PropertyNameCaseInsensitive = true
             };
 
-            Route deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Route>(data, options);
+            BlazorRoute deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<BlazorRoute>(data, options);
             
-            Tuple<DateTime, string, Route> someData = new Tuple<DateTime, string, Route>(DateTime.Now,"/en/carousel", deserializedRouteUsingSystemTextJson);
+            Tuple<DateTime, string, BlazorRoute> someData = new Tuple<DateTime, string, BlazorRoute>(DateTime.Now,"/en/carousel", deserializedRouteUsingSystemTextJson);
             
-            string jsonResult = System.Text.Json.JsonSerializer.Serialize<Tuple<DateTime, string, Route>>(someData, options);
+            string jsonResult = System.Text.Json.JsonSerializer.Serialize<Tuple<DateTime, string, BlazorRoute>>(someData, options);
 
             Assert.Contains(@"""Name"":""carousels""", jsonResult);
         }

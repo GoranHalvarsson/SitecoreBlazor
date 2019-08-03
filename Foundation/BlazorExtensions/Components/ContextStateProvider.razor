@@ -20,9 +20,10 @@ else
 
 @code {
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
 
-    public bool _hasLoaded;
+    protected bool _hasLoaded;
 
     protected override async Task OnInitAsync()
     {

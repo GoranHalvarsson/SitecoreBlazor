@@ -6,16 +6,10 @@
 
 
 
-@if (_hasLoaded)
-{
     <CascadingValue Value="@this">
         @ChildContent
     </CascadingValue>
-}
-else
-{
-    <p>Loading...</p>
-}
+
 
 
 @code {

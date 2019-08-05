@@ -4,7 +4,7 @@
   "libraries": [
     {
       "library": "bootstrap@4.3.1",
-      "destination": "Sass/vendors/bootstrap",
+      "destination": "Sass/Vendors/bootstrap",
       "files": [
         "scss/mixins/_alert.scss",
         "scss/mixins/_background-variant.scss",

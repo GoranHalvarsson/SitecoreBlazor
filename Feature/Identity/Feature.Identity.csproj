@@ -38,4 +38,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Sass\Copyright.scss">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+  </ItemGroup>
+
 </Project>

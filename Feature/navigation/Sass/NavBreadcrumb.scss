@@ -1,0 +1,89 @@
+﻿.breadcrumb {
+    padding: 8px 0;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: transparent;
+    border-radius: 0
+}
+
+.breadcrumb > li {
+display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+    content: "\\ ";
+    padding: 0 5px;
+    color: #586071
+}
+
+.breadcrumb > .active {
+color: #2e384e
+}
+
+.breadcrumb > li {
+font-size: 16px;
+font-weight: normal
+}
+
+.ie9 .breadcrumb > li, .breadcrumb > li .lte-ie8 {
+    margin-right: 1px
+}
+
+@media all and (max-width: 767px) {
+    .breadcrumb > li {
+        font-size: 12px
+    }
+}
+
+.breadcrumb > li + li:before {
+    color: #586071
+}
+
+.bg-primary .breadcrumb > li + li:before, .bg-secondary .breadcrumb > li + li:before, .bg-dark .breadcrumb > li + li:before, .bg-media .breadcrumb > li + li:before {
+    color: #fff
+}
+
+.bg-white .breadcrumb > li + li:before {
+    color: #000
+}
+
+@media all and (max-width: 767px) {
+    .breadcrumb > li + li:before {
+        padding: 0
+    }
+}
+
+.breadcrumb > li a {
+    color: #586071
+}
+
+.bg-primary .breadcrumb > li a, .bg-secondary .breadcrumb > li a, .bg-dark .breadcrumb > li a, .bg-media .breadcrumb > li a {
+    color: #fff
+}
+
+.bg-white .breadcrumb > li a {
+    color: #000
+}
+
+.breadcrumb > li.active {
+    font-weight: 700
+}
+
+@media all and (max-width: 767px) {
+    .breadcrumb > li.active {
+        font-size: 19px
+    }
+}
+
+.bg-primary .breadcrumb > li.active, .bg-secondary .breadcrumb > li.active, .bg-dark .breadcrumb > li.active, .bg-media .breadcrumb > li.active {
+    color: #fff
+}
+
+.bg-white .breadcrumb > li.active {
+    color: #000
+}
+
+.breadcrumb > li.active:before {
+    font-weight: normal;
+    font-size: 16px
+}

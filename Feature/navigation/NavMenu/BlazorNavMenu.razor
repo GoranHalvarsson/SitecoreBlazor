@@ -4,7 +4,7 @@
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
-@using Microsoft.JSInterop
+
 @using Foundation.BlazorExtensions.Components
 
 @inherits BaseComponent
@@ -14,6 +14,7 @@
 @inject LayoutService _layoutService;
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
 @inject IUriHelper _uriHelper;
+@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 
 
 
@@ -26,10 +27,10 @@
 else
 {
 
-    <button class="navbar-toggler" @onclick=ToggleNavMenu>
+    <button class="navbar-toggler" @onclick=_blazorStateMachine.ToggleNavBar>
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class=@(_collapseNavMenu ? "collapse navbar-collapse" : "navbar-collapse") @onclick=ToggleNavMenu>
+    <div class=@(_blazorStateMachine.IsNavBarCollapsed ? "collapse navbar-collapse" : "navbar-collapse")>
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item"></li>
@@ -39,7 +40,7 @@ else
                 if (item.Children == null || !item.Children.Any())
                 {
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="@item.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>
+                        <NavLink class="nav-link" href="@item.Url.AddBaseUrl(_uriHelper)" @onclick="_blazorStateMachine.ToggleNavBar"  Match=NavLinkMatch.All>
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
                         </NavLink>
                     </li>
@@ -48,7 +49,7 @@ else
                 {
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="Onclick">
+                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="ToggleSubMenu">
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()
                         </a>
                         <div class="@ClassName">
@@ -60,7 +61,7 @@ else
                                     continue;
                                 }
 
-                                <NavLink class="dropdown-item" href="@child.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
+                                <NavLink class="dropdown-item" @onclick="_blazorStateMachine.ToggleNavBar" href="@child.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
 
                             }
 
@@ -71,12 +72,17 @@ else
 
             }
 
-
-
         </ul>
 
+        <ul class="nav navbar-nav navbar-right">
+            <BlazorPlaceholder Name="navbar-activity-item">
+                @ChildContent
+            </BlazorPlaceholder>
+        </ul>
+      
 
     </div>
+
 }
 
 
@@ -85,24 +91,18 @@ else
 
 @code{
 
-   
     List<NavigationItem> NavigationItems { get; set; }
+
+
+    [Parameter]
+    protected RenderFragment ChildContent { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
         NavigationItems = await _navigationRepository.GetMenu();
     }
 
-
-    bool _collapseNavMenu = true;
-
-    void ToggleNavMenu()
-    {
-        _collapseNavMenu = !_collapseNavMenu;
-    }
-
-
-
+    
     string ClassName
     {
         get
@@ -113,7 +113,7 @@ else
     }
 
     bool IsOpen { get; set; }
-    void Onclick(UIMouseEventArgs e)
+    void ToggleSubMenu(UIMouseEventArgs e)
     {
         IsOpen = !IsOpen;
         StateHasChanged();
@@ -127,7 +127,7 @@ else
         _uriHelper.OnLocationChanged += OnLocationChanges;
     }
 
-  
+
     public void Dispose()
     {
         _uriHelper.OnLocationChanged -= OnLocationChanges;

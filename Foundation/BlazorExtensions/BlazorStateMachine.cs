@@ -23,6 +23,13 @@ namespace Foundation.BlazorExtensions
 
         public string RouteId { get; set; }
 
+        public bool IsNavBarCollapsed { get; set; } = true;
+
+        public void ToggleNavBar()
+        {
+            IsNavBarCollapsed = !IsNavBarCollapsed;
+        }
+
         public IList<Tuple<DateTime, string, BlazorRoute>> NavigatedRoutes { get; set; }
 
         public BlazorRoute CurrentRoute { get; set; }
@@ -62,8 +69,6 @@ namespace Foundation.BlazorExtensions
 
         }
 
-
-        
 
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 

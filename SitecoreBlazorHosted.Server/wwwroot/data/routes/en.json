@@ -41,15 +41,6 @@
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
               "Fields": {},
-              "Placeholders": {}
-            }
-          ],
-          "navbar-activity": [
-            {
-              "Assembly": "Project.BlazorSite",
-              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
-              "Name": "navbarActivity",
-              "Fields": {},
               "Placeholders": {
                 "navbar-activity-item": [
                   {
@@ -116,10 +107,10 @@
                   "Type": "HtmlField"
                 },
                 "ShowInNavigation": {
-                  "Value": true,
-                  "Type": "CheckboxField"
+                    "Value": true,
+                    "Type": "CheckboxField"
                 }
-
+                
               },
               "Placeholders": {}
             }

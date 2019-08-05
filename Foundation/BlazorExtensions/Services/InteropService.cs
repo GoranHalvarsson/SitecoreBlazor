@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Foundation.BlazorExtensions.TemporaryFixes;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
@@ -7,6 +8,7 @@ namespace Foundation.BlazorExtensions.Services
     {
         private readonly IJSRuntime _jsRuntime;
 
+        
         public InteropService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
@@ -23,7 +25,6 @@ namespace Foundation.BlazorExtensions.Services
         {
             return _jsRuntime.InvokeAsync<string>("blazorExtensions.setPageTitle", pageTitle);
         }
-
 
 
     }

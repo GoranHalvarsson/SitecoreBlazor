@@ -59,6 +59,18 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Sass\PageHeader.scss">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+    <None Update="Sass\PageHeaderCarousel.scss">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+    <None Update="Sass\PageHeaderDescription.scss">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+  </ItemGroup>
+
 
 
 </Project>

@@ -1,6 +1,4 @@
-﻿@using System.Net.Http
-@using Foundation.BlazorExtensions.Services
-@using SitecoreBlazorHosted.Shared.Models
+﻿@using SitecoreBlazorHosted.Shared.Models
 @using Foundation.BlazorExtensions.Components
 
 @inherits BaseComponent
@@ -21,13 +19,13 @@ else
 
     <li class="dropdown">
         <button type="button" class="btn  btn-light  dropdown-toggle " @onclick="() => ToggleOpen()" aria-haspopup="true">
-            @_languageService.Get(CurrentLanguage)?.NativeName
+            @_languageService.Get(_blazorStateMachine.Language)?.NativeName
         </button>
-        <div class="@ClassName">
+        <div class="@ClassName" onblur="() => ToggleOpen()">
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" @onclick="() => ToggleOpen()" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" @onclick="CloseNavMenuAndNavBar" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -37,20 +35,15 @@ else
 
 @code{
 
-   
-    private string CurrentLanguage { get; set; }
 
     private IList<Language> ValidLanguages { get; set; }
-
 
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        CurrentLanguage = _blazorStateMachine.Language;
-
-        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != CurrentLanguage).ToList();
+        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
 
     }
 
@@ -67,17 +60,24 @@ else
     private void ToggleOpen()
     {
         IsOpen = !IsOpen;
+        StateHasChanged();
     }
 
+    private void CloseNavMenuAndNavBar()
+    {
+        if (!_blazorStateMachine.IsNavBarCollapsed)
+            _blazorStateMachine.ToggleNavBar();
 
+        ToggleOpen();
+    }
 
     private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
     {
         string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
 
-        if (relative.Length > 0 && CurrentLanguage.Length > 0)
+        if (relative.Length > 0 && _blazorStateMachine.Language.Length > 0)
         {
-            relative = relative.Substring(CurrentLanguage.Length);
+            relative = relative.Substring(_blazorStateMachine.Language.Length);
         }
 
 

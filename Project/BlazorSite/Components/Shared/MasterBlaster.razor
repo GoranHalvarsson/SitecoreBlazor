@@ -52,9 +52,7 @@
 
     protected override Task OnAfterRenderAsync()
     {
-
         return ContextStateProvider.SaveChangesAsync();
-
     }
 
 
@@ -90,7 +88,7 @@
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {
 
-            // THIS IS FOR BLAZOR-SERVER-SIDE - Can't call javascript before rendering is done 
+            // THIS IS FOR BLAZOR-CLIENT-SIDE - Server-side can not calCan't call javascript before rendering is done
             try
             {
                 await _interopService.SetPageTitle(pageTitle);

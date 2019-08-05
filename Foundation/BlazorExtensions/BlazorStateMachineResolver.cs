@@ -33,11 +33,6 @@ namespace Foundation.BlazorExtensions
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, _jsRuntime);
         }
 
-        public Task<string> GetContextLanguageAsync(IJSRuntime jsRuntime)
-        {
-            return jsRuntime == null ? null : _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage,jsRuntime);
-        }
-
         public Task SetContextLanguageAsync(string language)
         {
 
@@ -47,31 +42,12 @@ namespace Foundation.BlazorExtensions
         }
 
 
-        public Task SetContextLanguageAsync(string language,IJSRuntime jsRuntime)
-        {
-
-            return String.IsNullOrWhiteSpace(language)
-                ? null
-                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language,jsRuntime);
-        }
-
         public Task<string> GetCurrentRouteIdAsync()
         {
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, _jsRuntime);
         }
 
-        public Task<string> GetCurrentRouteIdAsync(IJSRuntime jsRuntime)
-        {
-            return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId,jsRuntime);
-        }
-
-        public Task SetCurrentRouteIdAsync(string routeId,IJSRuntime jsRuntime)
-        {
-
-            return String.IsNullOrWhiteSpace(routeId)
-                ? null
-                : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId,jsRuntime);
-        }
+        
 
         public Task SetCurrentRouteIdAsync(string routeId)
         {
@@ -82,23 +58,12 @@ namespace Foundation.BlazorExtensions
         }
 
 
-        public Task<IList<Tuple<DateTime, string, BlazorRoute>>> GetNavigatedRouteAsync(IJSRuntime jsRuntime)
-        {
-            return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, jsRuntime);
-        }
-
         public Task<IList<Tuple<DateTime, string, BlazorRoute>>> GetNavigatedRouteAsync()
         {
             return _sessionStorage.GetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, _jsRuntime);
         }
 
-        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes, IJSRuntime jsRuntime)
-        {
-
-            return navigatedRoutes == null
-                ? null
-                : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, jsRuntime);
-        }
+        
 
         public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes)
         {

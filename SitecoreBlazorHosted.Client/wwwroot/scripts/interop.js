@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2018 cloudcrate solutions UG (haftungsbeschraenkt)
+// Copyright (c) 2018 cloudcrate solutions UG (haftungsbeschraenkt)
 var storageAssembly = 'Foundation_BlazorExtensions';
 var storageNamespace = "" + storageAssembly;
 var storages = {

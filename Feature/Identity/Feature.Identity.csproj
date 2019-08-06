@@ -17,17 +17,6 @@
     <None Remove="About\content\**" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <None Remove="Copyright\content\Copyright.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Copyright\content\Copyright.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Foundation\BlazorExtensions\Foundation.BlazorExtensions.csproj" />
     <ProjectReference Include="..\..\SitecoreBlazorHosted.Shared\SitecoreBlazorHosted.Shared.csproj" />
@@ -39,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Copyright\content\Copyright.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
     <None Update="Sass\Copyright.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>

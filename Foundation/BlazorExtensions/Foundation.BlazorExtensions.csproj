@@ -6,16 +6,17 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>true</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
     <Configurations>Debug;Release;BlazorServer;BlazorClient;BlazorElektron</Configurations>
   <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
-    <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+    <None Remove="Scripts\BlazorExtensionsInterop.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\BlazorStorageInterop.ts" />
   </ItemGroup>
 
 
@@ -30,7 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="content\BlazorStorageInterop.ts" />
+    <TypeScriptCompile Include="Scripts\BlazorStorageInterop.ts" />
+    <TypeScriptCompile Include="Scripts\BlazorExtensionsInterop.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\BlazorExtensionsInterop.js">
+      <LogicalName>blazor:js:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

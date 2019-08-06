@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="BuildBundlerMinifier" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="$(AspNetCoreVersion)" />
@@ -25,6 +26,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project\BlazorSite\Project.BlazorSite.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
 

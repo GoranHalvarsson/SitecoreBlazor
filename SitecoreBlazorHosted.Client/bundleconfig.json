@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "wwwroot/scripts/interop.js",
+    "inputFiles": [
+      "../Foundation/BlazorExtensions/Scripts/BlazorStorageInterop.js",
+      "../Foundation/BlazorExtensions/Scripts/BlazorExtensionsInterop.js"
+    ]
+  }
+
+]

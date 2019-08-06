@@ -15,16 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="PageHeaderCarousel\content\Habitat-004-wide.jpg" />
-    <None Remove="PageHeaderCarousel\content\Habitat-007-wide.jpg" />
-    <None Remove="PageHeaderCarousel\content\PageHeaderCarousel.css" />
-    <None Remove="PageHeader\content\PageHeader.css" />
-    <None Remove="PageHeaderDescription\content\banner.jpg" />
-    <None Remove="PageHeaderDescription\content\PageHeaderDescription.css" />
-    <None Remove="PageHeaderDescription\content\sc_logo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
   </ItemGroup>
@@ -36,30 +26,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="PageHeaderCarousel\content\Habitat-004-wide.jpg">
+    <None Update="PageHeaderCarousel\content\Habitat-004-wide.jpg">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeaderCarousel\content\Habitat-007-wide.jpg">
+    </None>
+    <None Update="PageHeaderCarousel\content\Habitat-007-wide.jpg">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeaderCarousel\content\PageHeaderCarousel.css">
+    </None>
+    <None Update="PageHeaderCarousel\content\PageHeaderCarousel.css">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeader\content\PageHeader.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeaderDescription\content\banner.jpg">
+    </None>
+    <None Update="PageHeaderDescription\content\banner.jpg">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeaderDescription\content\sc_logo.png">
-      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PageHeaderDescription\content\PageHeaderDescription.css">
+    </None>
+    <None Update="PageHeaderDescription\content\PageHeaderDescription.css">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
+    </None>
+    <None Update="PageHeaderDescription\content\sc_logo.png">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+    <None Update="PageHeader\content\PageHeader.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
     <None Update="Sass\PageHeader.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>

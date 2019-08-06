@@ -8,7 +8,7 @@
     <link rel="icon"
           type="image/png"
           href="/icons/icon.png">
-    <link href="css/blazorsite.min.css" rel="stylesheet" />
+    <link href="css/site.min.css" rel="stylesheet" />
     <link rel="manifest" href="manifest.json">
     <link rel="script" href="service-worker.js">
     <meta name="theme-color" content="#052767" />
@@ -16,10 +16,9 @@
 <body>
     <app><img src="css/SBlazor.svg" /></app>
 
-    <!--UNtil there is a functional blazor.polyfill, comment out for now...-->
-    <!--<script type="text/javascript" src="blazor.polyfill.min.js"></script>-->
-
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="scripts/interop.js"></script>
+   
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')

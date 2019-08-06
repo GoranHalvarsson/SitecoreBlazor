@@ -17,7 +17,7 @@ namespace Foundation.BlazorExtensions.Extensions
         {
             AddStorage(serviceCollection);
             serviceCollection.AddScoped<BlazorItemsService>();
-            serviceCollection.AddScoped<InteropService>();
+            serviceCollection.AddScoped<BlazorExtensionsInteropService>();
             serviceCollection.AddScoped<BlazorStateMachineResolver>();
             serviceCollection.AddScoped<RouteService>();
             serviceCollection.AddScoped<LayoutService>();

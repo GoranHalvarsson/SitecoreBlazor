@@ -13,7 +13,7 @@
 @inject IUriHelper _uriHelper;
 @inject LayoutService _layoutService;
 @inject LanguageService _languageService;
-@inject InteropService _interopService;
+@inject BlazorExtensionsInteropService _globalInteropService;
 
 
 
@@ -91,7 +91,7 @@
             // THIS IS FOR BLAZOR-CLIENT-SIDE - Server-side can not calCan't call javascript before rendering is done
             try
             {
-                await _interopService.SetPageTitle(pageTitle);
+                await _globalInteropService.SetPageTitle(pageTitle);
             }
             catch (Exception ex)
             {

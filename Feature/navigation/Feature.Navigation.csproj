@@ -17,6 +17,10 @@
     <EmbeddedResource Include="NavMenu\content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="NavMenu\content\NavMenu.css" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
@@ -25,25 +29,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="NavBreadcrumb\content\NavBreadcrumb.css" />
-    <None Remove="NavHeader\content\NavHeader.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="NavBreadcrumb\content\NavBreadcrumb.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NavHeader\content\NavHeader.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="NavBreadcrumb\content\NavBreadcrumb.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+    <None Update="NavHeader\content\NavHeader.css">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
     <None Update="Sass\NavBreadcrumb.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>

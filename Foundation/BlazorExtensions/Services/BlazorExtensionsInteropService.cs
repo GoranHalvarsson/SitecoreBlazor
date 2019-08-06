@@ -1,15 +1,14 @@
-﻿using Foundation.BlazorExtensions.TemporaryFixes;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
 {
-    public class InteropService
+    public class BlazorExtensionsInteropService
     {
         private readonly IJSRuntime _jsRuntime;
 
         
-        public InteropService(IJSRuntime jsRuntime)
+        public BlazorExtensionsInteropService(IJSRuntime jsRuntime)
         {
             _jsRuntime = jsRuntime;
         }
@@ -17,13 +16,13 @@ namespace Foundation.BlazorExtensions.Services
 
         public Task<bool> HardReload()
         {
-            return _jsRuntime.InvokeAsync<bool>("blazorExtensions.hardReload");
+            return _jsRuntime.InvokeAsync<bool>("blazorExtensionsInterop.hardReload");
         }
 
 
         public Task<string> SetPageTitle(string pageTitle)
         {
-            return _jsRuntime.InvokeAsync<string>("blazorExtensions.setPageTitle", pageTitle);
+            return _jsRuntime.InvokeAsync<string>("blazorExtensionsInterop.setPageTitle", pageTitle);
         }
 
 

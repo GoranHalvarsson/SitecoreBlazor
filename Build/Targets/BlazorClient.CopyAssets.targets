@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="Client" BeforeTargets="PreBuildEvent">
+    <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorClientDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
+  </Target>
+</Project>

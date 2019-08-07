@@ -1,5 +1,3 @@
 <Project>
-    <PropertyGroup>
-        <AspNetCoreVersion>3.0.0-preview7.19365.7</AspNetCoreVersion>
-    </PropertyGroup>
+  <Import Project="Build/Props/Project.BuildProperties.props" />
 </Project>

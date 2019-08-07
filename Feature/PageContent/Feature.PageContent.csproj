@@ -26,6 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\Images\banner.jpg">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+    <None Update="Assets\Images\sc_logo.png">
+      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
     <None Update="PageHeaderCarousel\content\Habitat-004-wide.jpg">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
@@ -56,8 +62,14 @@
     <None Update="Sass\PageHeaderDescription.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
+    <SourceImages Include="$(MSBuildProjectDirectory)\Assets\Images\**\*.*" />
+    
   </ItemGroup>
 
 
+  
+  <Target Name="Client" BeforeTargets="PreBuildEvent">
+    <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorClientDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
+  </Target>
 
 </Project>

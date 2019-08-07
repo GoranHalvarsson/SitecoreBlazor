@@ -50,6 +50,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorCssVendors", "BlazorC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foundation.BlazorCssVendors", "Foundation\BlazorCssVendors\Foundation.BlazorCssVendors.csproj", "{698200B3-94DA-4B19-8F69-1AF29CEE59F3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{902FCF8F-A45A-4D7F-A11C-6A7F0587782D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Props", "Props", "{3871473E-A2E0-4693-AA82-5DA53B42AE54}"
+	ProjectSection(SolutionItems) = preProject
+		build\props\Project.BuildProperties.props = build\props\Project.BuildProperties.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{D120D9B6-1445-47FA-905F-886FFCC22AE9}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Targets\BlazorClient.CopyAssets.targets = Build\Targets\BlazorClient.CopyAssets.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BlazorClient|Any CPU = BlazorClient|Any CPU
@@ -67,8 +79,8 @@ Global
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68D208ED-3786-4A9B-AEDD-814AE315B055}.Release|Any CPU.Build.0 = Release|Any CPU
-		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.ActiveCfg = BlazorElektron|Any CPU
-		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.Build.0 = BlazorElektron|Any CPU
+		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.ActiveCfg = Release|Any CPU
+		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorClient|Any CPU.Build.0 = Release|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
 		{405D481A-2358-48F2-B5B5-012C7C907504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -191,6 +203,9 @@ Global
 		{571772E8-D061-4C6A-89D1-89A95A25E4B9} = {775B8268-1BED-4DC2-988D-D1D221FB5000}
 		{7A9EC3D2-5400-4793-B168-0F76DC59963F} = {775B8268-1BED-4DC2-988D-D1D221FB5000}
 		{698200B3-94DA-4B19-8F69-1AF29CEE59F3} = {7A9EC3D2-5400-4793-B168-0F76DC59963F}
+		{902FCF8F-A45A-4D7F-A11C-6A7F0587782D} = {BF2F51D6-EBB9-4687-8A83-B6936DEB9777}
+		{3871473E-A2E0-4693-AA82-5DA53B42AE54} = {902FCF8F-A45A-4D7F-A11C-6A7F0587782D}
+		{D120D9B6-1445-47FA-905F-886FFCC22AE9} = {902FCF8F-A45A-4D7F-A11C-6A7F0587782D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F42D4C48-4A07-4F65-883B-DAED618FB590}

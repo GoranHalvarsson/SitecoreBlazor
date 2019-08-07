@@ -77,7 +77,7 @@
         get => _activeIndex;
         set
         {
-            _activeIndex = value; //StateHasChanged();
+            _activeIndex = value; 
         }
     }
 
@@ -86,15 +86,17 @@
 
     private Timer _timer;
 
-
-    protected override void OnInit()
+    protected override Task OnInitAsync()
     {
         _timer = new Timer(Interval);
         _timer.Elapsed += OnTimerEvent;
         _timer.AutoReset = true;
         _timer.Start();
 
+        return base.OnInitAsync();
     }
+
+
 
     private void OnTimerEvent(Object source, ElapsedEventArgs e)
     {

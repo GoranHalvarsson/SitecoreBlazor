@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SitecoreBlazorHosted.Shared;
 using System.Net.Http;
 
 namespace SitecoreBlazorHosted.Server
@@ -19,10 +20,14 @@ namespace SitecoreBlazorHosted.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // HttpContextAccessor
+            services.AddHttpContextAccessor();
+            services.AddScoped<HttpContextAccessor>();
+
             services.AddScoped<HttpClient>((s) => new HttpClient());
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
+            
             services.AddScoped<IRestService, RestService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();

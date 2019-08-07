@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "sv",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Karusellen går runt",
+    "PageTitle": {
+      "Value": "Karuseller",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {
@@ -40,15 +40,6 @@
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
               "Name": "navbarMenu",
-              "Fields": {},
-              "Placeholders": {}
-            }
-          ],
-          "navbar-activity": [
-            {
-              "Assembly": "Project.BlazorSite",
-              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
-              "Name": "navbarActivity",
               "Fields": {},
               "Placeholders": {
                 "navbar-activity-item": [

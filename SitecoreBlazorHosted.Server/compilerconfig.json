@@ -1,6 +1,6 @@
 [
   {
-    "inputFile": "Sass/Projects/BlazorSite.scss",
-    "outputFile": "wwwroot/css/blazorsite.css"
+    "inputFile": "../Project/BlazorSite/Sass/BlazorSite.scss",
+    "outputFile": "wwwroot/css/site.css"
   }
 ]

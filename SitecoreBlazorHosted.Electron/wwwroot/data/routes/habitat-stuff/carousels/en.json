@@ -4,8 +4,8 @@
   "DisplayName": null,
   "ItemLanguage": "en",
   "Fields": {
-    "NavigationTitle": {
-      "Value": "Merry go round",
+    "PageTitle": {
+      "Value": "Carousels",
       "Type": "PlainTextField"
     },
     "ShowInNavigation": {
@@ -39,15 +39,7 @@
             {
               "Assembly": "Feature.Navigation",
               "ComponentName": "Feature.Navigation.NavMenu.BlazorNavMenu",
-              "Fields": {},
-              "Placeholders": {}
-            }
-          ],
-          "navbar-activity": [
-            {
-              "Assembly": "Project.BlazorSite",
-              "ComponentName": "Project.BlazorSite.Components.Sublayouts.NavbarActivity",
-              "Name": "navbarActivity",
+              "Name": "navbarMenu",
               "Fields": {},
               "Placeholders": {
                 "navbar-activity-item": [

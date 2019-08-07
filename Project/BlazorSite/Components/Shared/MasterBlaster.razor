@@ -13,7 +13,7 @@
 @inject IUriHelper _uriHelper;
 @inject LayoutService _layoutService;
 @inject LanguageService _languageService;
-@inject BlazorExtensionsInteropService _globalInteropService;
+@inject BlazorExtensionsInteropService _blazorExtensionsInteropService;
 
 
 
@@ -56,20 +56,21 @@
     }
 
 
-
-
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
         _uriHelper.OnLocationChanged += OnLocationChanged;
 
-        Reload();
+        await Reload();
+
     }
+
+
 
 
 
     private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
 
-    private async void Reload()
+    private async Task Reload()
     {
 
         bool hasRouteError = Language.HasRouteError();
@@ -83,24 +84,7 @@
         await _layoutService.LoadRoute(Language, hasRouteError);
 
 
-        string pageTitle = _blazorStateMachine.GetFieldsFromCurrentRoute().PlainText("PageTitle")?.Value?.HtmlDecode();
-
-        if (!string.IsNullOrWhiteSpace(pageTitle))
-        {
-
-            // THIS IS FOR BLAZOR-CLIENT-SIDE - Server-side can not calCan't call javascript before rendering is done
-            try
-            {
-                await _globalInteropService.SetPageTitle(pageTitle);
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-
-
-        }
+        await SetPageTitle();
 
 
 
@@ -108,7 +92,26 @@
         StateHasChanged();
     }
 
+    private async Task SetPageTitle()
+    {
+        string pageTitle = _blazorStateMachine.GetFieldsFromCurrentRoute().PlainText("PageTitle")?.Value?.HtmlDecode();
 
+        if (!string.IsNullOrWhiteSpace(pageTitle))
+        {
+
+            try
+            {
+                await _blazorExtensionsInteropService.SetPageTitle(pageTitle);
+            }
+            catch (Exception ex)
+            {
+                // THIS IS FOR BLAZOR-SERVER-SIDE
+                Console.WriteLine(ex.Message);
+            }
+
+
+        }
+    }
 
     public void Dispose()
     {

@@ -9,18 +9,4 @@
 @inject IUriHelper _uriHelper
 
 
-<a class="navbar-brand" href="@CurrentLanguage.AddBaseUrl(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
-
-
-@code{
-
-    private string CurrentLanguage { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        CurrentLanguage = _blazorStateMachine.Language;
-    }
-
-
-
-}
+<a class="navbar-brand" href="@_blazorStateMachine.Language.AddBaseUrl(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>

@@ -8,7 +8,7 @@
     <title>BlazorSite server-side</title>
     <base href="~/" />
     <environment include="Development">
-        <link href="css/blazorsite.css" rel="stylesheet" />
+        <link href="css/site.min.css" rel="stylesheet" />
     </environment>
     @*<environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -22,10 +22,8 @@
     <app>@(await Html.RenderComponentAsync<Project.BlazorSite.App>())</app>
 
     <script src="_framework/blazor.server.js"></script>
-
-
-    <script type="text/javascript" src="BlazorStorageInterop.js"></script>
-    <script type="text/javascript" src="BlazorExtensionsInterop.js"></script>
+    <script type="text/javascript" src="scripts/interop.min.js"></script>
+   
 
 </body>
 </html>

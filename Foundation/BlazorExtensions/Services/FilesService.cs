@@ -1,5 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components;
+using SitecoreBlazorHosted.Shared;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,7 +11,7 @@ namespace Foundation.BlazorExtensions.Services
     public class FilesService : IRestService
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions;
-
+        
         public FilesService()
         {
             _jsonSerializerOptions = new JsonSerializerOptions()

@@ -32,27 +32,6 @@
     <None Update="Assets\Images\sc_logo.png">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
-    <None Update="PageHeaderCarousel\content\Habitat-004-wide.jpg">
-      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeaderCarousel\content\Habitat-007-wide.jpg">
-      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeaderCarousel\content\PageHeaderCarousel.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeaderDescription\content\banner.jpg">
-      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeaderDescription\content\PageHeaderDescription.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeaderDescription\content\sc_logo.png">
-      <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-    <None Update="PageHeader\content\PageHeader.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
     <None Update="Sass\PageHeader.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>

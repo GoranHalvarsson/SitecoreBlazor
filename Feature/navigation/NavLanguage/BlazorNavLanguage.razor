@@ -39,13 +39,16 @@ else
     private IList<Language> ValidLanguages { get; set; }
 
 
-    protected override void OnParametersSet()
+    protected override Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
 
         ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
 
+        return base.OnParametersSetAsync();
     }
+
+
+
 
     string ClassName
     {

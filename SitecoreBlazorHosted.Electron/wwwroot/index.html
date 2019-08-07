@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width" />
     <title>Sitecore Blazor Electron</title>
     <base href="./" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="css/site.min.css" rel="stylesheet" />
 </head>
 <body>
     <app><img src="css/SBlazor.svg" /></app>
 
     <script src="../bin/Debug/netcoreapp3.0/electron-js/components.electron.js"></script>
 
-    <script type="text/javascript" src="blazor.polyfill.min.js"></script>
-    <script type="text/javascript" src="BlazorStorageInterop.js"></script>
-    <script type="text/javascript" src="BlazorExtensionsInterop.js"></script>
+
+    <script type="text/javascript" src="scripts/interop.js"></script>
+   
 
 </body>
 </html>

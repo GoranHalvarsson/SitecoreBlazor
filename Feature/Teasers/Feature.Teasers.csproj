@@ -20,10 +20,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="WeatherTeaser\content\WeatherTeaser.css">
-      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
-    </None>
-  </ItemGroup>
-
 </Project>

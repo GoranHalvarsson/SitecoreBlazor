@@ -3,9 +3,11 @@
 
 using Feature.Navigation.Extensions;
 using Foundation.BlazorExtensions;
+using Foundation.BlazorExtensions.CustomBlazorRouter;
 using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,12 +25,13 @@ namespace SitecoreBlazorHosted.Server
             // HttpContextAccessor
             services.AddHttpContextAccessor();
             services.AddScoped<HttpContextAccessor>();
-
-            services.AddScoped<HttpClient>((s) => new HttpClient());
+          
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            
+
+            services.AddSingleton<HttpClient>((s) => new HttpClient());
             services.AddScoped<IRestService, RestService>();
+            //services.AddScoped<ServerNavigationManager>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();
 

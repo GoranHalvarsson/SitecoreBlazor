@@ -86,19 +86,19 @@
 
     private Timer _timer;
 
-    protected override Task OnInitAsync()
+    protected override Task OnInitializedAsync()
     {
         _timer = new Timer(Interval);
         _timer.Elapsed += OnTimerEvent;
         _timer.AutoReset = true;
         _timer.Start();
 
-        return base.OnInitAsync();
+        return base.OnInitializedAsync();
     }
 
 
 
-    private void OnTimerEvent(Object source, ElapsedEventArgs e)
+    private async void OnTimerEvent(Object source, ElapsedEventArgs e)
     {
 
 
@@ -113,7 +113,7 @@
         }
 
 
-        base.Invoke(StateHasChanged);
+        await base.InvokeAsync(StateHasChanged);
 
     }
 

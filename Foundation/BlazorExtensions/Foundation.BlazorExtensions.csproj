@@ -5,8 +5,8 @@
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>true</BlazorLinkOnBuild>
-    <LangVersion>7.3</LangVersion>
-    <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
+    <LangVersion>8</LangVersion>
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
     <Configurations>Debug;Release;BlazorServer;BlazorClient;BlazorElektron</Configurations>
   <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
@@ -22,7 +22,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
   </ItemGroup>
 

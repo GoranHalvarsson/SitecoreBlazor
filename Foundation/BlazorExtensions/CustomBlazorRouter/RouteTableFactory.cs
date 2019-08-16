@@ -1,28 +1,46 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.CustomBlazorRouter
 {
-    internal class RouteTable
+    /// <summary>
+    /// Resolves components for an application.
+    /// </summary>
+    internal static class RouteTableFactory
     {
-        public RouteTable(RouteEntry[] routes)
-        {
-            Routes = routes;
-        }
+        private static readonly ConcurrentDictionary<Assembly, RouteTable> Cache =
+            new ConcurrentDictionary<Assembly, RouteTable>();
+        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(RouteComparison);
 
-        public RouteEntry[] Routes { get; set; }
+        public static RouteTable Create(Assembly appAssembly)
+        {
+            if (Cache.TryGetValue(appAssembly, out var resolvedComponents))
+            {
+                return resolvedComponents;
+            }
+
+            var componentTypes = appAssembly.ExportedTypes.Where(t => typeof(IComponent).IsAssignableFrom(t));
+            var routeTable = Create(componentTypes);
+            Cache.TryAdd(appAssembly, routeTable);
+            return routeTable;
+        }
 
         /// <summary>
         /// New method to generate RouteTable from RouterDataRoot
         /// </summary>
         /// <param name="routesData"></param>
         /// <returns></returns>
-        public static RouteTable CreateNew(RouterDataRoot routesData)
+        public static RouteTable CreateFromRouterDataRoot(RouterDataRoot routesData)
         {
             var routes = new List<RouteEntry>();
+
+
+
 
             foreach (var item in routesData.Routes)
             {
@@ -34,7 +52,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                         if (string.IsNullOrWhiteSpace(child.Page))
                             continue;
 
-                        routes.Add(new RouteEntry(TemplateParser.ParseTemplate($"{item.Path}{child.Path}"), Type.GetType($"{child.Page}"),null));
+                        routes.Add(new RouteEntry(TemplateParser.ParseTemplate($"{item.Path}{child.Path}"), Type.GetType($"{child.Page}"), null));
                     }
                 }
                 else
@@ -51,23 +69,40 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             return new RouteTable(routes.OrderBy(id => id, RoutePrecedence).ToArray());
         }
 
-
-
-        public static RouteTable Create(IEnumerable<Type> types)
+        internal static RouteTable Create(IEnumerable<Type> componentTypes)
         {
-            var routes = new List<RouteEntry>();
-            foreach (var type in types)
+            var templatesByHandler = new Dictionary<Type, string[]>();
+            foreach (var componentType in componentTypes)
             {
                 // We're deliberately using inherit = false here.
                 //
                 // RouteAttribute is defined as non-inherited, because inheriting a route attribute always causes an
                 // ambiguity. You end up with two components (base class and derived class) with the same route.
-                var routeAttributes = type.GetCustomAttributes<RouteAttribute>(inherit: false);
+                var routeAttributes = componentType.GetCustomAttributes<RouteAttribute>(inherit: false);
 
-                foreach (var routeAttribute in routeAttributes)
+                var templates = routeAttributes.Select(t => t.Template).ToArray();
+                templatesByHandler.Add(componentType, templates);
+            }
+            return Create(templatesByHandler);
+        }
+
+        internal static RouteTable Create(Dictionary<Type, string[]> templatesByHandler)
+        {
+            var routes = new List<RouteEntry>();
+            foreach (var keyValuePair in templatesByHandler)
+            {
+                var parsedTemplates = keyValuePair.Value.Select(v => TemplateParser.ParseTemplate(v)).ToArray();
+                var allRouteParameterNames = parsedTemplates
+                    .SelectMany(GetParameterNames)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
+
+                foreach (var parsedTemplate in parsedTemplates)
                 {
-                    var template = TemplateParser.ParseTemplate(routeAttribute.Template);
-                    var entry = new RouteEntry(template, type, null);
+                    var unusedRouteParameterNames = allRouteParameterNames
+                        .Except(GetParameterNames(parsedTemplate), StringComparer.OrdinalIgnoreCase)
+                        .ToArray();
+                    var entry = new RouteEntry(parsedTemplate, keyValuePair.Key, unusedRouteParameterNames);
                     routes.Add(entry);
                 }
             }
@@ -75,7 +110,13 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             return new RouteTable(routes.OrderBy(id => id, RoutePrecedence).ToArray());
         }
 
-        public static IComparer<RouteEntry> RoutePrecedence { get; } = Comparer<RouteEntry>.Create(RouteComparison);
+        private static string[] GetParameterNames(RouteTemplate routeTemplate)
+        {
+            return routeTemplate.Segments
+                .Where(s => s.IsParameter)
+                .Select(s => s.Value)
+                .ToArray();
+        }
 
         /// <summary>
         /// Route precedence algorithm.
@@ -116,7 +157,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             }
             else
             {
-                for (int i = 0; i < xTemplate.Segments.Length; i++)
+                for (var i = 0; i < xTemplate.Segments.Length; i++)
                 {
                     var xSegment = xTemplate.Segments[i];
                     var ySegment = yTemplate.Segments[i];
@@ -154,18 +195,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 '{x.Template.TemplateText}' in '{x.Handler.FullName}'
 '{y.Template.TemplateText}' in '{y.Handler.FullName}'
 ");
-            }
-        }
-
-        internal void Route(RouteContext routeContext)
-        {
-            foreach (var route in Routes)
-            {
-                route.Match(routeContext);
-                if (routeContext.Handler != null)
-                {
-                    return;
-                }
             }
         }
     }

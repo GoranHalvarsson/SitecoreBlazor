@@ -24,7 +24,7 @@ namespace Foundation.BlazorExtensions.Services
 
         public async Task<T> ExecuteRestMethod<T>(string url) where T : class
         {
-            return await _httpClient.GetJsonAsync<T>(url);
+            return await ExecuteRestMethodWithJsonSerializerOptions<T>(url, _jsonSerializerOptions);
         }
 
         public async Task<string> ExecuteRestMethod(string url)

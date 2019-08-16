@@ -17,10 +17,11 @@
 
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406"/>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="$(AspNetCoreVersion)" PrivateAssets="all" />
   </ItemGroup>
 
 
@@ -33,7 +34,7 @@
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
-  
-  
+
+
 
 </Project>

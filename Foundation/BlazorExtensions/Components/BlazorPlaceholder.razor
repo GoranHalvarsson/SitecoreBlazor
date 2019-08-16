@@ -36,13 +36,13 @@ else
 @code{
 
     [Parameter]
-    protected string Name { get; set; }
+    public string Name { get; set; }
 
     [Parameter]
-    protected bool RenderChild { get; set; }
+    public bool RenderChild { get; set; }
 
     [Parameter]
-    protected Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+    public Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
 
 
     private IList<Microsoft.AspNetCore.Components.RenderFragment> DynamicComponents { get; set; }

@@ -3,18 +3,18 @@
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 
+@using Microsoft.AspNetCore.Components.Routing
 
 
-@implements Microsoft.AspNetCore.Components.IComponent
 @inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper;
 @inject BlazorItemsService _blazorItemsService;
 
 
 
     <ContextStateProvider>
-        @*<Router AppAssembly=typeof(Program).Assembly />*@
+        @*<Router AppAssembly=typeof(Components.Pages.RoutesClass).Assembly />*@
         @*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
-        <CustomRouter RouteValues="@RoutesData" />
+        <TheRouter RouteValues="@RoutesData" />
     </ContextStateProvider>
 
 
@@ -24,7 +24,7 @@
 
     private RouterDataRoot RoutesData = null;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         RoutesData = _blazorItemsService.CreateRoutes();
     }

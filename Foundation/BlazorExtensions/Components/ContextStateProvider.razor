@@ -21,11 +21,11 @@ else
 @code {
 
     [Parameter]
-    protected RenderFragment ChildContent { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
     protected bool _hasLoaded;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         await LoadStateAsync();
         _hasLoaded = true;
@@ -55,7 +55,9 @@ else
 
         try
         {
+            _blazorStateMachine.Language = await _blazorStateMachineResolver.GetContextLanguageAsync();
             _blazorStateMachine.NavigatedRoutes = await _blazorStateMachineResolver.GetNavigatedRouteAsync();
+
         }
         catch (Exception ex)
         {

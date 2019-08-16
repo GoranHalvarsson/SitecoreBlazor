@@ -6,8 +6,6 @@
 
     public class BlazorItem : IBlazorItem
     {
-        public const string RootItemId = "{11111111-1111-1111-1111-111111111111}";
-
         public string Url { get; set; }
         public string Name { get; set; }
 

@@ -17,7 +17,7 @@ namespace SitecoreBlazorHosted.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<HttpClient>((s) => new HttpClient());
+            //services.AddSingleton<HttpClient>((s) => new HttpClient());
             services.AddScoped<IRestService, RestService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();

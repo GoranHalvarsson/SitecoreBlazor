@@ -9,7 +9,7 @@
         <h5 class="card-title">@FieldsModel.PlainText("Header").Value.HtmlDecode()</h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <p class="card-text">@FieldsModel.PlainText("CountText").Value.HtmlDecode(): @currentCount</p>
-        <button class="@FieldsModel.Link("CountButton").Value.Class" @onclick="@IncrementCount">@FieldsModel.Link("CountButton").Value.Text.HtmlDecode()</button>
+        <button class="@FieldsModel.Link("CountButton").Value.Class" @onclick="IncrementCount">@FieldsModel.Link("CountButton").Value.Text.HtmlDecode()</button>
     </div>
 </div>
 

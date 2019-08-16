@@ -6,7 +6,7 @@
 
 @implements IDisposable
 
-@inherits Microsoft.AspNetCore.Components.Layouts.LayoutComponentBase
+@inherits LayoutComponentBase
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 @inject Foundation.BlazorExtensions.BlazorStateMachineResolver _blazorContext
 
@@ -44,10 +44,10 @@
 {
 
     [Parameter]
-    protected string Language { get; set; }
+    public string Language { get; set; }
 
     [CascadingParameter]
-    protected ContextStateProvider ContextStateProvider { get; set; }
+    public ContextStateProvider ContextStateProvider { get; set; }
 
 
     protected override Task OnAfterRenderAsync()
@@ -56,7 +56,7 @@
     }
 
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         _uriHelper.OnLocationChanged += OnLocationChanged;
 
@@ -68,10 +68,19 @@
 
 
 
-    private void OnLocationChanged(object sender, LocationChangedEventArgs args) => Reload();
+    private async void OnLocationChanged(object sender, LocationChangedEventArgs args) => await Reload();
 
     private async Task Reload()
     {
+
+
+        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+
+
+        if (relative == "")
+        {
+            Language = "en";
+        }
 
         bool hasRouteError = Language.HasRouteError();
 

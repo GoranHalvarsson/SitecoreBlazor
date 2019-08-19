@@ -61,17 +61,16 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         [Parameter] public RenderFragment NotFound { get; set; }
 
 
-        [Parameter] public RenderFragment<RouteData> Found { get; set; }
 
         /// <summary>
         /// The content that will be displayed if the user is not authorized.
         /// </summary>
-        [Parameter] public RenderFragment<AuthenticationState> NotAuthorizedContent { get; private set; }
+        [Parameter] public RenderFragment<AuthenticationState> NotAuthorizedContent { get;  set; }
 
         /// <summary>
         /// The content that will be displayed while asynchronous authorization is in progress.
         /// </summary>
-        [Parameter] public RenderFragment AuthorizingContent { get; private set; }
+        [Parameter] public RenderFragment AuthorizingContent { get;  set; }
 
         private RouteTable Routes { get; set; }
 
@@ -80,11 +79,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         {
             _logger = LoggerFactory.CreateLogger<Router>();
             _renderHandle = renderHandle;
-            //_baseUri = NavigationManagerResolver().BaseUri;
-            //_locationAbsolute = NavigationManagerResolver().Uri;
-            //NavigationManagerResolver().LocationChanged += OnLocationChanged;
-
-            //_renderHandle = renderHandle;
             _baseUri = UriHelper.GetBaseUri();
             _locationAbsolute = UriHelper.GetAbsoluteUri();
             UriHelper.OnLocationChanged += OnLocationChanged;
@@ -93,23 +87,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         public Task SetParametersAsync(ParameterView parameters)
         {
             parameters.SetParameterProperties(this);
-
-
-            // Found content is mandatory, because even though we could use something like <RouteView ...> as a
-            // reasonable default, if it's not declared explicitly in the template then people will have no way
-            // to discover how to customize this (e.g., to add authorization).
-            //if (Found == null)
-            //{
-            //    throw new InvalidOperationException($"The {nameof(Router)} component requires a value for the parameter {nameof(Found)}.");
-            //}
-
-            // NotFound content is mandatory, because even though we could display a default message like "Not found",
-            // it has to be specified explicitly so that it can also be wrapped in a specific layout
-            //if (NotFound == null)
-            //{
-            //    throw new InvalidOperationException($"The {nameof(Router)} component requires a value for the parameter {nameof(NotFound)}.");
-            //}
-
 
             Routes = RouteTableFactory.CreateFromRouterDataRoot(RouteValues);
             //Routes = RouteTableFactory.Create(AppAssembly);
@@ -170,11 +147,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 }
 
                 Log.NavigatingToComponent(_logger, context.Handler, locationPath, _baseUri);
-
-                var routeData = new RouteData(
-                    context.Handler,
-                    context.Parameters ?? _emptyParametersDictionary);
-
+              
 
                 _renderHandle.Render(builder => Render(builder, context.Handler, context.Parameters));
                 

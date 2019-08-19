@@ -6,6 +6,7 @@
 @inject IUriHelper _uriHelper
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
+@inject Foundation.BlazorExtensions.Services.LayoutService _layoutService;
 
 
 @if (ValidLanguages == null)
@@ -25,7 +26,7 @@ else
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" @onclick="CloseNavMenuAndNavBar" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" @onclick="() => SwitchLanguage(language)" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -72,6 +73,23 @@ else
             _blazorStateMachine.ToggleNavBar();
 
         ToggleOpen();
+    }
+
+     private void SwitchLanguage(Language language)
+    {
+
+         if (!_blazorStateMachine.IsNavBarCollapsed)
+            _blazorStateMachine.ToggleNavBar();
+
+        _blazorStateMachine.Language = language.TwoLetterCode;
+        
+        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
+        ToggleOpen();
+        //StateHasChanged();
+
+        _layoutService.SwitchLanguage(language);
+
+
     }
 
     private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)

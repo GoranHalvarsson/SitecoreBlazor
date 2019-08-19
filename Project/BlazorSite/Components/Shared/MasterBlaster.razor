@@ -79,7 +79,7 @@
 
         if (relative == "")
         {
-            Language = "en";
+            Language = _languageService.GetDefaultLanguage().TwoLetterCode;
         }
 
         bool hasRouteError = Language.HasRouteError();

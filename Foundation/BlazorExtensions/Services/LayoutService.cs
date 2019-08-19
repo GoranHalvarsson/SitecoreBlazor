@@ -1,8 +1,6 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Factories;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using SitecoreBlazorHosted.Shared;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -27,10 +25,9 @@ namespace Foundation.BlazorExtensions.Services
             _blazorStateMachine = blazorStateMachine;
         }
 
-        [Obsolete("Not used")]
         public event EventHandler LanguageSwitch;
 
-        [Obsolete("Not used")]
+
         public void SwitchLanguage(Language language)
         {
             LanguageSwitchArgs args = new LanguageSwitchArgs
@@ -52,14 +49,14 @@ namespace Foundation.BlazorExtensions.Services
             if (_blazorStateMachine.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
             {
 
-                RenderedComponentsInDynamicPlaceholdersPerStateChanged = new List<string>();
+                ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged = new List<string>();
 
                 await _routeService.LoadRoute(language, hasRouteError);
             }
         }
 
 
-        private List<string> RenderedComponentsInDynamicPlaceholdersPerStateChanged
+        private List<string> ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged
         {
             get; set;
         }
@@ -94,14 +91,14 @@ namespace Foundation.BlazorExtensions.Services
 
                             string keyName = $"{keyVal.Key}-{placeholderData.ComponentName}";
 
-                            if (RenderedComponentsInDynamicPlaceholdersPerStateChanged.Any(comp => comp == keyName))
+                            if (ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged.Any(comp => comp == keyName))
                                 continue;
 
 
                             list.Add(_componentFactory.CreateComponent(placeholderData));
 
                             if (keyVal.Key.IsDynamicPlaceholder())
-                                RenderedComponentsInDynamicPlaceholdersPerStateChanged.Add(keyName);
+                                ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged.Add(keyName);
 
                         }
                     }

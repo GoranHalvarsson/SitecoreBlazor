@@ -1,5 +1,4 @@
 ﻿using Foundation.BlazorExtensions.Factories;
-using Microsoft.AspNetCore.Components;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -72,7 +71,18 @@ namespace Foundation.BlazorExtensions
 
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
+        [Obsolete("Not use", true)]
+        public event EventHandler LanguageSwitch;
 
+        [Obsolete("Not use", true)]
+        public void SwitchLanguage(Language language)
+        {
+            LanguageSwitchArgs args = new LanguageSwitchArgs
+            {
+                Language = language
+            };
+            LanguageSwitch?.Invoke(this, args);
+        }
         public BlazorRoute GetNavigatedRoute(string url)
         {
             if (NavigatedRoutes == null)

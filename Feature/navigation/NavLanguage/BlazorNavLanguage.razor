@@ -84,12 +84,9 @@ else
         _blazorStateMachine.Language = language.TwoLetterCode;
         
         ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
+        
         ToggleOpen();
-        //StateHasChanged();
-
-        _layoutService.SwitchLanguage(language);
-
-
+        
     }
 
     private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)

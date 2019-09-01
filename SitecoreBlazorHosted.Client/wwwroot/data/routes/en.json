@@ -98,6 +98,15 @@
                   },
                   "Type": "ImageField"
                 },
+                "BannerImage": {
+                  "Value": {
+                    "Src": "images/banner.jpg",
+                    "Alt": "Sitecore banner",
+                    "Width": null,
+                    "Height": null
+                  },
+                  "Type": "ImageField"
+                },
                 "Title": {
                   "Value": "Sitecore Experience Platform + BLAZOR 3.0.0-preview8.19405.7",
                   "Type": "PlainTextField"
@@ -107,10 +116,10 @@
                   "Type": "HtmlField"
                 },
                 "ShowInNavigation": {
-                    "Value": true,
-                    "Type": "CheckboxField"
+                  "Value": true,
+                  "Type": "CheckboxField"
                 }
-                
+
               },
               "Placeholders": {}
             }

@@ -3,21 +3,29 @@
 
 @inherits BaseComponent
 
-<div id="CenterColumn">
-    <div id="InnerCenter">
-        <div id="Header">
-            <img alt="@FieldsModel.Image("HeaderImage")?.Value.Alt" id="scLogo" src="@FieldsModel.Image("HeaderImage").Value.Src">
+
+<div class="jumbotron banner" style="background-image: url('@FieldsModel.Image("BannerImage").Value.Src');">
+
+
+    <img class="logo-image" alt="@FieldsModel.Image("HeaderImage")?.Value.Alt" src="@FieldsModel.Image("HeaderImage").Value.Src">
+
+
+
+</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@FieldsModel.PlainText("Title")?.Value.HtmlDecode()</h2>
+            @((MarkupString)FieldsModel.HtmlText("Text")?.Value.HtmlDecode())
+
+           @FieldsModel.Checkbox("ShowInNavigation")?.Value
+
+         
         </div>
-        <div id="Content">
-            <div id="LeftContent">
-                <h1>@FieldsModel.PlainText("Title")?.Value.HtmlDecode()</h1>
-                <div class="contentDescription">
-                    @((MarkupString)FieldsModel.HtmlText("Text")?.Value.HtmlDecode())
-                </div>
-            </div>
-        </div>
-        @FieldsModel.Checkbox("ShowInNavigation")?.Value
     </div>
 </div>
+
+
 
 

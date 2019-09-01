@@ -1,7 +1,52 @@
-﻿/*
-    This file is to show how CSS and other static resources (such as images) can be
-    used from a library project/package.
-*/
+﻿
+.banner {
+    background: url(path/to/image.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 400px;
+    padding: 0;
+
+
+    @include media-breakpoint-down(sm) {
+        min-height: 100px;
+        padding: 0;
+        margin-top: 3.5em;
+    }
+
+    @include media-breakpoint-up(sm) {
+        min-height: 200px;
+        padding: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+        min-height: 400px;
+        padding: 0;
+    }
+}
+
+img.logo-image {
+    position: relative;
+    top: 1em;
+    left: 2em;
+    max-width: 15em;
+
+
+    @include media-breakpoint-down(sm) {
+        max-width: 6em;
+        top: 0.5em;
+        left: 0.5em;
+    }
+
+    @include media-breakpoint-up(sm) {
+        max-width: 10em;
+    }
+
+    @include media-breakpoint-up(lg) {
+        max-width: 15em;
+    }
+}
+
+
+
 
 #CenterColumn {
     margin: auto;
@@ -61,4 +106,3 @@
     padding-right: 20px;
     line-height: 22px;
 }
-

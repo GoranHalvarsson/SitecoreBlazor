@@ -25,6 +25,12 @@ namespace Foundation.BlazorExtensions.Services
                             Value = "Hem",
                             Editable = "Hem",
                             Type =  FieldTypes.PlainTextField
+                        },
+                        new BlazorItemField<bool>
+                        {
+                            FieldName = "ShowInNavigation",
+                            Value = true,
+                            Type =  FieldTypes.CheckboxField
                         }
                   },
                           Children = new List<IBlazorItem>()
@@ -142,6 +148,12 @@ namespace Foundation.BlazorExtensions.Services
                                 Value = "Home",
                                 Editable = "Home",
                                 Type =  FieldTypes.PlainTextField
+                            },
+                            new BlazorItemField<bool>
+                            {
+                                FieldName = "ShowInNavigation",
+                                Value = true,
+                                Type =  FieldTypes.CheckboxField
                             }
                       },
                           Children = new List<IBlazorItem>()
@@ -165,6 +177,12 @@ namespace Foundation.BlazorExtensions.Services
                                                 Value = "Habitat stuff",
                                                 Editable = "Habitat stuff",
                                                 Type =  FieldTypes.PlainTextField
+                                            },
+                                            new BlazorItemField<bool>
+                                            {
+                                                FieldName = "ShowInNavigation",
+                                                Value = true,
+                                                Type =  FieldTypes.CheckboxField
                                             }
                                     },
                                     Children = new List<IBlazorItem>()
@@ -183,6 +201,12 @@ namespace Foundation.BlazorExtensions.Services
                                                         Value = "Carousels",
                                                         Editable = "Carousels",
                                                         Type =  FieldTypes.PlainTextField
+                                                    },
+                                                    new BlazorItemField<bool>
+                                                    {
+                                                        FieldName = "ShowInNavigation",
+                                                        Value = true,
+                                                        Type =  FieldTypes.CheckboxField
                                                     }
                                             },
                                             Parent = new BlazorItem()
@@ -206,6 +230,12 @@ namespace Foundation.BlazorExtensions.Services
                                                         Value = "Teasers",
                                                         Editable = "Teasers",
                                                         Type =  FieldTypes.PlainTextField
+                                                    },
+                                                    new BlazorItemField<bool>
+                                                    {
+                                                        FieldName = "ShowInNavigation",
+                                                        Value = true,
+                                                        Type =  FieldTypes.CheckboxField
                                                     }
                                             },
                                             Parent = new BlazorItem()

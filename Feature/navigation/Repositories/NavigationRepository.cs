@@ -5,6 +5,7 @@ using SitecoreBlazorHosted.Shared.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Foundation.BlazorExtensions.Extensions;
 
 namespace Feature.Navigation.Repositories
 {
@@ -36,9 +37,15 @@ namespace Feature.Navigation.Repositories
 
         }
 
+
+        private bool IncludeInNavigation(IBlazorItem blazorItem, bool forceShowInMenu = false)
+        {
+            return (forceShowInMenu || blazorItem.GetBoolValue(Constants.Fields.ShowInNavigation, false));
+        }
+
+
         private async Task<List<NavigationItem>> GetNavigationHierarchy()
         {
-
 
             var routeId = _blazorStateMachine.RouteId;
 
@@ -88,39 +95,32 @@ namespace Feature.Navigation.Repositories
             };
         }
 
-        private List<NavigationItem> GetChildNavigationItems(IBlazorItem item)
+        private List<NavigationItem> GetChildNavigationItems(IBlazorItem blazorItem)
         {
-            List<NavigationItem> children = new List<NavigationItem>();
+            if (!blazorItem.HasChildren)
+                return new List<NavigationItem>();
 
-            if (!item.HasChildren)
-                return children;
 
-            foreach (var child in item.Children)
-            {
-                if (child == null)
-                    continue;
-
-                children.Add(CreateNavigationItem(child));
-            }
-
-            return children;
+           return  blazorItem.Children.Where(child => this.IncludeInNavigation(child)).Select(child => this.CreateNavigationItem(child)).ToList();
+           
         }
 
         public Task<List<NavigationItem>> GetMenu()
         {
-            string currentLanguage = _blazorStateMachine.Language;
-            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(currentLanguage);
+            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(_blazorStateMachine.Language);
+
+            List<NavigationItem> navigationItems = new List<NavigationItem>();
 
 
-            List<NavigationItem> list = new List<NavigationItem>
-          {
-                   new NavigationItem() //Home
-                   {
-                       Item = rootItem,
-                       Url = rootItem.Url,
-                       Children = null
-                   }
-          };
+            if (this.IncludeInNavigation(rootItem))
+            {
+                navigationItems.Add(new NavigationItem()
+                {
+                    Item = rootItem,
+                    Url = rootItem.Url,
+                    Children = null
+                });
+            }
 
             foreach (IBlazorItem item in rootItem.Children)
             {
@@ -128,13 +128,11 @@ namespace Feature.Navigation.Repositories
                 if (item == null)
                     continue;
 
-                list.Add(
-                         CreateNavigationItem(item)
-                         );
+                navigationItems.Add(CreateNavigationItem(item));
             }
 
 
-            return Task.FromResult<List<NavigationItem>>(list);
+            return Task.FromResult<List<NavigationItem>>(navigationItems);
 
 
         }

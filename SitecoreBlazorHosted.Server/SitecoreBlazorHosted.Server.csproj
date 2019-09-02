@@ -4,13 +4,13 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Configurations>Debug;Release;BlazorElektron</Configurations>
+    <Configurations>Debug;Release;BlazorElektron;BlazorServer</Configurations>
   </PropertyGroup>
 
  
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406"/>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="$(AspNetCoreVersion)" />
   </ItemGroup>
 

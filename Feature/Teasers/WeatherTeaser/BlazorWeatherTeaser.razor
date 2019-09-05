@@ -7,7 +7,7 @@
 
 @inherits BaseComponent
 
-@inject IUriHelper uriHelper;
+@inject NavigationManager _navigationManager;
 @inject IRestService restService
 <div class="card">
     <div class="card-body">
@@ -58,7 +58,7 @@
     protected override async Task OnParametersSetAsync()
     {
 
-        WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.AddBaseUrl(uriHelper));
+        WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.AddBaseUrl(_navigationManager));
     }
 
 

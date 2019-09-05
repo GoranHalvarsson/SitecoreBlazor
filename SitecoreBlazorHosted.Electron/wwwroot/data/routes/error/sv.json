@@ -91,6 +91,15 @@
             },
             "Type": "ImageField"
           },
+          "BannerImage": {
+            "Value": {
+              "Src": "images/banner.jpg",
+              "Alt": "Sitecore banner",
+              "Width": null,
+              "Height": null
+            },
+            "Type": "ImageField"
+          },
           "Title": {
             "Value": "Sitecore Experience Platform + BLAZOR",
             "Type": "PlainTextField"
@@ -116,7 +125,7 @@
           },
           "Image": {
             "Value": {
-              "Src": "css/SBlazor.svg",
+              "Src": "images/SBlazor.svg",
               "Alt": null,
               "Width": null,
               "Height": null

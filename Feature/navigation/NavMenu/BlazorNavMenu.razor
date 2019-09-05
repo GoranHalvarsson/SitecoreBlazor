@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Components
+@using  Microsoft.AspNetCore.Components.Web
 
 
 @inherits BaseComponent
@@ -11,7 +12,7 @@
 
 
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository
-@inject IUriHelper _uriHelper;
+@inject NavigationManager _navigationManager;
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 
 
@@ -38,7 +39,7 @@ else
                 if (item.Children == null || !item.Children.Any())
                 {
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="@item.Url.AddBaseUrl(_uriHelper)" @onclick="_blazorStateMachine.ToggleNavBar" Match=NavLinkMatch.All>
+                        <NavLink class="nav-link" href="@item.Url.AddBaseUrl(_navigationManager)" @onclick="_blazorStateMachine.ToggleNavBar" Match=NavLinkMatch.All>
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
                         </NavLink>
                     </li>
@@ -59,7 +60,7 @@ else
                                     continue;
                                 }
 
-                                <NavLink class="dropdown-item" @onclick="_blazorStateMachine.ToggleNavBar" href="@child.Url.AddBaseUrl(_uriHelper)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
+                                <NavLink class="dropdown-item" @onclick="_blazorStateMachine.ToggleNavBar" href="@child.Url.AddBaseUrl(_navigationManager)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
 
                             }
 
@@ -111,7 +112,7 @@ else
     }
 
     bool IsOpen { get; set; }
-    void ToggleSubMenu(UIMouseEventArgs e)
+    void ToggleSubMenu(System.EventArgs e)
     {
         IsOpen = !IsOpen;
         StateHasChanged();
@@ -123,13 +124,13 @@ else
 
     protected override void OnInitialized()
     {
-        _uriHelper.OnLocationChanged += OnLocationChanges;
+        _navigationManager.LocationChanged += OnLocationChanges;
     }
 
 
     public void Dispose()
     {
-        _uriHelper.OnLocationChanged -= OnLocationChanges;
+        _navigationManager.LocationChanged -= OnLocationChanges;
     }
 
 }

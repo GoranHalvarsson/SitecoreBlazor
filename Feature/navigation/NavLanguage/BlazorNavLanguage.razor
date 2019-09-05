@@ -1,9 +1,10 @@
 ﻿@using SitecoreBlazorHosted.Shared.Models
 @using Foundation.BlazorExtensions.Components
+@using Microsoft.AspNetCore.Components.Web
 
 @inherits BaseComponent
 
-@inject IUriHelper _uriHelper
+@inject NavigationManager _navigationManager
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
 @inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
 @inject Foundation.BlazorExtensions.Services.LayoutService _layoutService;
@@ -22,11 +23,11 @@ else
         <button type="button" class="btn  btn-light  dropdown-toggle " @onclick="() => ToggleOpen()" aria-haspopup="true">
             @_languageService.Get(_blazorStateMachine.Language)?.NativeName
         </button>
-        <div class="@ClassName" onblur="() => ToggleOpen()">
+        <div class="@ClassName" @onblur="() => ToggleOpen()">
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" @onclick="() => SwitchLanguage(language)" href="@BuildUrl(language)">@language.NativeName</a>
+                <a class="dropdown-item" @onclick="() => ToggleOpen()" href="@BuildUrl(language)">@language.NativeName</a>
             }
 
         </div>
@@ -75,23 +76,23 @@ else
         ToggleOpen();
     }
 
-     private void SwitchLanguage(Language language)
+    private void SwitchLanguage(Language language)
     {
 
-         if (!_blazorStateMachine.IsNavBarCollapsed)
-            _blazorStateMachine.ToggleNavBar();
+        //if (!_blazorStateMachine.IsNavBarCollapsed)
+        //    _blazorStateMachine.ToggleNavBar();
 
-        _blazorStateMachine.Language = language.TwoLetterCode;
-        
-        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
-        
+        //_blazorStateMachine.Language = language.TwoLetterCode;
+
+        //ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
+
         ToggleOpen();
-        
+
     }
 
     private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
     {
-        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+        string relative = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
         if (relative.Length > 0 && _blazorStateMachine.Language.Length > 0)
         {
@@ -99,7 +100,7 @@ else
         }
 
 
-        return $"{_uriHelper.GetBaseUri()}{language.TwoLetterCode}{relative}";
+        return $"{_navigationManager.BaseUri}{language.TwoLetterCode}{relative}";
     }
 
 

@@ -6,7 +6,7 @@
 
 
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
-@inject IUriHelper _uriHelper
+@inject NavigationManager _navigationManager
 
 
-<a class="navbar-brand" href="@_blazorStateMachine.Language.AddBaseUrl(_uriHelper)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+<a class="navbar-brand" href="@_blazorStateMachine.Language.AddBaseUrl(_navigationManager)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>

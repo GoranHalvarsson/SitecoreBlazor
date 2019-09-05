@@ -24,11 +24,11 @@
            //_jsonSerializerOptions.Converters.Add(new CustomTupleConverter());
         }
 
-        public Task ClearAsync(IJSRuntime jsRuntime) => jsRuntime.InvokeAsync<object>($"{_fullTypeName}.Clear");
+        public ValueTask<object> ClearAsync(IJSRuntime jsRuntime) => jsRuntime.InvokeAsync<object>($"{_fullTypeName}.Clear");
 
 
 
-        public Task<string> GetItemAsync(string key, IJSRuntime jsRuntime)
+        public ValueTask<string> GetItemAsync(string key, IJSRuntime jsRuntime)
         {
             return jsRuntime.InvokeAsync<string>($"{_fullTypeName}.GetItem", key);
         }
@@ -40,12 +40,12 @@
         }
 
 
-        public Task<string> KeyAsync(int index, IJSRuntime jsRuntime)
+        public ValueTask<string> KeyAsync(int index, IJSRuntime jsRuntime)
         {
             return jsRuntime.InvokeAsync<string>($"{_fullTypeName}.Key", index);
         }
 
-        public Task RemoveItemAsync(string key, IJSRuntime jsRuntime)
+        public ValueTask<object> RemoveItemAsync(string key, IJSRuntime jsRuntime)
         {
             return jsRuntime.InvokeAsync<object>($"{_fullTypeName}.RemoveItem", key);
         }
@@ -56,13 +56,13 @@
             ((IJSInProcessRuntime)jsRuntime).Invoke<object>($"{_fullTypeName}.RemoveItem", key);
         }
 
-        public Task SetItemAsync(string key, string data, IJSRuntime jsRuntime)
+        public ValueTask<object> SetItemAsync(string key, string data, IJSRuntime jsRuntime)
         {
             return jsRuntime.InvokeAsync<object>($"{_fullTypeName}.SetItem", key, data);
         }
 
 
-        public Task SetItemAsync<T>(string key, T data, IJSRuntime jsRuntime)
+        public ValueTask<object> SetItemAsync<T>(string key, T data, IJSRuntime jsRuntime)
         {
             return SetItemAsync(key, JsonSerializer.Serialize<T>(data, _jsonSerializerOptions), jsRuntime);
         }

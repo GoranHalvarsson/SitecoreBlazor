@@ -3,6 +3,7 @@
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Components
+@using Microsoft.AspNetCore.Components.Web
 
 @inherits BaseComponent
 
@@ -77,7 +78,7 @@
         get => _activeIndex;
         set
         {
-            _activeIndex = value; 
+            _activeIndex = value;
         }
     }
 
@@ -163,7 +164,7 @@
         }
     }
 
-    private void NavCarousel(Microsoft.AspNetCore.Components.UIMouseEventArgs args, int index)
+    private void NavCarousel(System.EventArgs args, int index)
     {
         ActiveIndex = index;
     }

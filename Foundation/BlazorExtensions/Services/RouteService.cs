@@ -1,6 +1,7 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
 using Microsoft.AspNetCore.Components;
 using SitecoreBlazorHosted.Shared.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,14 +10,14 @@ namespace Foundation.BlazorExtensions.Services
     public class RouteService
     {
         private readonly IRestService _restService;
-        private readonly IUriHelper _uriHelper;
+        private readonly NavigationManager _navigationManager;
         private readonly BlazorItemsService _blazorItemsService;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public RouteService(IRestService restService, IUriHelper uriHelper, BlazorItemsService blazorItemsService, BlazorStateMachine blazorStateMachine)
+        public RouteService(IRestService restService, NavigationManager navigationManager, BlazorItemsService blazorItemsService, BlazorStateMachine blazorStateMachine)
         {
             _restService = restService;
-            _uriHelper = uriHelper;
+            _navigationManager = navigationManager;
             _blazorItemsService = blazorItemsService;
             _blazorStateMachine = blazorStateMachine;
         }
@@ -24,9 +25,9 @@ namespace Foundation.BlazorExtensions.Services
         
         public string BuildRouteApiUrl(string language, bool? hasRouteError)
         {
-            string baseUrl = $"{_uriHelper.GetBaseUri()}/data/routes";
+            string baseUrl = $"{_navigationManager.BaseUri}/data/routes";
 
-            string relativeUrl = $"{_uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri())}";
+            string relativeUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
             //Incorrect url
             if (hasRouteError.HasValue && hasRouteError.Value)
@@ -50,10 +51,10 @@ namespace Foundation.BlazorExtensions.Services
         }
 
 
-
+        [Obsolete("Not used", true)]
         public (bool IsCurrentUrl, string CurrentUrl) UrlIsCurrent()
         {
-            string relativeUrl = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+            string relativeUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
             if (string.IsNullOrWhiteSpace(_blazorStateMachine.CurrentRoute?.ItemLanguage))
                 return (false, $"/{relativeUrl}");

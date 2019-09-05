@@ -7021,10 +7021,42 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-/*
-    This file is to show how CSS and other static resources (such as images) can be
-    used from a library project/package.
-*/
+.banner {
+  background: url(../../../Project/BlazorSite/Sass/path/to/image.jpg) no-repeat center center;
+  background-size: cover;
+  min-height: 400px;
+  padding: 0; }
+  @media (max-width: 767.98px) {
+    .banner {
+      min-height: 100px;
+      padding: 0;
+      margin-top: 3.5em; } }
+  @media (min-width: 576px) {
+    .banner {
+      min-height: 200px;
+      padding: 0; } }
+  @media (min-width: 992px) {
+    .banner {
+      min-height: 400px;
+      padding: 0; } }
+
+img.logo-image {
+  position: relative;
+  top: 1em;
+  left: 2em;
+  max-width: 15em; }
+  @media (max-width: 767.98px) {
+    img.logo-image {
+      max-width: 6em;
+      top: 0.5em;
+      left: 0.5em; } }
+  @media (min-width: 576px) {
+    img.logo-image {
+      max-width: 10em; } }
+  @media (min-width: 992px) {
+    img.logo-image {
+      max-width: 15em; } }
+
 #CenterColumn {
   margin: auto;
   padding-right: 20px;

@@ -14,13 +14,13 @@ namespace Foundation.BlazorExtensions.Services
         }
 
 
-        public Task<bool> HardReload()
+        public ValueTask<bool> HardReload()
         {
             return _jsRuntime.InvokeAsync<bool>("blazorExtensionsInterop.hardReload");
         }
 
 
-        public Task<string> SetPageTitle(string pageTitle)
+        public ValueTask<string> SetPageTitle(string pageTitle)
         {
             return _jsRuntime.InvokeAsync<string>("blazorExtensionsInterop.setPageTitle", pageTitle);
         }

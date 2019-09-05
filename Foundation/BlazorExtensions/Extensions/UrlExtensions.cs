@@ -8,13 +8,13 @@ namespace Foundation.BlazorExtensions.Extensions
     public static class UrlExtensions
     {
 
-        public static string AddBaseUrl(this string url, IUriHelper uriHelper)
+        public static string AddBaseUrl(this string url, NavigationManager navigationManager)
         {
 
             if (url.StartsWith("/"))
                 url = url.Substring(1);
 
-            return new Uri(new Uri(uriHelper.GetBaseUri()), url).ToString();
+            return new Uri(new Uri(navigationManager.BaseUri), url).ToString();
         }
 
         //TODO Not sure where to put this one...

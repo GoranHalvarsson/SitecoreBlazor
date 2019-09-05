@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Routing
 @using Foundation.BlazorExtensions.Components
 @using Foundation.BlazorExtensions.Extensions
@@ -8,9 +8,8 @@
 
 @inherits LayoutComponentBase
 @inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
-@inject Foundation.BlazorExtensions.BlazorStateMachineResolver _blazorContext
 
-@inject IUriHelper _uriHelper;
+@inject NavigationManager _navigationManager;
 @inject LayoutService _layoutService;
 @inject LanguageService _languageService;
 @inject BlazorExtensionsInteropService _blazorExtensionsInteropService;
@@ -50,44 +49,38 @@
     public ContextStateProvider ContextStateProvider { get; set; }
 
 
-    protected override Task OnAfterRenderAsync()
+    protected override Task OnAfterRenderAsync(bool firstRender)
     {
         return ContextStateProvider.SaveChangesAsync();
     }
 
 
+
     protected override async Task OnInitializedAsync()
     {
-        _uriHelper.OnLocationChanged += OnLocationChanged;
+        _navigationManager.LocationChanged += OnLocationChanged;
 
         await Reload();
 
     }
 
 
-
-
-
+   
     private async void OnLocationChanged(object sender, LocationChangedEventArgs args) => await Reload();
 
     private async Task Reload()
     {
 
 
-        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+        Language = ContextStateProvider.RouteLanguage;
 
-
-        if (relative == "")
-        {
-            Language = _languageService.GetDefaultLanguage().TwoLetterCode;
-        }
 
         bool hasRouteError = Language.HasRouteError();
 
 
         if (hasRouteError)
         {
-            Language = _languageService.GetLanguageFromUrl(_uriHelper.GetBaseUri(), Language).TwoLetterCode;
+            Language = _languageService.GetLanguageFromUrl(_navigationManager.BaseUri, Language).TwoLetterCode;
         }
 
         await _layoutService.LoadRoute(Language, hasRouteError);
@@ -103,7 +96,7 @@
 
     private async Task SetPageTitle()
     {
-        string pageTitle = _blazorStateMachine.GetFieldsFromCurrentRoute().PlainText("PageTitle")?.Value?.HtmlDecode();
+        string pageTitle = _blazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute().PlainText("PageTitle")?.Value?.HtmlDecode();
 
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {
@@ -124,7 +117,7 @@
 
     public void Dispose()
     {
-        _uriHelper.OnLocationChanged -= OnLocationChanged;
+        _navigationManager.LocationChanged -= OnLocationChanged;
     }
 
 }

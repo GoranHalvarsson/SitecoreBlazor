@@ -14,14 +14,12 @@ namespace Foundation.BlazorExtensions.Services
     {
         private readonly ComponentFactory _componentFactory;
         private readonly RouteService _routeService;
-        private readonly IUriHelper _uriHelper;
         private readonly BlazorStateMachine _blazorStateMachine;
 
-        public LayoutService(ComponentFactory componentFactory, RouteService routeService, IUriHelper uriHelper, BlazorStateMachine blazorStateMachine)
+        public LayoutService(ComponentFactory componentFactory, RouteService routeService, BlazorStateMachine blazorStateMachine)
         {
             _componentFactory = componentFactory;
             _routeService = routeService;
-            _uriHelper = uriHelper;
             _blazorStateMachine = blazorStateMachine;
         }
 
@@ -34,14 +32,9 @@ namespace Foundation.BlazorExtensions.Services
         /// <returns></returns>
         public async Task LoadRoute(string language, bool hasRouteError)
         {
-
-            if (_blazorStateMachine.CurrentPlaceholders == null || !_routeService.UrlIsCurrent().IsCurrentUrl)
-            {
-
                 ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged = new List<string>();
 
                 await _routeService.LoadRoute(language, hasRouteError);
-            }
         }
 
 

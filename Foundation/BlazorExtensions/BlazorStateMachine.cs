@@ -9,11 +9,11 @@ namespace Foundation.BlazorExtensions
 
     public class BlazorStateMachine
     {
-        private readonly ComponentFactory _componentFactory;
+        private readonly FieldFactory _fieldFactory;
 
-        public BlazorStateMachine(ComponentFactory componentFactory)
+        public BlazorStateMachine(FieldFactory fieldFactory)
         {
-            _componentFactory = componentFactory;
+            _fieldFactory = fieldFactory;
         }
 
         public int ValidCacheInHours { get; set; } = 12;
@@ -33,7 +33,42 @@ namespace Foundation.BlazorExtensions
 
         public BlazorRoute CurrentRoute { get; set; }
 
-        public List<IBlazorItemField> GetFieldsFromCurrentRoute(string placeHolder = null)
+
+        public Dictionary<string, BlazorRouteField> GetAllBlazorRouteFieldsFromCurrentRoute(string placeHolder = null)
+        {
+            Dictionary<string, BlazorRouteField> blazorFields = new Dictionary<string, BlazorRouteField>();
+
+            if (CurrentRoute == null)
+                return null;
+
+            if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            {
+                blazorFields = CurrentRoute.Fields;
+            }
+
+            if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            {
+
+                var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
+
+
+                foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
+                {
+
+                    foreach (Placeholder placeholderData in keyVal.Value)
+                    {
+                        blazorFields.AddRange(placeholderData.Fields);
+                    }
+                }
+
+            }
+
+            return blazorFields;
+
+        }
+
+
+        public List<IBlazorItemField> GetAllBlazorItemFieldsFromCurrentRoute(string placeHolder = null)
         {
 
             List<IBlazorItemField> blazorFields = new List<IBlazorItemField>();
@@ -43,7 +78,7 @@ namespace Foundation.BlazorExtensions
 
             if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
             {
-                blazorFields.AddRange(_componentFactory.CreateComponentModel(CurrentRoute.Fields));
+                blazorFields.AddRange(_fieldFactory.CreateFields(CurrentRoute.Fields));
             }
 
             if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
@@ -58,7 +93,7 @@ namespace Foundation.BlazorExtensions
                     foreach (Placeholder placeholderData in keyVal.Value)
                     {
 
-                        blazorFields.AddRange(_componentFactory.CreateComponentModel(placeholderData.Fields));
+                        blazorFields.AddRange(_fieldFactory.CreateFields(placeholderData.Fields));
                     }
                 }
 
@@ -71,10 +106,10 @@ namespace Foundation.BlazorExtensions
 
         public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
 
-        [Obsolete("Not use", true)]
-        public event EventHandler LanguageSwitch;
+        [Obsolete()]
+        public event EventHandler<LanguageSwitchArgs> LanguageSwitch;
 
-        [Obsolete("Not use", true)]
+        [Obsolete()]
         public void SwitchLanguage(Language language)
         {
             LanguageSwitchArgs args = new LanguageSwitchArgs
@@ -119,5 +154,17 @@ namespace Foundation.BlazorExtensions
             NavigatedRoutes.Remove(foundItem);
         }
 
+       
+    }
+
+    public static class DictionaryExtensions
+    {
+        public static Dictionary<T, U> AddRange<T, U>(this Dictionary<T, U> destination, Dictionary<T, U> source)
+        {
+            if (destination == null) destination = new Dictionary<T, U>();
+            foreach (var e in source)
+                destination.Add(e.Key, e.Value);
+            return destination;
+        }
     }
 }

@@ -191,7 +191,7 @@
           },
           "Image": {
             "Value": {
-              "Src": "css/SBlazor.svg",
+              "Src": "images/SBlazor.svg",
               "Alt": null,
               "Width": null,
               "Height": null

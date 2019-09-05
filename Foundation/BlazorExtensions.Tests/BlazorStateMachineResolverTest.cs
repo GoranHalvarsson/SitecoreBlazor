@@ -41,7 +41,8 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var storedJson = "en";
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
-            jsRuntime.NextInvocationResult = Task.FromResult(storedJson);
+          
+            jsRuntime.NextInvocationResult = new ValueTask<string>(storedJson);
 
             // Act
             var result = await blazorStateMachineResolver.GetContextLanguageAsync();
@@ -58,7 +59,7 @@ namespace Foundation.BlazorExtensions.Tests
             // Arrange
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
-            var jsResultTask = Task.FromResult((object)null);
+            var jsResultTask = new ValueTask<object>();
             var contextLanguage = "en";
 
             // Act
@@ -66,7 +67,7 @@ namespace Foundation.BlazorExtensions.Tests
             var result = blazorStateMachineResolver.SetContextLanguageAsync(contextLanguage);
 
             // Assert
-            Assert.Same(jsResultTask, result);
+            Assert.Equal(jsResultTask, result);
 
             var invocation = jsRuntime.Invocations.Single();
 
@@ -84,7 +85,7 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var storedJson = "route_id";
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
-            jsRuntime.NextInvocationResult = Task.FromResult(storedJson);
+            jsRuntime.NextInvocationResult = new ValueTask<string>(storedJson);
 
             // Act
             var result = await blazorStateMachineResolver.GetCurrentRouteIdAsync();
@@ -101,7 +102,7 @@ namespace Foundation.BlazorExtensions.Tests
             // Arrange
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
-            var jsResultTask = Task.FromResult((object)null);
+            var jsResultTask = new ValueTask<object>();
             var routeId = "route_id";
 
             // Act
@@ -109,7 +110,7 @@ namespace Foundation.BlazorExtensions.Tests
             var result = blazorStateMachineResolver.SetCurrentRouteIdAsync(routeId);
 
             // Assert
-            Assert.Same(jsResultTask, result);
+            Assert.Equal(jsResultTask, result);
 
             var invocation = jsRuntime.Invocations.Single();
 
@@ -150,7 +151,7 @@ namespace Foundation.BlazorExtensions.Tests
 
 
 
-            jsRuntime.NextInvocationResult = Task.FromResult(storedJson);
+            jsRuntime.NextInvocationResult = new ValueTask<string>(storedJson);
             IList<Tuple<DateTime, string, BlazorRoute>> result = null;
 
             // Act
@@ -184,7 +185,7 @@ namespace Foundation.BlazorExtensions.Tests
             // Arrange
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
-            var jsResultTask = Task.FromResult((object)null);
+            var jsResultTask = new ValueTask<object>();
             var data = new List<Tuple<DateTime, string, BlazorRoute>>();
             data.Add(
                 new Tuple<DateTime, string, BlazorRoute>(

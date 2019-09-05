@@ -23,6 +23,10 @@ else
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+
+    [Parameter]
+    public string RouteLanguage { get; set; }
+
     protected bool _hasLoaded;
 
     protected override async Task OnInitializedAsync()

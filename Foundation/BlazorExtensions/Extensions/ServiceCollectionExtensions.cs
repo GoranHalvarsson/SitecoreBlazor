@@ -21,6 +21,7 @@ namespace Foundation.BlazorExtensions.Extensions
             serviceCollection.AddScoped<BlazorStateMachineResolver>();
             serviceCollection.AddScoped<RouteService>();
             serviceCollection.AddScoped<LayoutService>();
+            serviceCollection.AddScoped<FieldFactory>();
             serviceCollection.AddScoped<ComponentFactory>();
             serviceCollection.AddScoped<LanguageService>();
             serviceCollection.AddScoped<BlazorStateMachine>();

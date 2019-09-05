@@ -28,32 +28,32 @@ namespace Foundation.BlazorExtensions
             _jsRuntime = jsRuntime ?? throw new ArgumentException("The value cannot be null", nameof(jsRuntime));
         }
 
-        public Task<string> GetContextLanguageAsync()
+        public ValueTask<string> GetContextLanguageAsync()
         {
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, _jsRuntime);
         }
 
-        public Task SetContextLanguageAsync(string language)
+        public ValueTask<object> SetContextLanguageAsync(string language)
         {
 
             return String.IsNullOrWhiteSpace(language)
-                ? null
+                ? new ValueTask<object>()
                 : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, language, _jsRuntime);
         }
 
 
-        public Task<string> GetCurrentRouteIdAsync()
+        public ValueTask<string> GetCurrentRouteIdAsync()
         {
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, _jsRuntime);
         }
 
         
 
-        public Task SetCurrentRouteIdAsync(string routeId)
+        public ValueTask<object> SetCurrentRouteIdAsync(string routeId)
         {
 
             return String.IsNullOrWhiteSpace(routeId)
-                ? null
+                ? new ValueTask<object>()
                 : _sessionStorage.SetItemAsync(Constants.Storage.StorageKeys.CurrentRouteId, routeId, _jsRuntime);
         }
 
@@ -65,11 +65,11 @@ namespace Foundation.BlazorExtensions
 
         
 
-        public Task SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes)
+        public ValueTask<object> SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes)
         {
 
             return navigatedRoutes == null
-                ? null
+                ? new ValueTask<object>()
                 : _sessionStorage.SetItemAsync<IList<Tuple<DateTime, string, BlazorRoute>>>(Constants.Storage.StorageKeys.NavigatedRoutes, navigatedRoutes, _jsRuntime);
         }
 

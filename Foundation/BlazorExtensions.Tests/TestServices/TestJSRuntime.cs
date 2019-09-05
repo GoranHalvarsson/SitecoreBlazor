@@ -15,16 +15,17 @@ namespace Foundation.BlazorExtensions.Tests.TestServices
 
         public object NextInvocationResult { get; set; }
 
-        public Task<TValue> InvokeAsync<TValue>(string identifier, params object[] args)
-        {
-            Invocations.Add((identifier, args));
-            return (Task<TValue>)NextInvocationResult;
-        }
 
-        public Task<TValue> InvokeAsync<TValue>(string identifier, IEnumerable<object> args, CancellationToken cancellationToken = default)
+        public ValueTask<TValue> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, object[] args)
         {
             Invocations.Add((identifier, args.ToArray()));
-            return (Task<TValue>)NextInvocationResult;
+            return (ValueTask<TValue>)NextInvocationResult;
+        }
+
+        public ValueTask<TValue> InvokeAsync<TValue>(string identifier, object[] args)
+        {
+            Invocations.Add((identifier, args));
+            return (ValueTask<TValue>)NextInvocationResult;
         }
     }
 }

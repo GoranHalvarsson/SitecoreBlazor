@@ -1,14 +1,14 @@
-﻿using Foundation.BlazorExtensions.Services;
+﻿using Foundation.BlazorExtensions.Components;
+using Foundation.BlazorExtensions.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.Extensions.Logging;
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Foundation.BlazorExtensions.CustomBlazorRouter
 {
@@ -19,7 +19,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
     /// A component that displays whichever other component corresponds to the
     /// current navigation location.
     /// </summary>
-    public class TheRouter : IComponent, IHandleAfterRender, IDisposable
+    public sealed class TheRouter : IComponent, IHandleAfterRender, IDisposable
     {
         static readonly char[] _queryOrHashStartChar = new[] { '?', '#' };
         static readonly ReadOnlyDictionary<string, object> _emptyParametersDictionary
@@ -33,17 +33,11 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
        
 
-        //[Inject]
-        //private NavigationManager NavigationManager { get; set; }
-
         [Inject]
-        private IUriHelper UriHelper { get; set; }
+        private NavigationManager NavigationManager { get; set; }
 
 
         [Inject] private INavigationInterception NavigationInterception { get; set; }
-
-
-        [Inject] private IComponentContext ComponentContext { get; set; }
 
 
         [Inject] private ILoggerFactory LoggerFactory { get; set; }
@@ -60,28 +54,29 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
         [Parameter] public RenderFragment NotFound { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the content to display when a match is found for the requested route.
+        /// </summary>
+        [Parameter] public RenderFragment<RouteData> Found { get; set; }
 
         /// <summary>
-        /// The content that will be displayed if the user is not authorized.
+        /// We need it in order to set the current route language parameter
         /// </summary>
-        [Parameter] public RenderFragment<AuthenticationState> NotAuthorizedContent { get;  set; }
-
-        /// <summary>
-        /// The content that will be displayed while asynchronous authorization is in progress.
-        /// </summary>
-        [Parameter] public RenderFragment AuthorizingContent { get;  set; }
+        [CascadingParameter]
+        public ContextStateProvider ContextStateProvider { get; set; }
 
         private RouteTable Routes { get; set; }
+
+
 
 
         public void Attach(RenderHandle renderHandle)
         {
             _logger = LoggerFactory.CreateLogger<Router>();
             _renderHandle = renderHandle;
-            _baseUri = UriHelper.GetBaseUri();
-            _locationAbsolute = UriHelper.GetAbsoluteUri();
-            UriHelper.OnLocationChanged += OnLocationChanged;
+            _baseUri = NavigationManager.BaseUri;
+            _locationAbsolute = NavigationManager.Uri;
+            NavigationManager.LocationChanged += OnLocationChanged;
         }
 
         public Task SetParametersAsync(ParameterView parameters)
@@ -97,7 +92,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         /// <inheritdoc />
         public void Dispose()
         {
-            UriHelper.OnLocationChanged -= OnLocationChanged;
+            NavigationManager.LocationChanged -= OnLocationChanged;
         }
 
         private string StringUntilAny(string str, char[] chars)
@@ -108,20 +103,11 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 : str.Substring(0, firstIndex);
         }
 
-        protected virtual void Render(RenderTreeBuilder builder, Type handler, IDictionary<string, object> parameters)
-        {
-            builder.OpenComponent(0, typeof(PageDisplay));
-            builder.AddAttribute(1, nameof(PageDisplay.Page), handler);
-            builder.AddAttribute(2, nameof(PageDisplay.PageParameters), parameters);
-            builder.AddAttribute(3, nameof(PageDisplay.NotAuthorizedContent), NotAuthorizedContent);
-            builder.AddAttribute(4, nameof(PageDisplay.AuthorizingContent), AuthorizingContent);
-            builder.CloseComponent();
-        }
-
+       
         private void Refresh(bool isNavigationIntercepted)
         {
 
-            var locationPath = UriHelper.ToBaseRelativePath(_baseUri, _locationAbsolute);
+            var locationPath = NavigationManager.ToBaseRelativePath(_locationAbsolute);
             locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
 
 
@@ -147,10 +133,16 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 }
 
                 Log.NavigatingToComponent(_logger, context.Handler, locationPath, _baseUri);
-              
 
-                _renderHandle.Render(builder => Render(builder, context.Handler, context.Parameters));
-                
+                RouteData routeData = new RouteData(
+                   context.Handler,
+                   context.Parameters ?? _emptyParametersDictionary);
+
+
+                ContextStateProvider.RouteLanguage = context.Parameters["Language"].ToString(); 
+
+                _renderHandle.Render(Found(routeData));
+
             }
             else
             {
@@ -166,7 +158,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 else
                 {
                     Log.NavigatingToExternalUri(_logger, _locationAbsolute, locationPath, _baseUri);
-                    UriHelper.NavigateTo(_locationAbsolute, forceLoad: true);
+                    NavigationManager.NavigateTo(_locationAbsolute, forceLoad: true);
                 }
             }
 
@@ -197,7 +189,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
         Task IHandleAfterRender.OnAfterRenderAsync()
         {
-            if (!_navigationInterceptionEnabled && ComponentContext.IsConnected)
+            if (!_navigationInterceptionEnabled)
             {
                 _navigationInterceptionEnabled = true;
                 return NavigationInterception.EnableNavigationInterceptionAsync();

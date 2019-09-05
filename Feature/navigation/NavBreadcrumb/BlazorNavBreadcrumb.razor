@@ -5,7 +5,7 @@
 @inherits BaseComponent
 
 
-@inject Microsoft.AspNetCore.Components.IUriHelper _uriHelper
+@inject Microsoft.AspNetCore.Components.NavigationManager _navigationManager
 @inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository;
 
 
@@ -33,7 +33,7 @@ else
                 }
                 else
                 {
-                    <a href="@item.Url.AddBaseUrl(_uriHelper)">@title</a>
+                    <a href="@item.Url.AddBaseUrl(_navigationManager)">@title</a>
                 }
             </li>
         }
@@ -47,7 +47,7 @@ else
 
     string GetClassName(NavigationItem item)
     {
-        string relative = _uriHelper.ToBaseRelativePath(_uriHelper.GetBaseUri(), _uriHelper.GetAbsoluteUri());
+        string relative = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
         return item.Url.Equals("/" + relative) ? "active" : string.Empty;
 

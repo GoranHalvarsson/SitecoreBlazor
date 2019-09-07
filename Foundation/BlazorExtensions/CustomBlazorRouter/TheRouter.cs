@@ -68,8 +68,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         private RouteTable Routes { get; set; }
 
 
-
-
         public void Attach(RenderHandle renderHandle)
         {
             _logger = LoggerFactory.CreateLogger<Router>();
@@ -138,8 +136,10 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                    context.Handler,
                    context.Parameters ?? _emptyParametersDictionary);
 
-
-                ContextStateProvider.RouteLanguage = context.Parameters["Language"].ToString(); 
+                //Has Language parameter, then set it
+                ContextStateProvider.RouteLanguage = context.Parameters.ContainsKey("Language")
+                    ? context.Parameters["Language"].ToString()
+                    : LanguageService.GetDefaultLanguage().TwoLetterCode;
 
                 _renderHandle.Render(Found(routeData));
 

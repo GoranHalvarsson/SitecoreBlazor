@@ -11,7 +11,7 @@ namespace Foundation.BlazorExtensions.Extensions
         public static string AddBaseUrl(this string url, NavigationManager navigationManager)
         {
 
-            if (url.StartsWith("/"))
+            if (!string.IsNullOrWhiteSpace(url) && url.StartsWith("/"))
                 url = url.Substring(1);
 
             return new Uri(new Uri(navigationManager.BaseUri), url).ToString();

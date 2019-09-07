@@ -1,10 +1,8 @@
 ﻿@import "../../../Foundation/BlazorCssVendors/Sass/Vendors/bootstrap/scss/bootstrap.scss";
 
-@import "../../../Feature/PageContent/Sass/PageHeaderDescription.scss";
-@import "../../../Feature/PageContent/Sass/PageHeader.scss";
-@import "../../../Feature/PageContent/Sass/PageHeaderCarousel.scss";
-@import "../../../Feature/navigation/Sass/NavBreadcrumb.scss";
-@import "../../../Feature/Identity/Sass/Copyright.scss";
+@import "../../../Feature/PageContent/Sass/Index.scss";
+@import "../../../Feature/navigation/Sass/Index.scss";
+@import "../../../Feature/Identity/Sass/Index.scss";
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -30,25 +28,25 @@ app {
     float: right;
 }
 
-
-
 .main {
     flex: 1;
+
+    .top-row {
+        background-color: #e6e6e6;
+        border-bottom: 1px solid #d6d5d5;
+    }
 }
 
-.main .top-row {
-    background-color: #e6e6e6;
-    border-bottom: 1px solid #d6d5d5;
-}
+.nav-item a {
+    &.active {
+        background-color: rgba(255, 255, 255, 0.25);
+        color: black;
+    }
 
-.nav-item  a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: black;
-}
-
-.nav-item a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: black;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: black;
+    }
 }
 
 .content {
@@ -56,8 +54,6 @@ app {
     min-height: 80% !important;
     height: auto;
 }
-
-
 
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
@@ -81,14 +77,16 @@ app {
         top: 0;
     }
 
-    .main .top-row {
-        position: sticky;
-        top: 0;
-    }
+    .main {
+        .top-row {
+            position: sticky;
+            top: 0;
+        }
 
-    .main > div {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
+        > div {
+            padding-left: 2rem !important;
+            padding-right: 1.5rem !important;
+        }
     }
 
     .navbar-toggler {

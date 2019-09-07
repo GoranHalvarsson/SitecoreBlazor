@@ -32,13 +32,13 @@
     <None Update="Assets\Images\sc_logo.png">
       <LogicalName>blazor:file:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
-    <None Update="Sass\PageHeader.scss">
+    <None Update="Sass\_pageHeader.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
-    <None Update="Sass\PageHeaderCarousel.scss">
+    <None Update="Sass\_pageHeaderCarousel.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
-    <None Update="Sass\PageHeaderDescription.scss">
+    <None Update="Sass\_pageHeaderDescription.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
   </ItemGroup>

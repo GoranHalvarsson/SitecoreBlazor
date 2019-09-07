@@ -7021,6 +7021,12 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+.page-header {
+  padding-top: 1.1rem; }
+
+.carousel-caption {
+  background-color: deepskyblue; }
+
 .banner {
   background: url(../../../Project/BlazorSite/Sass/path/to/image.jpg) no-repeat center center;
   background-size: cover;
@@ -7057,83 +7063,30 @@ img.logo-image {
     img.logo-image {
       max-width: 15em; } }
 
-#CenterColumn {
-  margin: auto;
-  padding-right: 20px;
-  padding-left: 20px;
-  max-width: 1170px;
-  min-height: 402px;
-  background: white url("/images/banner.jpg") no-repeat;
-  background-size: 1170px 402px;
-  text-align: left; }
-
-#InnerCenter {
-  margin: auto;
-  position: relative;
-  width: 1150px;
-  height: 700px; }
-
-#Header {
-  height: 402px; }
-
-#Footer {
-  width: 100%;
-  clear: both;
-  padding-top: 2px; }
-
-#LeftContent {
-  width: 750px;
-  text-align: justify; }
-
-#scLogo {
-  margin-top: 20px; }
-
-.contentTitle {
-  margin-top: 50px;
-  font-weight: 400;
-  font-size: 36px; }
-
-.divider {
-  background-color: #DCDCDC;
-  border: 0 none;
-  clear: both;
-  display: block;
-  height: 1px;
-  float: none;
-  margin: 50px auto;
-  width: 100%; }
-
-.contentDescription {
-  padding-right: 20px;
-  line-height: 22px; }
-
-.page-header {
-  padding-top: 1.1rem; }
-
-.carousel-caption {
-  background-color: deepskyblue; }
-
 .breadcrumb {
   padding: 8px 0;
   margin-bottom: 20px;
   list-style: none;
   background-color: transparent;
   border-radius: 0; }
-
-.breadcrumb > li {
-  display: inline-block; }
-
-.breadcrumb > li + li:before {
-  content: "\\ ";
-  padding: 0 5px;
-  color: #586071; }
-
-.breadcrumb > .active {
-  color: #2e384e; }
-
-.breadcrumb > li {
-  font-size: 16px;
-  font-weight: normal; }
+  .breadcrumb > li {
+    display: inline-block; }
+    .breadcrumb > li + li:before {
+      content: "\\ ";
+      padding: 0 5px;
+      color: #586071; }
+  .breadcrumb > .active {
+    color: #2e384e; }
+  .breadcrumb > li {
+    font-size: 16px;
+    font-weight: normal; }
+    .breadcrumb > li.active {
+      font-weight: 700; }
+      .breadcrumb > li.active:before {
+        font-weight: normal;
+        font-size: 16px; }
+    .breadcrumb > li + li:before, .breadcrumb > li a {
+      color: #586071; }
 
 .ie9 .breadcrumb > li, .breadcrumb > li .lte-ie8 {
   margin-right: 1px; }
@@ -7142,8 +7095,13 @@ img.logo-image {
   .breadcrumb > li {
     font-size: 12px; } }
 
-.breadcrumb > li + li:before {
-  color: #586071; }
+@media all and (max-width: 767px) {
+  .breadcrumb > li + li:before {
+    padding: 0; } }
+
+@media all and (max-width: 767px) {
+  .breadcrumb > li.active {
+    font-size: 19px; } }
 
 .bg-primary .breadcrumb > li + li:before, .bg-secondary .breadcrumb > li + li:before, .bg-dark .breadcrumb > li + li:before, .bg-media .breadcrumb > li + li:before {
   color: #fff; }
@@ -7151,35 +7109,17 @@ img.logo-image {
 .bg-white .breadcrumb > li + li:before {
   color: #000; }
 
-@media all and (max-width: 767px) {
-  .breadcrumb > li + li:before {
-    padding: 0; } }
-
-.breadcrumb > li a {
-  color: #586071; }
-
 .bg-primary .breadcrumb > li a, .bg-secondary .breadcrumb > li a, .bg-dark .breadcrumb > li a, .bg-media .breadcrumb > li a {
   color: #fff; }
 
 .bg-white .breadcrumb > li a {
   color: #000; }
 
-.breadcrumb > li.active {
-  font-weight: 700; }
-
-@media all and (max-width: 767px) {
-  .breadcrumb > li.active {
-    font-size: 19px; } }
-
 .bg-primary .breadcrumb > li.active, .bg-secondary .breadcrumb > li.active, .bg-dark .breadcrumb > li.active, .bg-media .breadcrumb > li.active {
   color: #fff; }
 
 .bg-white .breadcrumb > li.active {
   color: #000; }
-
-.breadcrumb > li.active:before {
-  font-weight: normal;
-  font-size: 16px; }
 
 .footer-image {
   height: 50px;
@@ -7208,10 +7148,9 @@ app {
 
 .main {
   flex: 1; }
-
-.main .top-row {
-  background-color: #e6e6e6;
-  border-bottom: 1px solid #d6d5d5; }
+  .main .top-row {
+    background-color: #e6e6e6;
+    border-bottom: 1px solid #d6d5d5; }
 
 .nav-item a.active {
   background-color: rgba(255, 255, 255, 0.25);

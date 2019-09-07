@@ -5,6 +5,6 @@
 
 
 <div class="text-right">
-    @FieldsModel.PlainText("Text").Value.HtmlDecode() <a href="@FieldsModel.Link("Link").Value.Href" target="@FieldsModel.Link("Link").Value.Target" title="@FieldsModel.Link("Link").Value.Text"><img alt="@FieldsModel.Image("Image").Value.Alt" class="footer-image" src="@FieldsModel.Image("Image").Value.Src"></a>
+    @FieldsModel.PlainText("Text").Value.HtmlDecode() <a href="@FieldsModel.Link("Link").Value.Href" target="@FieldsModel.Link("Link").Value.Target" title="@FieldsModel.Link("Link").Value.Text.HtmlDecode()"><img alt="@FieldsModel.Image("Image").Value.Alt" class="footer-image" src="@FieldsModel.Image("Image").Value.Src"></a>
 </div>
 

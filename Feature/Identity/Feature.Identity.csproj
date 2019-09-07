@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Sass\Copyright.scss">
+    <None Update="Sass\_copyright.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
   </ItemGroup>

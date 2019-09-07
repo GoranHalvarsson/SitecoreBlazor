@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Sass\NavBreadcrumb.scss">
+    <None Update="Sass\_navBreadcrumb.scss">
       <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
   </ItemGroup>

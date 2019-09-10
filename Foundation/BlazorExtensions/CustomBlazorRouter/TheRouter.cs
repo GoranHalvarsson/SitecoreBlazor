@@ -132,14 +132,21 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
                 Log.NavigatingToComponent(_logger, context.Handler, locationPath, _baseUri);
 
+                //Custom - Adding language param if missing, also set default language 
+                if (!context.Parameters.ContainsKey("Language"))
+                    context.Parameters.Add("Language", LanguageService.GetDefaultLanguage().TwoLetterCode.ToString());
+
+                //Custom - Has nu language, set default language
+                if (string.IsNullOrWhiteSpace(context.Parameters["Language"].ToString()))
+                    context.Parameters["Language"] = LanguageService.GetDefaultLanguage().TwoLetterCode.ToString();
+
+                //Custom - Set the language CascadingParameter 
+                ContextStateProvider.RouteLanguage = context.Parameters["Language"].ToString();
+
                 RouteData routeData = new RouteData(
                    context.Handler,
                    context.Parameters ?? _emptyParametersDictionary);
-
-                //Has Language parameter, then set it
-                ContextStateProvider.RouteLanguage = context.Parameters.ContainsKey("Language")
-                    ? context.Parameters["Language"].ToString()
-                    : LanguageService.GetDefaultLanguage().TwoLetterCode;
+                 
 
                 _renderHandle.Render(Found(routeData));
 

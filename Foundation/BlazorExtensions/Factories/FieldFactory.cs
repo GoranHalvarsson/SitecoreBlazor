@@ -9,9 +9,9 @@ namespace Foundation.BlazorExtensions.Factories
 {
     public class FieldFactory
     {
-        private IBlazorItemField CreateSitecoreField<T>(KeyValuePair<string, BlazorRouteField> sitecoreField)
+        private IBlazorItemField CreateBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField)
         {
-            if (sitecoreField.Value == null)
+            if (blazorRouteField.Value == null)
                 return null;
 
             BlazorItemField<T> field = null;
@@ -22,15 +22,15 @@ namespace Foundation.BlazorExtensions.Factories
             try
             {
 
-                switch (sitecoreField.Value.Type)
+                switch (blazorRouteField.Value.Type)
                 {
                     case FieldTypes.HtmlField:
                     case FieldTypes.PlainTextField:
                     case FieldTypes.CheckboxField:
-                        fieldValue = (T)Convert.ChangeType(sitecoreField.Value.Value.ToString(), typeof(T));
+                        fieldValue = (T)Convert.ChangeType(blazorRouteField.Value.Value.ToString(), typeof(T));
                         break;
                     default:
-                        fieldValue = JsonSerializer.Deserialize<T>(sitecoreField.Value.Value.ToString());
+                        fieldValue = JsonSerializer.Deserialize<T>(blazorRouteField.Value.Value.ToString());
                         break;
                 }
 
@@ -38,16 +38,16 @@ namespace Foundation.BlazorExtensions.Factories
 
                 field = new BlazorItemField<T>
                 {
-                    FieldName = sitecoreField.Key,
+                    FieldName = blazorRouteField.Key,
                     Value = fieldValue,
-                    Editable = sitecoreField.Value?.Editable,
-                    Type = sitecoreField.Value?.Type
+                    Editable = blazorRouteField.Value?.Editable,
+                    Type = blazorRouteField.Value?.Type
                 };
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating field {sitecoreField.Value.Value}. Error { ex.Message}");
+                Console.WriteLine($"Error creating field {blazorRouteField.Value.Value}. Error { ex.Message}");
             }
 
             return field;
@@ -56,7 +56,7 @@ namespace Foundation.BlazorExtensions.Factories
         }
 
 
-        private Dictionary<string, BlazorRouteField> CreateDefaultField()
+        private Dictionary<string, BlazorRouteField> CreateDefaultBlazorRouteField()
         {
             SitecoreBlazorHosted.Shared.Models.BlazorRouteField defaultField = new BlazorRouteField()
             {
@@ -72,18 +72,18 @@ namespace Foundation.BlazorExtensions.Factories
             
         }
 
-        private IBlazorItemField CreateComplexSitecoreField<T>(KeyValuePair<string, BlazorRouteField> field) where T : class
+        private IBlazorItemField CreateComplexBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
         {
-            if (field.Value == null)
+            if (blazorRouteField.Value == null)
                 return null;
 
-            BlazorItemField<T> sitecoreField = null;
+            BlazorItemField<T> blazorItemField = null;
 
             T fieldValue = default;
 
             try
             {
-                switch (field.Value.Type)
+                switch (blazorRouteField.Value.Type)
                 {
                     case FieldTypes.MultiListField:
 
@@ -93,7 +93,7 @@ namespace Foundation.BlazorExtensions.Factories
                         };
 
 
-                        foreach (var item in field.Value.Values)
+                        foreach (var item in blazorRouteField.Value.Values)
                         {
                             if (item == null || string.IsNullOrWhiteSpace(item.ToString()))
                                 continue;
@@ -104,9 +104,9 @@ namespace Foundation.BlazorExtensions.Factories
                             };
 
 
-                            var fields = CreateFields(item.Fields);
+                            var fields = CreateBlazorItemFields(item.Fields);
 
-                            multiListItem.SitecoreFields = fields;
+                            multiListItem.BlazorItemFields = fields;
 
                             fieldValueMultiList.Values.Add(multiListItem);
 
@@ -121,12 +121,12 @@ namespace Foundation.BlazorExtensions.Factories
                 }
 
 
-                sitecoreField = new BlazorItemField<T>
+                blazorItemField = new BlazorItemField<T>
                 {
-                    FieldName = field.Key,
+                    FieldName = blazorRouteField.Key,
                     Value = fieldValue,
-                    Editable = field.Value?.Editable,
-                    Type = field.Value?.Type
+                    Editable = blazorRouteField.Value?.Editable,
+                    Type = blazorRouteField.Value?.Type
                 };
 
 
@@ -137,19 +137,20 @@ namespace Foundation.BlazorExtensions.Factories
 
             }
 
-            return sitecoreField;
+            return blazorItemField;
 
         }
-        public List<IBlazorItemField> CreateFields(Dictionary<string, BlazorRouteField> fields)
+        
+        public List<IBlazorItemField> CreateBlazorItemFields(Dictionary<string, BlazorRouteField> blazorRouteFields)
         {
-            if (fields == null || !fields.Any())
-                fields = CreateDefaultField();
+            if (blazorRouteFields == null || !blazorRouteFields.Any())
+                blazorRouteFields = CreateDefaultBlazorRouteField();
 
 
             List<IBlazorItemField> list = new List<IBlazorItemField>();
 
 
-            foreach (KeyValuePair<string, BlazorRouteField> field in fields)
+            foreach (KeyValuePair<string, BlazorRouteField> field in blazorRouteFields)
             {
                 if (field.Value == null)
                     continue;
@@ -163,22 +164,22 @@ namespace Foundation.BlazorExtensions.Factories
                 {
                     case FieldTypes.HtmlField:
                     case FieldTypes.PlainTextField:
-                        list.Add(CreateSitecoreField<string>(field));
+                        list.Add(CreateBlazorItemField<string>(field));
                         break;
                     case FieldTypes.CheckboxField:
-                        list.Add(CreateSitecoreField<bool>(field));
+                        list.Add(CreateBlazorItemField<bool>(field));
                         break;
 
                     case FieldTypes.LinkField:
-                        list.Add(CreateSitecoreField<BlazorFieldValueLink>(field));
+                        list.Add(CreateBlazorItemField<BlazorFieldValueLink>(field));
                         break;
 
                     case FieldTypes.ImageField:
-                        list.Add(CreateSitecoreField<BlazorFieldValueImage>(field));
+                        list.Add(CreateBlazorItemField<BlazorFieldValueImage>(field));
                         break;
 
                     case FieldTypes.MultiListField:
-                        list.Add(CreateComplexSitecoreField<BlazorFieldValueMultiList>(field));
+                        list.Add(CreateComplexBlazorItemField<BlazorFieldValueMultiList>(field));
                         break;
 
                     default:

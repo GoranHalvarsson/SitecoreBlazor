@@ -18,17 +18,17 @@ namespace Foundation.BlazorExtensions.Services
             };
         }
 
-        public IEnumerable<SitecoreBlazorHosted.Shared.Models.Language>
+        public IEnumerable<Language>
             GetLanguages()
         {
-            yield return new SitecoreBlazorHosted.Shared.Models.Language()
+            yield return new Language()
             {
                 Name = "en",
                 NativeName = "English",
                 TwoLetterCode = "en"
             };
 
-            yield return new SitecoreBlazorHosted.Shared.Models.Language()
+            yield return new Language()
             {
                 Name = "sv",
                 NativeName = "Svenska",

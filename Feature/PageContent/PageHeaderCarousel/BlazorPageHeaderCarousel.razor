@@ -29,11 +29,11 @@
             var field = @FieldsModel.MultiList("MediaSelector").Value.Values[j];
 
             <div class="@CarouselItemClassName(j)">
-                <img class="d-block w-100" src="@field.SitecoreFields.Image("MediaImage").Value.Src" alt="@field.SitecoreFields.Image("MediaImage").Value.Alt">
+                <img class="d-block w-100" src="@field.BlazorItemFields.Image("MediaImage").Value.Src" alt="@field.BlazorItemFields.Image("MediaImage").Value.Alt">
                 <div class="carousel-caption d-none d-md-block bg-dark">
 
-                    <h5>@field.SitecoreFields.PlainText("MediaTitle").Value.HtmlDecode()</h5>
-                    <p>@field.SitecoreFields.PlainText("MediaDescription").Value.HtmlDecode()</p>
+                    <h5>@field.BlazorItemFields.PlainText("MediaTitle").Value.HtmlDecode()</h5>
+                    <p>@field.BlazorItemFields.PlainText("MediaDescription").Value.HtmlDecode()</p>
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ namespace SitecoreBlazorHosted.Shared.Models
         public string Url { get; set; }
 
         public Dictionary<string, BlazorRouteField> Fields { get; set; }
-        public List<IBlazorItemField> SitecoreFields { get; set; }
+        public List<IBlazorItemField> BlazorItemFields { get; set; }
 
     }
 

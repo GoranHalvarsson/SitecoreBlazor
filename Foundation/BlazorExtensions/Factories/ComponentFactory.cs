@@ -26,7 +26,7 @@ namespace Foundation.BlazorExtensions.Factories
             {
                 Type componentType = Type.GetType($"{placeholderData.ComponentName}, {placeholderData.Assembly}");
 
-                IList<IBlazorItemField> componentModel = _fieldFactory.CreateFields(placeholderData.Fields);
+                IList<IBlazorItemField> componentModel = _fieldFactory.CreateBlazorItemFields(placeholderData.Fields);
 
                 return BuildRenderTree =>
                 {

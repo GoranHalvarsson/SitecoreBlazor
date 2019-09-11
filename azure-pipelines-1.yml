@@ -1,0 +1,46 @@
+pr:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfigurationClient: 'BlazorClient'
+  buildConfigurationServer: 'BlazorServer'
+  buildConfigurationElectron: 'BlazorElectron'
+
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 3.0.100-preview9-014004
+
+- script: dotnet build --configuration $(buildConfigurationClient) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
+  displayName: 'Building $(buildConfigurationClient)...'
+
+- script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
+  displayName: 'Building $(buildConfigurationServer)...'
+
+- script: dotnet build --configuration $(buildConfigurationElectron) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj
+  displayName: 'Building $(buildConfigurationElectron)...'
+
+- task: DotNetCoreCLI@1
+  displayName: 'Running tests...'
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfigurationClient)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing BlazorClient App...'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '--configuration $(buildConfigurationClient) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj'
+    zipAfterPublish: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing Build Artifacts...'
+

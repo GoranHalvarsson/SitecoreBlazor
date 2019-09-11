@@ -3,11 +3,6 @@ trigger:
     include:
       - master
 
-pr:
-  branches:
-    include:
-      - '*'
-
 pool:
   vmImage: 'windows-2019'
 

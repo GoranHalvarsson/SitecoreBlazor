@@ -33,14 +33,4 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfigurationClient)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Publishing BlazorClient App...'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '--configuration $(buildConfigurationClient) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj'
-    zipAfterPublish: false
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publishing Build Artifacts...'
 

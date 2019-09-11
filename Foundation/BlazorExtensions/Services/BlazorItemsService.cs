@@ -313,16 +313,16 @@ namespace Foundation.BlazorExtensions.Services
 
 
 
-            List<RouterData> GetChildren(IBlazorItem sitecoreItem)
+            List<RouterData> GetChildren(IBlazorItem blazorItem)
             {
                 List<RouterData> children = new List<RouterData>();
 
-                if (!sitecoreItem.HasChildren)
+                if (!blazorItem.HasChildren)
                 {
                     return null;
                 }
 
-                foreach (IBlazorItem child in sitecoreItem.Children)
+                foreach (IBlazorItem child in blazorItem.Children)
                 {
                     children.Add(new RouterData()
                     {

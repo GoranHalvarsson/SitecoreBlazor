@@ -25,15 +25,16 @@ namespace Foundation.BlazorExtensions
 
         public bool IsNavBarCollapsed { get; set; } = true;
 
-        public void ToggleNavBar()
-        {
-            IsNavBarCollapsed = !IsNavBarCollapsed;
-        }
-
         public IList<Tuple<DateTime, string, BlazorRoute>> NavigatedRoutes { get; set; }
 
         public BlazorRoute CurrentRoute { get; set; }
 
+        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
+
+        public void ToggleNavBar()
+        {
+            IsNavBarCollapsed = !IsNavBarCollapsed;
+        }
 
         public Dictionary<string, BlazorRouteField> GetAllBlazorRouteFieldsFromCurrentRoute(string placeHolder = null)
         {
@@ -79,7 +80,7 @@ namespace Foundation.BlazorExtensions
 
             if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
             {
-                blazorFields.AddRange(_fieldFactory.CreateFields(CurrentRoute.Fields));
+                blazorFields.AddRange(_fieldFactory.CreateBlazorItemFields(CurrentRoute.Fields));
             }
 
             if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
@@ -94,7 +95,7 @@ namespace Foundation.BlazorExtensions
                     foreach (Placeholder placeholderData in keyVal.Value)
                     {
 
-                        blazorFields.AddRange(_fieldFactory.CreateFields(placeholderData.Fields));
+                        blazorFields.AddRange(_fieldFactory.CreateBlazorItemFields(placeholderData.Fields));
                     }
                 }
 
@@ -104,21 +105,6 @@ namespace Foundation.BlazorExtensions
 
         }
 
-
-        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
-
-        [Obsolete()]
-        public event EventHandler<LanguageSwitchArgs> LanguageSwitch;
-
-        [Obsolete()]
-        public void SwitchLanguage(Language language)
-        {
-            LanguageSwitchArgs args = new LanguageSwitchArgs
-            {
-                Language = language
-            };
-            LanguageSwitch?.Invoke(this, args);
-        }
         public BlazorRoute GetNavigatedRoute(string url)
         {
             if (NavigatedRoutes == null)
@@ -153,6 +139,19 @@ namespace Foundation.BlazorExtensions
                 return;
 
             NavigatedRoutes.Remove(foundItem);
+        }
+
+        [Obsolete()]
+        public event EventHandler<LanguageSwitchArgs> LanguageSwitch;
+
+        [Obsolete()]
+        public void SwitchLanguage(Language language)
+        {
+            LanguageSwitchArgs args = new LanguageSwitchArgs
+            {
+                Language = language
+            };
+            LanguageSwitch?.Invoke(this, args);
         }
 
 

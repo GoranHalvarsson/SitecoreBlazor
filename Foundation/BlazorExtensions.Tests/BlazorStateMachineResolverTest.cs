@@ -227,29 +227,6 @@ namespace Foundation.BlazorExtensions.Tests
 
 
         }
-
-        //[DllImport("kernel32", SetLastError = true)]
-        //static extern bool FreeLibrary(IntPtr hModule);
-
-        //private static void Teardown()
-        //{
-        //    foreach (ProcessModule mod in Process.GetCurrentProcess().Modules)
-        //    {
-        //        if (mod.ModuleName == "Foundation.BlazorExtensions.dll")
-        //        {
-        //            FreeLibrary(mod.BaseAddress);
-        //        }
-
-        //        if (mod.ModuleName == "SitecoreBlazorHosted.Shared.dll")
-        //        {
-        //            FreeLibrary(mod.BaseAddress);
-        //        }
-        //    }
-        //}
-
-        //public void Dispose()
-        //{
-        //    Teardown();
-        //}
+       
     }
 }

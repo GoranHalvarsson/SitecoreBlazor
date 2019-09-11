@@ -1,19 +1,46 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- master
+pr:
+  branches:
+    include:
+      - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfigurationClient: 'BlazorClient'
+  buildConfigurationServer: 'BlazorServer'
+  buildConfigurationElectron: 'BlazorElectron'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: DotNetCoreInstaller@0
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 3.0.100-preview9-014004
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: dotnet build --configuration $(buildConfigurationClient) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
+  displayName: 'Building $(buildConfigurationClient)...'
+
+- script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
+  displayName: 'Building $(buildConfigurationServer)...'
+
+- script: dotnet build --configuration $(buildConfigurationElectron) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj
+  displayName: 'Building $(buildConfigurationElectron)...'
+
+- task: DotNetCoreCLI@1
+  displayName: 'Running tests...'
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfigurationClient)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing BlazorClient App...'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '--configuration $(buildConfigurationClient) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj'
+    zipAfterPublish: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing Build Artifacts...'
+

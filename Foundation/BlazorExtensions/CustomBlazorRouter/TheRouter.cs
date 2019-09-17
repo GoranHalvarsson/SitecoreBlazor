@@ -16,7 +16,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
 
     /// <summary>
-    /// A component that displays whichever other component corresponds to the
+    /// Custom route component that displays whichever other component corresponds to the
     /// current navigation location.
     /// </summary>
     public sealed class TheRouter : IComponent, IHandleAfterRender, IDisposable

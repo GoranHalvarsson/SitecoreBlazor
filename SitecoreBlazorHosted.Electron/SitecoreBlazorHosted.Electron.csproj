@@ -16,7 +16,7 @@
   
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(BlazorVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Electron" Version="$(ComponentsElectronVersion)" />
   </ItemGroup>
 

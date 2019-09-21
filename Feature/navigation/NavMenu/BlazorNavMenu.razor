@@ -48,9 +48,9 @@ else
                 {
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="ToggleSubMenu">
+                        <button type="button" class="btn btn-link nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="ToggleSubMenu">
                             @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()
-                        </a>
+                        </button>
                         <div class="@ClassName">
 
                             @foreach (var child in item.Children)

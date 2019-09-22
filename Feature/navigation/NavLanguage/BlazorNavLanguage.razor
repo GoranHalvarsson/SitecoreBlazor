@@ -23,11 +23,11 @@ else
         <button type="button" class="btn  btn-light  dropdown-toggle " @onclick="() => ToggleOpen()" aria-haspopup="true">
             @_languageService.Get(_blazorStateMachine.Language)?.NativeName
         </button>
-        <div class="@ClassName" @onblur="() => ToggleOpen()">
+        <div class="@ClassName">
 
             @foreach (var language in ValidLanguages)
             {
-                <a class="dropdown-item" @onclick="() => SwitchLanguage(language)" href="@BuildUrl(language)">@language.NativeName</a>
+                <button type="button" class="btn btn-link dropdown-item" @onclick="() => SwitchLanguage(language)" >@language.NativeName</button>
             }
 
         </div>
@@ -81,6 +81,10 @@ else
             _blazorStateMachine.ToggleNavBar();
 
         ToggleOpen();
+
+        string url = BuildUrl(language);
+
+        _navigationManager.NavigateTo(url);
 
 
     }

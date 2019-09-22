@@ -31,5 +31,21 @@ namespace Foundation.BlazorExtensions.Extensions
             return url;
         }
 
+        //public static string GetLanguageSegment(this string url, string baseUrl)
+        //{
+
+        //    Uri uri = new Uri(new Uri(baseUrl), url);
+
+        //    string segment = uri?.Segments?.ElementAt(1);
+
+        //    if (string.IsNullOrWhiteSpace(segment))
+        //        return false;
+
+        //    url = url.Replace(Constants.UrlFixes.FilePrefix, "");
+
+        //    return url;
+        //}
+
+
     }
 }

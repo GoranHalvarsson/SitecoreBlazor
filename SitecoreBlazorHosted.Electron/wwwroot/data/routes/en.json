@@ -108,7 +108,7 @@
                   "Type": "ImageField"
                 },
                 "Title": {
-                  "Value": "Sitecore Experience Platform + BLAZOR 3.0.0-preview9.19424.4",
+                  "Value": "Sitecore Experience Platform + BLAZOR 3.0.0-rc1.19457.4 and 3.0.0-preview9.19457.4",
                   "Type": "PlainTextField"
                 },
                 "Text": {

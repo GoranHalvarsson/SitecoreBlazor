@@ -70,6 +70,9 @@ else
 
         }
 
+        if (string.IsNullOrWhiteSpace(_blazorStateMachine.Language))
+            _blazorStateMachine.Language = RouteLanguage;
+
     }
 
 }

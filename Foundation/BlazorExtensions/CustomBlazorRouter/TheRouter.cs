@@ -118,7 +118,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             Routes.Route(context);
 
             // Custom - Not valid route
-            if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(_baseUri, locationPath))
+            if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(locationPath))
                 context = SetErrorContext(locationPath);
 
 
@@ -176,7 +176,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
 
         private RouteContext SetErrorContext(string locationPath)
         {
-            Language currentLanguage = LanguageService.GetLanguageFromUrl(_baseUri, locationPath);
+            Language currentLanguage = LanguageService.GetLanguageFromUrl(locationPath);
 
             var errContext = new RouteContext($"{currentLanguage.TwoLetterCode}?{Constants.Route.RouteError}");
             Routes.Route(errContext);

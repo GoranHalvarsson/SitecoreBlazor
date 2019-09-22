@@ -4,7 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <LangVersion>7.3</LangVersion>
-    <ComponentsElectronVersion>0.1.0-dev-0001</ComponentsElectronVersion>
+    <SignAssembly>false</SignAssembly>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <ComponentsElectronVersion>0.1.0-dev</ComponentsElectronVersion>
     <DefaultItemExcludes>${DefaultItemExcludes};node_modules\**;package-lock.json</DefaultItemExcludes>
     <RestoreAdditionalProjectSources>
       ..\packages;
@@ -16,6 +18,8 @@
   
 
   <ItemGroup>
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(BlazorVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Electron" Version="$(ComponentsElectronVersion)" />
   </ItemGroup>
@@ -30,11 +34,11 @@
   </Target>
 
   <!-- Note: this is not necessary since preview 6, since the framework now has a built-in mechanism for obtaining static content from referenced packages/projects. -->
-  <Target Name="CopyStaticAssets" BeforeTargets="CoreCompile">
+  <!--<Target Name="CopyStaticAssets" BeforeTargets="CoreCompile">
     <ItemGroup>
       <_FilesToCopy Include="..\SitecoreBlazorHosted.Server\wwwroot\**" />
     </ItemGroup>
     <Copy SourceFiles="@(_FilesToCopy)" DestinationFolder="wwwroot\%(RecursiveDir)" />
-  </Target>
+  </Target>-->
 
 </Project>

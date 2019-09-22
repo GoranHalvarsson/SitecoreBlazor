@@ -80,7 +80,7 @@
 
         if (hasRouteError)
         {
-            Language = _languageService.GetLanguageFromUrl(_navigationManager.BaseUri, Language).TwoLetterCode;
+            Language = _languageService.GetLanguageFromUrl(Language).TwoLetterCode;
         }
 
         await _layoutService.LoadRoute(Language, hasRouteError);

@@ -47,6 +47,30 @@
     <SourceImages Include="$(MSBuildProjectDirectory)\Assets\Images\**\*.*" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Remove="Assets\Images\Habitat-004-wide.jpg" />
+    <None Remove="Assets\Images\Habitat-007-wide.jpg" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SourceImages Remove="Assets\Images\Habitat-004-wide.jpg" />
+    <SourceImages Remove="Assets\Images\Habitat-007-wide.jpg" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Include="Assets\Images\Habitat-004-wide.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Assets\Images\Habitat-007-wide.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
   
   <Target Name="Client" BeforeTargets="PreBuildEvent">
     <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorClientDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
@@ -55,5 +79,10 @@
   <Target Name="Server" BeforeTargets="PreBuildEvent">
     <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorServerDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
   </Target>
+
+  <Target Name="Electron" BeforeTargets="PreBuildEvent">
+    <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorElectronDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
+  </Target>
+
 
 </Project>

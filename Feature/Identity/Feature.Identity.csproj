@@ -56,4 +56,8 @@
     <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorServerDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
   </Target>
 
+  <Target Name="Electron" BeforeTargets="PreBuildEvent">
+    <Copy SourceFiles="@(SourceImages)" DestinationFiles="@(SourceImages->'$(BlazorElectronDirectory)\wwwroot\images\%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="false" />
+  </Target>
+
 </Project>

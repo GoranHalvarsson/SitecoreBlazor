@@ -51,13 +51,13 @@ namespace Foundation.BlazorExtensions.Services
         }
 
 
-        public bool HasValidLanguageInUrl(string baseUrl, string relativeUrl)
+        public bool HasValidLanguageInUrl(string relativeUrl)
         {
 
             if (string.IsNullOrWhiteSpace(relativeUrl))
                 return false;
 
-            Uri uri = new Uri(new Uri(baseUrl), relativeUrl);
+            Uri uri = new Uri(new Uri("http://www.fakeBase.com/"), relativeUrl);
 
             string segment =  uri?.Segments?.ElementAt(1);
 
@@ -73,13 +73,14 @@ namespace Foundation.BlazorExtensions.Services
 
         }
 
-        public Language GetLanguageFromUrl(string baseUrl, string relativeUrl)
+        public Language GetLanguageFromUrl(string relativeUrl)
         {
 
             if (string.IsNullOrWhiteSpace(relativeUrl))
                 return GetDefaultLanguage();
 
-            Uri uri = new Uri(new Uri(baseUrl), relativeUrl);
+            Uri uri = new Uri(new Uri("http://www.fakeBase.com/"), relativeUrl);
+
 
             string segment =  uri?.Segments?.ElementAt(1);
 

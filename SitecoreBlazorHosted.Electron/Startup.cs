@@ -14,7 +14,7 @@ namespace SitecoreBlazorHosted.Electron
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<HttpClient>((s) => new HttpClient());
+            //services.AddSingleton<HttpClient>((s) => new HttpClient());
             services.AddScoped<IRestService, FilesService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();

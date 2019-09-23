@@ -66,11 +66,11 @@ namespace Foundation.BlazorExtensions.Services
               : (false, $"/{relativeUrl}");
         }
 
-        public async Task LoadRoute(string language = null, bool hasRouteError = false )
+        public async Task LoadRoute(string language, bool hasRouteError = false )
         {
             string routeUrl = BuildRouteApiUrl(language, hasRouteError);
 
-            BlazorRoute routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
+            BlazorRoute? routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
             if (routeExists == null) {
                 _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<BlazorRoute>(routeUrl);

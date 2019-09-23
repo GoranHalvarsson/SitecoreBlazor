@@ -21,6 +21,7 @@ namespace Foundation.BlazorExtensions.Services
             _componentFactory = componentFactory;
             _routeService = routeService;
             _blazorStateMachine = blazorStateMachine;
+            ComponentsInDynamicPlaceholdersAllreadyRenderdPerStateChanged = new List<string>();
         }
 
        
@@ -44,7 +45,7 @@ namespace Foundation.BlazorExtensions.Services
         }
 
 
-        public Task<List<RenderFragment>> RenderPlaceholders(string placeholder, CancellationToken cancellationToken = default)
+        public Task<List<RenderFragment>?> RenderPlaceholders(string placeholder, CancellationToken cancellationToken = default)
         {
             return Task.Run(() =>
             {
@@ -53,7 +54,7 @@ namespace Foundation.BlazorExtensions.Services
                 try
                 {
 
-                    IList<KeyValuePair<string, IList<Placeholder>>> placeHoldersList = _blazorStateMachine.CurrentPlaceholders?.Where(ph => ph.Key.ExtractPlaceholderName() == placeholder).ToList();
+                    IList<KeyValuePair<string, IList<Placeholder>>>? placeHoldersList = _blazorStateMachine.CurrentPlaceholders?.Where(ph => ph.Key.ExtractPlaceholderName() == placeholder).ToList();
 
                     if (placeHoldersList == null)
                         return null;

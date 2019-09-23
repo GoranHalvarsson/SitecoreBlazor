@@ -20,8 +20,8 @@ To get started with Blazor and build your first Blazor web app check out [Blazor
 ## Setup solution
 Clone or fork this repo, build it and be happy 🙂
 
-## UPDATE! Application can now run server-side or client-side
-To run server-side:
+## UPDATE! Application can now run Server-side, Client-side or as an Electron app 
+**To run server-side:**
 
 Set SitecoreBlazorHosted.Server as StartUp project.
 
@@ -29,11 +29,19 @@ Select BlazorServer in Solution Configurations.
 
 And run...
 
-To run client-side:
+**To run client-side:**
 
 Set SitecoreBlazorHosted.Client as StartUp project.
 
 Select BlazorClient in Solution Configurations.
+
+And run...
+
+**To run Electron App:**
+
+Set SitecoreBlazorHosted.Electron as StartUp project.
+
+Select BlazorElectron in Solution Configurations.
 
 And run...
 

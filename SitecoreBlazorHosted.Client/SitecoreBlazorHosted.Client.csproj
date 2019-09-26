@@ -7,15 +7,20 @@
       https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
       https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
     </RestoreAdditionalProjectSources>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <Configurations>Debug;Release;BlazorElektron</Configurations>
+    <Configurations>Debug;Release;BlazorClient</Configurations>
+    <ServiceWorkerForce>false</ServiceWorkerForce>
   </PropertyGroup>
 
 
 
 
   <ItemGroup>
+    <PackageReference Include="BlazorPWA.MSBuild" Version="0.0.1-beta20190815-02">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(BlazorVersion)" />

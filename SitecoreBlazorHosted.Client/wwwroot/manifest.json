@@ -1,15 +1,23 @@
-﻿{
-  "name": "Sitecore Blazor",
-  "short_name": "Sitecore Blazor",
+{
+  "short_name": "SitecoreBlazorHosted",
+  "name": "SitecoreBlazorHosted.Client",
+  "start_url": "/",
+  "display": "standalone",
   "icons": [
     {
-      "src": "icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src":"/icons/icon-192x192.png",
+      "type":"image/png",
+      "sizes":"192x192"
+    },
+    {
+      "src":"/images/icon-192x192.png",
+      "type":"image/png",
+      "sizes":"192x192"
+    },
+    {
+      "src":"/default-icon-512x512.png",
+      "type":"image/png",
+      "sizes":"512x512"
     }
-  ],
-  "start_url": "/en",
-  "display": "standalone",
-  "background_color": "#3a0647",
-  "theme_color": "#052767"
+  ]
 }

@@ -19,24 +19,24 @@ namespace Foundation.BlazorExtensions
 
         public int ValidCacheInHours { get; set; } = 12;
 
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
-        public string RouteId { get; set; }
+        public string? RouteId { get; set; }
 
         public bool IsNavBarCollapsed { get; set; } = true;
 
-        public IList<Tuple<DateTime, string, BlazorRoute>> NavigatedRoutes { get; set; }
+        public IList<Tuple<DateTime, string, BlazorRoute>>? NavigatedRoutes { get; set; }
 
-        public BlazorRoute CurrentRoute { get; set; }
+        public BlazorRoute? CurrentRoute { get; set; }
 
-        public IEnumerable<KeyValuePair<string, IList<Placeholder>>> CurrentPlaceholders { get; set; }
+        public IEnumerable<KeyValuePair<string, IList<Placeholder>>>? CurrentPlaceholders { get; set; }
 
         public void ToggleNavBar()
         {
             IsNavBarCollapsed = !IsNavBarCollapsed;
         }
 
-        public Dictionary<string, BlazorRouteField> GetAllBlazorRouteFieldsFromCurrentRoute(string placeHolder = null)
+        public Dictionary<string, BlazorRouteField>? GetAllBlazorRouteFieldsFromCurrentRoute(string placeHolder)
         {
             Dictionary<string, BlazorRouteField> blazorFields = new Dictionary<string, BlazorRouteField>();
 
@@ -70,7 +70,7 @@ namespace Foundation.BlazorExtensions
         }
 
 
-        public List<IBlazorItemField> GetAllBlazorItemFieldsFromCurrentRoute(string placeHolder = null)
+        public List<IBlazorItemField>? GetAllBlazorItemFieldsFromCurrentRoute(string placeHolder)
         {
 
             List<IBlazorItemField> blazorFields = new List<IBlazorItemField>();
@@ -105,7 +105,7 @@ namespace Foundation.BlazorExtensions
 
         }
 
-        public BlazorRoute GetNavigatedRoute(string url)
+        public BlazorRoute? GetNavigatedRoute(string url)
         {
             if (NavigatedRoutes == null)
                 return null;
@@ -141,18 +141,18 @@ namespace Foundation.BlazorExtensions
             NavigatedRoutes.Remove(foundItem);
         }
 
-        [Obsolete()]
-        public event EventHandler<LanguageSwitchArgs> LanguageSwitch;
+        //[Obsolete()]
+        //public event EventHandler<LanguageSwitchArgs> LanguageSwitch;
 
-        [Obsolete()]
-        public void SwitchLanguage(Language language)
-        {
-            LanguageSwitchArgs args = new LanguageSwitchArgs
-            {
-                Language = language
-            };
-            LanguageSwitch?.Invoke(this, args);
-        }
+        //[Obsolete()]
+        //public void SwitchLanguage(Language language)
+        //{
+        //    LanguageSwitchArgs args = new LanguageSwitchArgs
+        //    {
+        //        Language = language
+        //    };
+        //    LanguageSwitch?.Invoke(this, args);
+        //}
 
 
     }

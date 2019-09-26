@@ -59,7 +59,7 @@ namespace Foundation.BlazorExtensions.Services
 
             Uri uri = new Uri(new Uri("http://www.fakeBase.com/"), relativeUrl);
 
-            string segment =  uri?.Segments?.ElementAt(1);
+            string? segment =  uri?.Segments?.ElementAt(1);
 
             if(string.IsNullOrWhiteSpace(segment))
                 return false;
@@ -82,7 +82,7 @@ namespace Foundation.BlazorExtensions.Services
             Uri uri = new Uri(new Uri("http://www.fakeBase.com/"), relativeUrl);
 
 
-            string segment =  uri?.Segments?.ElementAt(1);
+            string? segment =  uri?.Segments?.ElementAt(1);
 
             if(string.IsNullOrWhiteSpace(segment))
                 return GetDefaultLanguage();

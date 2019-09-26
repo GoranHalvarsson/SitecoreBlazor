@@ -16,7 +16,7 @@ namespace Foundation.BlazorExtensions.Factories
 
         
 
-        public RenderFragment CreateComponent(Placeholder placeholderData)
+        public RenderFragment? CreateComponent(Placeholder placeholderData)
         {
 
             if (placeholderData == null)

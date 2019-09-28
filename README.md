@@ -46,6 +46,11 @@ Select BlazorElectron in Solution Configurations.
 And run...
 
 ## Blog posts
-[Server-side is dead, long live client-side! BLAZOR + Sitecore = a match made in heaven](https://visionsincode.wordpress.com/2018/05/13/server-side-is-dead-long-live-client-side-blazor-sitecore-a-match-made-in-heaven/)
+[Make it all dynamic in BLAZOR – Routing, Pages and Components](https://visionsincode.wordpress.com/2019/09/27/make-it-all-dynamic-in-blazor-routing-pages-and-components/)
 
 [Time travel into the future – BLAZOR + SITECORE + HELIX](https://visionsincode.wordpress.com/2018/06/30/time-travel-into-the-future-blazor-sitecore-helix/)
+
+[Server-side is dead, long live client-side! BLAZOR + Sitecore = a match made in heaven](https://visionsincode.wordpress.com/2018/05/13/server-side-is-dead-long-live-client-side-blazor-sitecore-a-match-made-in-heaven/)
+
+
+

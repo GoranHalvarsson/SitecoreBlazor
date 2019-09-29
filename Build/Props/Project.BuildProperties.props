@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-      <AspNetCoreVersion>3.0.0-rc1.19457.4</AspNetCoreVersion>
+      <AspNetCoreVersion>3.0.0-preview9.19465.2</AspNetCoreVersion>
       <BlazorVersion>3.0.0-preview9.19465.2</BlazorVersion>
       <BlazorClientDirectory>$(SolutionDir)SitecoreBlazorHosted.Client</BlazorClientDirectory>
       <BlazorServerDirectory>$(SolutionDir)SitecoreBlazorHosted.Server</BlazorServerDirectory>

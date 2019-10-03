@@ -2,10 +2,7 @@
 using SitecoreBlazorHosted.Shared.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
@@ -25,7 +22,7 @@ namespace Foundation.BlazorExtensions.Tests
         }
 
         [Fact]
-        public void RequiresJSRuntime()
+        public void RequiresJsRuntime()
         {
             var ex = Assert.Throws<ArgumentException>(
                 () => new BlazorStateMachineResolver(new SessionStorage(), null));
@@ -131,8 +128,8 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
             var storedJson = "[\n\t{\n\t\t\"Item1\": \"2019-07-28T11:46:14.378+00:00\",\n\t\t\"Item2\": \"https://base/data/routes/en.json\",\n\t\t\"Item3\": {\r\n  \"Name\": \"carousels\",\r\n  \"Id\": \"8a80477e-7cb4-4cee-a035-b48ac118abe8\",\r\n  \"DisplayName\": null,\r\n  \"ItemLanguage\": \"en\",\r\n  \"Fields\": null,\r\n  \"Placeholders\": null\r\n}\n]";
-            var expectedData = new List<Tuple<DateTime, string, BlazorRoute>>();
-            expectedData.Add(
+            var expectedData = new List<Tuple<DateTime, string, BlazorRoute>>
+            {
                 new Tuple<DateTime, string, BlazorRoute>(
                     DateTime.Parse("2019-07-28T11:46:14.378+00:00"),
                     "http://someurl",
@@ -146,7 +143,7 @@ namespace Foundation.BlazorExtensions.Tests
                         Fields = null,
                         DisplayName = null
                     })
-                );
+            };
 
 
 
@@ -186,8 +183,8 @@ namespace Foundation.BlazorExtensions.Tests
             var jsRuntime = new TestJSRuntime();
             var blazorStateMachineResolver = new BlazorStateMachineResolver(new SessionStorage(), jsRuntime);
             var jsResultTask = new ValueTask<object>();
-            var data = new List<Tuple<DateTime, string, BlazorRoute>>();
-            data.Add(
+            var data = new List<Tuple<DateTime, string, BlazorRoute>>
+            {
                 new Tuple<DateTime, string, BlazorRoute>(
                     DateTime.Parse("2019-07-28T11:46:14.378+00:00"),
                     "http://someurl",
@@ -201,7 +198,7 @@ namespace Foundation.BlazorExtensions.Tests
                         Fields = null,
                         DisplayName = null
                     })
-                );
+            };
 
             var options = new JsonSerializerOptions()
             {

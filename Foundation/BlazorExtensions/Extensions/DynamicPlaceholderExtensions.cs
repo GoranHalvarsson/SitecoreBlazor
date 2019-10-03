@@ -12,12 +12,7 @@ namespace Foundation.BlazorExtensions.Extensions
 
       string possibleGuid = placeholderName.Substring(placeholderName.Length - 36, 36);
 
-      if (IsValidGuid(possibleGuid))
-        return placeholderName.Substring(0, placeholderName.Length - 37);
-
-
-      return placeholderName;
-
+      return IsValidGuid(possibleGuid) ? placeholderName.Substring(0, placeholderName.Length - 37) : placeholderName;
     }
 
     public static bool IsDynamicPlaceholder(this string placeholderName)

@@ -1,3 +1,6 @@
+@using System
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Components
 @*@using Microsoft.AspNetCore.ProtectedBrowserStorage
     @inject ProtectedSessionStorage ProtectedSessionStore*@
 
@@ -6,7 +9,7 @@
 
 
 
-@if (_hasLoaded)
+@if (HasLoaded)
 {
     <CascadingValue Value="@this">
         @ChildContent
@@ -27,12 +30,12 @@ else
     [Parameter]
     public string RouteLanguage { get; set; }
 
-    protected bool _hasLoaded;
+    protected bool HasLoaded { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await LoadStateAsync();
-        _hasLoaded = true;
+        HasLoaded = true;
 
     }
 

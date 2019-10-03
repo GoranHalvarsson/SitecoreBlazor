@@ -1,12 +1,9 @@
 using Feature.Navigation.Extensions;
-using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Services;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Project.BlazorSite;
-using SitecoreBlazorHosted.Shared;
-using System.Net.Http;
 
 namespace SitecoreBlazorHosted.Electron
 {
@@ -14,7 +11,7 @@ namespace SitecoreBlazorHosted.Electron
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<HttpClient>((s) => new HttpClient());
+            //TODO! Should FileService be in the Electron project?
             services.AddScoped<IRestService, FilesService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();

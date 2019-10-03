@@ -9,7 +9,6 @@ namespace Foundation.BlazorExtensions.Services
     {
         public Language GetDefaultLanguage()
         {
-            //Get is from sitecore
             return new Language()
             {
                 Name = "English",

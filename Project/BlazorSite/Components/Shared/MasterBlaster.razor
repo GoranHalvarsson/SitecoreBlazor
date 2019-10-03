@@ -1,18 +1,18 @@
-﻿@using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Components.Routing
+﻿@using System
+@using System.Threading.Tasks
 @using Foundation.BlazorExtensions.Components
 @using Foundation.BlazorExtensions.Extensions
-@using Foundation.BlazorExtensions.Services
+@using Microsoft.AspNetCore.Components
 
-@implements IDisposable
+@implements System.IDisposable
 
-@inherits LayoutComponentBase
-@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
+@inherits Microsoft.AspNetCore.Components.LayoutComponentBase
+@inject Foundation.BlazorExtensions.BlazorStateMachine BlazorStateMachine
 
-@inject NavigationManager _navigationManager;
-@inject LayoutService _layoutService;
-@inject LanguageService _languageService;
-@inject BlazorExtensionsInteropService _blazorExtensionsInteropService;
+@inject NavigationManager NavigationManager;
+@inject LayoutService LayoutService;
+@inject LanguageService LanguageService;
+@inject BlazorExtensionsInteropService BlazorExtensionsInteropService;
 
 
 
@@ -58,7 +58,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _navigationManager.LocationChanged += OnLocationChanged;
+        NavigationManager.LocationChanged += OnLocationChanged;
 
         await Reload();
 
@@ -80,10 +80,10 @@
 
         if (hasRouteError)
         {
-            Language = _languageService.GetLanguageFromUrl(Language).TwoLetterCode;
+            Language = LanguageService.GetLanguageFromUrl(Language).TwoLetterCode;
         }
 
-        await _layoutService.LoadRoute(Language, hasRouteError);
+        await LayoutService.LoadRoute(Language, hasRouteError);
 
 
         await SetPageTitle();
@@ -96,14 +96,14 @@
 
     private async Task SetPageTitle()
     {
-        string pageTitle = _blazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.HtmlDecode();
+        string pageTitle = BlazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.HtmlDecode();
 
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {
 
             try
             {
-                await _blazorExtensionsInteropService.SetPageTitle(pageTitle);
+                await BlazorExtensionsInteropService.SetPageTitle(pageTitle);
             }
             catch (Exception ex)
             {
@@ -117,7 +117,7 @@
 
     public void Dispose()
     {
-        _navigationManager.LocationChanged -= OnLocationChanged;
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
 }

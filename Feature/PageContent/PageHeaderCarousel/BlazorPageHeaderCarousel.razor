@@ -1,5 +1,7 @@
-﻿@using System.Timers
+﻿@using System
+@using System.Timers
 @using System.Linq
+@using System.Threading.Tasks
 @using Feature.PageContent
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Components
@@ -7,7 +9,7 @@
 
 @inherits BaseComponent
 
-@implements IDisposable
+@implements System.IDisposable
 
 
 <div class="carousel slide" @onmouseout="StartTimer" @onmouseover="StopTimer">
@@ -66,23 +68,8 @@
         return $"carousel-item {active}";
     }
 
-    private string CarouselItemCaptionClassName
-    {
-        get
-        {
-            return $"carousel-caption d-none d-md-block";
-        }
-    }
-
-    private int _activeIndex;
-    private int ActiveIndex
-    {
-        get => _activeIndex;
-        set
-        {
-            _activeIndex = value;   
-        }
-    }
+   
+    private int ActiveIndex { get; set; }
 
 
     private int Interval { get; set; } = 5000;
@@ -123,18 +110,12 @@
 
     private void StopTimer()
     {
-        if (_timer != null)
-        {
-            _timer.Stop();
-        }
+        _timer?.Stop();
     }
 
     private void StartTimer()
     {
-        if (_timer != null)
-        {
-            _timer.Start();
-        }
+        _timer?.Start();
     }
 
     private void NavCarousel(CarouselDirection carouselIndication)
@@ -173,12 +154,12 @@
 
     public void Dispose()
     {
-        if (_timer != null)
-        {
-            _timer.Stop();
-            _timer.Dispose();
-            _timer = null;
-        }
+        if (_timer == null) 
+            return;
+        
+        _timer.Stop();
+        _timer.Dispose();
+        _timer = null;
     }
 
 }

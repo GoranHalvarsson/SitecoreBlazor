@@ -1,9 +1,5 @@
 ﻿using Foundation.BlazorExtensions.Extensions;
-using Microsoft.AspNetCore.Components;
-using SitecoreBlazorHosted.Shared;
-using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Foundation.BlazorExtensions.Services
@@ -27,18 +23,7 @@ namespace Foundation.BlazorExtensions.Services
 
             url = url.RemoveFilePrefix();
 
-            return await Task<string>.Run(() =>
-            {
-                if (!System.IO.File.Exists(url))
-                {
-                    return "";
-                }
-                else
-                {
-                    return System.IO.File.ReadAllText(url);
-                }
-
-            });
+            return await Task.Run(() => !System.IO.File.Exists(url) ? "" : System.IO.File.ReadAllText(url));
         }
 
         public Task<T> ExecuteRestMethod<T>(string url) where T : class
@@ -50,7 +35,7 @@ namespace Foundation.BlazorExtensions.Services
         {
             string rawResultData = await ExecuteRestMethod(url);
 
-            return JsonSerializer.Deserialize<T>(rawResultData, options == null ? _jsonSerializerOptions : options);
+            return JsonSerializer.Deserialize<T>(rawResultData, options ?? _jsonSerializerOptions);
         }
 
     }

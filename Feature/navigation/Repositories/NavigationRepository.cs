@@ -97,12 +97,7 @@ namespace Feature.Navigation.Repositories
 
         private List<NavigationItem> GetChildNavigationItems(IBlazorItem blazorItem)
         {
-            if (!blazorItem.HasChildren)
-                return new List<NavigationItem>();
-
-
-           return  blazorItem.Children.Where(child => this.IncludeInNavigation(child)).Select(child => this.CreateNavigationItem(child)).ToList();
-           
+            return !blazorItem.HasChildren ? new List<NavigationItem>() : blazorItem.Children.Where(child => this.IncludeInNavigation(child)).Select(this.CreateNavigationItem).ToList();
         }
 
         public Task<List<NavigationItem>> GetMenu()
@@ -122,14 +117,7 @@ namespace Feature.Navigation.Repositories
                 });
             }
 
-            foreach (IBlazorItem item in rootItem.Children)
-            {
-
-                if (item == null)
-                    continue;
-
-                navigationItems.Add(CreateNavigationItem(item));
-            }
+            navigationItems.AddRange(from item in rootItem.Children where item != null select CreateNavigationItem(item));
 
 
             return Task.FromResult<List<NavigationItem>>(navigationItems);

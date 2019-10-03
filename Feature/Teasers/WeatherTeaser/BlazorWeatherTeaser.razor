@@ -1,14 +1,14 @@
 ﻿@using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Services
 @using SitecoreBlazorHosted.Shared
-@using System.Net.Http;
-@using Foundation.BlazorExtensions
+@using System.Threading.Tasks
 @using Foundation.BlazorExtensions.Components
+@using Microsoft.AspNetCore.Components
 
 @inherits BaseComponent
 
-@inject NavigationManager _navigationManager;
-@inject IRestService restService
+@inject NavigationManager NavigationManager;
+@inject IRestService RestService
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
@@ -17,13 +17,13 @@
         <h6 class="card-subtitle mb-2 text-muted">@FieldsModel.PlainText("WeatherTeaserText").Value.HtmlDecode()</h6>
 
         <p class="card-text">
-            @if (WeatherForecasts == null)
+            @if (_weatherForecasts == null)
             {
                 <em>Loading...</em>
             }
         </p>
 
-        @if (WeatherForecasts != null)
+        @if (_weatherForecasts != null)
         {
             <table class="table">
                 <thead>
@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var forecast in WeatherForecasts)
+                    @foreach (var forecast in _weatherForecasts)
                     {
                         <tr>
                             <td>@forecast.Date.ToShortDateString()</td>
@@ -53,12 +53,12 @@
 
 @code{
 
-    WeatherForecast[] WeatherForecasts;
+    private WeatherForecast[] _weatherForecasts;
 
     protected override async Task OnParametersSetAsync()
     {
 
-        WeatherForecasts = await restService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.AddBaseUrl(_navigationManager));
+        _weatherForecasts = await RestService.ExecuteRestMethod<WeatherForecast[]>(FieldsModel.PlainText("RestUrl").Value.AddBaseUrl(NavigationManager));
     }
 
 

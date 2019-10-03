@@ -1,12 +1,15 @@
-﻿@using SitecoreBlazorHosted.Shared.Models.Navigation
+﻿@using System.Collections.Generic
+@using System.Threading.Tasks
+@using SitecoreBlazorHosted.Shared.Models.Navigation
 @using Foundation.BlazorExtensions.Extensions
 @using Foundation.BlazorExtensions.Components
+@using Microsoft.AspNetCore.Components
 
 @inherits BaseComponent
 
 
-@inject Microsoft.AspNetCore.Components.NavigationManager _navigationManager
-@inject Feature.Navigation.Repositories.NavigationRepository _navigationRepository;
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Feature.Navigation.Repositories.NavigationRepository NavigationRepository;
 
 
 @if (NavigationItems == null)
@@ -33,7 +36,7 @@ else
                 }
                 else
                 {
-                    <a href="@item.Url.AddBaseUrl(_navigationManager)">@title</a>
+                    <a href="@item.Url.AddBaseUrl(NavigationManager)">@title</a>
                 }
             </li>
         }
@@ -47,7 +50,7 @@ else
 
     string GetClassName(NavigationItem item)
     {
-        string relative = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+        string relative = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 
         return item.Url.Equals("/" + relative) ? "active" : string.Empty;
 
@@ -56,7 +59,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        NavigationItems = await _navigationRepository.GetBreadcrumb();
+        NavigationItems = await NavigationRepository.GetBreadcrumb();
     }
 
 }

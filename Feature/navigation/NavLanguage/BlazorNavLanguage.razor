@@ -1,13 +1,17 @@
-﻿@using SitecoreBlazorHosted.Shared.Models
+﻿@using System.Collections.Generic
+@using System.Linq
+@using System.Threading.Tasks
+@using SitecoreBlazorHosted.Shared.Models
 @using Foundation.BlazorExtensions.Components
+@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 
 @inherits BaseComponent
 
-@inject NavigationManager _navigationManager
-@inject Foundation.BlazorExtensions.BlazorStateMachine _blazorStateMachine
-@inject Foundation.BlazorExtensions.Services.LanguageService _languageService;
-@inject Foundation.BlazorExtensions.Services.LayoutService _layoutService;
+@inject NavigationManager NavigationManager
+@inject Foundation.BlazorExtensions.BlazorStateMachine BlazorStateMachine
+@inject Foundation.BlazorExtensions.Services.LanguageService LanguageService;
+@inject Foundation.BlazorExtensions.Services.LayoutService LayoutService;
 
 
 @if (ValidLanguages == null)
@@ -21,7 +25,7 @@ else
 
     <li class="dropdown">
         <button type="button" class="btn  btn-light  dropdown-toggle " @onclick="() => ToggleOpen()" aria-haspopup="true">
-            @_languageService.Get(_blazorStateMachine.Language)?.NativeName
+            @LanguageService.Get(BlazorStateMachine.Language)?.NativeName
         </button>
         <div class="@ClassName">
 
@@ -44,7 +48,7 @@ else
     protected override Task OnParametersSetAsync()
     {
 
-        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
+        ValidLanguages = LanguageService.GetLanguages().Where(l => l.Name != BlazorStateMachine.Language).ToList();
 
         return base.OnParametersSetAsync();
     }
@@ -72,34 +76,34 @@ else
     private void SwitchLanguage(Language language)
     {
 
-        _blazorStateMachine.Language = language.TwoLetterCode;
+        BlazorStateMachine.Language = language.TwoLetterCode;
 
-        ValidLanguages = _languageService.GetLanguages().Where(l => l.Name != _blazorStateMachine.Language).ToList();
+        ValidLanguages = LanguageService.GetLanguages().Where(l => l.Name != BlazorStateMachine.Language).ToList();
 
 
-        if (!_blazorStateMachine.IsNavBarCollapsed)
-            _blazorStateMachine.ToggleNavBar();
+        if (!BlazorStateMachine.IsNavBarCollapsed)
+            BlazorStateMachine.ToggleNavBar();
 
         ToggleOpen();
 
         string url = BuildUrl(language);
 
-        _navigationManager.NavigateTo(url);
+        NavigationManager.NavigateTo(url);
 
 
     }
 
     private string BuildUrl(SitecoreBlazorHosted.Shared.Models.Language language)
     {
-        string relative = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+        string relative = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 
-        if (relative.Length > 0 && _blazorStateMachine.Language.Length > 0)
+        if (relative.Length > 0 && BlazorStateMachine.Language.Length > 0)
         {
-            relative = relative.Substring(_blazorStateMachine.Language.Length);
+            relative = relative.Substring(BlazorStateMachine.Language.Length);
         }
 
 
-        return $"{_navigationManager.BaseUri}{language.TwoLetterCode}{relative}";
+        return $"{NavigationManager.BaseUri}{language.TwoLetterCode}{relative}";
     }
 
 

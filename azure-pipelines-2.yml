@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfigurationElectron: 'BlazorElectron'
+
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Installing .NET Core SDK...'
+  inputs:
+    version: 3.0.100
+
+- script: dotnet build --configuration $(buildConfigurationElectron) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj
+  displayName: 'Building $(buildConfigurationElectron)...'
+
+- task: DotNetCoreCLI@1
+  displayName: 'Running tests...'
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfigurationClient)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publishing BlazorClient App...'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    arguments: '--configuration $(buildConfigurationElectron) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj'
+    zipAfterPublish: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publishing Build Artifacts...'

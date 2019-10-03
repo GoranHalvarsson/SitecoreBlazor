@@ -23,7 +23,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfigurationClient)'
+    arguments: '--configuration $(buildConfigurationElectron)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publishing BlazorElectron App...'

@@ -5,14 +5,14 @@
 
 
 
-@inject BlazorItemsService _blazorItemsService;
+@inject BlazorItemsService BlazorItemsService;
 
 
 
 <ContextStateProvider>
     @*<Router AppAssembly=typeof(Components.Pages.RoutesClass).Assembly />*@
     @*Instead of using default router from Blazor we will have a customized version, which will allow us to add routes*@
-    <TheRouter RouteValues="@AllRoutes">
+    <TheRouter RouteValues="@_allRoutes">
         <NotFound>
             <p>Sorry, there's nothing at this address.</p>
         </NotFound>
@@ -31,11 +31,11 @@
 {
 
 
-    private RouterDataRoot AllRoutes = null;
+    private RouterDataRoot _allRoutes = null;
 
     protected override void OnInitialized()
     {
-        AllRoutes = _blazorItemsService.CreateRoutes();
+        _allRoutes = BlazorItemsService.CreateRoutes();
     }
 
 

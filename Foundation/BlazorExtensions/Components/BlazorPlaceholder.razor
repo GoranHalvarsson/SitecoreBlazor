@@ -1,8 +1,12 @@
 ﻿
+@using System.Collections.Generic
+@using System.Threading.Tasks
 @using Foundation.BlazorExtensions.Services;
+@using Microsoft.AspNetCore.Components
+
 @implements Microsoft.AspNetCore.Components.IComponent
 
-@inject LayoutService layoutService
+@inject LayoutService LayoutService
 
 @if (RenderChild)
 {
@@ -50,7 +54,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        DynamicComponents = await layoutService.RenderPlaceholders(Name);
+        DynamicComponents = await LayoutService.RenderPlaceholders(Name);
     }
 }
 

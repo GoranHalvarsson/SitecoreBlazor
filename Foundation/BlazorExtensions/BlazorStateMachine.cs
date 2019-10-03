@@ -43,26 +43,20 @@ namespace Foundation.BlazorExtensions
             if (CurrentRoute == null)
                 return null;
 
-            if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            if (string.IsNullOrWhiteSpace(placeHolder) || CurrentPlaceholders.All(pl => pl.Key != placeHolder))
             {
                 blazorFields = CurrentRoute.Fields;
             }
 
-            if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            if (CurrentPlaceholders.All(pl => pl.Key != placeHolder)) 
+                return blazorFields;
+            
+            var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
+
+
+            foreach (var placeholderData in placeHoldersList.SelectMany(keyVal => keyVal.Value))
             {
-
-                var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
-
-
-                foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
-                {
-
-                    foreach (Placeholder placeholderData in keyVal.Value)
-                    {
-                        blazorFields.AddRange(placeholderData.Fields);
-                    }
-                }
-
+                blazorFields.AddRange(placeholderData.Fields);
             }
 
             return blazorFields;
@@ -78,27 +72,19 @@ namespace Foundation.BlazorExtensions
             if (CurrentRoute == null)
                 return null;
 
-            if (string.IsNullOrWhiteSpace(placeHolder) || !CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            if (string.IsNullOrWhiteSpace(placeHolder) || CurrentPlaceholders.All(pl => pl.Key != placeHolder))
             {
                 blazorFields.AddRange(_fieldFactory.CreateBlazorItemFields(CurrentRoute.Fields));
             }
 
-            if (CurrentPlaceholders.Any(pl => pl.Key == placeHolder))
+            if (CurrentPlaceholders.All(pl => pl.Key != placeHolder)) 
+                return blazorFields;
+            var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
+
+
+            foreach (var placeholderData in placeHoldersList.SelectMany(keyVal => keyVal.Value))
             {
-
-                var placeHoldersList = CurrentPlaceholders?.Where(ph => ph.Key == placeHolder).ToList();
-
-
-                foreach (KeyValuePair<string, IList<Placeholder>> keyVal in placeHoldersList)
-                {
-
-                    foreach (Placeholder placeholderData in keyVal.Value)
-                    {
-
-                        blazorFields.AddRange(_fieldFactory.CreateBlazorItemFields(placeholderData.Fields));
-                    }
-                }
-
+                blazorFields.AddRange(_fieldFactory.CreateBlazorItemFields(placeholderData.Fields));
             }
 
             return blazorFields;
@@ -110,9 +96,9 @@ namespace Foundation.BlazorExtensions
             if (NavigatedRoutes == null)
                 return null;
 
-            DateTime CacheValidTo = DateTime.Now.AddHours(ValidCacheInHours);
+            DateTime cacheValidTo = DateTime.Now.AddHours(ValidCacheInHours);
 
-            return NavigatedRoutes.Where(navRoot => navRoot.Item2 == url && navRoot.Item1 <= CacheValidTo).Select(navroot => navroot.Item3).FirstOrDefault();
+            return NavigatedRoutes.Where(navRoot => navRoot.Item2 == url && navRoot.Item1 <= cacheValidTo).Select(navroot => navroot.Item3).FirstOrDefault();
         }
 
         public void AddNavigatedRoute(string url, BlazorRoute routeToAdd)
@@ -130,15 +116,12 @@ namespace Foundation.BlazorExtensions
 
         public void RemoveNavigatedRoute(string url, BlazorRoute routeToAdd)
         {
-            if (NavigatedRoutes == null)
-                return;
-
-            Tuple<DateTime, string, BlazorRoute> foundItem = NavigatedRoutes.FirstOrDefault(navRoot => navRoot.Item2 == url);
+            Tuple<DateTime, string, BlazorRoute>? foundItem = NavigatedRoutes?.FirstOrDefault(navRoot => navRoot.Item2 == url);
 
             if (foundItem?.Item3 == null)
                 return;
 
-            NavigatedRoutes.Remove(foundItem);
+            _ = NavigatedRoutes?.Remove(foundItem);
         }
 
         //[Obsolete()]

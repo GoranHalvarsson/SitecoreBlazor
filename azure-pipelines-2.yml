@@ -26,7 +26,7 @@ steps:
     arguments: '--configuration $(buildConfigurationClient)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Publishing BlazorClient App...'
+  displayName: 'Publishing BlazorElectron App...'
   inputs:
     command: publish
     publishWebProjects: false

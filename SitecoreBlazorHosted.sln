@@ -30,6 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzurePipelines", "AzurePipelines", "{F87CFBDF-3EEA-41C7-867E-F59DE721ECA8}"
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines-1.yml = azure-pipelines-1.yml
+		azure-pipelines-2.yml = azure-pipelines-2.yml
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject

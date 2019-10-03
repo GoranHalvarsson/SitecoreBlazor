@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <Configurations>Debug;Release;BlazorElektron</Configurations>
+    <Configurations>Debug;Release;BlazorServer;BlazorClient;BlazorElektron</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

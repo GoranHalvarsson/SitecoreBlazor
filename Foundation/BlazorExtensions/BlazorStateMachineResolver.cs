@@ -13,7 +13,7 @@ namespace Foundation.BlazorExtensions
     public class BlazorStateMachineResolver
     {
         private readonly SessionStorage _sessionStorage;
-        private readonly IJSRuntime _jsRuntime;
+        private readonly IJSRuntime? _jsRuntime;
 
 
 

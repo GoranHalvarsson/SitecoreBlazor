@@ -1,12 +1,9 @@
 ﻿using Feature.Navigation.Extensions;
-using Foundation.BlazorExtensions;
 using Foundation.BlazorExtensions.Extensions;
 using Foundation.BlazorExtensions.Services;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Project.BlazorSite;
-using SitecoreBlazorHosted.Shared;
-using System.Net.Http;
 
 
 namespace SitecoreBlazorHosted.Client

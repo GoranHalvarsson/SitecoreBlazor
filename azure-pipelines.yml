@@ -43,26 +43,3 @@ steps:
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publishing Client Artifacts...'
-
-
-- task:  DotNetCoreCLI@2
-  displayName: 'Publishing BlazorServer App...'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '--configuration $(buildConfigurationServer) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj'
-    zipAfterPublish: false
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publishing Server Artifacts...'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Publishing BlazorElectron App...'
-  inputs:
-    command: publish
-    publishWebProjects: false
-    arguments: '--configuration $(buildConfigurationElectron) --output $(Build.ArtifactStagingDirectory) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj'
-    zipAfterPublish: false
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publishing Electron Artifacts...'

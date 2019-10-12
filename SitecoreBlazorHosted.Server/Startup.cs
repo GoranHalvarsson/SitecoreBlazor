@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SitecoreBlazorHosted.Shared;
 using System.Net.Http;
+using SitecoreBlazorHosted.Server.Providers;
+using SitecoreBlazorHosted.Server.Services;
 
 namespace SitecoreBlazorHosted.Server
 {
@@ -27,7 +29,10 @@ namespace SitecoreBlazorHosted.Server
             services.AddServerSideBlazor();
 
             services.AddSingleton<HttpClient>((s) => new HttpClient());
-            services.AddScoped<IRestService, RestService>();
+            services.AddSingleton<IPathProvider, PathProvider>();
+
+
+            services.AddScoped<IRestService, FilesIOService>();
             services.AddForFoundationBlazorExtensions();
             services.AddForFeatureNavigation();
 

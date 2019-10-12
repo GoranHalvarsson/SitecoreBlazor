@@ -1,8 +1,10 @@
-﻿using Foundation.BlazorExtensions.Extensions;
+﻿using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Foundation.BlazorExtensions.Extensions;
+using Foundation.BlazorExtensions.Services;
 
-namespace Foundation.BlazorExtensions.Services
+namespace SitecoreBlazorHosted.Electron.Services
 {
     public class FilesService : IRestService
     {
@@ -21,9 +23,14 @@ namespace Foundation.BlazorExtensions.Services
         public async Task<string> ExecuteRestMethod(string url)
         {
 
+
             url = url.RemoveFilePrefix();
 
-            return await Task.Run(() => !System.IO.File.Exists(url) ? "" : System.IO.File.ReadAllText(url));
+            if (!System.IO.File.Exists(url))
+                return string.Empty;
+
+            using StreamReader sr = new StreamReader(url);
+            return await sr.ReadToEndAsync();
         }
 
         public Task<T> ExecuteRestMethod<T>(string url) where T : class

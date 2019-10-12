@@ -7,6 +7,6 @@ namespace Foundation.BlazorExtensions.Services
     {
         Task<string> ExecuteRestMethod(string url);
         Task<T> ExecuteRestMethod<T>(string url) where T : class;
-        Task<T> ExecuteRestMethodWithJsonSerializerOptions<T>(string url, JsonSerializerOptions options = null);
+        Task<T> ExecuteRestMethodWithJsonSerializerOptions<T>(string url, JsonSerializerOptions? options);
     }
 }

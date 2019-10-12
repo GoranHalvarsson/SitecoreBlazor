@@ -73,7 +73,7 @@ namespace Foundation.BlazorExtensions.Services
             BlazorRoute? routeExists = _blazorStateMachine.GetNavigatedRoute(routeUrl);
             
             if (routeExists == null) {
-                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<BlazorRoute>(routeUrl);
+                _blazorStateMachine.CurrentRoute = await _restService.ExecuteRestMethodWithJsonSerializerOptions<BlazorRoute>(routeUrl, null);
                 _blazorStateMachine.AddNavigatedRoute(routeUrl, _blazorStateMachine.CurrentRoute);
             }
             else

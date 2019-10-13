@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
     <Configurations>Debug;Release;BlazorServer;BlazorElektron</Configurations>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
 

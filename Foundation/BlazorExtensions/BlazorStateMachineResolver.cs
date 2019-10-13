@@ -33,7 +33,7 @@ namespace Foundation.BlazorExtensions
             return _sessionStorage.GetItemAsync(Constants.Storage.StorageKeys.ContextLanguage, _jsRuntime);
         }
 
-        public ValueTask<object> SetContextLanguageAsync(string language)
+        public ValueTask<object> SetContextLanguageAsync(string? language)
         {
 
             return String.IsNullOrWhiteSpace(language)
@@ -49,7 +49,7 @@ namespace Foundation.BlazorExtensions
 
         
 
-        public ValueTask<object> SetCurrentRouteIdAsync(string routeId)
+        public ValueTask<object> SetCurrentRouteIdAsync(string? routeId)
         {
 
             return String.IsNullOrWhiteSpace(routeId)
@@ -65,7 +65,7 @@ namespace Foundation.BlazorExtensions
 
         
 
-        public ValueTask<object> SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>> navigatedRoutes)
+        public ValueTask<object> SetCurrentNavigatedRoutesAsync(IList<Tuple<DateTime, string, BlazorRoute>>? navigatedRoutes)
         {
 
             return navigatedRoutes == null

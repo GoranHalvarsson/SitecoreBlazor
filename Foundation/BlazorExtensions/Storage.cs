@@ -9,60 +9,62 @@
 
     public abstract class StorageBase
     {
-        private readonly string _fullTypeName;
+        private readonly string? _fullTypeName;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
 
         protected internal StorageBase()
         {
-            _fullTypeName = GetType().FullName.Replace('.', '_');
+            _fullTypeName = GetType().FullName?.Replace('.', '_');
             _jsonSerializerOptions = new JsonSerializerOptions()
             {
                 IgnoreNullValues = true,
                 AllowTrailingCommas = true,
                 PropertyNameCaseInsensitive = true
             };
-           //_jsonSerializerOptions.Converters.Add(new CustomTupleConverter());
+            //_jsonSerializerOptions.Converters.Add(new CustomTupleConverter());
         }
 
         public ValueTask<object> ClearAsync(IJSRuntime jsRuntime) => jsRuntime.InvokeAsync<object>($"{_fullTypeName}.Clear");
 
 
 
-        public ValueTask<string> GetItemAsync(string key, IJSRuntime jsRuntime)
+        public ValueTask<string> GetItemAsync(string key, IJSRuntime? jsRuntime)
         {
             return jsRuntime.InvokeAsync<string>($"{_fullTypeName}.GetItem", key);
         }
 
-        public async Task<T> GetItemAsync<T>(string key, IJSRuntime jsRuntime)
+        public async Task<T> GetItemAsync<T>(string key, IJSRuntime? jsRuntime)
         {
             var json = await GetItemAsync(key, jsRuntime);
-            return string.IsNullOrWhiteSpace(json) ? default(T) : JsonSerializer.Deserialize<T>(json, _jsonSerializerOptions);
+            return string.IsNullOrWhiteSpace(json) ? default : JsonSerializer.Deserialize<T>(json, _jsonSerializerOptions);
         }
 
 
-        public ValueTask<string> KeyAsync(int index, IJSRuntime jsRuntime)
+        public ValueTask<string> KeyAsync(int index, IJSRuntime? jsRuntime)
         {
             return jsRuntime.InvokeAsync<string>($"{_fullTypeName}.Key", index);
         }
 
-        public ValueTask<object> RemoveItemAsync(string key, IJSRuntime jsRuntime)
+        public ValueTask<object> RemoveItemAsync(string key, IJSRuntime? jsRuntime)
         {
             return jsRuntime.InvokeAsync<object>($"{_fullTypeName}.RemoveItem", key);
         }
 
         [Obsolete()]
-        public void RemoveItem(string key, IJSRuntime jsRuntime)
+        public void RemoveItem(string key, IJSRuntime? jsRuntime)
         {
-            ((IJSInProcessRuntime)jsRuntime).Invoke<object>($"{_fullTypeName}.RemoveItem", key);
+
+            jsRuntime.InvokeAsync<object>($"{_fullTypeName}.RemoveItem", key, key);
+            
         }
 
-        public ValueTask<object> SetItemAsync(string key, string data, IJSRuntime jsRuntime)
+        public ValueTask<object> SetItemAsync(string key, string? data, IJSRuntime? jsRuntime)
         {
             return jsRuntime.InvokeAsync<object>($"{_fullTypeName}.SetItem", key, data);
         }
 
 
-        public ValueTask<object> SetItemAsync<T>(string key, T data, IJSRuntime jsRuntime)
+        public ValueTask<object> SetItemAsync<T>(string key, T data, IJSRuntime? jsRuntime)
         {
             return SetItemAsync(key, JsonSerializer.Serialize<T>(data, _jsonSerializerOptions), jsRuntime);
         }

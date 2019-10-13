@@ -10,17 +10,17 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
         /// <summary>
         /// Route path
         /// </summary>
-        public string Path { get; set; }
+        public string? Path { get; set; }
 
         /// <summary>
         /// Page assembly - Project.BlazorSite.Components.Shared.MasterBlaster, Project.BlazorSite
         /// </summary>
-        public string Page { get; set; }
+        public string? Page { get; set; }
 
         /// <summary>
         /// Children to the page
         /// </summary>
-        public List<RouterData> Children { get; set; }
+        public List<RouterData>? Children { get; set; }
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
     /// </summary>
     public class RouterDataRoot
     {
-        public List<RouterData> Routes { get; set; }
+        public List<RouterData>? Routes { get; set; }
     }
 
 

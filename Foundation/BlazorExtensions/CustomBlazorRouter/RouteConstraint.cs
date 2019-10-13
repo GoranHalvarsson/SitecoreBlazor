@@ -37,7 +37,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             }
         }
 
-        private static RouteConstraint CreateRouteConstraint(string constraint)
+        private static RouteConstraint? CreateRouteConstraint(string constraint)
         {
             switch (constraint)
             {

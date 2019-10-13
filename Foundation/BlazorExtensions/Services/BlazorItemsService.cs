@@ -7,7 +7,7 @@ namespace Foundation.BlazorExtensions.Services
     public class BlazorItemsService
     {
         private const string PageComponent = "Project.BlazorSite.Components.Shared.MasterBlaster, Project.BlazorSite";
-        public BlazorItem GetBlazorItemRootMock(string language = "en")
+        public BlazorItem GetBlazorItemRootMock(string? language = "en")
         {
 
             return language == "sv"
@@ -313,7 +313,7 @@ namespace Foundation.BlazorExtensions.Services
 
 
 
-            List<RouterData> GetChildren(IBlazorItem blazorItem)
+            List<RouterData>? GetChildren(IBlazorItem blazorItem)
             {
                 List<RouterData> children = new List<RouterData>();
 

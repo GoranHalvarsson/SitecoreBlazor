@@ -77,8 +77,12 @@ namespace Foundation.BlazorExtensions.Services
                             if (ComponentsInDynamicPlaceholdersAlreadyRenderedPerStateChanged.Any(comp => comp == keyName))
                                 continue;
 
+                            var component = _componentFactory.CreateComponent(placeholderData);
 
-                            list.Add(_componentFactory.CreateComponent(placeholderData));
+                            if(component == null)
+                                continue;
+
+                            list.Add(component);
 
                             if (keyVal.Key.IsDynamicPlaceholder())
                                 ComponentsInDynamicPlaceholdersAlreadyRenderedPerStateChanged.Add(keyName);

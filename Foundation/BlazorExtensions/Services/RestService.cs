@@ -30,7 +30,7 @@ namespace Foundation.BlazorExtensions.Services
             return await _httpClient.GetStringAsync(url);
         }
 
-        public async Task<T> ExecuteRestMethodWithJsonSerializerOptions<T>(string url, JsonSerializerOptions options = null)
+        public async Task<T> ExecuteRestMethodWithJsonSerializerOptions<T>(string url, JsonSerializerOptions? options)
         {
             string rawResultData = await ExecuteRestMethod(url);
 

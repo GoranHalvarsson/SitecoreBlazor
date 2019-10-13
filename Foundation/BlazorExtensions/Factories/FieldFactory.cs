@@ -9,50 +9,42 @@ namespace Foundation.BlazorExtensions.Factories
 {
     public class FieldFactory
     {
-        private IBlazorItemField CreateBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField)
+        private IBlazorItemField? CreateBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField)
         {
             if (blazorRouteField.Value == null)
                 return null;
 
-            BlazorItemField<T> field = null;
 
-            T fieldValue = default;
+            return new BlazorItemField<T>
+            {
+                FieldName = blazorRouteField.Key,
+                Value = GetFieldValue<T>(blazorRouteField),
+                Editable = blazorRouteField.Value?.Editable,
+                Type = blazorRouteField.Value?.Type
+            };
 
-          
+        }
+
+        private static T GetFieldValue<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField)
+        {
             try
             {
-
-                switch (blazorRouteField.Value.Type)
+                var fieldValue = blazorRouteField.Value.Type switch
                 {
-                    case FieldTypes.HtmlField:
-                    case FieldTypes.PlainTextField:
-                    case FieldTypes.CheckboxField:
-                        fieldValue = (T)Convert.ChangeType(blazorRouteField.Value.Value.ToString(), typeof(T));
-                        break;
-                    default:
-                        fieldValue = JsonSerializer.Deserialize<T>(blazorRouteField.Value.Value.ToString());
-                        break;
-                }
-
-
-
-                field = new BlazorItemField<T>
-                {
-                    FieldName = blazorRouteField.Key,
-                    Value = fieldValue,
-                    Editable = blazorRouteField.Value?.Editable,
-                    Type = blazorRouteField.Value?.Type
+                    FieldTypes.HtmlField => (T)Convert.ChangeType(blazorRouteField.Value.Value.ToString(), typeof(T)),
+                    FieldTypes.PlainTextField => (T)Convert.ChangeType(blazorRouteField.Value.Value.ToString(), typeof(T)),
+                    FieldTypes.CheckboxField => (T)Convert.ChangeType(blazorRouteField.Value.Value.ToString(), typeof(T)),
+                    _ => JsonSerializer.Deserialize<T>(blazorRouteField.Value.Value.ToString())
                 };
 
+                return fieldValue;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating field {blazorRouteField.Value.Value}. Error { ex.Message}");
+                Console.WriteLine($"Error parsing/serialize field {blazorRouteField.Value.Value}. Error { ex.Message}");
             }
 
-            return field;
-
-
+            return default;
         }
 
 
@@ -69,20 +61,36 @@ namespace Foundation.BlazorExtensions.Factories
             {
                { "DefaultField",defaultField }
             };
-            
+
         }
 
-        private IBlazorItemField CreateComplexBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
+        private IBlazorItemField? CreateComplexBlazorItemField<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
         {
             if (blazorRouteField.Value == null)
                 return null;
 
-            BlazorItemField<T> blazorItemField = null;
+           
 
-            T fieldValue = default;
+            return new BlazorItemField<T>
+            {
+                FieldName = blazorRouteField.Key,
+                Value = GetComplexFieldValue<T>(blazorRouteField),
+                Editable = blazorRouteField.Value?.Editable,
+                Type = blazorRouteField.Value?.Type
+            };
+
+
+        }
+
+        private T GetComplexFieldValue<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
+        {
+
+
+             T fieldValue = default;
 
             try
             {
+
                 switch (blazorRouteField.Value.Type)
                 {
                     case FieldTypes.MultiListField:
@@ -98,7 +106,8 @@ namespace Foundation.BlazorExtensions.Factories
                             if (item == null || string.IsNullOrWhiteSpace(item.ToString()))
                                 continue;
 
-                            BlazorFieldValueMultiListItem multiListItem = new BlazorFieldValueMultiListItem() {
+                            BlazorFieldValueMultiListItem multiListItem = new BlazorFieldValueMultiListItem()
+                            {
                                 Id = item.Id,
                                 Url = item.Url
                             };
@@ -109,7 +118,6 @@ namespace Foundation.BlazorExtensions.Factories
                             multiListItem.BlazorItemFields = fields;
 
                             fieldValueMultiList.Values.Add(multiListItem);
-
                         }
 
 
@@ -120,16 +128,6 @@ namespace Foundation.BlazorExtensions.Factories
                         break;
                 }
 
-
-                blazorItemField = new BlazorItemField<T>
-                {
-                    FieldName = blazorRouteField.Key,
-                    Value = fieldValue,
-                    Editable = blazorRouteField.Value?.Editable,
-                    Type = blazorRouteField.Value?.Type
-                };
-
-
             }
             catch (Exception ex)
             {
@@ -137,10 +135,11 @@ namespace Foundation.BlazorExtensions.Factories
 
             }
 
-            return blazorItemField;
+            return fieldValue;
+
 
         }
-        
+
         public List<IBlazorItemField> CreateBlazorItemFields(Dictionary<string, BlazorRouteField> blazorRouteFields)
         {
             if (blazorRouteFields == null || !blazorRouteFields.Any())

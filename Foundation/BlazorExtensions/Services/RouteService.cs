@@ -52,16 +52,16 @@ namespace Foundation.BlazorExtensions.Services
 
 
         [Obsolete("Not used", true)]
-        public (bool IsCurrentUrl, string CurrentUrl) UrlIsCurrent()
+        public (bool IsCurrentUrl, string CurrentUrl)? UrlIsCurrent()
         {
             string relativeUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
             if (string.IsNullOrWhiteSpace(_blazorStateMachine.CurrentRoute?.ItemLanguage))
                 return (false, $"/{relativeUrl}");
 
-            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(_blazorStateMachine.CurrentRoute.ItemLanguage);
+            IBlazorItem rootItem = _blazorItemsService.GetBlazorItemRootMock(_blazorStateMachine?.CurrentRoute?.ItemLanguage);
 
-            return _blazorStateMachine.CurrentRoute != null && rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl && item.Id == _blazorStateMachine.CurrentRoute.Id)
+            return _blazorStateMachine?.CurrentRoute != null && rootItem.GetItSelfAndDescendants().Any(item => item.Url == "/" + relativeUrl && item.Id == _blazorStateMachine.CurrentRoute.Id)
               ? (true, $"/{relativeUrl}")
               : (false, $"/{relativeUrl}");
         }

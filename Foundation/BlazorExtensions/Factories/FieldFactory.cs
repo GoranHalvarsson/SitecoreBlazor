@@ -69,6 +69,8 @@ namespace Foundation.BlazorExtensions.Factories
             if (blazorRouteField.Value == null)
                 return null;
 
+           
+
             return new BlazorItemField<T>
             {
                 FieldName = blazorRouteField.Key,
@@ -80,11 +82,11 @@ namespace Foundation.BlazorExtensions.Factories
 
         }
 
-        private T? GetComplexFieldValue<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
+        private T GetComplexFieldValue<T>(KeyValuePair<string, BlazorRouteField> blazorRouteField) where T : class
         {
 
 
-            T? fieldValue = default;
+             T fieldValue = default;
 
             try
             {

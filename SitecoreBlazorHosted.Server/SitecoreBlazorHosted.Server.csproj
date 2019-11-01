@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>8</LangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Configurations>Debug;Release;BlazorElektron;BlazorServer</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
  
@@ -19,15 +19,5 @@
     <ProjectReference Include="..\Project\BlazorSite\Project.BlazorSite.csproj" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <Content Update="Pages\_ViewImports.cshtml">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      <Generator>MSBuild:RazorGenerateComponentDeclarationDesignTime</Generator>
-    </Content>
-    <Content Update="_ViewImports.cshtml">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      <Generator>MSBuild:RazorGenerateComponentDeclarationDesignTime</Generator>
-    </Content>
-  </ItemGroup>-->
 
 </Project>

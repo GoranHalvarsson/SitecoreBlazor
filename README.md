@@ -46,6 +46,9 @@ Select BlazorElectron in Solution Configurations.
 And run...
 
 ## Blog posts
+
+[One solution (setup) to rule them all – Blazor Webassembly, Blazor Server, Blazor Electron](https://visionsincode.wordpress.com/2019/11/01/one-solution-setup-to-rule-them-all-blazor-webassembly-blazor-server-blazor-electron/)
+
 [Make it all dynamic in BLAZOR – Routing, Pages and Components](https://visionsincode.wordpress.com/2019/09/27/make-it-all-dynamic-in-blazor-routing-pages-and-components/)
 
 [Time travel into the future – BLAZOR + SITECORE + HELIX](https://visionsincode.wordpress.com/2018/06/30/time-travel-into-the-future-blazor-sitecore-helix/)

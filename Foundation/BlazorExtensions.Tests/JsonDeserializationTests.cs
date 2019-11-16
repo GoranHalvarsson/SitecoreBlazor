@@ -29,6 +29,27 @@ namespace BlazorExtensions.Tests
             Assert.Equal(deserializedRouteUsingNewtonSoft.Placeholders.Count, deserializedRouteUsingSystemTextJson.Placeholders.Values.Count);
         }
 
+        [Fact]
+        public void TestRawJssLayoutService()
+        {
+            string jssFile = "jss_layout_service_sample.json";
+            string dataDir = "../../../Data/";
+
+            var data = System.IO.File.ReadAllText(dataDir + jssFile);
+
+            JsonSerializerOptions options = new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true,
+                AllowTrailingCommas = true,
+                PropertyNameCaseInsensitive = true
+            };
+
+            object deserializedRouteUsingNewtonSoft = JsonConvert.DeserializeObject(data);
+            Object deserializedRouteUsingSystemTextJson = System.Text.Json.JsonSerializer.Deserialize<Object>(data, options);
+
+            Assert.NotNull(deserializedRouteUsingNewtonSoft);
+        }
+
 
         [Fact]
         public void SerializeToStringTest()

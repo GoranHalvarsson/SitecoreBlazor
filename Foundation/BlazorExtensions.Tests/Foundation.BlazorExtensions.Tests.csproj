@@ -42,6 +42,9 @@
     <None Update="Data\en.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
+    <None Update="Data\jss_layout_service_sample.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
     <None Update="Data\sv.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

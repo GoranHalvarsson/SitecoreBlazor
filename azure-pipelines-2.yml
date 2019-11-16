@@ -9,7 +9,7 @@ steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Installing .NET Core SDK...'
   inputs:
-    version: 3.1.100-preview2-014569
+    version: 3.1.100-preview3-014645
 
 - script: dotnet build --configuration $(buildConfigurationElectron) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj
   displayName: 'Building $(buildConfigurationElectron)...'

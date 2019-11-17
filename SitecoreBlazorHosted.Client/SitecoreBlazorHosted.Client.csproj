@@ -35,11 +35,6 @@
   </ItemGroup>
 
 
-  <ItemGroup>
-    <Folder Include="wwwroot\scripts\" />
-  </ItemGroup>
-
-
 
 
 </Project>

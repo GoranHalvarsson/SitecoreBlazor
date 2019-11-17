@@ -14,6 +14,14 @@
 
   <ItemGroup>
     <None Remove="Scripts\BlazorExtensionsInterop.ts" />
+    <None Remove="Scripts\SafariFix.blazor.webassembly.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scripts\SafariFix.blazor.webassembly.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

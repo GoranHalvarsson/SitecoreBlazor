@@ -2,7 +2,6 @@
 using SitecoreBlazorHosted.Server.Providers;
 using System;
 using System.IO;
-using System.IO.Pipelines;
 using System.Text.Json;
 using System.Threading.Tasks;
 

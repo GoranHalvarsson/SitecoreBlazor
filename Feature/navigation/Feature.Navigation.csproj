@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(BlazorVersion)" PrivateAssets="all" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

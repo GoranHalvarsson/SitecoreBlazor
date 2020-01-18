@@ -17,16 +17,17 @@
 
 
   <ItemGroup>
-    <PackageReference Include="BlazorPWA.MSBuild" Version="0.0.1-beta20190815-02">
+    <PackageReference Include="BlazorPWA.MSBuild" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="$(BlazorVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(BlazorVersion)" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="$(BlazorVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="$(BlazorVersion)" PrivateAssets="all" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
 
 

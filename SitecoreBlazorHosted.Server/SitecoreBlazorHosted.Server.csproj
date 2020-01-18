@@ -10,8 +10,9 @@
  
   <ItemGroup>
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
-    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
 
  

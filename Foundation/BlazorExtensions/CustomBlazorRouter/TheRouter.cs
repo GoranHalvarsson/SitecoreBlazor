@@ -104,7 +104,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
        
         private void Refresh(bool isNavigationIntercepted)
         {
-
             var locationPath = NavigationManager.ToBaseRelativePath(_locationAbsolute);
             locationPath = StringUntilAny(locationPath, _queryOrHashStartChar);
 
@@ -118,7 +117,7 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             Routes.Route(context);
 
             // Custom - Not valid route
-            if (context.Handler == null || !LanguageService.HasValidLanguageInUrl(locationPath))
+            if ((context.Handler == null && NotFound == null) || !LanguageService.HasValidLanguageInUrl(locationPath))
                 context = SetErrorContext(locationPath);
 
 
@@ -155,6 +154,9 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
             {
                 if (!isNavigationIntercepted)
                 {
+
+                    Console.WriteLine("aaaaa");
+
                     Log.DisplayingNotFound(_logger, locationPath, _baseUri);
 
                     // We did not find a Component that matches the route.
@@ -164,7 +166,10 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 }
                 else
                 {
-                    Log.NavigatingToExternalUri(_logger, _locationAbsolute, locationPath, _baseUri);
+                    Console.WriteLine("ccccc");
+
+
+                   Log.NavigatingToExternalUri(_logger, _locationAbsolute, locationPath, _baseUri);
                     NavigationManager.NavigateTo(_locationAbsolute, forceLoad: true);
                 }
             }

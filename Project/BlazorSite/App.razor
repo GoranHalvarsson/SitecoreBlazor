@@ -11,9 +11,9 @@
 
 <ContextStateProvider>
     <TheRouter RouteValues="@_allRoutes">
-        <NotFound>
+        @*<NotFound>
             <p>Sorry, there's nothing at this address.</p>
-        </NotFound>
+        </NotFound>*@
         <Found Context="routeData">
             <TheRouteView RouteData="@routeData"  DefaultLayout="@typeof(Project.BlazorSite.Components.Shared.MasterBlaster)"></TheRouteView>
             @*<Project.BlazorSite.Components.Shared.MasterBlaster Language="en">

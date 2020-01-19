@@ -155,8 +155,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 if (!isNavigationIntercepted)
                 {
 
-                    Console.WriteLine("aaaaa");
-
                     Log.DisplayingNotFound(_logger, locationPath, _baseUri);
 
                     // We did not find a Component that matches the route.
@@ -166,9 +164,6 @@ namespace Foundation.BlazorExtensions.CustomBlazorRouter
                 }
                 else
                 {
-                    Console.WriteLine("ccccc");
-
-
                    Log.NavigatingToExternalUri(_logger, _locationAbsolute, locationPath, _baseUri);
                     NavigationManager.NavigateTo(_locationAbsolute, forceLoad: true);
                 }

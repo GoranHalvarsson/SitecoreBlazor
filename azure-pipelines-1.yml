@@ -23,9 +23,6 @@ steps:
 - script: dotnet build --configuration $(buildConfigurationServer) SitecoreBlazorHosted.Server/SitecoreBlazorHosted.Server.csproj
   displayName: 'Building $(buildConfigurationServer)...'
 
-- script: dotnet build --configuration $(buildConfigurationElectron) SitecoreBlazorHosted.Electron/SitecoreBlazorHosted.Electron.csproj
-  displayName: 'Building $(buildConfigurationElectron)...'
-
 - task: DotNetCoreCLI@1
   displayName: 'Running tests...'
   inputs:

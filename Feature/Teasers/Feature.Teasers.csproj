@@ -21,4 +21,10 @@
     <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Sass\_cardTeaser.scss">
+      <LogicalName>blazor:css:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </None>
+  </ItemGroup>
+
 </Project>

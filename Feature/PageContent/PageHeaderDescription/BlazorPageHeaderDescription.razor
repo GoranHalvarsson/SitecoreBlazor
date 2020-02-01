@@ -17,8 +17,8 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-12">
-            <h2>@FieldsModel.PlainText("Title")?.Value.HtmlDecode()</h2>
-            @((MarkupString)FieldsModel.HtmlText("Text")?.Value.HtmlDecode())
+            <h2>@FieldsModel.PlainText("Title")?.Value.Html()</h2>
+            @((MarkupString)FieldsModel.HtmlText("Text")?.Value.Html())
 
            @FieldsModel.Checkbox("ShowInNavigation")?.Value
 

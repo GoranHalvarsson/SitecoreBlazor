@@ -13,6 +13,10 @@
     <ServiceWorkerForce>false</ServiceWorkerForce>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Startup.cs" />
+  </ItemGroup>
+
 
 
 

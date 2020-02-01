@@ -10,4 +10,4 @@
 @inject NavigationManager NavigationManager
 
 
-<a class="navbar-brand" href="@_blazorStateMachine.Language.AddBaseUrl(NavigationManager)">@FieldsModel.PlainText("NavHeader").Value.HtmlDecode()</a>
+<a class="navbar-brand" href="@_blazorStateMachine.Language.AddBaseUrl(NavigationManager)">@FieldsModel.PlainText("NavHeader").Value.Html()</a>

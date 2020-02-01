@@ -24,7 +24,7 @@ else
         @foreach (var item in NavigationItems)
         {
 
-            var title = item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode();
+            var title = item.Item.Fields.PlainText("NavigationTitle").Value.Html();
 
 
             <li class="@GetClassName(item)">

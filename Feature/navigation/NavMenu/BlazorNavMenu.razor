@@ -43,7 +43,7 @@ else
                 {
                     <li class="nav-item">
                         <NavLink class="nav-link" href="@item.Url.AddBaseUrl(NavigationManager)" @onclick="BlazorStateMachine.ToggleNavBar" Match=NavLinkMatch.All>
-                            @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode() @*<span class="sr-only">(current)</span>*@
+                            @item.Item.Fields.PlainText("NavigationTitle").Value.Html() @*<span class="sr-only">(current)</span>*@
                         </NavLink>
                     </li>
                 }
@@ -52,7 +52,7 @@ else
 
                     <li class="nav-item dropdown">
                         <button type="button" class="btn btn-link nav-link dropdown-toggle" id="navbardrop" aria-haspopup="true" aria-expanded="@IsOpen" @onclick="ToggleSubMenu">
-                            @item.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()
+                            @item.Item.Fields.PlainText("NavigationTitle").Value.Html()
                         </button>
                         <div class="@ClassName">
 
@@ -63,7 +63,7 @@ else
                                     continue;
                                 }
 
-                                <NavLink class="dropdown-item" @onclick="BlazorStateMachine.ToggleNavBar" href="@child.Url.AddBaseUrl(NavigationManager)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.HtmlDecode()</NavLink>
+                                <NavLink class="dropdown-item" @onclick="BlazorStateMachine.ToggleNavBar" href="@child.Url.AddBaseUrl(NavigationManager)" Match=NavLinkMatch.All>@child.Item.Fields.PlainText("NavigationTitle").Value.Html()</NavLink>
 
                             }
 

@@ -96,7 +96,7 @@
 
     private async Task SetPageTitle()
     {
-        string pageTitle = BlazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.HtmlDecode();
+        string pageTitle = BlazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.Html();
 
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {

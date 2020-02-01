@@ -5,12 +5,6 @@
       "../Foundation/BlazorExtensions/Scripts/BlazorStorageInterop.js",
       "../Foundation/BlazorExtensions/Scripts/BlazorExtensionsInterop.js"
     ]
-  },
-  {
-    "outputFileName": "wwwroot/scripts/SafariFix.blazor.webassembly.js",
-    "inputFiles": [
-      "../Foundation/BlazorExtensions/Scripts/SafariFix.blazor.webassembly.js"
-    ]
   }
 
 ]

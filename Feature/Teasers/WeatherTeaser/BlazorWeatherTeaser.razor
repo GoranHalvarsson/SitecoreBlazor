@@ -12,9 +12,9 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">
-            @FieldsModel.PlainText("WeatherTeaserHeader").Value.HtmlDecode()
+            @FieldsModel.PlainText("WeatherTeaserHeader").Value.Html()
         </h5>
-        <h6 class="card-subtitle mb-2 text-muted">@FieldsModel.PlainText("WeatherTeaserText").Value.HtmlDecode()</h6>
+        <h6 class="card-subtitle mb-2 text-muted">@FieldsModel.PlainText("WeatherTeaserText").Value.Html()</h6>
 
         <p class="card-text">
             @if (_weatherForecasts == null)

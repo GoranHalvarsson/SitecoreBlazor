@@ -36,8 +36,8 @@
                 <img class="d-block w-100" src="@field.BlazorItemFields.Image("MediaImage").Value.Src" alt="@field.BlazorItemFields.Image("MediaImage").Value.Alt">
                 <div class="carousel-caption d-none d-md-block bg-dark">
 
-                    <h5>@field.BlazorItemFields.PlainText("MediaTitle").Value.HtmlDecode()</h5>
-                    <p>@field.BlazorItemFields.PlainText("MediaDescription").Value.HtmlDecode()</p>
+                    <h5>@field.BlazorItemFields.PlainText("MediaTitle").Value.Html()</h5>
+                    <p>@field.BlazorItemFields.PlainText("MediaDescription").Value.Html()</p>
                 </div>
             </div>
 

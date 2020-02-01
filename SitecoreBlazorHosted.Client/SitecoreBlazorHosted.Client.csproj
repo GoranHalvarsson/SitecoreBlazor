@@ -10,7 +10,7 @@
     <LangVersion>8</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <Configurations>Debug;Release;BlazorClient</Configurations>
-    <ServiceWorkerForce>false</ServiceWorkerForce>
+    <ServiceWorkerForce>true</ServiceWorkerForce>
   </PropertyGroup>
 
   <ItemGroup>

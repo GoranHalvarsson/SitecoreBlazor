@@ -3,6 +3,12 @@ const swInstalledEvent = 'installed';
 const staticCachePrefix = 'blazor-cache-v';
 const updateAlertMessage = 'Update available. Reload the page when convenient.';
 window.updateAvailable = new Promise(function (resolve, reject) {
+    var { hostname } = window.location;
+    if (typeof ignoreHosts !== 'undefined') {
+        if (ignoreHosts.includes(hostname)) {
+            return;
+        }
+    }
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register(serviceWorkerFileName)
             .then(function (registration) {

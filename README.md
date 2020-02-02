@@ -38,6 +38,7 @@ Select BlazorClient in Solution Configurations.
 And run...
 
 **For now we have to disable/unload the Electron project. Because of breaking changes in the preview 3.2.0-preview1.20073.1,  [Asp Labs - Components.Electron needs to be upgraded](https://github.com/aspnet/AspLabs/tree/master/src/ComponentsElectron).**
+
 ~~**To run Electron App:**~~
 
 ~~Set SitecoreBlazorHosted.Electron as StartUp project.~~

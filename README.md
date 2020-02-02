@@ -20,7 +20,7 @@ To get started with Blazor and build your first Blazor web app check out [Blazor
 ## Setup solution
 Clone or fork this repo, build it and be happy 🙂
 
-## UPDATE! Application can now run Server-side, Client-side or as an Electron app 
+## UPDATE! Application can now run Server-side, Client-side
 **To run server-side:**
 
 Set SitecoreBlazorHosted.Server as StartUp project.
@@ -37,13 +37,14 @@ Select BlazorClient in Solution Configurations.
 
 And run...
 
-**To run Electron App:**
+**For now we have disable/unload the Electron project. Because of breaking changes in the preview 3.2.0-preview1.20073.1,  [Asp Labs - Components.Electron needs to be upgraded](https://github.com/aspnet/AspLabs/tree/master/src/ComponentsElectron).**
+~~**To run Electron App:**~~
 
-Set SitecoreBlazorHosted.Electron as StartUp project.
+~~Set SitecoreBlazorHosted.Electron as StartUp project.~~
 
-Select BlazorElectron in Solution Configurations.
+~~Select BlazorElectron in Solution Configurations.~~
 
-And run...
+~~And run...~~
 
 ## Blog posts
 

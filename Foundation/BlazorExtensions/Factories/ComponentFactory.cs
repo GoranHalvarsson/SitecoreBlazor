@@ -28,14 +28,14 @@ namespace Foundation.BlazorExtensions.Factories
 
                 IList<IBlazorItemField> componentModel = _fieldFactory.CreateBlazorItemFields(placeholderData.Fields);
 
-                return BuildRenderTree =>
+                return buildRenderTree =>
                 {
 
-                    BuildRenderTree.OpenComponent(0, componentType);
+                    buildRenderTree.OpenComponent(0, componentType);
 
-                    BuildRenderTree.AddAttribute(1, "FieldsModel", componentModel);
+                    buildRenderTree.AddAttribute(1, "FieldsModel", componentModel);
 
-                    BuildRenderTree.CloseComponent();
+                    buildRenderTree.CloseComponent();
                 };
 
             }

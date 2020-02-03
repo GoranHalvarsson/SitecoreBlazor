@@ -11,13 +11,7 @@
 
         public string Language { get; set; }
         public string DisplayName { get;  set; }
-        public bool HasChildren
-        {
-            get
-            {
-                return Children != null && Children.Count() > 0;
-            }
-        }
+        public bool HasChildren => Children != null && Children.Any();
         public string Id { get;  set; }
         public string Path { get;  set; }
         public IBlazorItem Parent { get; set; }

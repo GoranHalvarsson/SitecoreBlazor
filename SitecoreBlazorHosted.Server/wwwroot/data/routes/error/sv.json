@@ -84,7 +84,7 @@
         "Fields": {
           "HeaderImage": {
             "Value": {
-              "Src": "images/sc_logo.png",
+              "Src": "/images/sc_logo.png",
               "Alt": "Sitecore",
               "Width": null,
               "Height": null
@@ -93,7 +93,7 @@
           },
           "BannerImage": {
             "Value": {
-              "Src": "images/banner.jpg",
+              "Src": "/images/banner.jpg",
               "Alt": "Sitecore banner",
               "Width": null,
               "Height": null

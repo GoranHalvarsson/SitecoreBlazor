@@ -34,10 +34,11 @@ namespace Foundation.BlazorExtensions.Extensions
 
 
 
-        public static RenderFragment RenderLinkField(this List<IBlazorItemField> fields, string fieldName, IDictionary<string, object>? htmlAttributes) => builder =>
+        public static RenderFragment RenderLinkField(this BlazorItemField<BlazorFieldValueLink> linkField, IDictionary<string, object>? htmlAttributes) => builder =>
         {
+            if(linkField?.Value == null)
+                return;
 
-            BlazorItemField<BlazorFieldValueLink> linkField = BlazorItemField<BlazorItemField<BlazorFieldValueLink>>(fields, fieldName);
 
             var anchorAttrs = new Dictionary<string, object>
                {
@@ -46,6 +47,13 @@ namespace Foundation.BlazorExtensions.Extensions
                    { "title", linkField.Value.Text },
                    { "target", linkField.Value.Target }
                };
+
+
+            if (htmlAttributes != null && ("_blank".Equals(anchorAttrs["target"]?.ToString(), StringComparison.InvariantCultureIgnoreCase) && !htmlAttributes.ContainsKey("rel")))
+            {
+                // information disclosure attack prevention keeps target blank site from getting ref to window.opener
+                anchorAttrs["rel"] = "noopener noreferrer";
+            }
 
 
             builder.OpenElement(0, "a");
@@ -61,11 +69,12 @@ namespace Foundation.BlazorExtensions.Extensions
         };
 
 
-        public static RenderFragment RenderHtmlField(this List<IBlazorItemField> fields, string fieldName, string tag, IDictionary<string, object>? htmlAttributes) => builder =>
+        public static RenderFragment RenderHtmlField(this BlazorItemField<string> htmlField, string tag, IDictionary<string, object>? htmlAttributes) => builder =>
         {
-
-            BlazorItemField<string> htmlTextField = BlazorItemField<BlazorItemField<string>>(fields, fieldName);
-
+            if(htmlField?.Value == null)
+                return;
+            
+          
             if (string.IsNullOrWhiteSpace(tag))
                 tag = "p";
 
@@ -76,12 +85,47 @@ namespace Foundation.BlazorExtensions.Extensions
             if (htmlAttributes != null)
                 builder.AddMultipleAttributes(1, htmlAttributes);
 
-            builder.AddMarkupContent(2, htmlTextField.Value);
+            builder.AddMarkupContent(2, htmlField.Value);
             builder.CloseElement();
 
         };
 
 
+        public static RenderFragment RenderImageField(this BlazorItemField<BlazorFieldValueImage> imageField, ImageSizeParameters? imageParams, IDictionary<string, object>? htmlAttributes, IEnumerable<ImageSizeParameters>? srcSet) => builder =>
+        {
+            if (imageField?.Value == null)
+                return;
+
+
+
+            var imageAttributes = GetImageAttributes(imageField.Value.Src, srcSet, htmlAttributes, imageParams);
+            if (imageAttributes == null) return;
+
+            builder.OpenElement(0, "img");
+            builder.AddMultipleAttributes(1, imageAttributes);
+            builder.CloseElement();
+
+        };
+
+        private static IDictionary<string, object> GetImageAttributes(
+            string src,
+            IEnumerable<ImageSizeParameters>? srcSet,
+            IDictionary<string, object>? otherAttrs,
+            ImageSizeParameters? imageParams)
+        {
+            var newAttributes = new Dictionary<string, object>(otherAttrs);
+            // update image URL for jss handler and image rendering params
+            var resolvedSrc = src.UpdateImageUrl(imageParams);
+            if (srcSet != null && srcSet.Any())
+            {
+                newAttributes["srcSet"] = resolvedSrc.ToSrcSet(srcSet, imageParams);
+            }
+            else
+            {
+                newAttributes["src"] = resolvedSrc;
+            }
+            return newAttributes;
+        }
 
     }
 

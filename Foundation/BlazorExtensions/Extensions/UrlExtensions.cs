@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using SitecoreBlazorHosted.Shared.Models;
 
 
 namespace Foundation.BlazorExtensions.Extensions
@@ -7,6 +11,14 @@ namespace Foundation.BlazorExtensions.Extensions
 
     public static class UrlExtensions
     {
+
+        private static readonly Regex ImageTagRegex = new Regex("<img([^>]+)/>", RegexOptions.IgnoreCase);
+
+        private static readonly Regex HtmlAttributesRegex = new Regex("([^=\\s]+)(=\"([^\"]*)\")?", RegexOptions.IgnoreCase);
+
+        private static readonly Regex MediaUrlPrefixRegex = new Regex("/([-~]{1})/media/", RegexOptions.IgnoreCase);
+
+
 
         public static string AddBaseUrl(this string url, NavigationManager navigationManager)
         {
@@ -62,21 +74,72 @@ namespace Foundation.BlazorExtensions.Extensions
         }
 
 
-        //public static string GetLanguageSegment(this string url, string baseUrl)
-            //{
+        public static string UpdateImageUrl(
+            this string url,
+            ImageSizeParameters? parameters)
+        {
+            var parsedUrl = new Uri(url, UriKind.RelativeOrAbsolute);
 
-            //    Uri uri = new Uri(new Uri(baseUrl), url);
+            var uriBuilder = parsedUrl.IsAbsoluteUri ?
+                new UriBuilder(parsedUrl) :
+                new UriBuilder("http://www.tempuri.org" + parsedUrl);
 
-            //    string segment = uri?.Segments?.ElementAt(1);
+            var imageParameters = parameters?.ToString();
+            if (!string.IsNullOrWhiteSpace(imageParameters))
+            {
+                uriBuilder.Query = imageParameters;
+            }
 
-            //    if (string.IsNullOrWhiteSpace(segment))
-            //        return false;
+            var match = MediaUrlPrefixRegex.Match(uriBuilder.Path);
+            if (match.Length > 1)
+            {
+                // regex will provide us with /-/ or /~/ type
+                uriBuilder.Path = MediaUrlPrefixRegex.Replace(uriBuilder.Path, $"/{match.Groups[1].Value}/jssmedia/");
+            }
 
-            //    url = url.Replace(Constants.UrlFixes.FilePrefix, "");
-
-            //    return url;
-            //}
-
-
+            return parsedUrl.IsAbsoluteUri ?
+                uriBuilder.Uri.GetComponents(UriComponents.AbsoluteUri, UriFormat.SafeUnescaped) :
+                uriBuilder.Uri.GetComponents(UriComponents.PathAndQuery, UriFormat.SafeUnescaped);
         }
+
+        public static string ToSrcSet(
+            this string url,
+            IEnumerable<ImageSizeParameters> srcSet,
+            ImageSizeParameters? imageParams)
+        {
+            var srcSetParameters = srcSet.Select(parameters =>
+            {
+                var newParams = new ImageSizeParameters(imageParams)
+                {
+                    W = parameters.W,
+                    H = parameters.H,
+                    Mw = parameters.Mw,
+                    Mh = parameters.Mh,
+                    Iar = parameters.Iar,
+                    As = parameters.As,
+                    Sc = parameters.Sc
+                };
+                var imageWidth = newParams.W ?? newParams.Mw;
+                return imageWidth == null ? null : $"{UpdateImageUrl(url, newParams)} {imageWidth}w";
+            }).Where(p => p != null);
+            return string.Join(", ", srcSetParameters);
+        }
+
+        //public static string GetLanguageSegment(this string url, string baseUrl)
+        //{
+
+        //    Uri uri = new Uri(new Uri(baseUrl), url);
+
+        //    string segment = uri?.Segments?.ElementAt(1);
+
+        //    if (string.IsNullOrWhiteSpace(segment))
+        //        return false;
+
+        //    url = url.Replace(Constants.UrlFixes.FilePrefix, "");
+
+        //    return url;
+        //}
+
+
     }
+}

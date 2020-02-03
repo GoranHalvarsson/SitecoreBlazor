@@ -42,10 +42,6 @@
     <None Update="Scripts\BlazorExtensionsInterop.js">
       <LogicalName>blazor:js:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </None>
-    <None Update="Scripts\SafariFix.blazor.webassembly.js">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
   </ItemGroup>
 
   

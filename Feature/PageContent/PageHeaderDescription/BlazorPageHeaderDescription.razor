@@ -5,24 +5,25 @@
 @inherits BaseComponent
 
 
-<div class="jumbotron banner" style="background-image: url('@FieldsModel.Image("BannerImage").Value.Src');">
+    <div class="jumbotron banner" style="background-image: url('@FieldsModel.Image("BannerImage").Value.Src');">
 
 
-    <img class="logo-image" alt="@FieldsModel.Image("HeaderImage")?.Value.Alt" src="@FieldsModel.Image("HeaderImage").Value.Src">
+        @FieldsModel.Image("HeaderImage").RenderImageField(null,new Dictionary<string, object>(){{"class", "logo-image"}}, null )
 
-
-
-</div>
+    </div>
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-12">
             <h2>@FieldsModel.PlainText("Title")?.Value.Html()</h2>
-            @((MarkupString)FieldsModel.HtmlText("Text")?.Value.Html())
 
-           @FieldsModel.Checkbox("ShowInNavigation")?.Value
+            @FieldsModel.HtmlText("Text").RenderHtmlField("p", null)
 
-         
+            @*@((MarkupString)FieldsModel.HtmlText("Text")?.Value.Html())*@
+
+            @FieldsModel.Checkbox("ShowInNavigation")?.Value
+
+
         </div>
     </div>
 </div>

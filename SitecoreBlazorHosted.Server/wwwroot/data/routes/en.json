@@ -108,7 +108,7 @@
                   "Type": "ImageField"
                 },
                 "Title": {
-                  "Value": "Sitecore Experience Platform + BLAZOR  3.2.0-preview1.20073.1",
+                  "Value": "Sitecore Experience Platform + BLAZOR  3.2.0-preview2.20160.5",
                   "Type": "PlainTextField"
                 },
                 "Text": {
@@ -140,16 +140,20 @@
               "Fields": {
                 "CardHeaderLink": {
                   "Value": {
-                    "Href": "https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-1-release-now-available/",
-                    "Text": "Blazor WebAssembly 3.2.0 Preview 1 release now available",
+                    "Href": "https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-2-release-now-available/",
+                    "Text": "Blazor WebAssembly 3.2.0 Preview 2 release now available",
                     "Target": "_blank",
                     "Class": ""
                   },
                   "Type": "LinkField"
                 },
                 "CardText": {
-                  "Value": "Blazor WebAssembly 3.2.0 Preview 1 is now available! Check out all the updates and improvements in this release.",
+                  "Value": "Blazor WebAssembly 3.2.0 Preview 2 is now available! Check out all the updates and improvements in this release.",
                   "Type": "HtmlField"
+                },
+                "CardIdentifier": {
+                  "Value": "BlazorWebAssembly",
+                  "Type": "PlainTextField"
                 }
 
               },
@@ -174,6 +178,10 @@
                 "CardText": {
                   "Value": "Build web apps using gRPC-Web and .NET Core! Check out this new experiment for gRPC-Web on .NET Core.",
                   "Type": "HtmlField"
+                },
+                "CardIdentifier": {
+                  "Value": "gRPCWeb",
+                  "Type": "PlainTextField"
                 }
 
               },
@@ -204,7 +212,7 @@
           },
           "Link": {
             "Value": {
-              "Href": "http://blazor.net",
+              "Href": "https://blazor.net",
               "Text": "Blazor will rock your world",
               "Target": "_blank",
               "Class": "ml-md-auto"

@@ -49,9 +49,16 @@
     public ContextStateProvider ContextStateProvider { get; set; }
 
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        return ContextStateProvider.SaveChangesAsync();
+
+        await ContextStateProvider.SaveChangesAsync();
+
+       
+        await ExecuteLocalNavigation();
+
+        await SetPageTitle();
+
     }
 
 
@@ -64,13 +71,22 @@
 
     }
 
+    private async ValueTask ExecuteLocalNavigation()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
 
-   
+        if (uri.Fragment.Length == 0)
+            return;
+
+        await BlazorExtensionsInteropService.NavigateToFragment(uri.Fragment.Substring(1));
+       
+    }
+
     private async void OnLocationChanged(object sender, LocationChangedEventArgs args) => await Reload();
 
     private async Task Reload()
     {
-
+        
 
         Language = ContextStateProvider.RouteLanguage;
 
@@ -85,10 +101,7 @@
 
         await LayoutService.LoadRoute(Language, hasRouteError);
 
-
-        await SetPageTitle();
-
-
+        
 
 
         StateHasChanged();
@@ -96,24 +109,15 @@
 
     private async Task SetPageTitle()
     {
-        string pageTitle = BlazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.Html();
+        var pageTitle = BlazorStateMachine.GetAllBlazorItemFieldsFromCurrentRoute(null).PlainText("PageTitle")?.Value?.Html();
 
         if (!string.IsNullOrWhiteSpace(pageTitle))
         {
-
-            try
-            {
-                await BlazorExtensionsInteropService.SetPageTitle(pageTitle);
-            }
-            catch (Exception ex)
-            {
-                // THIS IS FOR BLAZOR-SERVER-SIDE
-                Console.WriteLine(ex.Message);
-            }
-
-
+            await BlazorExtensionsInteropService.SetPageTitle(pageTitle);
         }
     }
+
+
 
     public void Dispose()
     {

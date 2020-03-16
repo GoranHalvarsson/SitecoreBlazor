@@ -25,6 +25,11 @@ namespace Foundation.BlazorExtensions.Services
             return _jsRuntime.InvokeAsync<string>("blazorExtensionsInterop.setPageTitle", pageTitle);
         }
 
+        public ValueTask NavigateToFragment(string elementId)
+        {
+            return _jsRuntime.InvokeVoidAsync("blazorExtensionsInterop.scrollToFragment", elementId);
+        }
+
 
     }
 

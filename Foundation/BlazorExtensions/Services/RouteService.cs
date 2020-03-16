@@ -29,6 +29,10 @@ namespace Foundation.BlazorExtensions.Services
 
             string relativeUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
 
+            //Remove hash
+            if(relativeUrl.IndexOf("#", StringComparison.Ordinal) > 0)
+                relativeUrl = relativeUrl.Substring(0, relativeUrl.LastIndexOf("#", StringComparison.Ordinal));
+           
             //Incorrect url
             if (hasRouteError.HasValue && hasRouteError.Value)
                 return $"{baseUrl}/error/{language}.json";

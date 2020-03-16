@@ -4,8 +4,8 @@
 
 @inherits BaseComponent
 
-<div class="card">
-    <div class="card-body">
+<div class="card" id="@FieldsModel.PlainText("CardIdentifier").Value">
+    <div class="card-body" >
         <h5 class="card-title">@FieldsModel.Link("CardHeaderLink").RenderLinkField(null)</h5>  
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         @FieldsModel.HtmlText("CardText").RenderHtmlField( "p", new Dictionary<string, object>()
@@ -18,11 +18,4 @@
 
 
 
-@code{
 
-
-
-
-
-
-}

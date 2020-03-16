@@ -86,6 +86,14 @@ var BlazorExtensionsInterop = /** @class */ (function () {
     BlazorExtensionsInterop.prototype.setPageTitle = function (pageTitle) {
         window.document.title = pageTitle;
     };
+    BlazorExtensionsInterop.prototype.scrollToFragment = function (elementId) {
+        var element = document.getElementById(elementId);
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    };
     return BlazorExtensionsInterop;
 }());
 function loadBlazorExtensionsInterop() {

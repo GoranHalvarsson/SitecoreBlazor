@@ -65,6 +65,9 @@ namespace Foundation.BlazorExtensions.Extensions
             if (!string.IsNullOrWhiteSpace(linkField.Value.Text))
                 builder.AddContent(2, linkField.Value.Text);
             
+
+
+
             builder.CloseElement();
         };
 

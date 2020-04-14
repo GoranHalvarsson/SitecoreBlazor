@@ -108,7 +108,7 @@
                   "Type": "ImageField"
                 },
                 "Title": {
-                  "Value": "Sitecore Experience Platform + BLAZOR  3.2.0-preview2.20160.5",
+                  "Value": "Sitecore Experience Platform + BLAZOR  3.2.0-preview3.20168.3",
                   "Type": "PlainTextField"
                 },
                 "Text": {
@@ -140,15 +140,15 @@
               "Fields": {
                 "CardHeaderLink": {
                   "Value": {
-                    "Href": "https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-2-release-now-available/",
-                    "Text": "Blazor WebAssembly 3.2.0 Preview 2 release now available",
+                    "Href": "https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-3-release-now-available/",
+                    "Text": "Blazor WebAssembly 3.2.0 Preview 3 release now available",
                     "Target": "_blank",
                     "Class": ""
                   },
                   "Type": "LinkField"
                 },
                 "CardText": {
-                  "Value": "Blazor WebAssembly 3.2.0 Preview 2 is now available! Check out all the updates and improvements in this release.",
+                  "Value": "Blazor WebAssembly 3.2.0 Preview 3 is now available! Check out all the updates and improvements in this release.",
                   "Type": "HtmlField"
                 },
                 "CardIdentifier": {

@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorWebAssemblyEnableLinking>true</BlazorWebAssemblyEnableLinking>
     <LangVersion>8</LangVersion>
-    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
     <Configurations>Debug;Release;BlazorServer;BlazorClient;BlazorElektron</Configurations>
   <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>

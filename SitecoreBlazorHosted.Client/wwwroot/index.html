@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width">
     <title>Sitecore Blazor WebAssembly</title>
     <base href="/" />
-    <link rel="icon"
-          type="image/png"
-          href="/icons/icon.png">
     <link href="css/site.min.css" rel="stylesheet" />
     <link rel="manifest" href="manifest.json">
-    <link rel="script" href="service-worker.js">
     <meta name="theme-color" content="#052767" />
-    <script src="ServiceWorkerRegister.js"></script>
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png" />
 </head>
 <body>
     <app><img src="images/SBlazor.svg" /></app>
@@ -23,6 +19,7 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="scripts/interop.min.js"></script>
 
 

@@ -39,8 +39,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorExtensions", "BlazorE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{38AAD945-9531-4D71-A8B8-31708BDB6A64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SitecoreBlazorHosted.Electron", "SitecoreBlazorHosted.Electron\SitecoreBlazorHosted.Electron.csproj", "{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF2F51D6-EBB9-4687-8A83-B6936DEB9777}"
 	ProjectSection(SolutionItems) = preProject
 		.editconfig = .editconfig
@@ -168,14 +166,6 @@ Global
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6AE3FC5-1C14-4F18-992F-8DE845F613D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorClient|Any CPU.ActiveCfg = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorElectron|Any CPU.Build.0 = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.BlazorServer|Any CPU.ActiveCfg = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{858F9CF7-D1BE-43F9-9E54-FE6B3843C6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{698200B3-94DA-4B19-8F69-1AF29CEE59F3}.BlazorClient|Any CPU.ActiveCfg = Debug|Any CPU
 		{698200B3-94DA-4B19-8F69-1AF29CEE59F3}.BlazorClient|Any CPU.Build.0 = Debug|Any CPU
 		{698200B3-94DA-4B19-8F69-1AF29CEE59F3}.BlazorElectron|Any CPU.ActiveCfg = Debug|Any CPU

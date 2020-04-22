@@ -7,15 +7,24 @@ pool:
   vmImage: 'windows-2019'
 
 variables:
+  solution: 'SitecoreBlazorHosted.sln'
   buildConfigurationClient: 'BlazorClient'
   buildConfigurationServer: 'BlazorServer'
-  buildConfigurationElectron: 'BlazorElectron'
 
 steps:
 - task: DotNetCoreInstaller@0
   displayName: 'Installing .NET Core SDK...'
   inputs:
     version: 3.1.201
+
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+
 
 - script: dotnet build --configuration $(buildConfigurationClient) SitecoreBlazorHosted.Client/SitecoreBlazorHosted.Client.csproj
   displayName: 'Building $(buildConfigurationClient)...'
